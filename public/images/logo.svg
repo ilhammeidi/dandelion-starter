@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.7;fill:#FF9800;}
+	.st1{opacity:0.7;fill:#03A9F4;}
+	.st2{opacity:0.7;fill:#8BC34A;}
+	.st3{opacity:0.7;fill:#9C27B0;}
+	.st4{opacity:0.7;fill:#F44336;}
+	.st5{opacity:0.7;fill:#009688;}
+	.st6{opacity:0.7;fill:#3F51B5;}
+	.st7{opacity:0.7;fill:#FFEB3B;}
+	.st8{fill:#FFFFFF;}
+</style>
+<g>
+	<g>
+		<ellipse class="st0" cx="50" cy="33.7" rx="15.6" ry="32.7"/>
+		<ellipse class="st1" cx="50" cy="66.3" rx="15.6" ry="32.7"/>
+		<ellipse class="st2" cx="66.3" cy="50" rx="32.7" ry="15.6"/>
+		<ellipse class="st3" cx="33.7" cy="50" rx="32.7" ry="15.6"/>
+		
+			<ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -15.9298 38.4579)" class="st4" cx="38.5" cy="38.5" rx="15.6" ry="32.7"/>
+		
+			<ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -25.4916 61.5421)" class="st5" cx="61.5" cy="61.5" rx="15.6" ry="32.7"/>
+		
+			<ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -32.2528 45.2191)" class="st6" cx="38.5" cy="61.5" rx="32.7" ry="15.6"/>
+		
+			<ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -9.1686 54.7809)" class="st7" cx="61.5" cy="38.5" rx="32.7" ry="15.6"/>
+	</g>
+	<circle class="st8" cx="50" cy="50" r="12.6"/>
+</g>
+</svg>

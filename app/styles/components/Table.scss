@@ -1,0 +1,92 @@
+@import "../../styles/mixins";
+
+.hideAction {
+  display: none !important;
+}
+.tableCrud{
+  table-layout: fixed;
+  .hiddenField{
+    opacity: 0;
+    position: absolute;
+  }
+  .editing{
+    background: rgba(249, 251, 231, 0.4);
+    td .crudInput{
+      &:before{
+        opacity: 1;
+      }
+      > div {
+        border: 1px solid rgba(0,0,0,0.16);
+        &:before, &:after{
+          opacity: 1;
+        } 
+      }
+      svg, button {
+        visibility: visible;
+        padding: 0
+      }
+      input[type="text"],
+      input[type="number"],
+      input[type="email"]{
+        width: 100%;
+      }
+    }
+  }
+  th{
+    padding: 0 15px;
+  }
+  td{
+    padding: 0 15px;
+    &.toggleCell{
+      position: relative;
+    }
+    vertical-align: middle;
+    .coverReadonly{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 2;
+      display: none;
+      &.show{
+        display: block;
+      }
+    }
+    .crudInput{
+      border: none;
+      border-radius: 6px;
+      &:before{
+        opacity: 0;
+      }
+      > div {
+        border: none;
+        &:before, &:after{
+          opacity: 0;
+        }
+      }
+      &.lightTxt {
+        color: material-color('grey', '200');
+        div {
+          color: material-color('grey', '200');
+        }
+      }
+      &.darkTxt {
+        color: material-color('grey', '900');
+        div {
+          color: material-color('grey', '900');
+        }
+      }
+      svg, button {
+        visibility: hidden;
+      }
+    }
+  }
+  td [disabled], td[disabled]:hover{
+    border: none !important;
+    box-shadow: none;
+    cursor: text;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+  }
+}

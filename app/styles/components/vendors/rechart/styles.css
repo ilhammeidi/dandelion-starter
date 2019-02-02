@@ -1,0 +1,16 @@
+.recharts-text {
+  font-size: 11px
+}
+.dark-mode .recharts-text{
+  fill: #ededed;
+}
+.light-mode .recharts-text{
+  fill: #838383;
+}
+.recharts-cartesian-grid-vertical line {
+  stroke: #a3a3a3;
+}
+
+.recharts-legend-item-text {
+  font-size: 12px
+}

@@ -1,0 +1,56 @@
+.text-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
+.s1 {
+  flex: 1;
+}
+.s2 {
+  flex: 2;
+}
+.s3 {
+  flex: 3;
+}
+.s4 {
+  flex: 4;
+}
+.s5 {
+  flex: 5;
+}
+.s6 {
+  flex: 6;
+}
+.s7 {
+  flex: 7;
+}
+.s8 {
+  flex: 8;
+}
+.s9 {
+  flex: 9;
+}
+.s10 {
+  flex: 10;
+}
+.s11 {
+  flex: 11;
+}
+.s12 {
+  flex: 12;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
