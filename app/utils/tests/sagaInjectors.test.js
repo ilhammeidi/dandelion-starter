@@ -145,18 +145,14 @@ describe('injectors', () => {
     it("should validate saga's descriptor", () => {
       expect(() => injectSaga('test')).toThrow();
       expect(() => injectSaga('test', { saga: 1 })).toThrow();
-      expect(() =>
-        injectSaga('test', { saga: testSaga, mode: 'testMode' }),
+      expect(() => injectSaga('test', { saga: testSaga, mode: 'testMode' }),
       ).toThrow();
       expect(() => injectSaga('test', { saga: testSaga, mode: 1 })).toThrow();
-      expect(() =>
-        injectSaga('test', { saga: testSaga, mode: RESTART_ON_REMOUNT }),
+      expect(() => injectSaga('test', { saga: testSaga, mode: RESTART_ON_REMOUNT }),
       ).not.toThrow();
-      expect(() =>
-        injectSaga('test', { saga: testSaga, mode: DAEMON }),
+      expect(() => injectSaga('test', { saga: testSaga, mode: DAEMON }),
       ).not.toThrow();
-      expect(() =>
-        injectSaga('test', { saga: testSaga, mode: ONCE_TILL_UNMOUNT }),
+      expect(() => injectSaga('test', { saga: testSaga, mode: ONCE_TILL_UNMOUNT }),
       ).not.toThrow();
     });
 

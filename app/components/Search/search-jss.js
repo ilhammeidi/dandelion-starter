@@ -75,19 +75,19 @@ const styles = theme => ({
     [theme.breakpoints.down('xs')]: {
       display: 'none'
     },
-    '& > div': {
-      border: 'none',
-      '& input': {
-        transition: theme.transitions.create('width'),
-        padding: 0,
-        color: theme.palette.common.white,
-        width: 100,
-        '&:focus': {
-          width: 250,
-          textIndent: 0,
-          outline: 0,
-        },
+    '& input': {
+      transition: theme.transitions.create('width'),
+      padding: 0,
+      color: theme.palette.common.white,
+      width: 100,
+      '&:focus': {
+        width: 250,
+        textIndent: 0,
+        outline: 0,
       },
+    },
+    '&:after': {
+      display: 'none'
     },
     '& ::-webkit-input-placeholder': { /* Chrome/Opera/Safari */
       color: 'rgba(255,255,255,1)'

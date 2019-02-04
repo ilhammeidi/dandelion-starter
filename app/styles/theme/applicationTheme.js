@@ -208,13 +208,14 @@ const applicationTheme = (color, mode) => ({
     MuiInputAdornment: {
       root: {
         alignItems: 'flex-end',
+        paddingBottom: 4,
         '& button': {
           width: 32,
           height: 32,
           padding: 0
         },
-        '& p': {
-          lineHeight: 2
+        '& svg': {
+          fontSize: 18
         }
       },
       positionStart: {

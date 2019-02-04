@@ -190,8 +190,8 @@ const styles = theme => ({
     },
   },
   headCapital: {
-    padding: `${theme.spacing.unit}px 0 ${theme.spacing.unit}px ${theme.spacing.unit * 3}px`,
-    left: theme.spacing.unit * -1.5,
+    padding: `${theme.spacing.unit}px 0 ${theme.spacing.unit}px ${theme.spacing.unit * 9}px`,
+    left: theme.spacing.unit * -2,
     position: 'relative',
     textTransform: 'uppercase',
     borderRadius: `0 ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px 0`,
@@ -343,7 +343,7 @@ const styles = theme => ({
     },
     '&:hover': {
       '&::-webkit-scrollbar-thumb': {
-        backgroundColor: 'rgba(0,0,0,0.4)',
+        backgroundColor: 'rgba(0,0,0,0.3)',
         border: '1px solid rgba(255,255,255,0.4)',
       }
     }

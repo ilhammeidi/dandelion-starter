@@ -18,10 +18,13 @@ function renderInput(inputProps) {
 
   return (
     <TextField
-      className={classes.inputHeader}
       fullWidth
       InputProps={{
         inputRef: ref,
+        classes: {
+          root: classes.inputHeader,
+          input: classes.inputHeaderText,
+        },
         ...other,
       }}
     />

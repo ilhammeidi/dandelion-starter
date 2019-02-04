@@ -1,16 +1,17 @@
 import invariant from 'invariant';
-import { isEmpty, isFunction, isString, conformsTo } from 'lodash';
+import {
+  isEmpty, isFunction, isString, conformsTo
+} from 'lodash';
 
 import checkStore from './checkStore';
 import { DAEMON, ONCE_TILL_UNMOUNT, RESTART_ON_REMOUNT } from './constants';
 
 const allowedModes = [RESTART_ON_REMOUNT, DAEMON, ONCE_TILL_UNMOUNT];
 
-const checkKey = key =>
-  invariant(
-    isString(key) && !isEmpty(key),
-    '(app/utils...) injectSaga: Expected `key` to be a non empty string',
-  );
+const checkKey = key => invariant(
+  isString(key) && !isEmpty(key),
+  '(app/utils...) injectSaga: Expected `key` to be a non empty string',
+);
 
 const checkDescriptor = descriptor => {
   const shape = {
@@ -48,8 +49,8 @@ export function injectSagaFactory(store, isValid) {
     }
 
     if (
-      !hasSaga ||
-      (hasSaga && mode !== DAEMON && mode !== ONCE_TILL_UNMOUNT)
+      !hasSaga
+      || (hasSaga && mode !== DAEMON && mode !== ONCE_TILL_UNMOUNT)
     ) {
       /* eslint-disable no-param-reassign */
       store.injectedSagas[key] = {
