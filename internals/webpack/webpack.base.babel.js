@@ -33,15 +33,15 @@ module.exports = options => ({
         You can enable it to maintain and keep clean your code.
         NOTE: By enable eslint running app process at beginning will slower
       */
-      {
-        enforce: 'pre',
-        test: /\.js?$/,
-        exclude: [/node_modules/],
-        loader: 'eslint-loader',
-        options: {
-          quiet: true,
-        }
-      },
+      //      {
+      //        enforce: 'pre',
+      //        test: /\.js?$/,
+      //        exclude: [/node_modules/],
+      //        loader: 'eslint-loader',
+      //        options: {
+      //          quiet: true,
+      //        }
+      //      },
       {
         test: /\.js$/, // Transform all .js files required somewhere with Babel
         exclude: /node_modules/,
@@ -174,6 +174,18 @@ module.exports = options => ({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
     }),
+    new webpack.ContextReplacementPlugin(/^\.\/locale$/, context => {
+      if (!/\/moment\//.test(context.context)) {
+        return;
+      }
+      // context needs to be modified in place
+      Object.assign(context, {
+      // include only CJK
+        regExp: /^\.\/(ja|ko|zh)/,
+        // point to the locale data folder relative to moment's src/lib/locale
+        request: '../../locale'
+      });
+    })
   ]),
   resolve: {
     modules: ['node_modules', 'app'],
