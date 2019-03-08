@@ -29,7 +29,29 @@ class HeaderMenu extends React.Component {
     fullScreen: false,
     status: dummy.user.status,
     anchorEl: null,
+    fixed: false,
   };
+
+  // Initial menu ui
+  flagFixedMenu = false;
+
+  componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = () => {
+    const doc = document.documentElement;
+    const scroll = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+    const newFlagFixedMenu = (scroll > 64);
+    if (this.flagFixedMenu !== newFlagFixedMenu) {
+      this.setState({ fixed: newFlagFixedMenu });
+      this.flagFixedMenu = newFlagFixedMenu;
+    }
+  }
 
   openFullScreen = () => {
     this.setState({ fullScreen: true });
@@ -84,7 +106,6 @@ class HeaderMenu extends React.Component {
       classes,
       type,
       dataMenu,
-      fixed,
       history,
       openGuide,
       mode,
@@ -94,7 +115,12 @@ class HeaderMenu extends React.Component {
       isLogin,
       logoLink
     } = this.props;
-    const { fullScreen, status, anchorEl } = this.state;
+    const {
+      fullScreen,
+      status,
+      anchorEl,
+      fixed
+    } = this.state;
     return (
       <AppBar
         className={
@@ -198,7 +224,6 @@ HeaderMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   dataMenu: PropTypes.array.isRequired,
-  fixed: PropTypes.bool.isRequired,
   openMobileNav: PropTypes.bool.isRequired,
   mode: PropTypes.string.isRequired,
   changeMode: PropTypes.func.isRequired,

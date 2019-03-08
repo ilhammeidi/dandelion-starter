@@ -20,7 +20,6 @@ class DropMenuLayout extends React.Component {
       deco,
       bgPosition,
       changeMode,
-      transform,
       place,
       history,
       titleException,
@@ -34,7 +33,6 @@ class DropMenuLayout extends React.Component {
         <HeaderMenu
           type="top-navigation"
           dataMenu={dataMenu}
-          fixed={transform > 64}
           changeMode={changeMode}
           mode={mode}
           history={history}
@@ -99,7 +97,6 @@ DropMenuLayout.propTypes = {
   gradient: PropTypes.bool.isRequired,
   deco: PropTypes.bool.isRequired,
   bgPosition: PropTypes.string.isRequired,
-  transform: PropTypes.number.isRequired,
   place: PropTypes.string.isRequired,
   titleException: PropTypes.array.isRequired,
   handleOpenGuide: PropTypes.func.isRequired

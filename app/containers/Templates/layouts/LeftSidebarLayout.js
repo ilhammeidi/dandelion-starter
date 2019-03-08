@@ -28,7 +28,6 @@ class LeftSidebarLayout extends React.Component {
       history,
       bgPosition,
       changeMode,
-      transform,
       place,
       titleException,
       handleOpenGuide
@@ -37,8 +36,6 @@ class LeftSidebarLayout extends React.Component {
       <Fragment>
         <Header
           toggleDrawerOpen={toggleDrawer}
-          turnDarker={transform > 30}
-          showTitle={transform > 40}
           margin={sidebarOpen}
           gradient={gradient}
           position="left-sidebar"
@@ -52,7 +49,6 @@ class LeftSidebarLayout extends React.Component {
           open={sidebarOpen}
           toggleDrawerOpen={toggleDrawer}
           loadTransition={loadTransition}
-          turnDarker={transform > 30}
           dataMenu={dataMenu}
           leftSidebar
         />
@@ -103,7 +99,6 @@ LeftSidebarLayout.propTypes = {
   gradient: PropTypes.bool.isRequired,
   deco: PropTypes.bool.isRequired,
   bgPosition: PropTypes.string.isRequired,
-  transform: PropTypes.number.isRequired,
   place: PropTypes.string.isRequired,
   titleException: PropTypes.array.isRequired,
   handleOpenGuide: PropTypes.func.isRequired

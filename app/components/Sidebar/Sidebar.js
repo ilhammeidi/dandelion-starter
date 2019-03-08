@@ -13,7 +13,29 @@ class Sidebar extends React.Component {
   state = {
     status: dummy.user.status,
     anchorEl: null,
+    turnDarker: false
   };
+
+  // Initial header style
+  flagDarker = false;
+
+  componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = () => {
+    const doc = document.documentElement;
+    const scroll = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+    const newFlagDarker = (scroll > 30);
+    if (this.flagDarker !== newFlagDarker) {
+      this.setState({ turnDarker: newFlagDarker });
+      this.flagDarker = newFlagDarker;
+    }
+  }
 
   handleOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -29,16 +51,15 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { status, anchorEl } = this.state;
     const {
       classes,
       open,
       toggleDrawerOpen,
       loadTransition,
-      turnDarker,
       leftSidebar,
       dataMenu
     } = this.props;
+    const { status, anchorEl, turnDarker } = this.state;
     return (
       <Fragment>
         <Hidden lgUp>
@@ -97,7 +118,6 @@ Sidebar.propTypes = {
   classes: PropTypes.object.isRequired,
   toggleDrawerOpen: PropTypes.func.isRequired,
   loadTransition: PropTypes.func.isRequired,
-  turnDarker: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
   leftSidebar: PropTypes.bool,
   dataMenu: PropTypes.array.isRequired,

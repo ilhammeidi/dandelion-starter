@@ -34,7 +34,8 @@ Outer.propTypes = {
 const reducer = 'ui';
 const mapStateToProps = state => ({
   gradient: state.getIn([reducer, 'gradient']),
-  decoration: state.getIn([reducer, 'decoration'])
+  decoration: state.getIn([reducer, 'decoration']),
+  ...state,
 });
 
 const OuterMaped = connect(

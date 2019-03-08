@@ -72,7 +72,7 @@ function getSuggestions(value) {
   const inputLength = inputValue.length;
   let count = 0;
   return inputLength === 0 ? [] : menu.filter(suggestion => {
-    const keep = count < 5 && suggestion.name.toLowerCase().slice(0, inputLength) === inputValue;
+    const keep = (!inputValue || suggestion.name.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) && count < 5;
 
     if (keep) {
       count += 1;

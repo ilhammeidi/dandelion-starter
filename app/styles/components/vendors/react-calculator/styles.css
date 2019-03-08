@@ -5,8 +5,6 @@
   flex-direction: column;
 }
 .react-calculator .result-panel {
-  display: flex;
-  flex-direction: column;
   text-align: right;
   padding: 10px 30px;
 }

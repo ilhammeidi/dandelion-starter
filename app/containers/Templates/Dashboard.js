@@ -13,15 +13,13 @@ import MegaMenuLayout from './layouts/MegaMenuLayout';
 import styles from './appStyles-jss';
 
 class Dashboard extends React.Component {
+  // Initial header style
   state = {
-    transform: 0,
     openGuide: false
   };
 
   componentDidMount = () => {
     const { history, initialOpen, loadTransition } = this.props;
-    // Scroll content to top
-    window.addEventListener('scroll', this.handleScroll);
 
     // Set expanded sidebar menu
     const currentPath = history.location.pathname;
@@ -35,18 +33,6 @@ class Dashboard extends React.Component {
       setTimeout(() => {
         loadTransition(true);
       }, 500);
-    });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll = () => {
-    const doc = document.documentElement;
-    const scroll = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
-    this.setState({
-      transform: scroll
     });
   }
 
@@ -74,7 +60,7 @@ class Dashboard extends React.Component {
       layout,
       changeMode
     } = this.props;
-    const { openGuide, transform } = this.state;
+    const { openGuide } = this.state;
     const titleException = ['/app', '/app/crm-dashboard', '/app/crypto-dashboard'];
     const parts = history.location.pathname.split('/');
     const place = parts[parts.length - 1].replace('-', ' ');
@@ -102,7 +88,6 @@ class Dashboard extends React.Component {
               gradient={gradient}
               deco={deco}
               bgPosition={bgPosition}
-              transform={transform}
               place={place}
               titleException={titleException}
               handleOpenGuide={this.handleOpenGuide}
@@ -124,7 +109,6 @@ class Dashboard extends React.Component {
               gradient={gradient}
               deco={deco}
               bgPosition={bgPosition}
-              transform={transform}
               place={place}
               titleException={titleException}
               handleOpenGuide={this.handleOpenGuide}
@@ -146,7 +130,6 @@ class Dashboard extends React.Component {
               gradient={gradient}
               deco={deco}
               bgPosition={bgPosition}
-              transform={transform}
               place={place}
               titleException={titleException}
               handleOpenGuide={this.handleOpenGuide}
@@ -168,7 +151,6 @@ class Dashboard extends React.Component {
               gradient={gradient}
               deco={deco}
               bgPosition={bgPosition}
-              transform={transform}
               place={place}
               titleException={titleException}
               handleOpenGuide={this.handleOpenGuide}
@@ -207,7 +189,8 @@ const mapStateToProps = state => ({
   gradient: state.getIn([reducer, 'gradient']),
   deco: state.getIn([reducer, 'decoration']),
   layout: state.getIn([reducer, 'layout']),
-  bgPosition: state.getIn([reducer, 'bgPosition'])
+  bgPosition: state.getIn([reducer, 'bgPosition']),
+  ...state,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -71,7 +71,11 @@ const styles = theme => ({
     '& $profile': {
       flexDirection: 'row',
       top: theme.spacing.unit * 6,
-      padding: theme.spacing.unit / 2
+      padding: theme.spacing.unit / 2,
+      textAlign: 'left',
+      '& button': {
+        width: 'auto'
+      }
     },
     '& $avatar': {
       marginRight: theme.spacing.unit * 3

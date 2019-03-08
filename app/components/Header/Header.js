@@ -21,8 +21,38 @@ const elem = document.documentElement;
 class Header extends React.Component {
   state = {
     open: false,
-    fullScreen: false
+    fullScreen: false,
+    turnDarker: false,
+    showTitle: false
   };
+
+  // Initial header style
+  flagDarker = false;
+
+  flagTitle = false;
+
+  componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = () => {
+    const doc = document.documentElement;
+    const scroll = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+    const newFlagDarker = (scroll > 30);
+    const newFlagTitle = (scroll > 40);
+    if (this.flagDarker !== newFlagDarker) {
+      this.setState({ turnDarker: newFlagDarker });
+      this.flagDarker = newFlagDarker;
+    }
+    if (this.flagTitle !== newFlagTitle) {
+      this.setState({ showTitle: newFlagTitle });
+      this.flagTitle = newFlagTitle;
+    }
+  }
 
   openFullScreen = () => {
     this.setState({ fullScreen: true });
@@ -65,15 +95,18 @@ class Header extends React.Component {
       toggleDrawerOpen,
       margin,
       position,
-      turnDarker,
-      showTitle,
       gradient,
       mode,
       title,
       openGuide,
       history
     } = this.props;
-    const { fullScreen, open } = this.state;
+    const {
+      fullScreen,
+      open,
+      turnDarker,
+      showTitle
+    } = this.state;
 
     const setMargin = (sidebarPosition) => {
       if (sidebarPosition === 'right-sidebar') {
@@ -158,8 +191,6 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired,
   toggleDrawerOpen: PropTypes.func.isRequired,
   margin: PropTypes.bool.isRequired,
-  turnDarker: PropTypes.bool.isRequired,
-  showTitle: PropTypes.bool.isRequired,
   gradient: PropTypes.bool.isRequired,
   position: PropTypes.string.isRequired,
   mode: PropTypes.string.isRequired,
