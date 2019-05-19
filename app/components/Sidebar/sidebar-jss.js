@@ -155,6 +155,9 @@ const styles = theme => ({
     marginLeft: -15,
     '& > $title:first-child': {
       margin: '0'
+    },
+    '& $head': {
++     paddingLeft: theme.spacing.unit * 10
     }
   },
   active: {
@@ -165,7 +168,7 @@ const styles = theme => ({
     '& $icon svg': {
       fill: theme.palette.primary.dark,
     },
-    '&:hover': {
+    '&:hover, &:focus': {
       backgroundColor: theme.palette.type === 'dark' ? fade(theme.palette.primary.main, 0.24) : theme.palette.primary.light,
     }
   },
