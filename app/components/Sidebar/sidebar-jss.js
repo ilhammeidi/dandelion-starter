@@ -157,7 +157,7 @@ const styles = theme => ({
       margin: '0'
     },
     '& $head': {
-+     paddingLeft: theme.spacing.unit * 10
+      paddingLeft: theme.spacing.unit * 10
     }
   },
   active: {
