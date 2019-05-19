@@ -115,7 +115,6 @@ class ReduxFormDemo extends Component {
                     validate={required}
                     required
                     ref={this.saveRef}
-                    withRef
                     className={classes.field}
                   />
                 </div>

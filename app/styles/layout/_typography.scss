@@ -25,7 +25,7 @@ p {
 
 a {
   color: material-color('blue', '500');
-  text-decoration-skip: ink;
+  text-decoration-skip-ink: auto;
   transition: color $base-duration $base-timing;
 
   &:focus {
@@ -47,3 +47,7 @@ hr {
 [textalign="left"]{text-align: left}
 [textalign="right"]{text-align: right}
 [textalign="justify"]{text-align: justify}
+
+svg {
+  fill: currentColor;
+}
