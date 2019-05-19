@@ -1,6 +1,6 @@
 import React from 'react';
 import Outer from '../../Templates/Outer';
-import { Login } from '../../pageListAsync';
+import Login from '../Users/Login';
 
 class LoginDedicated extends React.Component {
   render() {
