@@ -33,14 +33,14 @@ const styles = theme => ({
       content: '""',
       position: 'absolute',
       width: 5,
-      height: theme.spacing.unit * 5,
+      height: theme.spacing(5),
       top: 0,
       left: 0,
       background: fade(theme.palette.primary.main, 0.5)
     }
   },
   drawerPaperClose: {
-    width: 66,
+    width: theme.spacing(8),
     position: 'absolute',
     overflowX: 'hidden',
     background: theme.palette.background.paper,
@@ -70,22 +70,22 @@ const styles = theme => ({
     },
     '& $profile': {
       flexDirection: 'row',
-      top: theme.spacing.unit * 6,
-      padding: theme.spacing.unit / 2,
+      top: theme.spacing(6),
+      padding: theme.spacing(0.5),
       textAlign: 'left',
       '& button': {
         width: 'auto'
       }
     },
     '& $avatar': {
-      marginRight: theme.spacing.unit * 3
+      marginRight: theme.spacing(3)
     },
     '& $menuContainer': {
       '&$menuContainer': {
-        paddingTop: theme.spacing.unit * 10,
+        paddingTop: theme.spacing(10),
         paddingBottom: 0,
       }
-    }
+    },
   },
   drawerInner: {
     // Make the items inside not wrap when transitioning:
@@ -129,23 +129,23 @@ const styles = theme => ({
     background: 'none',
   },
   nested: {
-    paddingTop: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    margin: `${theme.spacing.unit}px 0`,
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+    margin: `${theme.spacing(0.5)}px 0`,
     [theme.breakpoints.down('lg')]: {
-      paddingLeft: theme.spacing.unit * 3
+      paddingLeft: theme.spacing(3)
     }
   },
   child: {
     '& a': {
-      paddingLeft: theme.spacing.unit * 6,
+      paddingLeft: theme.spacing(6),
     }
   },
   title: {
     fontSize: 10,
     textTransform: 'uppercase',
-    paddingLeft: theme.spacing.unit * 10,
-    marginTop: theme.spacing.unit * 3,
+    paddingLeft: theme.spacing(10),
+    marginTop: theme.spacing(3),
     display: 'block',
     color: theme.palette.secondary.main,
     lineHeight: '28px',
@@ -157,7 +157,7 @@ const styles = theme => ({
       margin: '0'
     },
     '& $head': {
-      paddingLeft: theme.spacing.unit * 10
+      paddingLeft: theme.spacing(10)
     }
   },
   active: {
@@ -179,17 +179,17 @@ const styles = theme => ({
     whiteSpace: 'nowrap'
   },
   icon: {
-    marginRight: theme.spacing.unit / 2,
+    minWidth: theme.spacing(5),
     fill: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark,
   },
   iconed: {},
   head: {
-    padding: `${theme.spacing.unit}px 0`,
-    margin: `${theme.spacing.unit}px 0`,
-    borderRadius: `0 ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px 0`,
-    paddingLeft: theme.spacing.unit * 3,
+    padding: `${theme.spacing(1)}px 0`,
+    margin: `${theme.spacing(1)}px 0`,
+    borderRadius: `0 ${theme.spacing(3)}px ${theme.spacing(3)}px 0`,
+    paddingLeft: theme.spacing(3),
     '&$iconed': {
-      paddingLeft: theme.spacing.unit * 3,
+      paddingLeft: theme.spacing(3),
     },
     '& svg[class^="MuiSvgIcon"]': {
       left: -10,
@@ -197,12 +197,12 @@ const styles = theme => ({
     },
   },
   headCapital: {
-    padding: `${theme.spacing.unit}px 0 ${theme.spacing.unit}px ${theme.spacing.unit * 9}px`,
-    left: theme.spacing.unit * -2,
+    padding: `${theme.spacing(1)}px 0 ${theme.spacing(1)}px ${theme.spacing(9)}px`,
+    left: theme.spacing(1) * -2,
     position: 'relative',
     textTransform: 'uppercase',
-    borderRadius: `0 ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px 0`,
-    margin: `${theme.spacing.unit}px`,
+    borderRadius: `0 ${theme.spacing(3)}px ${theme.spacing(3)}px 0`,
+    margin: `${theme.spacing(1)}px`,
     '& span': {
       fontSize: 14
     }
@@ -210,14 +210,14 @@ const styles = theme => ({
   copyright: {
     color: theme.palette.text.secondary,
     background: theme.palette.background.paper,
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     position: 'fixed',
     [theme.breakpoints.up('lg')]: {
       background: 'none',
       position: 'absolute',
     },
     bottom: 0,
-    left: theme.spacing.unit * 3,
+    left: theme.spacing(3),
     lineHeight: '24px',
   },
   brand: {
@@ -238,7 +238,7 @@ const styles = theme => ({
     },
   },
   brandBig: {
-    paddingTop: theme.spacing.unit * 4,
+    paddingTop: theme.spacing(4),
     position: 'relative',
     textAlign: 'center',
     '& img': {
@@ -246,7 +246,7 @@ const styles = theme => ({
     },
     '& h3': {
       fontSize: 18,
-      marginTop: theme.spacing.unit * 2,
+      marginTop: theme.spacing(2),
       fontWeight: 500,
       color: theme.palette.text.primary,
     }
@@ -261,7 +261,7 @@ const styles = theme => ({
     textAlign: 'center',
     alignItems: 'center',
     position: 'absolute',
-    margin: `${theme.spacing.unit * 2}px 0`,
+    margin: `${theme.spacing(2)}px 0`,
     zIndex: 0,
     '& h4': {
       fontSize: 18,
@@ -290,11 +290,11 @@ const styles = theme => ({
     }
   },
   dotStatus: {
-    width: theme.spacing.unit,
-    height: theme.spacing.unit,
+    width: theme.spacing(1),
+    height: theme.spacing(1),
     display: 'inline-block',
     borderRadius: '50%',
-    marginRight: theme.spacing.unit / 2
+    marginRight: theme.spacing(0.5)
   },
   online: {
     backgroundColor: lightGreen[500]
@@ -317,23 +317,23 @@ const styles = theme => ({
     width: drawerWidth,
     position: 'relative',
     display: 'block',
-    padding: `${theme.spacing.unit * 5}px 0`,
+    padding: `${theme.spacing(5)}px 0`,
     '&$withProfile': {
-      paddingTop: theme.spacing.unit * 18
+      paddingTop: theme.spacing(18)
     },
     '&$landingNav': {
       [theme.breakpoints.up('lg')]: {
-        paddingTop: theme.spacing.unit * 5
+        paddingTop: theme.spacing(5)
       },
       [theme.breakpoints.down('lg')]: {
         height: 'calc(100% - 164px)',
-        paddingTop: theme.spacing.unit * 5
+        paddingTop: theme.spacing(5)
       }
     },
     '&$rounded': {
-      paddingRight: theme.spacing.unit * 1.5,
+      paddingRight: theme.spacing(1.5),
       '& a': {
-        borderRadius: `0 ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px 0`,
+        borderRadius: `0 ${theme.spacing(3)}px ${theme.spacing(3)}px 0`,
       },
       '& $opened': {
         '&:before': {
@@ -356,7 +356,7 @@ const styles = theme => ({
     }
   },
   divider: {
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing(1)
   },
   badge: {
     height: 'auto'

@@ -17,6 +17,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Ionicon from 'react-ionicons';
 import dummy from 'dan-api/dummy/dummyContents';
 import messageStyles from 'dan-styles/Messages.scss';
@@ -79,43 +80,53 @@ class UserMenu extends React.Component {
         >
           <MenuItem onClick={this.handleClose}>
             <div className={messageStyles.messageInfo}>
-              <Avatar alt="User Name" src={avatarApi[0]} />
+              <ListItemAvatar>
+                <Avatar alt="User Name" src={avatarApi[0]} />
+              </ListItemAvatar>
               <ListItemText primary={dummy.text.subtitle} secondary={dummy.text.date} />
             </div>
           </MenuItem>
           <Divider variant="inset" />
           <MenuItem onClick={this.handleClose}>
             <div className={messageStyles.messageInfo}>
-              <Avatar className={messageStyles.icon}>
-                <Info />
-              </Avatar>
+              <ListItemAvatar>
+                <Avatar className={messageStyles.icon}>
+                  <Info />
+                </Avatar>
+              </ListItemAvatar>
               <ListItemText primary={dummy.text.sentences} className={classes.textNotif} secondary={dummy.text.date} />
             </div>
           </MenuItem>
           <Divider variant="inset" />
           <MenuItem onClick={this.handleClose}>
             <div className={messageStyles.messageSuccess}>
-              <Avatar className={messageStyles.icon}>
-                <Check />
-              </Avatar>
+              <ListItemAvatar>
+                <Avatar className={messageStyles.icon}>
+                  <Check />
+                </Avatar>
+              </ListItemAvatar>
               <ListItemText primary={dummy.text.subtitle} className={classes.textNotif} secondary={dummy.text.date} />
             </div>
           </MenuItem>
           <Divider variant="inset" />
           <MenuItem onClick={this.handleClose}>
             <div className={messageStyles.messageWarning}>
-              <Avatar className={messageStyles.icon}>
-                <Warning />
-              </Avatar>
+              <ListItemAvatar>
+                <Avatar className={messageStyles.icon}>
+                  <Warning />
+                </Avatar>
+              </ListItemAvatar>
               <ListItemText primary={dummy.text.subtitle} className={classes.textNotif} secondary={dummy.text.date} />
             </div>
           </MenuItem>
           <Divider variant="inset" />
           <MenuItem onClick={this.handleClose}>
             <div className={messageStyles.messageError}>
-              <Avatar className={messageStyles.icon}>
-                <Error />
-              </Avatar>
+              <ListItemAvatar>
+                <Avatar className={messageStyles.icon}>
+                  <Error />
+                </Avatar>
+              </ListItemAvatar>
               <ListItemText primary="Suspendisse pharetra pulvinar sollicitudin. Aenean ut orci eu odio cursus lobortis eget tempus velit. " className={classes.textNotif} secondary="Jan 9, 2016" />
             </div>
           </MenuItem>

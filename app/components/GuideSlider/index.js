@@ -15,11 +15,11 @@ import styles from './guide-jss';
 
 const maxStepsSwipe = guideData.length;
 
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
+const Transition = React.forwardRef(function Transition(props, ref) { // eslint-disable-line
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
-class GuideSlider extends React.Component {
+class GuideSlider extends React.Component { // eslint-disable-line
   state = {
     activeStepSwipe: 0,
   };
@@ -71,6 +71,7 @@ class GuideSlider extends React.Component {
             index={activeStepSwipe}
             onChangeIndex={this.handleStepChangeSwipe}
             enableMouseEvents
+            className={classes.guideWrap}
           >
             {guideData.map((step, index) => (
               <div className={classes.figure} key={index.toString()}>

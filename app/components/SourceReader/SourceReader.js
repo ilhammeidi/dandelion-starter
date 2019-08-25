@@ -27,7 +27,7 @@ const styles = theme => ({
     fontSize: 20,
   },
   leftIcon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
   },
   source: {
     overflow: 'hidden',

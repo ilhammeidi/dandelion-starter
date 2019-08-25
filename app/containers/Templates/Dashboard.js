@@ -8,6 +8,7 @@ import { GuideSlider } from 'dan-components';
 import { toggleAction, openAction, playTransitionAction } from 'dan-actions/UiActions';
 import LeftSidebarLayout from './layouts/LeftSidebarLayout';
 import RightSidebarLayout from './layouts/RightSidebarLayout';
+import LeftSidebarBigLayout from './layouts/LeftSidebarBigLayout';
 import DropMenuLayout from './layouts/DropMenuLayout';
 import MegaMenuLayout from './layouts/MegaMenuLayout';
 import styles from './appStyles-jss';
@@ -94,6 +95,27 @@ class Dashboard extends React.Component {
             >
               { children }
             </LeftSidebarLayout>
+          )
+        }
+        { /* Left Big-Sidebar Layout */
+          layout === 'big-sidebar' && (
+            <LeftSidebarBigLayout
+              history={history}
+              toggleDrawer={toggleDrawer}
+              loadTransition={loadTransition}
+              changeMode={changeMode}
+              sidebarOpen={sidebarOpen}
+              pageLoaded={pageLoaded}
+              gradient={gradient}
+              deco={deco}
+              bgPosition={bgPosition}
+              mode={mode}
+              place={place}
+              titleException={titleException}
+              handleOpenGuide={this.handleOpenGuide}
+            >
+              { children }
+            </LeftSidebarBigLayout>
           )
         }
         { /* Right Sidebar Layout */

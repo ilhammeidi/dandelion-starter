@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { Field, reduxForm } from 'redux-form/immutable';
-import { Checkbox, TextField } from 'redux-form-material-ui';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -23,6 +22,7 @@ import Icon from '@material-ui/core/Icon';
 import Hidden from '@material-ui/core/Hidden';
 import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
+import { TextFieldRedux, CheckboxRedux } from './ReduxFormMUI';
 import styles from './user-jss';
 import { ContentDivider } from '../Divider';
 
@@ -34,6 +34,11 @@ const email = value => (
     : undefined
 );
 
+const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
+  return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
+});
+
+// eslint-disable-next-line
 class LoginForm extends React.Component {
   state = {
     showPassword: false
@@ -72,7 +77,7 @@ class LoginForm extends React.Component {
                 <img src={logo} alt={brand.name} />
                 {brand.name}
               </NavLink>
-              <Button size="small" className={classes.buttonLink} component={NavLink} to="/register">
+              <Button size="small" className={classes.buttonLink} component={LinkBtn} to="/register">
                 <Icon className={classes.icon}>arrow_forward</Icon>
                 Create new account
               </Button>
@@ -107,7 +112,7 @@ class LoginForm extends React.Component {
                 <FormControl className={classes.formControl}>
                   <Field
                     name="email"
-                    component={TextField}
+                    component={TextFieldRedux}
                     placeholder="Your Email"
                     label="Your Email"
                     required
@@ -120,7 +125,7 @@ class LoginForm extends React.Component {
                 <FormControl className={classes.formControl}>
                   <Field
                     name="password"
-                    component={TextField}
+                    component={TextFieldRedux}
                     type={showPassword ? 'text' : 'password'}
                     label="Your Password"
                     InputProps={{
@@ -143,8 +148,8 @@ class LoginForm extends React.Component {
                 </FormControl>
               </div>
               <div className={classes.optArea}>
-                <FormControlLabel className={classes.label} control={<Field name="checkbox" component={Checkbox} />} label="Remember" />
-                <Button size="small" component={NavLink} to="/reset-password" className={classes.buttonLink}>Forgot Password</Button>
+                <FormControlLabel className={classes.label} control={<Field name="checkbox" component={CheckboxRedux} />} label="Remember" />
+                <Button size="small" component={LinkBtn} to="/reset-password" className={classes.buttonLink}>Forgot Password</Button>
               </div>
               <div className={classes.btnArea}>
                 <Button variant="contained" color="primary" size="large" type="submit">

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { closeAllAction } from 'dan-actions/UiActions';
 import Button from '@material-ui/core/Button';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Popper from '@material-ui/core/Popper';
@@ -18,12 +18,18 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import styles from './header-jss';
 
+const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
+  return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
+});
+
+// eslint-disable-next-line
 class MainMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       active: [],
       openMenu: [],
+      anchorEl: null,
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleOpenMenu = this.handleOpenMenu.bind(this);
@@ -39,6 +45,7 @@ class MainMenu extends React.Component {
   handleOpenMenu = (event, key, keyParent) => {
     const { openSubMenu } = this.props;
     openSubMenu(key, keyParent);
+    this.setState({ anchorEl: event.currentTarget });
     setTimeout(() => {
       this.setState({
         openMenu: this.props.open, // eslint-disable-line
@@ -64,7 +71,7 @@ class MainMenu extends React.Component {
 
   render() {
     const { classes, open, dataMenu } = this.props;
-    const { active, openMenu } = this.state;
+    const { active, openMenu, anchorEl } = this.state;
     const getMenus = (parent, menuArray) => menuArray.map((item, index) => {
       if (item.multilevel) {
         return false;
@@ -91,6 +98,7 @@ class MainMenu extends React.Component {
             </Button>
             <Popper
               open={openMenu.indexOf(item.key) > -1}
+              anchorEl={anchorEl}
               transition
               disablePortal
             >
@@ -125,7 +133,7 @@ class MainMenu extends React.Component {
           exact
           className={classes.menuItem}
           activeClassName={classes.active}
-          component={NavLink}
+          component={LinkBtn}
           to={item.link}
           onClick={() => this.handleActiveParent(parent)}
         >
@@ -169,4 +177,4 @@ const MainMenuMapped = connect(
   mapDispatchToProps
 )(MainMenu);
 
-export default withTheme()(withStyles(styles)(MainMenuMapped));
+export default withStyles(styles)(MainMenuMapped);

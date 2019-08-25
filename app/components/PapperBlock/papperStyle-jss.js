@@ -1,9 +1,9 @@
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 const styles = theme => ({
   root: theme.mixins.gutters({
-    paddingTop: theme.spacing.unit * 3,
-    paddingBottom: theme.spacing.unit * 3,
-    marginBottom: theme.spacing.unit * 3,
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    marginBottom: theme.spacing(3),
     boxShadow: theme.shade.light,
     color: theme.palette.text.primary,
     '&$noMargin': {
@@ -13,9 +13,9 @@ const styles = theme => ({
   descBlock: {
     display: 'flex',
     alignItems: 'center',
-    marginBottom: theme.spacing.unit * 5,
+    marginBottom: theme.spacing(5),
     [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing.unit * 3,
+      marginBottom: theme.spacing(3),
     }
   },
   titleText: {
@@ -30,23 +30,23 @@ const styles = theme => ({
     [theme.breakpoints.down('xs')]: {
       textAlign: 'center',
       fontWeight: 600,
-      marginBottom: theme.spacing.unit
+      marginBottom: theme.spacing(1)
     }
   },
   description: {
     maxWidth: 960,
-    paddingTop: theme.spacing.unit / 2,
+    paddingTop: theme.spacing(0.5),
     [theme.breakpoints.down('xs')]: {
       textAlign: 'center'
     }
   },
   content: {
-    marginTop: theme.spacing.unit * 2,
-    padding: theme.spacing.unit,
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(1),
     borderRadius: theme.rounded.medium,
     backgroundColor: theme.palette.background.default,
     [theme.breakpoints.up('lg')]: {
-      padding: theme.spacing.unit * 2
+      padding: theme.spacing(2)
     }
   },
   whiteBg: {
@@ -81,7 +81,7 @@ const styles = theme => ({
     textAlign: 'center',
     lineHeight: '44px',
     verticalAlign: 'middle',
-    marginRight: theme.spacing.unit * 3,
+    marginRight: theme.spacing(3),
     [theme.breakpoints.down('xs')]: {
       display: 'none'
     },

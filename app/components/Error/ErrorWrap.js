@@ -21,7 +21,7 @@ const styles = theme => ({
     justifyContent: 'center',
     flexDirection: 'column',
     position: 'relative',
-    margin: `${theme.spacing.unit * 3}px auto`,
+    margin: `${theme.spacing(3)}px auto`,
     '& h5': {
       [theme.breakpoints.down('sm')]: {
         fontSize: '1.2rem',
@@ -33,7 +33,7 @@ const styles = theme => ({
     textShadow: `10px 6px 50px ${theme.palette.primary.main}`,
     [theme.breakpoints.down('sm')]: {
       fontSize: '4rem',
-      marginBottom: theme.spacing.unit * 2
+      marginBottom: theme.spacing(2)
     },
   },
   deco: {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { closeAllAction } from 'dan-actions/UiActions';
 import Button from '@material-ui/core/Button';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Fade from '@material-ui/core/Fade';
 import Popper from '@material-ui/core/Popper';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -20,12 +20,18 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import styles from './header-jss';
 
+const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
+  return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
+});
+
+// eslint-disable-next-line
 class MegaMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       active: [],
-      openMenu: []
+      openMenu: [],
+      anchorEl: null,
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleOpenMenu = this.handleOpenMenu.bind(this);
@@ -41,6 +47,7 @@ class MegaMenu extends React.Component {
   handleOpenMenu = (event, key, keyParent) => {
     const { openSubMenu } = this.props;
     openSubMenu(key, keyParent);
+    this.setState({ anchorEl: event.currentTarget });
     setTimeout(() => {
       this.setState({
         openMenu: this.props.open, // eslint-disable-line
@@ -48,7 +55,7 @@ class MegaMenu extends React.Component {
     }, 50);
   };
 
-  handleClose = event => {
+  handleClose = (event) => {
     const { closeAll } = this.props;
     closeAll();
     if (this.anchorEl.contains(event.target)) {
@@ -66,7 +73,7 @@ class MegaMenu extends React.Component {
 
   render() {
     const { classes, open, dataMenu } = this.props;
-    const { active, openMenu } = this.state;
+    const { active, openMenu, anchorEl } = this.state;
     const getMenus = (parent, menuArray) => menuArray.map((item, index) => {
       if (item.multilevel) {
         return false;
@@ -93,6 +100,7 @@ class MegaMenu extends React.Component {
             </Button>
             <Popper
               open={openMenu.indexOf(item.key) > -1}
+              anchorEl={anchorEl}
               transition
               disablePortal
             >
@@ -142,7 +150,7 @@ class MegaMenu extends React.Component {
           exact
           className={classes.megaItem}
           activeClassName={classes.active}
-          component={NavLink}
+          component={LinkBtn}
           to={item.link}
           onClick={() => this.handleActiveParent(parent)}
         >
@@ -186,4 +194,4 @@ const MegaMenuMapped = connect(
   mapDispatchToProps
 )(MegaMenu);
 
-export default withTheme()(withStyles(styles)(MegaMenuMapped));
+export default withStyles(styles)(MegaMenuMapped);

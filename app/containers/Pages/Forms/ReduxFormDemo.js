@@ -16,11 +16,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import {
-  Checkbox,
-  Select,
-  TextField,
-  Switch
-} from 'redux-form-material-ui';
+  CheckboxRedux,
+  SelectRedux,
+  TextFieldRedux,
+  SwitchRedux
+} from 'dan-components/Forms/ReduxFormMUI';
 import { initAction, clearAction } from '../../../actions/ReduxFormActions';
 
 const renderRadioGroup = ({ input, ...rest }) => (
@@ -59,7 +59,7 @@ const styles = theme => ({
     flexDirection: 'row'
   },
   buttonInit: {
-    margin: theme.spacing.unit * 4,
+    margin: theme.spacing(4),
     textAlign: 'center'
   },
 });
@@ -88,7 +88,7 @@ class ReduxFormDemo extends Component {
     } = this.props;
     return (
       <div>
-        <Grid container spacing={24} alignItems="flex-start" direction="row" justify="center">
+        <Grid container spacing={3} alignItems="flex-start" direction="row" justify="center">
           <Grid item xs={12} md={6}>
             <Paper className={classes.root}>
               <Typography variant="h5" component="h3">
@@ -109,7 +109,7 @@ class ReduxFormDemo extends Component {
                 <div>
                   <Field
                     name="text"
-                    component={TextField}
+                    component={TextFieldRedux}
                     placeholder="Text Field"
                     label="Text Field"
                     validate={required}
@@ -121,7 +121,7 @@ class ReduxFormDemo extends Component {
                 <div>
                   <Field
                     name="email"
-                    component={TextField}
+                    component={TextFieldRedux}
                     placeholder="Email Field"
                     label="Email"
                     required
@@ -141,7 +141,7 @@ class ReduxFormDemo extends Component {
                     <InputLabel htmlFor="selection">Selection</InputLabel>
                     <Field
                       name="selection"
-                      component={Select}
+                      component={SelectRedux}
                       placeholder="Selection"
                       autoWidth={trueBool}
                     >
@@ -154,15 +154,15 @@ class ReduxFormDemo extends Component {
                 <div className={classes.fieldBasic}>
                   <FormLabel component="label">Toggle Input</FormLabel>
                   <div className={classes.inlineWrap}>
-                    <FormControlLabel control={<Field name="onof" component={Switch} />} label="On/OF Switch" />
-                    <FormControlLabel control={<Field name="checkbox" component={Checkbox} />} label="Checkbox" />
+                    <FormControlLabel control={<Field name="onof" component={SwitchRedux} />} label="On/OF Switch" />
+                    <FormControlLabel control={<Field name="checkbox" component={CheckboxRedux} />} label="Checkbox" />
                   </div>
                 </div>
                 <div className={classes.field}>
                   <Field
                     name="textarea"
                     className={classes.field}
-                    component={TextField}
+                    component={TextFieldRedux}
                     placeholder="Textarea"
                     label="Textarea"
                     multiline={trueBool}

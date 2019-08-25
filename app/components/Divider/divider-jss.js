@@ -54,7 +54,7 @@ const styles = theme => ({
     border: 'none',
     borderTop: theme.palette.type === 'dark' ? `1px solid ${theme.palette.grey[700]}` : `1px solid ${theme.palette.grey[300]}`,
     color: theme.palette.text.secondary,
-    margin: `${theme.spacing.unit * 4}px ${theme.spacing.unit / 2}px ${theme.spacing.unit * 2}px`,
+    margin: `${theme.spacing(4)}px ${theme.spacing(0.5)}px ${theme.spacing(2)}px`,
     textAlign: 'center',
     '&:after': {
       content: 'attr(data-content)',

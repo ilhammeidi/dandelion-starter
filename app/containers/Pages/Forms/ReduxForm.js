@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
 import { withStyles } from '@material-ui/core/styles';
-import { PapperBlock } from 'dan-components';
+import { SourceReader, PapperBlock } from 'dan-components';
 import ReduxFormDemo from './ReduxFormDemo';
 
 const styles = ({
@@ -26,6 +26,7 @@ class ReduxForm extends React.Component {
   render() {
     const title = brand.name + ' - Form';
     const description = brand.desc;
+    const docSrc = 'containers/Forms/demos/';
     return (
       <div>
         <Helmet>
@@ -39,6 +40,7 @@ class ReduxForm extends React.Component {
         <PapperBlock title="Redux Form" icon="ios-list-box-outline" desc="This is a simple demonstration of how to connect all the standard material-ui form elements to redux-form.">
           <div>
             <ReduxFormDemo onSubmit={(values) => this.showResult(values)} />
+            <SourceReader componentName={docSrc + 'ReduxFormDemo.js'} />
           </div>
         </PapperBlock>
       </div>

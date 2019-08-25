@@ -32,11 +32,7 @@
       }
     }
   }
-  th{
-    padding: 0 15px;
-  }
   td{
-    padding: 0 15px;
     &.toggleCell{
       position: relative;
     }
@@ -79,6 +75,11 @@
         visibility: hidden;
       }
     }
+  }
+  th {
+    padding: 0 8px;
+    word-break: keep-all;
+    white-space: nowrap;
   }
   td [disabled], td[disabled]:hover{
     border: none !important;

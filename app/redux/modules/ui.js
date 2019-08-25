@@ -2,25 +2,29 @@ import { fromJS, List } from 'immutable';
 import MenuContent from 'dan-api/ui/menu';
 import {
   TOGGLE_SIDEBAR,
+  OPEN_MENU,
   OPEN_SUBMENU,
   CLOSE_ALL_SUBMENU,
   CHANGE_THEME,
+  CHANGE_RANDOM_THEME,
   CHANGE_MODE,
   CHANGE_GRADIENT,
   CHANGE_DECO,
   CHANGE_BG_POSITION,
   CHANGE_LAYOUT,
+  CHANGE_DIRECTION,
   LOAD_PAGE
 } from '../../actions/actionConstants';
 
 const initialState = {
   /* Settings for Themes and layout */
   theme: 'blueCyanTheme',
+  direction: 'ltr',
   type: 'light', // light or dark
   gradient: true, // true or false
   decoration: true, // true or false
   bgPosition: 'half', // half, header, full
-  layout: 'left-sidebar', // left-sidebar, right-sidebar, top-navigation, mega-menu
+  layout: 'left-sidebar', // big-sidebar, left-sidebar, right-sidebar, top-navigation, mega-menu
   /* End settings */
   palette: List([
     { name: 'Ocean Sky', value: 'skyBlueTheme' },
@@ -73,6 +77,10 @@ export default function reducer(state = initialImmutableState, action = {}) {
       return state.withMutations((mutableState) => {
         mutableState.set('sidebarOpen', !state.get('sidebarOpen'));
       });
+    case OPEN_MENU:
+      return state.withMutations((mutableState) => {
+        mutableState.set('sidebarOpen', true);
+      });
     case OPEN_SUBMENU:
       return state.withMutations((mutableState) => {
         // Set initial open parent menu
@@ -103,6 +111,12 @@ export default function reducer(state = initialImmutableState, action = {}) {
       return state.withMutations((mutableState) => {
         mutableState.set('subMenuOpen', List([]));
       });
+    case CHANGE_RANDOM_THEME:
+      return state.withMutations((mutableState) => {
+        const paletteArray = state.get('palette').toJS();
+        const random = paletteArray[Math.floor(Math.random() * paletteArray.length)];
+        mutableState.set('theme', random.value);
+      });
     case CHANGE_THEME:
       return state.withMutations((mutableState) => {
         mutableState.set('theme', action.theme);
@@ -126,6 +140,10 @@ export default function reducer(state = initialImmutableState, action = {}) {
     case CHANGE_LAYOUT:
       return state.withMutations((mutableState) => {
         mutableState.set('layout', action.layout);
+      });
+    case CHANGE_DIRECTION:
+      return state.withMutations((mutableState) => {
+        mutableState.set('direction', action.direction);
       });
     case LOAD_PAGE:
       return state.withMutations((mutableState) => {

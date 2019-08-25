@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form/immutable';
-import { Checkbox, TextField } from 'redux-form-material-ui';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -21,6 +20,7 @@ import Icon from '@material-ui/core/Icon';
 import Hidden from '@material-ui/core/Hidden';
 import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
+import { TextFieldRedux, CheckboxRedux } from './ReduxFormMUI';
 import styles from './user-jss';
 
 // validation functions
@@ -32,13 +32,17 @@ const email = value => (
 );
 
 const passwordsMatch = (value, allValues) => {
-  console.log(value, allValues.get('password'));
   if (value !== allValues.get('password')) {
     return 'Passwords dont match';
   }
   return undefined;
 };
 
+const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
+  return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
+});
+
+// eslint-disable-next-line
 class RegisterForm extends React.Component {
   state = {
     tab: 0,
@@ -81,7 +85,7 @@ class RegisterForm extends React.Component {
                 <img src={logo} alt={brand.name} />
                 {brand.name}
               </NavLink>
-              <Button size="small" className={classes.buttonLink} component={NavLink} to="/login">
+              <Button size="small" className={classes.buttonLink} component={LinkBtn} to="/login">
                 <Icon className={classes.icon}>arrow_forward</Icon>
                 Already have account ?
               </Button>
@@ -111,7 +115,7 @@ class RegisterForm extends React.Component {
                   <FormControl className={classes.formControl}>
                     <Field
                       name="name"
-                      component={TextField}
+                      component={TextFieldRedux}
                       placeholder="Username"
                       label="Username"
                       required
@@ -123,7 +127,7 @@ class RegisterForm extends React.Component {
                   <FormControl className={classes.formControl}>
                     <Field
                       name="email"
-                      component={TextField}
+                      component={TextFieldRedux}
                       placeholder="Your Email"
                       label="Your Email"
                       required
@@ -136,7 +140,7 @@ class RegisterForm extends React.Component {
                   <FormControl className={classes.formControl}>
                     <Field
                       name="password"
-                      component={TextField}
+                      component={TextFieldRedux}
                       type="password"
                       label="Your Password"
                       required
@@ -149,7 +153,7 @@ class RegisterForm extends React.Component {
                   <FormControl className={classes.formControl}>
                     <Field
                       name="passwordConfirm"
-                      component={TextField}
+                      component={TextFieldRedux}
                       type="password"
                       label="Re-type Password"
                       required
@@ -159,7 +163,12 @@ class RegisterForm extends React.Component {
                   </FormControl>
                 </div>
                 <div>
-                  <FormControlLabel control={<Field name="checkbox" component={Checkbox} className={classes.agree} />} label="Agree with" />
+                  <FormControlLabel
+                    control={(
+                      <Field name="checkbox" component={CheckboxRedux} required className={classes.agree} />
+                    )}
+                    label="Agree with"
+                  />
                   <a href="#" className={classes.link}>Terms &amp; Condition</a>
                 </div>
                 <div className={classes.btnArea}>

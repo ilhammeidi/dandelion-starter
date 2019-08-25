@@ -1,7 +1,7 @@
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: `${theme.spacing.unit * 2}px 0`,
+    margin: theme.spacing(2, 0, 4),
     borderRadius: 40,
     overflow: 'hidden',
     boxShadow: theme.shadows[5]
@@ -16,8 +16,8 @@ const styles = theme => ({
   wrapper: {
     fontFamily: theme.typography.fontFamily,
     position: 'relative',
-    marginRight: theme.spacing.unit * 2,
-    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(1),
     borderRadius: 2,
     display: 'block',
     color: theme.palette.text.secondary,
@@ -41,7 +41,7 @@ const styles = theme => ({
   },
   input: {
     font: 'inherit',
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit}px ${theme.spacing.unit}px ${theme.spacing.unit * 4}px`,
+    padding: `${theme.spacing(1)}px ${theme.spacing(1)}px ${theme.spacing(1)}px ${theme.spacing(4)}px`,
     border: 0,
     display: 'block',
     verticalAlign: 'middle',
@@ -56,15 +56,15 @@ const styles = theme => ({
   },
   toggleContainer: {
     height: 56,
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    margin: `${theme.spacing.unit}px 0`,
+    margin: `${theme.spacing(1)}px 0`,
   },
   inputHeader: {
     font: 'inherit',
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit}px ${theme.spacing.unit}px ${theme.spacing.unit * 9}px`,
+    padding: `${theme.spacing(1)}px ${theme.spacing(1)}px ${theme.spacing(1)}px ${theme.spacing(9)}px`,
     border: 0,
     display: 'block',
     verticalAlign: 'middle',
@@ -110,7 +110,7 @@ const styles = theme => ({
   suggestionsContainerOpen: {
     position: 'absolute',
     zIndex: 1,
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(1),
     left: 0,
     right: 0,
     overflow: 'hidden'

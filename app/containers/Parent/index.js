@@ -51,7 +51,8 @@ class Parent extends React.Component {
       return (
         <Typography className={classes.title} variant="h6">
           { item.name }
-        </Typography>);
+        </Typography>
+      );
     });
 
     return (

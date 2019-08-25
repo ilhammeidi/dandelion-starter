@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -17,6 +17,11 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import styles from './sidebar-jss';
 
+const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
+  return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
+});
+
+// eslint-disable-next-line
 class MainMenu extends React.Component {
   handleClick() {
     const { toggleDrawerOpen, loadTransition } = this.props;
@@ -90,15 +95,10 @@ class MainMenu extends React.Component {
           exact
           className={classes.nested}
           activeClassName={classes.active}
-          component={NavLink}
+          component={LinkBtn}
           to={item.link}
           onClick={() => this.handleClick()}
         >
-          {item.icon && (
-            <ListItemIcon className={classes.icon}>
-              <Ionicon icon={item.icon} />
-            </ListItemIcon>
-          )}
           <ListItemText classes={{ primary: classes.primary }} inset primary={item.name} />
           {item.badge && (
             <Chip color="primary" label={item.badge} className={classes.badge} />
@@ -140,4 +140,4 @@ const MainMenuMapped = connect(
   mapDispatchToProps
 )(MainMenu);
 
-export default withTheme()(withStyles(styles)(MainMenuMapped));
+export default withStyles(styles)(MainMenuMapped);

@@ -3,14 +3,9 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import Loading from 'react-loading-bar';
 import { bindActionCreators } from 'redux';
-import {
-  withTheme, withStyles,
-  createMuiTheme, MuiThemeProvider
-} from '@material-ui/core/styles';
+import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import 'dan-styles/vendors/react-loading-bar/index.css';
-import {
-  changeModeAction,
-} from 'dan-actions/UiActions';
+import { changeModeAction } from 'dan-actions/UiActions';
 import applicationTheme from '../../styles/theme/applicationTheme';
 
 const styles = {
@@ -110,4 +105,4 @@ const ThemeWrapperMapped = connect(
   dispatchToProps
 )(ThemeWrapper);
 
-export default withTheme()(withStyles(styles)(ThemeWrapperMapped));
+export default withStyles(styles)(ThemeWrapperMapped);

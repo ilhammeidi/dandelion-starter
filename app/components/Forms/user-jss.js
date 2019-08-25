@@ -13,7 +13,7 @@ const rootWraper = {
 };
 
 const wrapper = (theme, opacity) => ({
-  padding: theme.spacing.unit * 3,
+  padding: theme.spacing(3),
   textAlign: 'center',
   backgroundColor: fade(theme.palette.background.paper, opacity),
   backgroundRepeat: 'no-repeat',
@@ -60,7 +60,7 @@ const styles = theme => ({
       width: 480,
     },
     '& $topBar': {
-      marginBottom: theme.spacing.unit * 4
+      marginBottom: theme.spacing(4)
     }
   },
   fullWrap: {
@@ -82,11 +82,11 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     '& $icon': {
-      marginRight: theme.spacing.unit
+      marginRight: theme.spacing(1)
     },
     [theme.breakpoints.down('sm')]: {
       justifyContent: 'center',
-      marginBottom: theme.spacing.unit * 3,
+      marginBottom: theme.spacing(3),
       '& a': {
         display: 'none'
       }
@@ -107,7 +107,7 @@ const styles = theme => ({
       color: theme.palette.common.white,
     },
     [theme.breakpoints.down('md')]: {
-      margin: theme.spacing.unit * 2
+      margin: theme.spacing(2)
     },
     '& img': {
       width: 30,
@@ -124,7 +124,7 @@ const styles = theme => ({
   },
   pageFormWrap: {
     width: '100%',
-    margin: `${theme.spacing.unit * 2}px auto`,
+    margin: `${theme.spacing(2)}px auto`,
     [theme.breakpoints.up('sm')]: {
       width: 480,
     },
@@ -137,7 +137,7 @@ const styles = theme => ({
   },
   formControl: {
     width: '100%',
-    marginBottom: theme.spacing.unit
+    marginBottom: theme.spacing(1)
   },
   socmedLogin: {
     [theme.breakpoints.up('sm')]: {
@@ -152,7 +152,7 @@ const styles = theme => ({
     margin: '0 auto',
     '& button': {
       padding: '4px 16px',
-      margin: `0 ${theme.spacing.unit}px`
+      margin: `0 ${theme.spacing(1)}px`
     },
     [theme.breakpoints.only('sm')]: {
       width: 480,
@@ -164,7 +164,7 @@ const styles = theme => ({
       width: 720
     },
     [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing.unit * 3
+      marginBottom: theme.spacing(3)
     },
   },
   sideFormWrap: {
@@ -187,7 +187,7 @@ const styles = theme => ({
     background: gradientBgLight(theme),
     fontWeight: 'bold',
     color: theme.palette.primary.main,
-    paddingBottom: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing(3),
     '-webkit-background-clip': 'text',
     '-webkit-text-fill-color': 'transparent',
     [theme.breakpoints.down('sm')]: {
@@ -217,7 +217,7 @@ const styles = theme => ({
   btnArea: {
     display: 'flex',
     justifyContent: 'space-around',
-    margin: `${theme.spacing.unit * 2}px 0`,
+    margin: `${theme.spacing(2)}px 0`,
     fontSize: 12,
     '& $label': {
       fontSize: 12,
@@ -226,7 +226,7 @@ const styles = theme => ({
       }
     },
     '& button': {
-      margin: `0 ${theme.spacing.unit}px`
+      margin: `0 ${theme.spacing(1)}px`
     },
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
@@ -273,10 +273,10 @@ const styles = theme => ({
     }
   },
   leftIcon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
   },
   iconSmall: {
     fontSize: 20,
@@ -292,7 +292,7 @@ const styles = theme => ({
     position: 'relative'
   },
   tab: {
-    margin: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit}px`,
+    margin: `${theme.spacing(3)}px 0 ${theme.spacing(1)}px`,
   },
   link: {
     fontSize: '0.875rem',
@@ -305,11 +305,11 @@ const styles = theme => ({
   socmedFull: {
     textAlign: 'center',
     width: '100%',
-    margin: `${theme.spacing.unit * 3}px ${theme.spacing.unit}px`,
+    margin: `${theme.spacing(3)}px ${theme.spacing(1)}px`,
     '& button': {
       width: '100%',
       display: 'block',
-      margin: `0 auto ${theme.spacing.unit * 2}px`
+      margin: `0 auto ${theme.spacing(2)}px`
     },
     [theme.breakpoints.up('sm')]: {
       '& button': {
@@ -329,11 +329,14 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'baseline',
   },
+  unlockBtn: {
+    top: -4
+  },
   notifyForm: {
     alignItems: 'baseline',
     [theme.breakpoints.down('xs')]: {
       '& button': {
-        marginTop: theme.spacing.unit * 3,
+        marginTop: theme.spacing(3),
         width: '100%'
       },
     },
@@ -345,7 +348,7 @@ const styles = theme => ({
     }
   },
   lockField: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
     '& label': {
       color: `${theme.palette.common.white} !important`,
     },
@@ -361,7 +364,7 @@ const styles = theme => ({
     width: 150,
     height: 150,
     [theme.breakpoints.up('lg')]: {
-      marginRight: theme.spacing.unit * 3,
+      marginRight: theme.spacing(3),
     },
     boxShadow: theme.glow.medium
   },
@@ -369,17 +372,17 @@ const styles = theme => ({
     color: theme.palette.common.white,
     fontWeight: theme.typography.fontWeightMedium,
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing.unit * 3,
+      marginTop: theme.spacing(3),
       textAlign: 'center'
     }
   },
   hint: {
-    padding: theme.spacing.unit
+    padding: theme.spacing(1)
   },
   brandCenter: {
     display: 'flex',
     justifyContent: 'center',
-    marginBottom: theme.spacing.unit * 3,
+    marginBottom: theme.spacing(3),
   },
   centerAdornment: {
     justifyContent: 'center',
@@ -400,7 +403,7 @@ const styles = theme => ({
   optArea: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: `0 ${theme.spacing.unit / 2}px`
+    padding: `0 ${theme.spacing(0.5)}px`
   },
 });
 

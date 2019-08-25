@@ -3,11 +3,11 @@ import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
 const styles = theme => ({
   root: {
-    paddingRight: theme.spacing.unit,
+    paddingRight: theme.spacing(1),
   },
   rootTable: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing(3),
     overflowX: 'auto',
   },
   highlight:
@@ -22,7 +22,7 @@ const styles = theme => ({
     flex: '1 1 100%',
   },
   avatar: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing(1)
   },
   flex: {
     display: 'flex'
@@ -57,26 +57,26 @@ const styles = theme => ({
     }
   },
   button: {
-    margin: `${theme.spacing.unit}px 0`,
+    margin: `${theme.spacing(1)}px 0`,
   },
   iconSmall: {
     fontSize: 20,
   },
   leftIcon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
   },
   tableChip: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     color: theme.palette.common.white
   },
   /*
   -----------------------
-  ** Table Style **
-  ** - Odd Even Stripped
-  ** - Hover Style
-  ** - Bordered Style
-  ** - Empty Table
-  ** - Table SIze
+  ' Table Style '
+  ' - Odd Even Stripped
+  ' - Hover Style
+  ' - Bordered Style
+  ' - Empty Table
+  ' - Table SIze
   -----------------------
   */
   stripped: {

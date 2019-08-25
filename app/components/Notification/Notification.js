@@ -7,8 +7,8 @@ import CloseIcon from '@material-ui/icons/Close';
 
 const styles = theme => ({
   close: {
-    width: theme.spacing.unit * 4,
-    height: theme.spacing.unit * 4,
+    width: theme.spacing(4),
+    height: theme.spacing(4),
     padding: 0,
   },
 });

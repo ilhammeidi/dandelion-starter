@@ -5,12 +5,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-// Remove this line once the following warning goes away (it was meant for webpack loader authors not users):
-// 'DeprecationWarning: loaderUtils.parseQuery() received a non-string value which can be problematic,
-// see https://github.com/webpack/loader-utils/issues/56 parseQuery() will be replaced with getOptions()
-// in the next major version of loader-utils.'
-process.noDeprecation = true;
-
 const HappyPack = require('happypack');
 const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 
@@ -43,7 +37,7 @@ module.exports = options => ({
       //        }
       //      },
       {
-        test: /\.js$/, // Transform all .js files required somewhere with Babel
+        test: /\.jsx?$/, // Transform all .js and .jsx files required somewhere with Babel
         exclude: /node_modules/,
         use: {
           loader: 'happypack/loader?id=js',
@@ -169,18 +163,14 @@ module.exports = options => ({
       threadPool: happyThreadPool,
       loaders: ['babel-loader?cacheDirectory=true']
     }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      },
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
     }),
     new webpack.ContextReplacementPlugin(/^\.\/locale$/, context => {
-      if (!/\/moment\//.test(context.context)) {
-        return;
-      }
+      if (!/\/moment\//.test(context.context)) { return; }
       // context needs to be modified in place
       Object.assign(context, {
-      // include only CJK
+        // include only CJK
         regExp: /^\.\/(ja|ko|zh)/,
         // point to the locale data folder relative to moment's src/lib/locale
         request: '../../locale'

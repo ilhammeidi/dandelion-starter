@@ -112,6 +112,9 @@ class Header extends React.Component {
       if (sidebarPosition === 'right-sidebar') {
         return classes.right;
       }
+      if (sidebarPosition === 'left-sidebar-big') {
+        return classes.leftBig;
+      }
       return classes.left;
     };
 
