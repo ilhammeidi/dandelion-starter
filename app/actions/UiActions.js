@@ -7,7 +7,6 @@ export const openAction = initialLocation => ({
   type: types.OPEN_SUBMENU,
   initialLocation
 });
-export const closeAllAction = { type: types.CLOSE_ALL_SUBMENU };
 export const changeThemeAction = theme => ({
   type: types.CHANGE_THEME,
   theme

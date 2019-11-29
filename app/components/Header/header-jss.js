@@ -29,7 +29,7 @@ const styles = theme => ({
       '& $menuButton': {
         marginLeft: 30,
         marginRight: theme.spacing(2),
-        [theme.breakpoints.down('lg')]: {
+        [theme.breakpoints.down('md')]: {
           marginLeft: 13,
         },
       },

@@ -19,15 +19,19 @@ const styles = theme => ({
     overflow: 'auto',
   },
   blogWrap: {
+    color: theme.palette.text.primary,
     position: 'relative'
   },
   appFrameInner: {
+    color: theme.palette.text.primary,
     ...appFrame,
   },
   appFrameOuter: {
+    color: theme.palette.text.primary,
     ...appFrame,
   },
   appFrameLanding: {
+    color: theme.palette.text.primary,
     backgroundColor: theme.palette.background.default,
     minHeight: 1000,
   },
@@ -35,6 +39,7 @@ const styles = theme => ({
     display: 'flex',
     width: '100%',
     height: '100%',
+    color: theme.palette.text.primary,
     [theme.breakpoints.up('lg')]: {
       position: 'absolute',
       overflow: 'hidden',

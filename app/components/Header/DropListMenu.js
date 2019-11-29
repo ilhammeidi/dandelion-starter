@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { closeAllAction } from 'dan-actions/UiActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -54,8 +53,6 @@ class MainMenu extends React.Component {
   };
 
   handleClose = event => {
-    const { closeAll } = this.props;
-    closeAll();
     if (this.anchorEl.contains(event.target)) {
       return;
     }
@@ -155,7 +152,6 @@ MainMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   open: PropTypes.object.isRequired,
   openSubMenu: PropTypes.func.isRequired,
-  closeAll: PropTypes.func.isRequired,
   dataMenu: PropTypes.array.isRequired,
 };
 
@@ -168,8 +164,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  openSubMenu: bindActionCreators(openAction, dispatch),
-  closeAll: () => dispatch(closeAllAction),
+  openSubMenu: bindActionCreators(openAction, dispatch)
 });
 
 const MainMenuMapped = connect(

@@ -4,7 +4,6 @@ import {
   TOGGLE_SIDEBAR,
   OPEN_MENU,
   OPEN_SUBMENU,
-  CLOSE_ALL_SUBMENU,
   CHANGE_THEME,
   CHANGE_RANDOM_THEME,
   CHANGE_MODE,
@@ -106,10 +105,6 @@ export default function reducer(state = initialImmutableState, action = {}) {
         } else {
           mutableState.set('subMenuOpen', List([action.key, action.keyParent]));
         }
-      });
-    case CLOSE_ALL_SUBMENU:
-      return state.withMutations((mutableState) => {
-        mutableState.set('subMenuOpen', List([]));
       });
     case CHANGE_RANDOM_THEME:
       return state.withMutations((mutableState) => {

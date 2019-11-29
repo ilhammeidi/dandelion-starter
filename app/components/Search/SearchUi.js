@@ -18,13 +18,10 @@ function renderInput(inputProps) {
 
   return (
     <TextField
+      className={classes.inputHeader}
       fullWidth
       InputProps={{
         inputRef: ref,
-        classes: {
-          root: classes.inputHeader,
-          input: classes.inputHeaderText,
-        },
         ...other,
       }}
     />
@@ -150,7 +147,7 @@ class SearchUi extends React.Component {
         className={classes.autocomplete}
         inputProps={{
           classes,
-          placeholder: 'Search Ui',
+          placeholder: 'Search UI',
           value,
           onChange: this.handleChange,
         }}

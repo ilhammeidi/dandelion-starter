@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { closeAllAction } from 'dan-actions/UiActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Fade from '@material-ui/core/Fade';
@@ -56,8 +55,6 @@ class MegaMenu extends React.Component {
   };
 
   handleClose = (event) => {
-    const { closeAll } = this.props;
-    closeAll();
     if (this.anchorEl.contains(event.target)) {
       return;
     }
@@ -172,7 +169,6 @@ MegaMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   open: PropTypes.object.isRequired,
   openSubMenu: PropTypes.func.isRequired,
-  closeAll: PropTypes.func.isRequired,
   dataMenu: PropTypes.array.isRequired,
 };
 
@@ -186,7 +182,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   openSubMenu: bindActionCreators(openAction, dispatch),
-  closeAll: () => dispatch(closeAllAction),
 });
 
 const MegaMenuMapped = connect(

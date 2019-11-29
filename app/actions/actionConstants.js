@@ -2,7 +2,6 @@
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
 export const OPEN_MENU = 'OPEN_MENU';
 export const OPEN_SUBMENU = 'OPEN_SUBMENU';
-export const CLOSE_ALL_SUBMENU = 'CLOSE_ALL_SUBMENU';
 export const CHANGE_THEME = 'CHANGE_THEME';
 export const CHANGE_RANDOM_THEME = 'CHANGE_RANDOM_THEME';
 export const CHANGE_MODE = 'CHANGE_MODE';
