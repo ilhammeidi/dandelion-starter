@@ -75,6 +75,12 @@ const styles = theme => ({
     [theme.breakpoints.down('xs')]: {
       display: 'none'
     },
+    '& > div': {
+      border: 'none',
+      '&:after': {
+        display: 'none'
+      },
+    },
     '& input': {
       transition: theme.transitions.create('width'),
       padding: 0,
@@ -85,9 +91,6 @@ const styles = theme => ({
         textIndent: 0,
         outline: 0,
       },
-    },
-    '&:after': {
-      display: 'none'
     },
     '& ::-webkit-input-placeholder': { /* Chrome/Opera/Safari */
       color: 'rgba(255,255,255,1)'

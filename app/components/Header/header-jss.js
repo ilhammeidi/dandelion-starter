@@ -266,7 +266,7 @@ const styles = theme => ({
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
-      display: 'bloeck'
+      display: 'block'
     }
   },
   notifIcon: {

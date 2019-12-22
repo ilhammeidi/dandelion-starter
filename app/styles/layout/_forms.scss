@@ -44,3 +44,11 @@ select {
     outline-offset: $focus-outline-offset;
   }
 }
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="url"],
+input[type="number"] {
+  word-break: normal;
+}
