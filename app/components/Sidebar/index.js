@@ -89,6 +89,7 @@ class Sidebar extends React.Component {
           <Drawer
             variant="permanent"
             onClose={toggleDrawerOpen}
+            className={open ? classes.drawer : ''}
             classes={{
               paper: classNames(classes.drawer, classes.drawerPaper, !open ? classes.drawerPaperClose : ''),
             }}

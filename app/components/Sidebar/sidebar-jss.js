@@ -9,6 +9,9 @@ const styles = theme => ({
   user: {
     justifyContent: 'center'
   },
+  drawer: {
+    width: drawerWidth
+  },
   drawerPaper: {
     position: 'relative',
     height: '100%',
@@ -16,7 +19,6 @@ const styles = theme => ({
     border: 'none',
     background: 'none',
     color: theme.palette.text.primary,
-    width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -216,7 +218,6 @@ const styles = theme => ({
       background: 'none',
       position: 'absolute',
     },
-    bottom: 0,
     left: theme.spacing(3),
     lineHeight: '24px',
   },

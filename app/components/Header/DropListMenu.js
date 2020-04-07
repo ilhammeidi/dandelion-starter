@@ -47,7 +47,7 @@ class MainMenu extends React.Component {
     this.setState({ anchorEl: event.currentTarget });
     setTimeout(() => {
       this.setState({
-        openMenu: this.props.open, // eslint-disable-line
+        openMenu: [key], // eslint-disable-line
       });
     }, 50);
   };

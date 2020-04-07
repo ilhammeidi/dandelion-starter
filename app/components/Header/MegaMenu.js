@@ -49,7 +49,7 @@ class MegaMenu extends React.Component {
     this.setState({ anchorEl: event.currentTarget });
     setTimeout(() => {
       this.setState({
-        openMenu: this.props.open, // eslint-disable-line
+        openMenu: [key],
       });
     }, 50);
   };
@@ -181,7 +181,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  openSubMenu: bindActionCreators(openAction, dispatch),
+  openSubMenu: bindActionCreators(openAction, dispatch)
 });
 
 const MegaMenuMapped = connect(

@@ -16,11 +16,15 @@ import styles from './appStyles-jss';
 class Dashboard extends React.Component {
   // Initial header style
   state = {
-    openGuide: false
+    openGuide: false,
+    appHeight: 0
   };
 
   componentDidMount = () => {
     const { history, initialOpen, loadTransition } = this.props;
+
+    // Adjust min height
+    this.setState({ appHeight: window.innerHeight + 112 });
 
     // Set expanded sidebar menu
     const currentPath = history.location.pathname;
@@ -61,12 +65,13 @@ class Dashboard extends React.Component {
       layout,
       changeMode
     } = this.props;
-    const { openGuide } = this.state;
+    const { openGuide, appHeight } = this.state;
     const titleException = ['/app', '/app/crm-dashboard', '/app/crypto-dashboard'];
     const parts = history.location.pathname.split('/');
     const place = parts[parts.length - 1].replace('-', ' ');
     return (
       <div
+        style={{ minHeight: appHeight }}
         className={
           classNames(
             classes.appFrameInner,
