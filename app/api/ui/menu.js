@@ -135,5 +135,11 @@ module.exports = [
         ]
       },
     ]
+  },
+  {
+    key: 'no_child',
+    name: 'One Level Menu',
+    icon: 'ios-document-outline',
+    linkParent: '/app',
   }
 ];

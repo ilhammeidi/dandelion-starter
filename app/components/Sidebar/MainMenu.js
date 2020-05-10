@@ -37,11 +37,13 @@ class MainMenu extends React.Component {
       dataMenu
     } = this.props;
     const getMenus = menuArray => menuArray.map((item, index) => {
-      if (item.child) {
+      if (item.child || item.linkParent) {
         return (
           <div key={index.toString()}>
             <ListItem
               button
+              component={LinkBtn}
+              to={item.linkParent ? item.linkParent : '#'}
               className={
                 classNames(
                   classes.head,
@@ -57,22 +59,28 @@ class MainMenu extends React.Component {
                 </ListItemIcon>
               )}
               <ListItemText classes={{ primary: classes.primary }} variant="inset" primary={item.name} />
-              { open.indexOf(item.key) > -1 ? <ExpandLess /> : <ExpandMore /> }
-            </ListItem>
-            <Collapse
-              component="div"
-              className={classNames(
-                classes.nolist,
-                (item.keyParent ? classes.child : ''),
+              { !item.linkParent && (
+                <span>
+                  { open.indexOf(item.key) > -1 ? <ExpandLess /> : <ExpandMore /> }
+                </span>
               )}
-              in={open.indexOf(item.key) > -1}
-              timeout="auto"
-              unmountOnExit
-            >
-              <List className={classes.dense} component="nav" dense>
-                { getMenus(item.child, 'key') }
-              </List>
-            </Collapse>
+            </ListItem>
+            { !item.linkParent && (
+              <Collapse
+                component="div"
+                className={classNames(
+                  classes.nolist,
+                  (item.keyParent ? classes.child : ''),
+                )}
+                in={open.indexOf(item.key) > -1}
+                timeout="auto"
+                unmountOnExit
+              >
+                <List className={classes.dense} component="nav" dense>
+                  { getMenus(item.child, 'key') }
+                </List>
+              </Collapse>
+            )}
           </div>
         );
       }

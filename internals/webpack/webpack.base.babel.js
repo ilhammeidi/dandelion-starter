@@ -27,15 +27,15 @@ module.exports = options => ({
         You can enable it to maintain and keep clean your code.
         NOTE: By enable eslint running app process at beginning will slower
       */
-      //      {
-      //        enforce: 'pre',
-      //        test: /\.js?$/,
-      //        exclude: [/node_modules/],
-      //        loader: 'eslint-loader',
-      //        options: {
-      //          quiet: true,
-      //        }
-      //      },
+      {
+        enforce: 'pre',
+        test: /\.js?$/,
+        exclude: [/node_modules/],
+        loader: 'eslint-loader',
+        options: {
+          quiet: true,
+        }
+      },
       {
         test: /\.jsx?$/, // Transform all .js and .jsx files required somewhere with Babel
         exclude: /node_modules/,
@@ -184,6 +184,7 @@ module.exports = options => ({
     alias: {
       'dan-components': path.resolve(__dirname, '../../app/components/'),
       'dan-actions': path.resolve(__dirname, '../../app/actions/'),
+      'dan-redux': path.resolve(__dirname, '../../app/redux/'),
       'dan-styles': path.resolve(__dirname, '../../app/styles/components/'),
       'dan-api': path.resolve(__dirname, '../../app/api/'),
       'dan-images': path.resolve(__dirname, '../../public/images/'),

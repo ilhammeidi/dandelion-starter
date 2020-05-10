@@ -75,11 +75,13 @@ class MegaMenu extends React.Component {
       if (item.multilevel) {
         return false;
       }
-      if (item.child) {
+      if (item.child || item.linkParent) {
         return (
           <div key={index.toString()}>
             <Button
               aria-haspopup="true"
+              component={LinkBtn}
+              to={item.linkParent ? item.linkParent : '#'}
               buttonRef={node => {
                 this.anchorEl = node;
               }}
@@ -93,39 +95,41 @@ class MegaMenu extends React.Component {
               onClick={(event) => this.handleOpenMenu(event, item.key, item.keyParent)}
             >
               {item.name}
-              <ExpandMore className={classes.rightIcon} />
+              { !item.linkParent ? <ExpandMore className={classes.rightIcon} /> : <span className={classes.rightIcon}>&nbsp;&nbsp;</span> }
             </Button>
-            <Popper
-              open={openMenu.indexOf(item.key) > -1}
-              anchorEl={anchorEl}
-              transition
-              disablePortal
-            >
-              {({ TransitionProps, placement }) => (
-                <Fade
-                  {...TransitionProps}
-                  id="menu-list-grow"
-                  style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                >
-                  <Paper className={classes.dropDownMenu}>
-                    <ClickAwayListener onClickAway={this.handleClose}>
-                      <Grid container>
-                        <Grid item md={3} container justify="center">
-                          <span className={classes.bigIcon}>
-                            <Ionicon icon={item.icon} />
-                          </span>
+            { !item.linkParent && (
+              <Popper
+                open={openMenu.indexOf(item.key) > -1}
+                anchorEl={anchorEl}
+                transition
+                disablePortal
+              >
+                {({ TransitionProps, placement }) => (
+                  <Fade
+                    {...TransitionProps}
+                    id="menu-list-grow"
+                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                  >
+                    <Paper className={classes.dropDownMenu}>
+                      <ClickAwayListener onClickAway={this.handleClose}>
+                        <Grid container>
+                          <Grid item md={3} container justify="center">
+                            <span className={classes.bigIcon}>
+                              <Ionicon icon={item.icon} />
+                            </span>
+                          </Grid>
+                          <Grid item md={9}>
+                            <List role="menu" component="nav" className={classes.megaMenu}>
+                              { getMenus(item.key, item.child) }
+                            </List>
+                          </Grid>
                         </Grid>
-                        <Grid item md={9}>
-                          <List role="menu" component="nav" className={classes.megaMenu}>
-                            { getMenus(item.key, item.child) }
-                          </List>
-                        </Grid>
-                      </Grid>
-                    </ClickAwayListener>
-                  </Paper>
-                </Fade>
-              )}
-            </Popper>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Fade>
+                )}
+              </Popper>
+            )}
           </div>
         );
       }
@@ -148,7 +152,7 @@ class MegaMenu extends React.Component {
           className={classes.megaItem}
           activeClassName={classes.active}
           component={LinkBtn}
-          to={item.link}
+          to={item.link || item.linkParent}
           onClick={() => this.handleActiveParent(parent)}
         >
           <ListItemText primary={item.name} />

@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
-import Ionicon from 'react-ionicons';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import brand from 'dan-api/dummy/brand';
@@ -78,15 +77,15 @@ class ComingSoon extends React.Component {
                     />
                   </FormControl>
                   <aside>
-                    <Button variant="contained" mini color="secondary" type="submit">
+                    <Button variant="contained" color="secondary" type="submit">
                       Notify me
                     </Button>
                   </aside>
                 </div>
                 <div className={classNames(classes.lockForm, classes.centerAdornment)}>
-                  <IconButton color="primary" className={classes.button} href="#"><Ionicon icon="logo-facebook" /></IconButton>
-                  <IconButton color="primary" className={classes.button} href="#"><Ionicon icon="logo-twitter" /></IconButton>
-                  <IconButton color="primary" className={classes.button} href="#"><Ionicon icon="logo-github" /></IconButton>
+                  <IconButton color="primary" className={classes.button} href="#"><i className="ion-social-facebook" /></IconButton>
+                  <IconButton color="primary" className={classes.button} href="#"><i className="ion-social-twitter" /></IconButton>
+                  <IconButton color="primary" className={classes.button} href="#"><i className="ion-social-github" /></IconButton>
                 </div>
               </section>
             </Paper>

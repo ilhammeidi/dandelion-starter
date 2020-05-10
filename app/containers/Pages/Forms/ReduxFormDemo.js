@@ -21,7 +21,7 @@ import {
   TextFieldRedux,
   SwitchRedux
 } from 'dan-components/Forms/ReduxFormMUI';
-import { initAction, clearAction } from '../../../actions/ReduxFormActions';
+import { initAction, clearAction } from 'dan-redux/actions/reduxFormActions';
 
 const renderRadioGroup = ({ input, ...rest }) => (
   <RadioGroup

@@ -11,7 +11,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Ionicon from 'react-ionicons';
-import { openMenuAction } from 'dan-actions/UiActions';
+import { openMenuAction, closeMenuAction } from 'dan-redux/actions/uiActions';
 import MenuProfile from './MenuProfile';
 import styles from './sidebarBig-jss';
 
@@ -47,6 +47,7 @@ class MainMenuBig extends React.Component { // eslint-disable-line
     const {
       classes,
       open,
+      closeDrawer,
       dataMenu,
       drawerPaper,
     } = this.props;
@@ -94,7 +95,8 @@ class MainMenuBig extends React.Component { // eslint-disable-line
           focusRipple
           className={classNames(classes.menuHead, open.indexOf(item.key) > -1 ? classes.active : '')}
           component={LinkBtn}
-          to={item.link}
+          to={item.linkParent}
+          onClick={closeDrawer}
         >
           <Ionicon className={classes.icon} icon={item.icon} />
           <span className={classes.text}>
@@ -183,6 +185,7 @@ MainMenuBig.propTypes = {
   open: PropTypes.object.isRequired,
   dataMenu: PropTypes.array.isRequired,
   openDrawer: PropTypes.func.isRequired,
+  closeDrawer: PropTypes.func.isRequired,
   loadTransition: PropTypes.func.isRequired,
   drawerPaper: PropTypes.bool.isRequired,
   mobile: PropTypes.bool,
@@ -202,7 +205,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  openDrawer: () => dispatch(openMenuAction)
+  openDrawer: () => dispatch(openMenuAction),
+  closeDrawer: () => dispatch(closeMenuAction)
 });
 
 const MainMenuBigMapped = connect(

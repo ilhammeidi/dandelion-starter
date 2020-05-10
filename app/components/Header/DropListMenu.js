@@ -73,11 +73,13 @@ class MainMenu extends React.Component {
       if (item.multilevel) {
         return false;
       }
-      if (item.child) {
+      if (item.child || item.linkParent) {
         return (
           <div key={index.toString()}>
             <Button
               aria-owns={open ? 'menu-list-grow' : undefined}
+              component={LinkBtn}
+              to={item.linkParent ? item.linkParent : '#'}
               buttonRef={node => {
                 this.anchorEl = node;
               }}
@@ -91,30 +93,32 @@ class MainMenu extends React.Component {
               onClick={(event) => this.handleOpenMenu(event, item.key, item.keyParent)}
             >
               {item.name}
-              <ExpandMore className={classes.rightIcon} />
+              { !item.linkParent ? <ExpandMore className={classes.rightIcon} /> : <span className={classes.rightIcon}>&nbsp;&nbsp;</span> }
             </Button>
-            <Popper
-              open={openMenu.indexOf(item.key) > -1}
-              anchorEl={anchorEl}
-              transition
-              disablePortal
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  id="menu-list-grow"
-                  style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                >
-                  <Paper className={classes.dropDownMenu}>
-                    <ClickAwayListener onClickAway={this.handleClose}>
-                      <List role="menu" component="nav" className={classes.paperMenu}>
-                        { getMenus(item.key, item.child) }
-                      </List>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
+            { !item.linkParent && (
+              <Popper
+                open={openMenu.indexOf(item.key) > -1}
+                anchorEl={anchorEl}
+                transition
+                disablePortal
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    id="menu-list-grow"
+                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                  >
+                    <Paper className={classes.dropDownMenu}>
+                      <ClickAwayListener onClickAway={this.handleClose}>
+                        <List role="menu" component="nav" className={classes.paperMenu}>
+                          { getMenus(item.key, item.child) }
+                        </List>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            )}
           </div>
         );
       }

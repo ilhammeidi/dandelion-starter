@@ -8,7 +8,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import SearchIcon from '@material-ui/icons/Search';
 import Fab from '@material-ui/core/Fab';
-import Ionicon from 'react-ionicons';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -146,24 +145,24 @@ class Header extends React.Component {
                 {fullScreen ? (
                   <Tooltip title="Exit Full Screen" placement="bottom">
                     <IconButton className={classes.button} onClick={this.closeFullScreen}>
-                      <Ionicon icon="ios-qr-scanner" />
+                      <i className="ion-ios-crop" />
                     </IconButton>
                   </Tooltip>
                 ) : (
                   <Tooltip title="Full Screen" placement="bottom">
                     <IconButton className={classes.button} onClick={this.openFullScreen}>
-                      <Ionicon icon="ios-qr-scanner" />
+                      <i className="ion-ios-crop" />
                     </IconButton>
                   </Tooltip>
                 )}
                 <Tooltip title="Turn Dark/Light" placement="bottom">
                   <IconButton className={classes.button} onClick={() => this.turnMode(mode)}>
-                    <Ionicon icon="ios-bulb-outline" />
+                    <i className="ion-ios-lightbulb-outline" />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Show Guide" placement="bottom">
                   <IconButton className={classes.button} onClick={openGuide}>
-                    <Ionicon icon="ios-help-circle-outline" />
+                    <i className="ion-ios-help-outline" />
                   </IconButton>
                 </Tooltip>
               </div>

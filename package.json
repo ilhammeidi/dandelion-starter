@@ -1,6 +1,6 @@
 {
   "name": "dandelion_pro",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "React website tempate with focus on perfomance and design",
   "private": true,
   "engines": {
@@ -145,7 +145,7 @@
     "rcolor": "^1.0.1",
     "react": "16.8.6",
     "react-anchor-link-smooth-scroll": "^1.0.11",
-    "react-animated-slider": "^1.1.2",
+    "react-animated-slider": "^2.0.0",
     "react-autosuggest": "^9.3.4",
     "react-big-calendar": "^0.19.1",
     "react-calendar": "^2.17.4",
@@ -163,7 +163,6 @@
     "react-ionicons": "^2.1.6",
     "react-jss": "^10.0.0",
     "react-loadable": "^5.5.0",
-    "react-loading-bar": "0.0.7",
     "react-markdown": "^4.1.0",
     "react-modal": "^3.4.4",
     "react-number-format": "^3.3.4",

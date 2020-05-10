@@ -1,5 +1,5 @@
 import { fromJS, Map } from 'immutable';
-import { INIT, CLEAR } from '../../actions/actionConstants';
+import { INIT, CLEAR } from '../constants/reduxFormConstants';
 
 const initialState = {
   formValues: Map()

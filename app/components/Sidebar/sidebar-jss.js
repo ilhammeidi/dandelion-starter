@@ -35,7 +35,7 @@ const styles = theme => ({
       content: '""',
       position: 'absolute',
       width: 5,
-      height: theme.spacing(5),
+      height: theme.spacing(6),
       top: 0,
       left: 0,
       background: fade(theme.palette.primary.main, 0.5)
@@ -93,8 +93,9 @@ const styles = theme => ({
     // Make the items inside not wrap when transitioning:
     height: '100%',
     position: 'fixed',
-    backgroundColor: theme.palette.type === 'dark' ? fade(theme.palette.background.paper, 0.75) : fade(theme.palette.background.paper, 0.95),
+    backgroundColor: theme.palette.type === 'dark' ? fade(theme.palette.background.paper, 0.75) : fade(theme.palette.background.paper, 0.9),
     boxShadow: theme.shade.light,
+    backdropFilter: 'saturate(180%) blur(20px)'
   },
   drawerInnerMobile: {
     // Make the items inside not wrap when transitioning:

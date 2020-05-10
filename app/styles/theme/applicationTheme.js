@@ -408,6 +408,11 @@ const applicationTheme = (color, mode, direction) => ({
         }
       },
     },
+    MUIDataTableToolbar: {
+      filterPaper: {
+        maxWidth: 'none'
+      }
+    },
     MUIDataTableToolbarSelect: {
       root: {
         boxShadow: 'none',

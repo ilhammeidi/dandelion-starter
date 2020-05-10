@@ -1,11 +1,10 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import Loading from 'react-loading-bar';
+import Loading from '@material-ui/core/LinearProgress';
 import { bindActionCreators } from 'redux';
 import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import 'dan-styles/vendors/react-loading-bar/index.css';
-import { changeModeAction } from 'dan-actions/UiActions';
+import { changeModeAction } from 'dan-redux/actions/uiActions';
 import applicationTheme from '../../styles/theme/applicationTheme';
 
 const styles = {
@@ -15,6 +14,24 @@ const styles = {
     marginTop: 0,
     zIndex: 1,
   },
+  loading: {
+    zIndex: 10,
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    opacity: 1,
+    transition: 'opacity .5s ease'
+  },
+  loadingWrap: {
+    background: 'none'
+  },
+  bar: {
+    background: 'rgba(255, 255, 255, 0.7)'
+  },
+  hide: {
+    opacity: 0
+  }
 };
 
 export const AppContext = React.createContext();
@@ -23,7 +40,7 @@ class ThemeWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageLoaded: true,
+      pageLoaded: 0,
       theme: createMuiTheme(applicationTheme(props.color, props.mode)),
     };
   }
@@ -47,18 +64,25 @@ class ThemeWrapper extends React.Component {
   };
 
   onProgressShow = () => {
-    this.setState({ pageLoaded: true });
+    this.setState({ pageLoaded: 0 });
   }
 
-  onProgressHide = () => {
-    this.setState({ pageLoaded: false });
+  onProgressHide = val => {
+    this.setState({ pageLoaded: val });
   }
 
   playProgress = () => {
+    let timer = null;
     this.onProgressShow();
-    setTimeout(() => {
-      this.onProgressHide();
-    }, 500);
+    const setCompleted = () => {
+      const diff = Math.random() * 40;
+      const { pageLoaded } = this.state;
+      this.onProgressHide(pageLoaded + diff);
+      if (pageLoaded >= 100) {
+        clearInterval(timer);
+      }
+    };
+    timer = setInterval(setCompleted, 500);
   }
 
   render() {
@@ -68,9 +92,14 @@ class ThemeWrapper extends React.Component {
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
           <Loading
-            show={pageLoaded}
-            color="rgba(255,255,255,.9)"
-            showSpinner={false}
+            variant="determinate"
+            value={pageLoaded}
+            className={pageLoaded >= 100 ? classes.hide : ''}
+            classes={{
+              root: classes.loading,
+              colorPrimary: classes.loadingWrap,
+              barColorPrimary: classes.bar
+            }}
           />
           <AppContext.Provider value={this.handleChangeMode}>
             {children}

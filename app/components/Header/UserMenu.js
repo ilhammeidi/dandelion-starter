@@ -18,7 +18,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Ionicon from 'react-ionicons';
 import dummy from 'dan-api/dummy/dummyContents';
 import messageStyles from 'dan-styles/Messages.scss';
 import avatarApi from 'dan-api/images/avatars';
@@ -55,7 +54,7 @@ class UserMenu extends React.Component {
           className={classNames(classes.notifIcon, dark ? classes.dark : classes.light)}
         >
           <Badge className={classes.badge} badgeContent={4} color="secondary">
-            <Ionicon icon="ios-notifications-outline" />
+            <i className="ion-ios-bell-outline" />
           </Badge>
         </IconButton>
         <Menu
@@ -156,7 +155,7 @@ class UserMenu extends React.Component {
           <MenuItem onClick={this.handleClose} component={Link} to={link.email}>
             My Inbox
             <ListItemIcon>
-              <Badge className={classNames(classes.badge, classes.badgeMenu)} badgeContent={2} color="secondary">&nbsp;</Badge>
+              <Badge className={classNames(classes.badge, classes.badgeMenu)} badgeContent={2} color="secondary" />
             </ListItemIcon>
           </MenuItem>
           <Divider />

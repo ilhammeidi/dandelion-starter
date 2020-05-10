@@ -70,8 +70,6 @@ class LeftSidebarLayout extends React.Component {
             { !pageLoaded && (<img src="/images/spinner.gif" alt="spinner" className={classes.circularProgress} />) }
             <Fade
               in={pageLoaded}
-              mountOnEnter
-              unmountOnExit
               {...(pageLoaded ? { timeout: 700 } : {})}
             >
               <div className={!pageLoaded ? classes.hideApp : ''}>

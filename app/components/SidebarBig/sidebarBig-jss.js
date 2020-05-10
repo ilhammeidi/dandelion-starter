@@ -13,15 +13,24 @@ const styles = theme => ({
     padding: `${theme.spacing(1)}px 0`,
     position: 'relative',
     zIndex: 10,
-    backgroundColor: theme.palette.type === 'dark' ? fade(theme.palette.background.paper, 0.75) : fade(theme.palette.background.paper, 0.95),
-    boxShadow: theme.shade.light,
     height: '100%',
     display: 'flex',
+    '&:before': {
+      content: '""',
+      width: '100%',
+      height: '100%',
+      backgroundColor: theme.palette.type === 'dark' ? fade(theme.palette.background.paper, 0.75) : fade(theme.palette.background.paper, 0.9),
+      boxShadow: theme.shade.light,
+      backdropFilter: 'saturate(180%) blur(20px)',
+      position: 'absolute',
+      top: 0,
+      left: 0
+    }
   },
   category: {
     width: categoryWidth,
     '& $fixedWrap': {
-      padding: 0
+      paddingBottom: theme.spacing(8),
     }
   },
   icon: {},
@@ -32,9 +41,6 @@ const styles = theme => ({
     position: 'fixed',
     overflow: 'auto',
     height: '100%',
-    [theme.breakpoints.up('lg')]: {
-      height: 'calc(100% - 64px)',
-    },
     '&::-webkit-scrollbar': {
       width: 8,
     },

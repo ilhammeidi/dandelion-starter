@@ -3,6 +3,7 @@ import MenuContent from 'dan-api/ui/menu';
 import {
   TOGGLE_SIDEBAR,
   OPEN_MENU,
+  CLOSE_MENU,
   OPEN_SUBMENU,
   CHANGE_THEME,
   CHANGE_RANDOM_THEME,
@@ -13,7 +14,7 @@ import {
   CHANGE_LAYOUT,
   CHANGE_DIRECTION,
   LOAD_PAGE
-} from '../../actions/actionConstants';
+} from '../constants/uiConstants';
 
 const initialState = {
   /* Settings for Themes and layout */
@@ -23,7 +24,7 @@ const initialState = {
   gradient: true, // true or false
   decoration: true, // true or false
   bgPosition: 'half', // half, header, full
-  layout: 'left-sidebar', // big-sidebar, left-sidebar, right-sidebar, top-navigation, mega-menu
+  layout: 'left-sidebar', // big-sidebar, left-sidebar, top-navigation, mega-menu
   /* End settings */
   palette: List([
     { name: 'Ocean Sky', value: 'skyBlueTheme' },
@@ -79,6 +80,10 @@ export default function reducer(state = initialImmutableState, action = {}) {
     case OPEN_MENU:
       return state.withMutations((mutableState) => {
         mutableState.set('sidebarOpen', true);
+      });
+    case CLOSE_MENU:
+      return state.withMutations((mutableState) => {
+        mutableState.set('sidebarOpen', false);
       });
     case OPEN_SUBMENU:
       return state.withMutations((mutableState) => {

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { GuideSlider } from 'dan-components';
-import { toggleAction, openAction, playTransitionAction } from 'dan-actions/UiActions';
+import { toggleAction, openAction, playTransitionAction } from 'dan-redux/actions/uiActions';
 import LeftSidebarLayout from './layouts/LeftSidebarLayout';
 import RightSidebarLayout from './layouts/RightSidebarLayout';
 import LeftSidebarBigLayout from './layouts/LeftSidebarBigLayout';

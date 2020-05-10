@@ -395,6 +395,10 @@ const styles = theme => ({
         left: 10,
       },
       position: 'relative'
+    },
+    '& a i': {
+      width: 32,
+      height: 32
     }
   },
   centerV: {

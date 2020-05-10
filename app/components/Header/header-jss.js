@@ -234,9 +234,6 @@ const styles = theme => ({
     top: 0,
     [theme.breakpoints.up('lg')]: {
       top: theme.spacing(1) * -8,
-    },
-    '& nav': {
-      padding: '16px 0'
     }
   },
   separatorV: {
@@ -270,18 +267,19 @@ const styles = theme => ({
     }
   },
   notifIcon: {
-    '& svg': {
+    '& i': {
       width: 28,
       height: 28,
+      fontSize: 28
     },
     '&$dark': {
-      '& svg': {
-        fill: theme.palette.text.primary,
+      '& i': {
+        color: theme.palette.text.primary,
       }
     },
     '&$light': {
-      '& svg': {
-        fill: theme.palette.common.white,
+      '& i': {
+        color: theme.palette.common.white,
       }
     },
   },
@@ -305,7 +303,7 @@ const styles = theme => ({
   },
   mainMenu: {
     backgroundColor: theme.palette.background.paper,
-    padding: `${theme.spacing(1)}px 0`,
+    padding: theme.spacing(1, 0),
     boxShadow: theme.shadows[3],
     position: 'relative',
     transition: 'padding 0.3s ease',
@@ -318,7 +316,8 @@ const styles = theme => ({
     fontSize: 12,
     padding: `${theme.spacing(0.5)}px ${theme.spacing(1)}px ${theme.spacing(0.5)}px ${theme.spacing(2)}px`,
     minHeight: 'auto',
-    margin: `0 ${theme.spacing(0.5)}px`
+    margin: `0 ${theme.spacing(0.5)}px`,
+    lineHeight: '2em'
   },
   opened: {
     color: theme.palette.primary.main,
@@ -384,7 +383,6 @@ const styles = theme => ({
     }
   },
   megaMenu: {
-    padding: theme.spacing(2),
     '& $title': {
       paddingLeft: theme.spacing(2)
     }
@@ -439,10 +437,11 @@ const styles = theme => ({
     transition: 'opacity 0.5s ease',
     '& $button': {
       margin: `0 ${theme.spacing(1)}px / 2`,
-      '& svg': {
-        fill: fade(theme.palette.common.white, 0.87),
+      '& i': {
+        color: fade(theme.palette.common.white, 0.87),
         width: 28,
-        height: 28
+        height: 28,
+        fontSize: 28,
       }
     },
     '&$fadeOut': {
