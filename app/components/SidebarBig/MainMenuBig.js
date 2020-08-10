@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
@@ -19,84 +19,67 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
   return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
 });
 
-class MainMenuBig extends React.Component { // eslint-disable-line
-  state = { selectedMenu: [], menuLoaded: true };
+function MainMenuBig(props) {
+  const [selectedMenu, setSelectedMenu] = useState([]);
+  const [menuLoaded, setMenuLoaded] = useState(true);
 
-  handleLoadMenu(menu) {
-    const { openDrawer, mobile } = this.props;
-    this.setState({
-      selectedMenu: menu,
-      menuLoaded: false, // unload transtion menu
-    });
+  const handleLoadMenu = menu => {
+    const { openDrawer, mobile } = props;
+    setSelectedMenu(menu);
+    setMenuLoaded(false); // unload transtion menu
     setTimeout(() => {
-      this.setState({ menuLoaded: true }); // load transtion menu
+      setMenuLoaded(true); // load transtion menu
     }, 100);
     // Unecessary in mobile, because toggle menu is handled already
     if (!mobile) {
       openDrawer();
     }
-  }
+  };
 
-  handleLoadPage() {
-    const { loadTransition, toggleDrawerOpen } = this.props;
+  const handleLoadPage = () => {
+    const { loadTransition, toggleDrawerOpen } = props;
     toggleDrawerOpen();
     loadTransition(false);
-  }
+  };
 
-  render() {
-    const {
-      classes,
-      open,
-      closeDrawer,
-      dataMenu,
-      drawerPaper,
-    } = this.props;
-    const { selectedMenu, menuLoaded } = this.state;
-    const currentMenu = dataMenu.filter(item => item.key === open.get(0));
-    const activeMenu = (key, child) => {
-      if (selectedMenu.length < 1) {
-        if (open.indexOf(key) > -1) {
-          return true;
-        }
-        return false;
-      }
-      if (child === selectedMenu) {
+  const {
+    classes,
+    open,
+    closeDrawer,
+    dataMenu,
+    drawerPaper,
+  } = props;
+
+  const currentMenu = dataMenu.filter(item => item.key === open.get(0));
+  const activeMenu = (key, child) => {
+    if (selectedMenu.length < 1) {
+      if (open.indexOf(key) > -1) {
         return true;
       }
       return false;
-    };
-    const getMenus = menuArray => menuArray.map((item, index) => {
-      if (item.key === 'menu_levels') {
-        return false;
-      }
-      if (item.child) {
-        return (
-          <ButtonBase
-            key={index.toString()}
-            focusRipple
-            className={
-              classNames(
-                classes.menuHead,
-                activeMenu(item.key, item.child) ? classes.active : ''
-              )
-            }
-            onClick={() => this.handleLoadMenu(item.child)}
-          >
-            <Ionicon className={classes.icon} icon={item.icon} />
-            <span className={classes.text}>
-              { item.name }
-            </span>
-          </ButtonBase>
-        );
-      }
+    }
+    if (child === selectedMenu) {
+      return true;
+    }
+    return false;
+  };
+
+  const getMenus = menuArray => menuArray.map((item, index) => {
+    if (item.key === 'menu_levels') {
+      return false;
+    }
+    if (item.child) {
       return (
         <ButtonBase
           key={index.toString()}
           focusRipple
-          className={classNames(classes.menuHead, open.indexOf(item.key) > -1 ? classes.active : '')}
-          component={LinkBtn}
-          to={item.linkParent}
-          onClick={closeDrawer}
+          className={
+            classNames(
+              classes.menuHead,
+              activeMenu(item.key, item.child) ? classes.active : ''
+            )
+          }
+          onClick={() => handleLoadMenu(item.child)}
         >
           <Ionicon className={classes.icon} icon={item.icon} />
           <span className={classes.text}>
@@ -104,80 +87,95 @@ class MainMenuBig extends React.Component { // eslint-disable-line
           </span>
         </ButtonBase>
       );
-    });
+    }
+    return (
+      <ButtonBase
+        key={index.toString()}
+        focusRipple
+        className={classNames(classes.menuHead, open.indexOf(item.key) > -1 ? classes.active : '')}
+        component={LinkBtn}
+        to={item.linkParent}
+        onClick={closeDrawer}
+      >
+        <Ionicon className={classes.icon} icon={item.icon} />
+        <span className={classes.text}>
+          { item.name }
+        </span>
+      </ButtonBase>
+    );
+  });
 
-    const getChildMenu = menuArray => menuArray.map((item, index) => {
-      if (item.title) {
-        return (
-          <ListSubheader
-            key={index.toString()}
-            disableSticky
-            className={classes.title}
-          >
-            { item.name }
-          </ListSubheader>
-        );
-      }
+  const getChildMenu = menuArray => menuArray.map((item, index) => {
+    if (item.title) {
       return (
-        <ListItem
+        <ListSubheader
           key={index.toString()}
-          button
-          exact
-          className={classes.item}
-          activeClassName={classes.active}
-          component={LinkBtn}
-          to={item.link}
-          onClick={() => this.handleLoadPage()}
+          disableSticky
+          className={classes.title}
         >
-          <ListItemIcon>
-            <Ionicon className={classes.icon} icon={item.icon} />
-          </ListItemIcon>
-          <ListItemText
-            className={classes.text}
-            primary={item.name}
-          />
-        </ListItem>
+          { item.name }
+        </ListSubheader>
       );
-    });
+    }
+    return (
+      <ListItem
+        key={index.toString()}
+        button
+        exact
+        className={classes.item}
+        activeClassName={classes.active}
+        component={LinkBtn}
+        to={item.link}
+        onClick={() => handleLoadPage()}
+      >
+        <ListItemIcon>
+          <Ionicon className={classes.icon} icon={item.icon} />
+        </ListItemIcon>
+        <ListItemText
+          className={classes.text}
+          primary={item.name}
+        />
+      </ListItem>
+    );
+  });
 
-    const renderChildMenu = () => {
-      if (selectedMenu.length < 1) {
-        return (
-          <List dense className={classes.fixedWrap}>
-            {currentMenu.length > 0 ? getChildMenu(currentMenu[0].child) : ''}
-          </List>
-        );
-      }
+  const renderChildMenu = () => {
+    if (selectedMenu.length < 1) {
       return (
-        <List
-          dense
-          className={
-            classNames(
-              classes.fixedWrap,
-              classes.childMenuWrap,
-              menuLoaded && classes.menuLoaded
-            )
-          }
-        >
-          {getChildMenu(selectedMenu)}
+        <List dense className={classes.fixedWrap}>
+          {currentMenu.length > 0 ? getChildMenu(currentMenu[0].child) : ''}
         </List>
       );
-    };
-
+    }
     return (
-      <aside className={classes.bigSidebar}>
-        <nav className={classes.category}>
-          <div className={classNames(classes.fixedWrap, !drawerPaper && classes.userShifted)}>
-            <MenuProfile />
-            {getMenus(dataMenu)}
-          </div>
-        </nav>
-        <nav className={classNames(classes.listMenu, !drawerPaper && classes.drawerPaperClose)}>
-          {renderChildMenu()}
-        </nav>
-      </aside>
+      <List
+        dense
+        className={
+          classNames(
+            classes.fixedWrap,
+            classes.childMenuWrap,
+            menuLoaded && classes.menuLoaded
+          )
+        }
+      >
+        {getChildMenu(selectedMenu)}
+      </List>
     );
-  }
+  };
+
+  return (
+    <aside className={classes.bigSidebar}>
+      <nav className={classes.category}>
+        <div className={classNames(classes.fixedWrap, !drawerPaper && classes.userShifted)}>
+          <MenuProfile />
+          {getMenus(dataMenu)}
+        </div>
+      </nav>
+      <nav className={classNames(classes.listMenu, !drawerPaper && classes.drawerPaperClose)}>
+        {renderChildMenu()}
+      </nav>
+    </aside>
+  );
 }
 
 MainMenuBig.propTypes = {

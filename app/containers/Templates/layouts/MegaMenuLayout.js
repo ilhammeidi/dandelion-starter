@@ -9,77 +9,75 @@ import dataMenu from 'dan-api/ui/menu';
 import Decoration from '../Decoration';
 import styles from '../appStyles-jss';
 
-class DropMenuLayout extends React.Component {
-  render() {
-    const {
-      classes,
-      children,
-      pageLoaded,
-      mode,
-      gradient,
-      deco,
-      history,
-      bgPosition,
-      changeMode,
-      place,
-      titleException,
-      handleOpenGuide,
-      toggleDrawer,
-      sidebarOpen,
-      loadTransition
-    } = this.props;
-    return (
-      <Fragment>
-        <HeaderMenu
-          type="mega-menu"
-          dataMenu={dataMenu}
-          changeMode={changeMode}
+function DropMenuLayout(props) {
+  const {
+    classes,
+    children,
+    pageLoaded,
+    mode,
+    gradient,
+    deco,
+    history,
+    bgPosition,
+    changeMode,
+    place,
+    titleException,
+    handleOpenGuide,
+    toggleDrawer,
+    sidebarOpen,
+    loadTransition
+  } = props;
+  return (
+    <Fragment>
+      <HeaderMenu
+        type="mega-menu"
+        dataMenu={dataMenu}
+        changeMode={changeMode}
+        mode={mode}
+        history={history}
+        openGuide={handleOpenGuide}
+        toggleDrawerOpen={toggleDrawer}
+        openMobileNav={sidebarOpen}
+        loadTransition={loadTransition}
+        logoLink="/app"
+      />
+      <main
+        className={
+          classNames(
+            classes.content,
+            classes.highMargin
+          )
+        }
+        id="mainContent"
+      >
+        <Decoration
           mode={mode}
-          history={history}
-          openGuide={handleOpenGuide}
-          toggleDrawerOpen={toggleDrawer}
-          openMobileNav={sidebarOpen}
-          loadTransition={loadTransition}
-          logoLink="/app"
+          gradient={gradient}
+          decoration={deco}
+          bgPosition={bgPosition}
+          horizontalMenu
         />
-        <main
-          className={
-            classNames(
-              classes.content,
-              classes.highMargin
-            )
-          }
-          id="mainContent"
-        >
-          <Decoration
-            mode={mode}
-            gradient={gradient}
-            decoration={deco}
-            bgPosition={bgPosition}
-            horizontalMenu
-          />
-          <section className={classNames(classes.mainWrap, classes.topbarLayout)}>
-            {titleException.indexOf(history.location.pathname) < 0 && (
-              <div className={classes.pageTitle}>
-                <Typography component="h4" className={bgPosition === 'header' ? classes.darkTitle : classes.lightTitle} variant="h4">{place}</Typography>
-                <BreadCrumb separator=" / " theme={bgPosition === 'header' ? 'dark' : 'light'} location={history.location} />
-              </div>
-            )}
-            { !pageLoaded && (<img src="/images/spinner.gif" alt="spinner" className={classes.circularProgress} />) }
-            <Fade
-              in={pageLoaded}
-              {...(pageLoaded ? { timeout: 700 } : {})}
-            >
-              <div className={!pageLoaded ? classes.hideApp : ''}>
-                {/* Application content will load here */}
-                { children }
-              </div>
-            </Fade>
-          </section>
-        </main>
-      </Fragment>
-    );
-  }
+        <section className={classNames(classes.mainWrap, classes.topbarLayout)}>
+          {titleException.indexOf(history.location.pathname) < 0 && (
+            <div className={classes.pageTitle}>
+              <Typography component="h4" className={bgPosition === 'header' ? classes.darkTitle : classes.lightTitle} variant="h4">{place}</Typography>
+              <BreadCrumb separator=" / " theme={bgPosition === 'header' ? 'dark' : 'light'} location={history.location} />
+            </div>
+          )}
+          { !pageLoaded && (<img src="/images/spinner.gif" alt="spinner" className={classes.circularProgress} />) }
+          <Fade
+            in={pageLoaded}
+            {...(pageLoaded ? { timeout: 700 } : {})}
+          >
+            <div className={!pageLoaded ? classes.hideApp : ''}>
+              {/* Application content will load here */}
+              { children }
+            </div>
+          </Fade>
+        </section>
+      </main>
+    </Fragment>
+  );
 }
 
 DropMenuLayout.propTypes = {

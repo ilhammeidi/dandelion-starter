@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
@@ -17,44 +17,41 @@ import styles from './header-jss';
 
 const elem = document.documentElement;
 
-class Header extends React.Component {
-  state = {
-    open: false,
-    fullScreen: false,
-    turnDarker: false,
-    showTitle: false
-  };
+function Header(props) {
+  const [open] = useState(false);
+  const [fullScreen, setFullScreen] = useState(false);
+  const [turnDarker, setTurnDarker] = useState(false);
+  const [showTitle, setShowTitle] = useState(false);
 
   // Initial header style
-  flagDarker = false;
+  let flagDarker = false;
 
-  flagTitle = false;
+  let flagTitle = false;
 
-  componentDidMount = () => {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll = () => {
+  const handleScroll = () => {
     const doc = document.documentElement;
     const scroll = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
     const newFlagDarker = (scroll > 30);
     const newFlagTitle = (scroll > 40);
-    if (this.flagDarker !== newFlagDarker) {
-      this.setState({ turnDarker: newFlagDarker });
-      this.flagDarker = newFlagDarker;
+    if (flagDarker !== newFlagDarker) {
+      setTurnDarker(newFlagDarker);
+      flagDarker = newFlagDarker;
     }
-    if (this.flagTitle !== newFlagTitle) {
-      this.setState({ showTitle: newFlagTitle });
-      this.flagTitle = newFlagTitle;
+    if (flagTitle !== newFlagTitle) {
+      setShowTitle(newFlagTitle);
+      flagTitle = newFlagTitle;
     }
-  }
+  };
 
-  openFullScreen = () => {
-    this.setState({ fullScreen: true });
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const openFullScreen = () => {
+    setFullScreen(true);
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
     } else if (elem.mozRequestFullScreen) { /* Firefox */
@@ -66,8 +63,8 @@ class Header extends React.Component {
     }
   };
 
-  closeFullScreen = () => {
-    this.setState({ fullScreen: false });
+  const closeFullScreen = () => {
+    setFullScreen(false);
     if (document.exitFullscreen) {
       document.exitFullscreen();
     } else if (document.mozCancelFullScreen) {
@@ -79,114 +76,105 @@ class Header extends React.Component {
     }
   };
 
-  turnMode = mode => {
-    const { changeMode } = this.props;
+  const turnMode = mode => {
     if (mode === 'light') {
-      changeMode('dark');
+      props.changeMode('dark');
     } else {
-      changeMode('light');
+      props.changeMode('light');
     }
   };
 
-  render() {
-    const {
-      classes,
-      toggleDrawerOpen,
-      margin,
-      position,
-      gradient,
-      mode,
-      title,
-      openGuide,
-      history
-    } = this.props;
-    const {
-      fullScreen,
-      open,
-      turnDarker,
-      showTitle
-    } = this.state;
+  const {
+    classes,
+    toggleDrawerOpen,
+    margin,
+    position,
+    gradient,
+    mode,
+    title,
+    openGuide,
+    history
+  } = props;
 
-    const setMargin = (sidebarPosition) => {
-      if (sidebarPosition === 'right-sidebar') {
-        return classes.right;
-      }
-      if (sidebarPosition === 'left-sidebar-big') {
-        return classes.leftBig;
-      }
-      return classes.left;
-    };
+  const setMargin = (sidebarPosition) => {
+    if (sidebarPosition === 'right-sidebar') {
+      return classes.right;
+    }
+    if (sidebarPosition === 'left-sidebar-big') {
+      return classes.leftBig;
+    }
+    return classes.left;
+  };
 
-    return (
-      <AppBar
-        className={
-          classNames(
-            classes.appBar,
-            classes.floatingBar,
-            margin && classes.appBarShift,
-            setMargin(position),
-            turnDarker && classes.darker,
-            gradient ? classes.gradientBg : classes.solidBg
-          )
-        }
-      >
-        <Toolbar disableGutters={!open}>
-          <Fab
-            size="small"
-            className={classes.menuButton}
-            aria-label="Menu"
-            onClick={toggleDrawerOpen}
-          >
-            <MenuIcon />
-          </Fab>
-          <Hidden smDown>
-            <div className={classes.headerProperties}>
-              <div className={classNames(classes.headerAction, showTitle && classes.fadeOut)}>
-                {fullScreen ? (
-                  <Tooltip title="Exit Full Screen" placement="bottom">
-                    <IconButton className={classes.button} onClick={this.closeFullScreen}>
-                      <i className="ion-ios-crop" />
-                    </IconButton>
-                  </Tooltip>
-                ) : (
-                  <Tooltip title="Full Screen" placement="bottom">
-                    <IconButton className={classes.button} onClick={this.openFullScreen}>
-                      <i className="ion-ios-crop" />
-                    </IconButton>
-                  </Tooltip>
-                )}
-                <Tooltip title="Turn Dark/Light" placement="bottom">
-                  <IconButton className={classes.button} onClick={() => this.turnMode(mode)}>
-                    <i className="ion-ios-lightbulb-outline" />
+  return (
+    <AppBar
+      className={
+        classNames(
+          classes.appBar,
+          classes.floatingBar,
+          margin && classes.appBarShift,
+          setMargin(position),
+          turnDarker && classes.darker,
+          gradient ? classes.gradientBg : classes.solidBg
+        )
+      }
+    >
+      <Toolbar disableGutters={!open}>
+        <Fab
+          size="small"
+          className={classes.menuButton}
+          aria-label="Menu"
+          onClick={toggleDrawerOpen}
+        >
+          <MenuIcon />
+        </Fab>
+        <Hidden smDown>
+          <div className={classes.headerProperties}>
+            <div className={classNames(classes.headerAction, showTitle && classes.fadeOut)}>
+              {fullScreen ? (
+                <Tooltip title="Exit Full Screen" placement="bottom">
+                  <IconButton className={classes.button} onClick={closeFullScreen}>
+                    <i className="ion-ios-crop" />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title="Show Guide" placement="bottom">
-                  <IconButton className={classes.button} onClick={openGuide}>
-                    <i className="ion-ios-help-outline" />
+              ) : (
+                <Tooltip title="Full Screen" placement="bottom">
+                  <IconButton className={classes.button} onClick={openFullScreen}>
+                    <i className="ion-ios-crop" />
                   </IconButton>
                 </Tooltip>
-              </div>
-              <Typography component="h2" className={classNames(classes.headerTitle, showTitle && classes.show)}>
-                {title}
-              </Typography>
+              )}
+              <Tooltip title="Turn Dark/Light" placement="bottom">
+                <IconButton className={classes.button} onClick={() => turnMode(mode)}>
+                  <i className="ion-ios-lightbulb-outline" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Show Guide" placement="bottom">
+                <IconButton className={classes.button} onClick={openGuide}>
+                  <i className="ion-ios-help-outline" />
+                </IconButton>
+              </Tooltip>
             </div>
-          </Hidden>
-          <div className={classes.searchWrapper}>
-            <div className={classNames(classes.wrapper, classes.light)}>
-              <div className={classes.search}>
-                <SearchIcon />
-              </div>
-              <SearchUi history={history} />
-            </div>
+            <Typography component="h2" className={classNames(classes.headerTitle, showTitle && classes.show)}>
+              {title}
+            </Typography>
           </div>
-          <Hidden xsDown>
-            <span className={classes.separatorV} />
-          </Hidden>
-          <UserMenu />
-        </Toolbar>
-      </AppBar>
-    );
-  }
+        </Hidden>
+        <div className={classes.searchWrapper}>
+          <div className={classNames(classes.wrapper, classes.light)}>
+            <div className={classes.search}>
+              <SearchIcon />
+            </div>
+            <SearchUi history={history} />
+          </div>
+        </div>
+        <Hidden xsDown>
+          <span className={classes.separatorV} />
+        </Hidden>
+        <UserMenu />
+      </Toolbar>
+    </AppBar>
+  );
 }
 
 Header.propTypes = {

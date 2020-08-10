@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import Loading from '@material-ui/core/LinearProgress';
+import { create } from 'jss';
+import rtl from 'jss-rtl';
+import { StylesProvider, jssPreset } from '@material-ui/styles';
 import { bindActionCreators } from 'redux';
 import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { changeModeAction } from 'dan-redux/actions/uiActions';
@@ -34,80 +37,66 @@ const styles = {
   }
 };
 
-export const AppContext = React.createContext();
+// Configure JSS
+const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
-class ThemeWrapper extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pageLoaded: 0,
-      theme: createMuiTheme(applicationTheme(props.color, props.mode)),
+export const ThemeContext = React.createContext(undefined);
+
+function ThemeWrapper(props) {
+  const [progress, setProgress] = useState(0);
+  const [theme, setTheme] = useState(
+    // eslint-disable-next-line
+    createMuiTheme(applicationTheme(props.color, props.mode))
+  );
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress === 100) {
+          clearInterval(timer);
+        }
+        const diff = Math.random() * 40;
+        return Math.min(oldProgress + diff, 100);
+      });
+    }, 500);
+
+    return () => {
+      clearInterval(timer);
     };
-  }
+  }, []);
 
-  componentWillMount = () => {
-    this.onProgressShow();
-  }
-
-  componentDidMount = () => {
-    this.playProgress();
-  }
-
-  componentWillUnmount() {
-    this.onProgressShow();
-  }
-
-  handleChangeMode = mode => {
-    const { color, changeMode } = this.props;
-    this.setState({ theme: createMuiTheme(applicationTheme(color, mode)) });
+  const handleChangeMode = mode => {
+    const { color, changeMode } = props;
+    setTheme(
+      createMuiTheme(
+        applicationTheme(color, mode)
+      )
+    );
     changeMode(mode);
   };
 
-  onProgressShow = () => {
-    this.setState({ pageLoaded: 0 });
-  }
-
-  onProgressHide = val => {
-    this.setState({ pageLoaded: val });
-  }
-
-  playProgress = () => {
-    let timer = null;
-    this.onProgressShow();
-    const setCompleted = () => {
-      const diff = Math.random() * 40;
-      const { pageLoaded } = this.state;
-      this.onProgressHide(pageLoaded + diff);
-      if (pageLoaded >= 100) {
-        clearInterval(timer);
-      }
-    };
-    timer = setInterval(setCompleted, 500);
-  }
-
-  render() {
-    const { classes, children } = this.props;
-    const { pageLoaded, theme } = this.state;
-    return (
+  const { classes, children } = props;
+  return (
+    <StylesProvider jss={jss}>
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
           <Loading
             variant="determinate"
-            value={pageLoaded}
-            className={pageLoaded >= 100 ? classes.hide : ''}
+            value={progress}
+            className={progress >= 100 ? classes.hide : ''}
             classes={{
               root: classes.loading,
               colorPrimary: classes.loadingWrap,
               barColorPrimary: classes.bar
             }}
           />
-          <AppContext.Provider value={this.handleChangeMode}>
+          <ThemeContext.Provider value={handleChangeMode}>
             {children}
-          </AppContext.Provider>
+          </ThemeContext.Provider>
         </div>
       </MuiThemeProvider>
-    );
-  }
+    </StylesProvider>
+  );
 }
 
 ThemeWrapper.propTypes = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
@@ -22,134 +22,117 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
 });
 
 // eslint-disable-next-line
-class MainMenu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: [],
-      openMenu: [],
-      anchorEl: null,
-    };
-    this.handleClose = this.handleClose.bind(this);
-    this.handleOpenMenu = this.handleOpenMenu.bind(this);
-  }
+function MainMenu(props) {
+  const [active, setActive] = useState([]);
+  const [openMenu, setOpenMenu] = useState([]);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  componentDidMount() {
-    const { open } = this.props;
+  useEffect(() => {
+    const { open } = props;
     setTimeout(() => {
-      this.setState({ active: open });
+      setActive(open);
     }, 50);
-  }
+  }, []);
 
-  handleOpenMenu = (event, key, keyParent) => {
-    const { openSubMenu } = this.props;
+  const handleOpenMenu = (event, key, keyParent) => {
+    const { openSubMenu } = props;
     openSubMenu(key, keyParent);
-    this.setState({ anchorEl: event.currentTarget });
+    setAnchorEl(event.currentTarget);
     setTimeout(() => {
-      this.setState({
-        openMenu: [key], // eslint-disable-line
-      });
+      setOpenMenu([key]);
     }, 50);
   };
 
-  handleClose = event => {
-    if (this.anchorEl.contains(event.target)) {
+  const handleClose = event => {
+    if (anchorEl.contains(event.target)) {
       return;
     }
-    this.setState({ openMenu: [] });
-  }
+    setOpenMenu([]);
+  };
 
-  handleActiveParent = key => {
-    this.setState({
-      active: [key],
-      openMenu: []
-    });
-  }
+  const handleActiveParent = key => {
+    setActive([key]);
+    setOpenMenu([]);
+  };
 
-  render() {
-    const { classes, open, dataMenu } = this.props;
-    const { active, openMenu, anchorEl } = this.state;
-    const getMenus = (parent, menuArray) => menuArray.map((item, index) => {
-      if (item.multilevel) {
-        return false;
-      }
-      if (item.child || item.linkParent) {
-        return (
-          <div key={index.toString()}>
-            <Button
-              aria-owns={open ? 'menu-list-grow' : undefined}
-              component={LinkBtn}
-              to={item.linkParent ? item.linkParent : '#'}
-              buttonRef={node => {
-                this.anchorEl = node;
-              }}
-              className={
-                classNames(
-                  classes.headMenu,
-                  open.indexOf(item.key) > -1 ? classes.opened : '',
-                  active.indexOf(item.key) > -1 ? classes.selected : ''
-                )
-              }
-              onClick={(event) => this.handleOpenMenu(event, item.key, item.keyParent)}
-            >
-              {item.name}
-              { !item.linkParent ? <ExpandMore className={classes.rightIcon} /> : <span className={classes.rightIcon}>&nbsp;&nbsp;</span> }
-            </Button>
-            { !item.linkParent && (
-              <Popper
-                open={openMenu.indexOf(item.key) > -1}
-                anchorEl={anchorEl}
-                transition
-                disablePortal
-              >
-                {({ TransitionProps, placement }) => (
-                  <Grow
-                    {...TransitionProps}
-                    id="menu-list-grow"
-                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                  >
-                    <Paper className={classes.dropDownMenu}>
-                      <ClickAwayListener onClickAway={this.handleClose}>
-                        <List role="menu" component="nav" className={classes.paperMenu}>
-                          { getMenus(item.key, item.child) }
-                        </List>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
-            )}
-          </div>
-        );
-      }
-      if (item.title) {
-        return (
-          <ListSubheader component="div" key={index.toString()} className={classes.title}>{item.name}</ListSubheader>
-        );
-      }
+  const { classes, open, dataMenu } = props;
+  const getMenus = (parent, menuArray) => menuArray.map((item, index) => {
+    if (item.multilevel) {
+      return false;
+    }
+    if (item.child || item.linkParent) {
       return (
-        <ListItem
-          key={index.toString()}
-          button
-          exact
-          className={classes.menuItem}
-          activeClassName={classes.active}
-          component={LinkBtn}
-          to={item.link}
-          onClick={() => this.handleActiveParent(parent)}
-        >
-          <ListItemText primary={item.name} />
-        </ListItem>
-      );
-    });
-    return (
-      <nav className={classes.mainMenu}>
-        <div>
-          {getMenus(null, dataMenu)}
+        <div key={index.toString()}>
+          <Button
+            aria-owns={open ? 'menu-list-grow' : undefined}
+            component={LinkBtn}
+            to={item.linkParent ? item.linkParent : '#'}
+            className={
+              classNames(
+                classes.headMenu,
+                open.indexOf(item.key) > -1 ? classes.opened : '',
+                active.indexOf(item.key) > -1 ? classes.selected : ''
+              )
+            }
+            onClick={(event) => handleOpenMenu(event, item.key, item.keyParent)}
+          >
+            {item.name}
+            { !item.linkParent ? <ExpandMore className={classes.rightIcon} /> : <span className={classes.rightIcon}>&nbsp;&nbsp;</span> }
+          </Button>
+          { !item.linkParent && (
+            <Popper
+              open={openMenu.indexOf(item.key) > -1}
+              anchorEl={anchorEl}
+              transition
+              disablePortal
+            >
+              {({ TransitionProps, placement }) => (
+                <Grow
+                  {...TransitionProps}
+                  id="menu-list-grow"
+                  style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                >
+                  <Paper className={classes.dropDownMenu}>
+                    <ClickAwayListener onClickAway={handleClose}>
+                      <List role="menu" component="nav" className={classes.paperMenu}>
+                        { getMenus(item.key, item.child) }
+                      </List>
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
+              )}
+            </Popper>
+          )}
         </div>
-      </nav>
+      );
+    }
+    if (item.title) {
+      return (
+        <ListSubheader component="div" key={index.toString()} className={classes.title}>{item.name}</ListSubheader>
+      );
+    }
+    return (
+      <ListItem
+        key={index.toString()}
+        button
+        exact
+        className={classes.menuItem}
+        activeClassName={classes.active}
+        component={LinkBtn}
+        to={item.link}
+        onClick={() => handleActiveParent(parent)}
+      >
+        <ListItemText primary={item.name} />
+      </ListItem>
     );
-  }
+  });
+  return (
+    <nav className={classes.mainMenu}>
+      <div>
+        {getMenus(null, dataMenu)}
+      </div>
+    </nav>
+  );
 }
 
 MainMenu.propTypes = {

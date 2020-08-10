@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
@@ -9,110 +9,106 @@ import dummy from 'dan-api/dummy/dummyContents';
 import styles from './sidebar-jss';
 import SidebarContent from './SidebarContent';
 
-class Sidebar extends React.Component {
-  state = {
-    status: dummy.user.status,
-    anchorEl: null,
-    turnDarker: false
-  };
+function Sidebar(props) {
+  const [status, setStatus] = useState(dummy.user.status);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [turnDarker, setTurnDarker] = useState(false);
 
   // Initial header style
-  flagDarker = false;
+  let flagDarker = false;
 
-  componentDidMount = () => {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll = () => {
+  const handleScroll = () => {
     const doc = document.documentElement;
     const scroll = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
     const newFlagDarker = (scroll > 30);
-    if (this.flagDarker !== newFlagDarker) {
-      this.setState({ turnDarker: newFlagDarker });
-      this.flagDarker = newFlagDarker;
+    if (flagDarker !== newFlagDarker) {
+      setTurnDarker(newFlagDarker);
+      flagDarker = newFlagDarker;
     }
-  }
-
-  handleOpen = event => {
-    this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
+  const handleOpen = event => {
+    setAnchorEl(event.currentTarget);
   };
 
-  handleChangeStatus = status => {
-    this.setState({ status });
-    this.handleClose();
-  }
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-  render() {
-    const {
-      classes,
-      open,
-      toggleDrawerOpen,
-      loadTransition,
-      leftSidebar,
-      dataMenu
-    } = this.props;
-    const { status, anchorEl, turnDarker } = this.state;
-    return (
-      <Fragment>
-        <Hidden lgUp>
-          <SwipeableDrawer
-            onClose={toggleDrawerOpen}
-            onOpen={toggleDrawerOpen}
-            open={!open}
-            anchor={leftSidebar ? 'left' : 'right'}
-          >
-            <div className={classes.swipeDrawerPaper}>
-              <SidebarContent
-                drawerPaper
-                leftSidebar={leftSidebar}
-                toggleDrawerOpen={toggleDrawerOpen}
-                loadTransition={loadTransition}
-                dataMenu={dataMenu}
-                status={status}
-                anchorEl={anchorEl}
-                openMenuStatus={this.handleOpen}
-                closeMenuStatus={this.handleClose}
-                changeStatus={this.handleChangeStatus}
-              />
-            </div>
-          </SwipeableDrawer>
-        </Hidden>
-        <Hidden mdDown>
-          <Drawer
-            variant="permanent"
-            onClose={toggleDrawerOpen}
-            className={open ? classes.drawer : ''}
-            classes={{
-              paper: classNames(classes.drawer, classes.drawerPaper, !open ? classes.drawerPaperClose : ''),
-            }}
-            open={open}
-            anchor={leftSidebar ? 'left' : 'right'}
-          >
+  const handleChangeStatus = st => {
+    setStatus(st);
+    handleClose();
+  };
+
+  const {
+    classes,
+    open,
+    toggleDrawerOpen,
+    loadTransition,
+    leftSidebar,
+    dataMenu
+  } = props;
+
+  return (
+    <Fragment>
+      <Hidden lgUp>
+        <SwipeableDrawer
+          onClose={toggleDrawerOpen}
+          onOpen={toggleDrawerOpen}
+          open={!open}
+          anchor={leftSidebar ? 'left' : 'right'}
+        >
+          <div className={classes.swipeDrawerPaper}>
             <SidebarContent
-              drawerPaper={open}
+              drawerPaper
               leftSidebar={leftSidebar}
-              turnDarker={turnDarker}
+              toggleDrawerOpen={toggleDrawerOpen}
               loadTransition={loadTransition}
               dataMenu={dataMenu}
               status={status}
               anchorEl={anchorEl}
-              openMenuStatus={this.handleOpen}
-              closeMenuStatus={this.handleClose}
-              changeStatus={this.handleChangeStatus}
+              openMenuStatus={handleOpen}
+              closeMenuStatus={handleClose}
+              changeStatus={handleChangeStatus}
             />
-          </Drawer>
-        </Hidden>
-      </Fragment>
-    );
-  }
+          </div>
+        </SwipeableDrawer>
+      </Hidden>
+      <Hidden mdDown>
+        <Drawer
+          variant="permanent"
+          onClose={toggleDrawerOpen}
+          className={open ? classes.drawer : ''}
+          classes={{
+            paper: classNames(classes.drawer, classes.drawerPaper, !open ? classes.drawerPaperClose : ''),
+          }}
+          open={open}
+          anchor={leftSidebar ? 'left' : 'right'}
+        >
+          <SidebarContent
+            drawerPaper={open}
+            leftSidebar={leftSidebar}
+            turnDarker={turnDarker}
+            loadTransition={loadTransition}
+            dataMenu={dataMenu}
+            status={status}
+            anchorEl={anchorEl}
+            openMenuStatus={handleOpen}
+            closeMenuStatus={handleClose}
+            changeStatus={handleChangeStatus}
+          />
+        </Drawer>
+      </Hidden>
+    </Fragment>
+  );
 }
 
 Sidebar.propTypes = {

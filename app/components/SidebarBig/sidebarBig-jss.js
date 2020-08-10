@@ -203,9 +203,6 @@ const styles = theme => ({
         },
         '&:hover': {
           backgroundColor: theme.palette.type === 'dark' ? fade(theme.palette.secondary.light, 0.24) : fade(theme.palette.secondary.light, 0.24),
-        },
-        '&:focus': {
-          backgroundColor: theme.palette.type === 'dark' ? fade(theme.palette.secondary.light, 0.24) : fade(theme.palette.secondary.light, 0.24),
         }
       }
     }

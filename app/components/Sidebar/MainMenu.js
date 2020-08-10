@@ -22,104 +22,103 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
 });
 
 // eslint-disable-next-line
-class MainMenu extends React.Component {
-  handleClick() {
-    const { toggleDrawerOpen, loadTransition } = this.props;
+function MainMenu(props) {
+  const handleClick = () => {
+    const { toggleDrawerOpen, loadTransition } = props;
     toggleDrawerOpen();
     loadTransition(false);
-  }
+  };
 
-  render() {
-    const {
-      classes,
-      openSubMenu,
-      open,
-      dataMenu
-    } = this.props;
-    const getMenus = menuArray => menuArray.map((item, index) => {
-      if (item.child || item.linkParent) {
-        return (
-          <div key={index.toString()}>
-            <ListItem
-              button
-              component={LinkBtn}
-              to={item.linkParent ? item.linkParent : '#'}
-              className={
-                classNames(
-                  classes.head,
-                  item.icon ? classes.iconed : '',
-                  open.indexOf(item.key) > -1 ? classes.opened : '',
-                )
-              }
-              onClick={() => openSubMenu(item.key, item.keyParent)}
-            >
-              {item.icon && (
-                <ListItemIcon className={classes.icon}>
-                  <Ionicon icon={item.icon} />
-                </ListItemIcon>
-              )}
-              <ListItemText classes={{ primary: classes.primary }} variant="inset" primary={item.name} />
-              { !item.linkParent && (
-                <span>
-                  { open.indexOf(item.key) > -1 ? <ExpandLess /> : <ExpandMore /> }
-                </span>
-              )}
-            </ListItem>
-            { !item.linkParent && (
-              <Collapse
-                component="div"
-                className={classNames(
-                  classes.nolist,
-                  (item.keyParent ? classes.child : ''),
-                )}
-                in={open.indexOf(item.key) > -1}
-                timeout="auto"
-                unmountOnExit
-              >
-                <List className={classes.dense} component="nav" dense>
-                  { getMenus(item.child, 'key') }
-                </List>
-              </Collapse>
-            )}
-          </div>
-        );
-      }
-      if (item.title) {
-        return (
-          <ListSubheader
-            disableSticky
-            key={index.toString()}
-            component="div"
-            className={classes.title}
-          >
-            {item.name}
-          </ListSubheader>
-        );
-      }
+  const {
+    classes,
+    openSubMenu,
+    open,
+    dataMenu
+  } = props;
+
+  const getMenus = menuArray => menuArray.map((item, index) => {
+    if (item.child || item.linkParent) {
       return (
-        <ListItem
-          key={index.toString()}
-          button
-          exact
-          className={classes.nested}
-          activeClassName={classes.active}
-          component={LinkBtn}
-          to={item.link}
-          onClick={() => this.handleClick()}
-        >
-          <ListItemText classes={{ primary: classes.primary }} inset primary={item.name} />
-          {item.badge && (
-            <Chip color="primary" label={item.badge} className={classes.badge} />
+        <div key={index.toString()}>
+          <ListItem
+            button
+            component={LinkBtn}
+            to={item.linkParent ? item.linkParent : '#'}
+            className={
+              classNames(
+                classes.head,
+                item.icon ? classes.iconed : '',
+                open.indexOf(item.key) > -1 ? classes.opened : '',
+              )
+            }
+            onClick={() => openSubMenu(item.key, item.keyParent)}
+          >
+            {item.icon && (
+              <ListItemIcon className={classes.icon}>
+                <Ionicon icon={item.icon} />
+              </ListItemIcon>
+            )}
+            <ListItemText classes={{ primary: classes.primary }} variant="inset" primary={item.name} />
+            { !item.linkParent && (
+              <span>
+                { open.indexOf(item.key) > -1 ? <ExpandLess /> : <ExpandMore /> }
+              </span>
+            )}
+          </ListItem>
+          { !item.linkParent && (
+            <Collapse
+              component="div"
+              className={classNames(
+                classes.nolist,
+                (item.keyParent ? classes.child : ''),
+              )}
+              in={open.indexOf(item.key) > -1}
+              timeout="auto"
+              unmountOnExit
+            >
+              <List className={classes.dense} component="nav" dense>
+                { getMenus(item.child, 'key') }
+              </List>
+            </Collapse>
           )}
-        </ListItem>
+        </div>
       );
-    });
+    }
+    if (item.title) {
+      return (
+        <ListSubheader
+          disableSticky
+          key={index.toString()}
+          component="div"
+          className={classes.title}
+        >
+          {item.name}
+        </ListSubheader>
+      );
+    }
     return (
-      <div>
-        {getMenus(dataMenu)}
-      </div>
+      <ListItem
+        key={index.toString()}
+        button
+        exact
+        className={classes.nested}
+        activeClassName={classes.active}
+        component={LinkBtn}
+        to={item.link}
+        onClick={() => handleClick()}
+      >
+        <ListItemText classes={{ primary: classes.primary }} inset primary={item.name} />
+        {item.badge && (
+          <Chip color="primary" label={item.badge} className={classes.badge} />
+        )}
+      </ListItem>
     );
-  }
+  });
+  return (
+    <div>
+      {getMenus(dataMenu)}
+    </div>
+  );
 }
 
 MainMenu.propTypes = {

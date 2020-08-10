@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
@@ -47,7 +47,7 @@ const styles = theme => ({
   },
   open: {
     height: 'auto',
-    minHeight: 20,
+    minHeight: 50,
   },
   src: {
     textAlign: 'left',
@@ -60,7 +60,7 @@ const styles = theme => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     '& span': {
       fontSize: 14,
     },
@@ -78,88 +78,77 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    marginTop: theme.spacing(3)
   },
 });
 
-class SourceReader extends Component {
-  state = {
-    raws: [],
-    open: false,
-    loading: false,
-    style: this.props.mode // eslint-disable-line
-  };
+function SourceReader(props) {
+  const [raws, setRaws] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [style, setStyle] = useState(props.mode);
 
-  sourceOpen = () => {
-    const { componentName } = this.props;
-    const { open } = this.state;
+  const sourceOpen = () => {
+    const { componentName } = props;
     const name = componentName;
-    this.setState({ loading: true }, () => {
-      Axios.get(url + name).then(result => this.setState({
-        raws: result.data.records,
-        loading: false
-      }));
-      this.setState({ open: !open });
+    setLoading(true);
+    Axios.get(url + name).then(result => {
+      setRaws(result.data.records);
+      setLoading(false);
     });
+    setOpen(!open);
   };
 
-  handleStyle = (event, value) => {
-    this.setState({ style: value });
+  const handleStyle = (event, value) => {
+    setStyle(value);
   };
 
-  render() {
-    const {
-      raws,
-      open,
-      loading,
-      style
-    } = this.state;
-    const { classes, componentName } = this.props;
-    registerLanguage('jsx', jsx);
-    if (codePreview.enable) {
-      return (
-        <div>
-          <Button onClick={this.sourceOpen} color="secondary" className={classes.button} size="small">
-            { open ? (
-              <Close className={classNames(classes.leftIcon, classes.iconSmall)} />
-            ) : (
-              <Code className={classNames(classes.leftIcon, classes.iconSmall)} />
-            )}
-            { open ? 'Hide Code' : 'Show Code' }
-          </Button>
-          <section className={classNames(classes.source, open ? classes.open : '')}>
-            <div className={classes.src}>
-              <p>
-                <Icon className="description">description</Icon>
-                src/app/
-                {componentName}
-              </p>
-              <div className={classes.toggleContainer}>
-                <ToggleButtonGroup value={style} exclusive onChange={this.handleStyle}>
-                  <ToggleButton value="light">
-                    Light
-                  </ToggleButton>
-                  <ToggleButton value="dark">
-                    Dark
-                  </ToggleButton>
-                </ToggleButtonGroup>
-              </div>
+  const { classes, componentName } = props;
+  registerLanguage('jsx', jsx);
+  if (codePreview.enable) {
+    return (
+      <div>
+        <Button onClick={sourceOpen} color="secondary" className={classes.button} size="small">
+          { open ? (
+            <Close className={classNames(classes.leftIcon, classes.iconSmall)} />
+          ) : (
+            <Code className={classNames(classes.leftIcon, classes.iconSmall)} />
+          )}
+          { open ? 'Hide Code' : 'Show Code' }
+        </Button>
+        <section className={classNames(classes.source, open ? classes.open : '')}>
+          <div className={classes.src}>
+            <p>
+              <Icon className="description">description</Icon>
+              src/app/
+              {componentName}
+            </p>
+            <div className={classes.toggleContainer}>
+              <ToggleButtonGroup value={style} exclusive onChange={handleStyle}>
+                <ToggleButton value="light">
+                  Light
+                </ToggleButton>
+                <ToggleButton value="dark">
+                  Dark
+                </ToggleButton>
+              </ToggleButtonGroup>
             </div>
-            {loading && (
-              <LinearProgress color="secondary" className={classes.preloader} />
-            )}
-            {raws.map((raw, index) => ([
-              <div key={index.toString()}>
-                <SyntaxHighlighter language="jsx" style={style === 'dark' ? darkStyle : lightStyle} showLineNumbers="true">
-                  {raw.source.toString()}
-                </SyntaxHighlighter>
-              </div>
-            ]))}
-          </section>
-        </div>
-      );
-    }
-    return false;
+          </div>
+          {loading && (
+            <LinearProgress color="secondary" className={classes.preloader} />
+          )}
+          {raws.map((raw, index) => ([
+            <div key={index.toString()}>
+              <SyntaxHighlighter language="jsx" style={style === 'dark' ? darkStyle : lightStyle} showLineNumbers="true">
+                {raw.source.toString()}
+              </SyntaxHighlighter>
+            </div>
+          ]))}
+        </section>
+      </div>
+    );
   }
+  return false;
 }
 
 SourceReader.propTypes = {

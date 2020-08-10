@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -23,37 +23,34 @@ import SearchUi from '../Search/SearchUi';
 
 const elem = document.documentElement;
 
-class HeaderMenu extends React.Component {
-  state = {
-    fullScreen: false,
-    status: dummy.user.status,
-    anchorEl: null,
-    fixed: false,
-  };
+function HeaderMenu(props) {
+  const [fullScreen, setFullScreen] = useState(false);
+  const [status, setStatus] = useState(dummy.user.status);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [fixed, setFixed] = useState(false);
 
   // Initial menu ui
-  flagFixedMenu = false;
+  let flagFixedMenu = false;
 
-  componentDidMount = () => {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll = () => {
+  const handleScroll = () => {
     const doc = document.documentElement;
     const scroll = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
     const newFlagFixedMenu = (scroll > 64);
-    if (this.flagFixedMenu !== newFlagFixedMenu) {
-      this.setState({ fixed: newFlagFixedMenu });
-      this.flagFixedMenu = newFlagFixedMenu;
+    if (flagFixedMenu !== newFlagFixedMenu) {
+      setFixed(newFlagFixedMenu);
+      flagFixedMenu = newFlagFixedMenu;
     }
-  }
+  };
 
-  openFullScreen = () => {
-    this.setState({ fullScreen: true });
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const openFullScreen = () => {
+    setFullScreen(true);
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
     } else if (elem.mozRequestFullScreen) { /* Firefox */
@@ -65,8 +62,8 @@ class HeaderMenu extends React.Component {
     }
   };
 
-  closeFullScreen = () => {
-    this.setState({ fullScreen: false });
+  const closeFullScreen = () => {
+    setFullScreen(false);
     if (document.exitFullscreen) {
       document.exitFullscreen();
     } else if (document.mozCancelFullScreen) {
@@ -78,145 +75,136 @@ class HeaderMenu extends React.Component {
     }
   };
 
-  turnMode = mode => {
-    const { changeMode } = this.props;
+  const turnMode = mode => {
     if (mode === 'light') {
-      changeMode('dark');
+      props.changeMode('dark');
     } else {
-      changeMode('light');
+      props.changeMode('light');
     }
   };
 
-  handleOpen = event => {
-    this.setState({ anchorEl: event.currentTarget });
+  const handleOpen = event => {
+    setAnchorEl(event.currentTarget);
   };
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
-  handleChangeStatus = status => {
-    this.setState({ status });
-    this.handleClose();
-  }
+  const handleChangeStatus = st => {
+    setStatus(st);
+    handleClose();
+  };
 
-  render() {
-    const {
-      classes,
-      type,
-      dataMenu,
-      history,
-      openGuide,
-      mode,
-      toggleDrawerOpen,
-      openMobileNav,
-      loadTransition,
-      isLogin,
-      logoLink
-    } = this.props;
-    const {
-      fullScreen,
-      status,
-      anchorEl,
-      fixed
-    } = this.state;
-    return (
-      <AppBar
-        className={
-          classNames(
-            classes.appBar,
-            classes.attachedbar,
-            fixed ? classes.fixed : ''
-          )
-        }
-      >
-        <div className={classes.appMenu}>
-          <Hidden lgUp>
-            <IconButton
-              className={classes.menuButton}
-              aria-label="Menu"
-              onClick={toggleDrawerOpen}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Hidden>
-          <Hidden smDown>
-            <div className={classes.headerProperties}>
-              <div className={classNames(classes.headerAction, classes.invert)}>
-                {fullScreen ? (
-                  <Tooltip title="Exit Full Screen" placement="bottom">
-                    <IconButton className={classes.button} onClick={this.closeFullScreen}>
-                      <i className="ion-ios-crop" />
-                    </IconButton>
-                  </Tooltip>
-                ) : (
-                  <Tooltip title="Full Screen" placement="bottom">
-                    <IconButton className={classes.button} onClick={this.openFullScreen}>
-                      <i className="ion-ios-crop" />
-                    </IconButton>
-                  </Tooltip>
-                )}
-                <Tooltip title="Turn Dark/Light" placement="bottom">
-                  <IconButton className={classes.button} onClick={() => this.turnMode(mode)}>
-                    <i className="ion-ios-lightbulb-outline" />
+  const {
+    classes,
+    type,
+    dataMenu,
+    history,
+    openGuide,
+    mode,
+    toggleDrawerOpen,
+    openMobileNav,
+    loadTransition,
+    isLogin,
+    logoLink
+  } = props;
+  return (
+    <AppBar
+      className={
+        classNames(
+          classes.appBar,
+          classes.attachedbar,
+          fixed ? classes.fixed : ''
+        )
+      }
+    >
+      <div className={classes.appMenu}>
+        <Hidden lgUp>
+          <IconButton
+            className={classes.menuButton}
+            aria-label="Menu"
+            onClick={toggleDrawerOpen}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
+        <Hidden smDown>
+          <div className={classes.headerProperties}>
+            <div className={classNames(classes.headerAction, classes.invert)}>
+              {fullScreen ? (
+                <Tooltip title="Exit Full Screen" placement="bottom">
+                  <IconButton className={classes.button} onClick={closeFullScreen}>
+                    <i className="ion-ios-crop" />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title="Show Guide" placement="bottom">
-                  <IconButton className={classes.button} onClick={openGuide}>
-                    <i className="ion-ios-help-outline" />
+              ) : (
+                <Tooltip title="Full Screen" placement="bottom">
+                  <IconButton className={classes.button} onClick={openFullScreen}>
+                    <i className="ion-ios-crop" />
                   </IconButton>
                 </Tooltip>
-              </div>
-            </div>
-            <NavLink to={logoLink} className={classes.brand}>
-              <img src={logo} alt={brand.name} />
-              {brand.name}
-            </NavLink>
-          </Hidden>
-          <div className={classes.searchHeaderMenu}>
-            <div className={classNames(classes.wrapper, classes.dark)}>
-              <div className={classes.search}>
-                <SearchIcon />
-              </div>
-              <SearchUi history={history} />
+              )}
+              <Tooltip title="Turn Dark/Light" placement="bottom">
+                <IconButton className={classes.button} onClick={() => turnMode(mode)}>
+                  <i className="ion-ios-lightbulb-outline" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Show Guide" placement="bottom">
+                <IconButton className={classes.button} onClick={openGuide}>
+                  <i className="ion-ios-help-outline" />
+                </IconButton>
+              </Tooltip>
             </div>
           </div>
-          <Toolbar>
-            <UserMenu dark />
-          </Toolbar>
-        </div>
-        <Hidden mdDown>
-          <Fragment>
-            { type === 'mega-menu' ? <MegaMenu dataMenu={dataMenu} /> : <DropListMenu dataMenu={dataMenu} />}
-          </Fragment>
+          <NavLink to={logoLink} className={classes.brand}>
+            <img src={logo} alt={brand.name} />
+            {brand.name}
+          </NavLink>
         </Hidden>
-        <Hidden lgUp>
-          <SwipeableDrawer
-            onClose={toggleDrawerOpen}
-            onOpen={toggleDrawerOpen}
-            open={!openMobileNav}
-            anchor="left"
-          >
-            <div className={classes.swipeDrawerPaper}>
-              <SidebarContent
-                drawerPaper
-                leftSidebar
-                toggleDrawerOpen={toggleDrawerOpen}
-                loadTransition={loadTransition}
-                dataMenu={dataMenu}
-                status={status}
-                anchorEl={anchorEl}
-                openMenuStatus={this.handleOpen}
-                closeMenuStatus={this.handleClose}
-                changeStatus={this.handleChangeStatus}
-                isLogin={isLogin}
-              />
+        <div className={classes.searchHeaderMenu}>
+          <div className={classNames(classes.wrapper, classes.dark)}>
+            <div className={classes.search}>
+              <SearchIcon />
             </div>
-          </SwipeableDrawer>
-        </Hidden>
-      </AppBar>
-    );
-  }
+            <SearchUi history={history} />
+          </div>
+        </div>
+        <Toolbar>
+          <UserMenu dark />
+        </Toolbar>
+      </div>
+      <Hidden mdDown>
+        <Fragment>
+          { type === 'mega-menu' ? <MegaMenu dataMenu={dataMenu} /> : <DropListMenu dataMenu={dataMenu} />}
+        </Fragment>
+      </Hidden>
+      <Hidden lgUp>
+        <SwipeableDrawer
+          onClose={toggleDrawerOpen}
+          onOpen={toggleDrawerOpen}
+          open={!openMobileNav}
+          anchor="left"
+        >
+          <div className={classes.swipeDrawerPaper}>
+            <SidebarContent
+              drawerPaper
+              leftSidebar
+              toggleDrawerOpen={toggleDrawerOpen}
+              loadTransition={loadTransition}
+              dataMenu={dataMenu}
+              status={status}
+              anchorEl={anchorEl}
+              openMenuStatus={handleOpen}
+              closeMenuStatus={handleClose}
+              changeStatus={handleChangeStatus}
+              isLogin={isLogin}
+            />
+          </div>
+        </SwipeableDrawer>
+      </Hidden>
+    </AppBar>
+  );
 }
 
 HeaderMenu.propTypes = {

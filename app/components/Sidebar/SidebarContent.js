@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
@@ -13,125 +13,116 @@ import logo from 'dan-images/logo.svg';
 import MainMenu from './MainMenu';
 import styles from './sidebar-jss';
 
-class SidebarContent extends React.Component {
-  state = {
-    transform: 0,
+function SidebarContent(props) {
+  const [transform, setTransform] = useState(0);
+
+  const handleScroll = (event) => {
+    const scroll = event.target.scrollTop;
+    setTransform(scroll);
   };
 
-  componentDidMount = () => {
-    // Scroll content to top
+  useEffect(() => {
     const mainContent = document.getElementById('sidebar');
-    mainContent.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    const mainContent = document.getElementById('sidebar');
-    mainContent.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll = (event) => {
-    const scroll = event.target.scrollTop;
-    this.setState({
-      transform: scroll
-    });
-  }
-
-  render() {
-    const {
-      classes,
-      turnDarker,
-      drawerPaper,
-      toggleDrawerOpen,
-      loadTransition,
-      leftSidebar,
-      dataMenu,
-      status,
-      anchorEl,
-      openMenuStatus,
-      closeMenuStatus,
-      changeStatus,
-      isLogin
-    } = this.props;
-    const { transform } = this.state;
-
-    const setStatus = st => {
-      switch (st) {
-        case 'online':
-          return classes.online;
-        case 'idle':
-          return classes.idle;
-        case 'bussy':
-          return classes.bussy;
-        default:
-          return classes.offline;
-      }
+    mainContent.addEventListener('scroll', handleScroll);
+    return () => {
+      mainContent.removeEventListener('scroll', handleScroll);
     };
-    return (
-      <div className={classNames(classes.drawerInner, !drawerPaper ? classes.drawerPaperClose : '')}>
-        <div className={classes.drawerHeader}>
-          <NavLink to="/app" className={classNames(classes.brand, classes.brandBar, turnDarker && classes.darker)}>
-            <img src={logo} alt={brand.name} />
-            {brand.name}
-          </NavLink>
-          {isLogin && (
-            <div
-              className={classNames(classes.profile, classes.user)}
-              style={{ opacity: 1 - (transform / 100), marginTop: transform * -0.3 }}
-            >
-              <Avatar
-                alt={dummy.user.name}
-                src={dummy.user.avatar}
-                className={classNames(classes.avatar, classes.bigAvatar)}
-              />
-              <div>
-                <h4>{dummy.user.name}</h4>
-                <Button size="small" onClick={openMenuStatus}>
-                  <i className={classNames(classes.dotStatus, setStatus(status))} />
-                  {status}
-                </Button>
-                <Menu
-                  id="status-menu"
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={closeMenuStatus}
-                  className={classes.statusMenu}
-                >
-                  <MenuItem onClick={() => changeStatus('online')}>
-                    <i className={classNames(classes.dotStatus, classes.online)} />
-                    Online
-                  </MenuItem>
-                  <MenuItem onClick={() => changeStatus('idle')}>
-                    <i className={classNames(classes.dotStatus, classes.idle)} />
-                    Idle
-                  </MenuItem>
-                  <MenuItem onClick={() => changeStatus('bussy')}>
-                    <i className={classNames(classes.dotStatus, classes.bussy)} />
-                    Bussy
-                  </MenuItem>
-                  <MenuItem onClick={() => changeStatus('offline')}>
-                    <i className={classNames(classes.dotStatus, classes.offline)} />
-                    Offline
-                  </MenuItem>
-                </Menu>
-              </div>
+  }, []);
+
+  const {
+    classes,
+    turnDarker,
+    drawerPaper,
+    toggleDrawerOpen,
+    loadTransition,
+    leftSidebar,
+    dataMenu,
+    status,
+    anchorEl,
+    openMenuStatus,
+    closeMenuStatus,
+    changeStatus,
+    isLogin
+  } = props;
+
+  const setStatus = st => {
+    switch (st) {
+      case 'online':
+        return classes.online;
+      case 'idle':
+        return classes.idle;
+      case 'bussy':
+        return classes.bussy;
+      default:
+        return classes.offline;
+    }
+  };
+
+  return (
+    <div className={classNames(classes.drawerInner, !drawerPaper ? classes.drawerPaperClose : '')}>
+      <div className={classes.drawerHeader}>
+        <NavLink to="/app" className={classNames(classes.brand, classes.brandBar, turnDarker && classes.darker)}>
+          <img src={logo} alt={brand.name} />
+          {brand.name}
+        </NavLink>
+        {isLogin && (
+          <div
+            className={classNames(classes.profile, classes.user)}
+            style={{ opacity: 1 - (transform / 100), marginTop: transform * -0.3 }}
+          >
+            <Avatar
+              alt={dummy.user.name}
+              src={dummy.user.avatar}
+              className={classNames(classes.avatar, classes.bigAvatar)}
+            />
+            <div>
+              <h4>{dummy.user.name}</h4>
+              <Button size="small" onClick={openMenuStatus}>
+                <i className={classNames(classes.dotStatus, setStatus(status))} />
+                {status}
+              </Button>
+              <Menu
+                id="status-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={closeMenuStatus}
+                className={classes.statusMenu}
+              >
+                <MenuItem onClick={() => changeStatus('online')}>
+                  <i className={classNames(classes.dotStatus, classes.online)} />
+                  Online
+                </MenuItem>
+                <MenuItem onClick={() => changeStatus('idle')}>
+                  <i className={classNames(classes.dotStatus, classes.idle)} />
+                  Idle
+                </MenuItem>
+                <MenuItem onClick={() => changeStatus('bussy')}>
+                  <i className={classNames(classes.dotStatus, classes.bussy)} />
+                  Bussy
+                </MenuItem>
+                <MenuItem onClick={() => changeStatus('offline')}>
+                  <i className={classNames(classes.dotStatus, classes.offline)} />
+                  Offline
+                </MenuItem>
+              </Menu>
             </div>
-          )}
-        </div>
-        <div
-          id="sidebar"
-          className={
-            classNames(
-              classes.menuContainer,
-              leftSidebar && classes.rounded,
-              isLogin && classes.withProfile
-            )
-          }
-        >
-          <MainMenu loadTransition={loadTransition} dataMenu={dataMenu} toggleDrawerOpen={toggleDrawerOpen} />
-        </div>
+          </div>
+        )}
       </div>
-    );
-  }
+      <div
+        id="sidebar"
+        className={
+          classNames(
+            classes.menuContainer,
+            leftSidebar && classes.rounded,
+            isLogin && classes.withProfile
+          )
+        }
+      >
+        <MainMenu loadTransition={loadTransition} dataMenu={dataMenu} toggleDrawerOpen={toggleDrawerOpen} />
+      </div>
+    </div>
+  );
 }
 
 SidebarContent.propTypes = {

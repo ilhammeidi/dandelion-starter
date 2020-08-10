@@ -8,42 +8,40 @@ import Typography from '@material-ui/core/Typography';
 import Ionicon from 'react-ionicons';
 import styles from './papperStyle-jss';
 
-class PapperBlock extends React.Component {
-  render() {
-    const {
-      classes,
-      title,
-      desc,
-      children,
-      whiteBg,
-      noMargin,
-      colorMode,
-      overflowX,
-      icon
-    } = this.props;
-    return (
-      <div>
-        <Paper className={classNames(classes.root, noMargin && classes.noMargin, colorMode && classes.colorMode)} elevation={0}>
-          <div className={classes.descBlock}>
-            <span className={classes.iconTitle}>
-              <Ionicon icon={icon} />
-            </span>
-            <div className={classes.titleText}>
-              <Typography variant="h6" component="h2" className={classes.title}>
-                {title}
-              </Typography>
-              <Typography component="p" className={classes.description}>
-                {desc}
-              </Typography>
-            </div>
+function PapperBlock(props) {
+  const {
+    classes,
+    title,
+    desc,
+    children,
+    whiteBg,
+    noMargin,
+    colorMode,
+    overflowX,
+    icon
+  } = props;
+  return (
+    <div>
+      <Paper className={classNames(classes.root, noMargin && classes.noMargin, colorMode && classes.colorMode)} elevation={0}>
+        <div className={classes.descBlock}>
+          <span className={classes.iconTitle}>
+            <Ionicon icon={icon} />
+          </span>
+          <div className={classes.titleText}>
+            <Typography variant="h6" component="h2" className={classes.title}>
+              {title}
+            </Typography>
+            <Typography component="p" className={classes.description}>
+              {desc}
+            </Typography>
           </div>
-          <section className={classNames(classes.content, whiteBg && classes.whiteBg, overflowX && classes.overflowX)}>
-            {children}
-          </section>
-        </Paper>
-      </div>
-    );
-  }
+        </div>
+        <section className={classNames(classes.content, whiteBg && classes.whiteBg, overflowX && classes.overflowX)}>
+          {children}
+        </section>
+      </Paper>
+    </div>
+  );
 }
 
 PapperBlock.propTypes = {

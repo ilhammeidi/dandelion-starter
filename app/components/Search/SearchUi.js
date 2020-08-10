@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
 import { NavLink } from 'react-router-dom';
@@ -79,13 +79,11 @@ function getSuggestions(value) {
   });
 }
 
-class SearchUi extends React.Component {
-  state = {
-    value: '',
-    suggestions: [],
-  };
+function SearchUi(props) {
+  const [value, setValue] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {
     suggestionsApi.map(item => {
       if (item.child) {
         item.child.map(itemChild => {
@@ -97,63 +95,54 @@ class SearchUi extends React.Component {
       }
       return false;
     });
-  }
+  }, []);
 
-  handleSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value),
-    });
+  const handleSuggestionsFetchRequested = (e) => {
+    setSuggestions(getSuggestions(e.value));
   };
 
-  handleSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: [],
-    });
+  const handleSuggestionsClearRequested = () => {
+    setSuggestions([]);
   };
 
-  handleChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue,
-    });
+  const handleChange = (event, { newValue }) => {
+    setValue(newValue);
   };
 
-  handleSuggestionSelected = (event, { suggestion, method }) => {
-    const { history } = this.props;
+  const handleSuggestionSelected = (event, { suggestion, method }) => {
+    const { history } = props;
     if (method === 'enter') {
       history.push(suggestion.link);
     }
-  }
+  };
 
-  render() {
-    const { classes } = this.props;
-    const { suggestions, value } = this.state;
+  const { classes } = props;
 
-    return (
-      <Autosuggest
-        theme={{
-          container: classes.containerSearch,
-          suggestionsContainerOpen: classes.suggestionsContainerOpen,
-          suggestionsList: classes.suggestionsList,
-          suggestion: classes.suggestion,
-        }}
-        renderInputComponent={renderInput}
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
-        renderSuggestionsContainer={renderSuggestionsContainer}
-        getSuggestionValue={getSuggestionValue}
-        onSuggestionSelected={this.handleSuggestionSelected}
-        renderSuggestion={renderSuggestion}
-        className={classes.autocomplete}
-        inputProps={{
-          classes,
-          placeholder: 'Search UI',
-          value,
-          onChange: this.handleChange,
-        }}
-      />
-    );
-  }
+  return (
+    <Autosuggest
+      theme={{
+        container: classes.containerSearch,
+        suggestionsContainerOpen: classes.suggestionsContainerOpen,
+        suggestionsList: classes.suggestionsList,
+        suggestion: classes.suggestion,
+      }}
+      renderInputComponent={renderInput}
+      suggestions={suggestions}
+      onSuggestionsFetchRequested={(e) => handleSuggestionsFetchRequested(e)}
+      onSuggestionsClearRequested={handleSuggestionsClearRequested}
+      renderSuggestionsContainer={renderSuggestionsContainer}
+      getSuggestionValue={getSuggestionValue}
+      onSuggestionSelected={handleSuggestionSelected}
+      renderSuggestion={renderSuggestion}
+      className={classes.autocomplete}
+      inputProps={{
+        classes,
+        placeholder: 'Search UI',
+        value,
+        onChange: handleChange,
+      }}
+    />
+  );
 }
 
 SearchUi.propTypes = {
