@@ -54,39 +54,37 @@ const styles = theme => ({
   },
 });
 
-class Maintenance extends React.Component {
-  render() {
-    const title = brand.name + ' - Maintenance';
-    const description = brand.desc;
-    const { classes } = this.props;
-    return (
-      <div className={classes.root}>
-        <Helmet>
-          <title>{title}</title>
-          <meta name="description" content={description} />
-          <meta property="og:title" content={title} />
-          <meta property="og:description" content={description} />
-          <meta property="twitter:title" content={title} />
-          <meta property="twitter:description" content={description} />
-        </Helmet>
-        <div className={classes.container}>
-          <div className={classes.artwork}>
-            <Avatar className={classes.icon}><Build /></Avatar>
-            <Hidden xsDown>
-              <Avatar className={classes.icon}><Warning /></Avatar>
-            </Hidden>
-            <Hidden xsDown>
-              <Avatar className={classes.icon}><Settings /></Avatar>
-            </Hidden>
-          </div>
-          <Typography variant="h4" className={classes.title} gutterBottom>Under maintenance</Typography>
-          <Typography variant="subtitle1" className={classes.subtitle}>
-            Our website is under maintenance. We will be back shortly
-          </Typography>
+function Maintenance(props) {
+  const title = brand.name + ' - Maintenance';
+  const description = brand.desc;
+  const { classes } = props;
+  return (
+    <div className={classes.root}>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+      </Helmet>
+      <div className={classes.container}>
+        <div className={classes.artwork}>
+          <Avatar className={classes.icon}><Build /></Avatar>
+          <Hidden xsDown>
+            <Avatar className={classes.icon}><Warning /></Avatar>
+          </Hidden>
+          <Hidden xsDown>
+            <Avatar className={classes.icon}><Settings /></Avatar>
+          </Hidden>
         </div>
+        <Typography variant="h4" className={classes.title} gutterBottom>Under maintenance</Typography>
+        <Typography variant="subtitle1" className={classes.subtitle}>
+          Our website is under maintenance. We will be back shortly
+        </Typography>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 Maintenance.propTypes = {

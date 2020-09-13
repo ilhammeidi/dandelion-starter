@@ -5,23 +5,21 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './appStyles-jss';
 
-class Outer extends React.Component {
-  render() {
-    const {
-      classes,
-      children,
-      gradient,
-      decoration
-    } = this.props;
-    return (
-      <div className={classNames(classes.appFrameOuter, gradient ? classes.gradientBg : classes.solidBg)}>
-        <main className={classes.outerContent} id="mainContent">
-          { decoration && <div className={classes.petal} /> }
-          {children}
-        </main>
-      </div>
-    );
-  }
+function Outer(props) {
+  const {
+    classes,
+    children,
+    gradient,
+    decoration
+  } = props;
+  return (
+    <div className={classNames(classes.appFrameOuter, gradient ? classes.gradientBg : classes.solidBg)}>
+      <main className={classes.outerContent} id="mainContent">
+        { decoration && <div className={classes.petal} /> }
+        {children}
+      </main>
+    </div>
+  );
 }
 
 Outer.propTypes = {
