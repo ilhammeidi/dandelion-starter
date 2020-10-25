@@ -17,7 +17,7 @@ function ReduxForm() {
   const showResult = values => {
     setTimeout(() => {
       setValueForm(values);
-      window.alert(`You submitted:\n\n${valueForm}`); // eslint-disable-line
+      console.log(`You submitted:\n\n${valueForm}`); // eslint-disable-line
     }, 500); // simulate server latency
   };
 
@@ -37,6 +37,10 @@ function ReduxForm() {
       <PapperBlock title="Redux Form" icon="ios-list-box-outline" desc="This is a simple demonstration of how to connect all the standard material-ui form elements to redux-form.">
         <div>
           <ReduxFormDemo onSubmit={(values) => showResult(values)} />
+          <p>Submited Result: </p>
+          <code>
+            {valueForm && valueForm.toString()}
+          </code>
           <SourceReader componentName={docSrc + 'ReduxFormDemo.js'} />
         </div>
       </PapperBlock>
