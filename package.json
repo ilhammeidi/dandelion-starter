@@ -1,6 +1,6 @@
 {
   "name": "dandelion_starter",
-  "version": "1.9.0",
+  "version": "1.9.2",
   "description": "React website tempate with focus on perfomance and design",
   "private": true,
   "engines": {
@@ -243,7 +243,7 @@
     "lint-staged": "8.1.5",
     "ngrok": "3.1.1",
     "node-plop": "0.18.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.14.0",
     "null-loader": "0.1.1",
     "offline-plugin": "5.0.6",
     "optimize-css-assets-webpack-plugin": "5.0.1",
