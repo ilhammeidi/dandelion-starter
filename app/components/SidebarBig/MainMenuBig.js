@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItem from '@material-ui/core/ListItem';
@@ -23,10 +24,20 @@ function MainMenuBig(props) {
   const [selectedMenu, setSelectedMenu] = useState([]);
   const [menuLoaded, setMenuLoaded] = useState(true);
 
-  const handleLoadMenu = menu => {
+  const {
+    classes,
+    open,
+    closeDrawer,
+    dataMenu,
+    drawerPaper,
+    openSubMenu
+  } = props;
+
+  const handleLoadMenu = (menu, key) => {
     const { openDrawer, mobile } = props;
     setSelectedMenu(menu);
     setMenuLoaded(false); // unload transtion menu
+    openSubMenu(key);
     setTimeout(() => {
       setMenuLoaded(true); // load transtion menu
     }, 100);
@@ -41,14 +52,6 @@ function MainMenuBig(props) {
     toggleDrawerOpen();
     loadTransition(false);
   };
-
-  const {
-    classes,
-    open,
-    closeDrawer,
-    dataMenu,
-    drawerPaper,
-  } = props;
 
   const currentMenu = dataMenu.filter(item => item.key === open.get(0));
   const activeMenu = (key, child) => {
@@ -79,7 +82,7 @@ function MainMenuBig(props) {
               activeMenu(item.key, item.child) ? classes.active : ''
             )
           }
-          onClick={() => handleLoadMenu(item.child)}
+          onClick={() => handleLoadMenu(item.child, item.key)}
         >
           <Ionicon className={classes.icon} icon={item.icon} />
           <span className={classes.text}>
@@ -183,6 +186,7 @@ MainMenuBig.propTypes = {
   open: PropTypes.object.isRequired,
   dataMenu: PropTypes.array.isRequired,
   openDrawer: PropTypes.func.isRequired,
+  openSubMenu: PropTypes.func.isRequired,
   closeDrawer: PropTypes.func.isRequired,
   loadTransition: PropTypes.func.isRequired,
   drawerPaper: PropTypes.bool.isRequired,
@@ -196,6 +200,7 @@ MainMenuBig.defaultProps = {
 };
 
 const reducer = 'ui';
+const openAction = key => ({ type: 'OPEN_SUBMENU', key });
 
 const mapStateToProps = state => ({
   open: state.getIn([reducer, 'subMenuOpen']),
@@ -204,7 +209,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   openDrawer: () => dispatch(openMenuAction),
-  closeDrawer: () => dispatch(closeMenuAction)
+  closeDrawer: () => dispatch(closeMenuAction),
+  openSubMenu: bindActionCreators(openAction, dispatch)
 });
 
 const MainMenuBigMapped = connect(
