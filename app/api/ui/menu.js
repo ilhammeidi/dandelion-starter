@@ -1,8 +1,8 @@
 module.exports = [
   {
-    key: 'blank',
+    key: 'no_child',
     name: 'Blank Page',
-    link: '/',
     icon: 'ios-document-outline',
+    linkParent: '/',
   }
 ];
