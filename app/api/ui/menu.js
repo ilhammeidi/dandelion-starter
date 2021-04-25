@@ -2,7 +2,7 @@ module.exports = [
   {
     key: 'pages',
     name: 'Pages',
-    icon: 'ios-paper-outline',
+    icon: 'ion-ios-paper-outline',
     child: [
       {
         key: 'other_page',
@@ -13,7 +13,7 @@ module.exports = [
         key: 'blank',
         name: 'Blank Page',
         link: '/app',
-        icon: 'ios-document-outline',
+        icon: 'ion-ios-document-outline',
       },
       {
         key: 'main_page',
@@ -24,38 +24,38 @@ module.exports = [
         key: 'dashboard',
         name: 'Dashboard',
         link: '/app/dashboard',
-        icon: 'ios-home-outline',
+        icon: 'ion-ios-home-outline',
       },
       {
         key: 'form',
         name: 'Form',
         link: '/app/form',
-        icon: 'ios-list-box-outline',
+        icon: 'ion-ios-list-box-outline',
       },
       {
         key: 'table',
         name: 'Table',
         link: '/app/table',
-        icon: 'ios-grid-outline',
+        icon: 'ion-ios-grid-outline',
       },
       {
         key: 'maintenance',
         name: 'Maintenance',
         link: '/maintenance',
-        icon: 'ios-build-outline'
+        icon: 'ion-ios-build-outline'
       },
       {
         key: 'coming_soon',
         name: 'Coming Soon',
         link: '/coming-soon',
-        icon: 'ios-bonfire-outline'
+        icon: 'ion-ios-bonfire-outline'
       },
     ]
   },
   {
     key: 'auth',
     name: 'Auth Page',
-    icon: 'ios-contact-outline',
+    icon: 'ion-ios-contact-outline',
     child: [
       {
         key: 'auth_page',
@@ -66,26 +66,26 @@ module.exports = [
         key: 'login',
         name: 'Login',
         link: '/login',
-        icon: 'ios-person-outline'
+        icon: 'ion-ios-person-outline'
       },
       {
         key: 'register',
         name: 'Register',
         link: '/register',
-        icon: 'ios-key-outline'
+        icon: 'ion-ios-key-outline'
       },
       {
         key: 'reset',
         name: 'Reset Password',
         link: '/reset-password',
-        icon: 'ios-undo-outline'
+        icon: 'ion-ios-undo-outline'
       },
     ]
   },
   {
     key: 'errors',
     name: 'Errors',
-    icon: 'ios-paw-outline',
+    icon: 'ion-ios-paw-outline',
     child: [
       {
         key: 'errors_page',
@@ -96,13 +96,13 @@ module.exports = [
         key: 'not_found_page',
         name: 'Not Found Page',
         link: '/app/pages/not-found',
-        icon: 'ios-warning-outline'
+        icon: 'ion-ios-warning-outline'
       },
       {
         key: 'error_page',
         name: 'Error Page',
         link: '/app/pages/error',
-        icon: 'ios-warning-outline'
+        icon: 'ion-ios-warning-outline'
       },
     ]
   },
@@ -110,7 +110,7 @@ module.exports = [
     key: 'menu_levels',
     name: 'Menu Levels',
     multilevel: true,
-    icon: 'ios-menu-outline',
+    icon: 'ion-ios-menu-outline',
     child: [
       {
         key: 'level_1',
@@ -139,7 +139,7 @@ module.exports = [
   {
     key: 'no_child',
     name: 'One Level Menu',
-    icon: 'ios-document-outline',
+    icon: 'ion-ios-document-outline',
     linkParent: '/app',
   }
 ];

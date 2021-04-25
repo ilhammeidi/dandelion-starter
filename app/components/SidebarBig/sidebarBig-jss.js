@@ -140,9 +140,8 @@ const styles = theme => ({
     '& $icon': {
       color: fade(theme.palette.text.secondary, 0.54),
       display: 'block',
+      fontSize: 28,
       marginBottom: theme.spacing(1),
-      width: 28,
-      height: 28
     },
     '& $text': {
       width: 80,
@@ -169,7 +168,7 @@ const styles = theme => ({
     },
     '& $icon': {
       color: fade(theme.palette.text.secondary, 0.54),
-      fontSize: 14,
+      fontSize: 22,
     },
     '& $text': {
       paddingLeft: 0,

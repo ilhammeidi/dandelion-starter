@@ -86,8 +86,10 @@ module.exports = options => ({
         {
           loader: 'sass-loader',
           options: {
-            outputStyle: 'expanded',
-            sourceMap: false
+            sassOptions: {
+              outputStyle: 'expanded',
+              sourceMap: false
+            }
           }
         }],
       },

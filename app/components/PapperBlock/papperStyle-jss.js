@@ -85,11 +85,10 @@ const styles = theme => ({
     [theme.breakpoints.down('xs')]: {
       display: 'none'
     },
-    '& svg': {
-      width: '60%',
-      height: '60%',
-      verticalAlign: 'middle',
-      fill: theme.palette.type === 'dark' ? theme.palette.common.white : theme.palette.primary.main
+    '& i': {
+      fontSize: 28,
+      verticalAlign: 'baseline',
+      color: theme.palette.type === 'dark' ? theme.palette.common.white : theme.palette.primary.main
     }
   }
 });

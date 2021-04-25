@@ -168,8 +168,8 @@ const styles = theme => ({
     '& $primary': {
       color: theme.palette.type === 'dark' ? theme.palette.common.white : theme.palette.primary.dark,
     },
-    '& $icon svg': {
-      fill: theme.palette.primary.dark,
+    '& $icon': {
+      color: theme.palette.primary.dark,
     },
     '&:hover, &:focus': {
       backgroundColor: theme.palette.type === 'dark' ? fade(theme.palette.primary.main, 0.24) : theme.palette.primary.light,
@@ -183,7 +183,7 @@ const styles = theme => ({
   },
   icon: {
     minWidth: theme.spacing(5),
-    fill: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark,
+    fontSize: 24
   },
   iconed: {},
   head: {

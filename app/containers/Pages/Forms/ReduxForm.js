@@ -34,7 +34,7 @@ function ReduxForm() {
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
       </Helmet>
-      <PapperBlock title="Redux Form" icon="ios-list-box-outline" desc="This is a simple demonstration of how to connect all the standard material-ui form elements to redux-form.">
+      <PapperBlock title="Redux Form" icon="ion-ios-list-box-outline" desc="This is a simple demonstration of how to connect all the standard material-ui form elements to redux-form.">
         <div>
           <ReduxFormDemo onSubmit={(values) => showResult(values)} />
           <p>Submited Result: </p>

@@ -12,7 +12,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Collapse from '@material-ui/core/Collapse';
 import Chip from '@material-ui/core/Chip';
-import Ionicon from 'react-ionicons';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import styles from './sidebar-jss';
@@ -55,7 +54,7 @@ function MainMenu(props) {
           >
             {item.icon && (
               <ListItemIcon className={classes.icon}>
-                <Ionicon icon={item.icon} />
+                <i className={item.icon} />
               </ListItemIcon>
             )}
             <ListItemText classes={{ primary: classes.primary }} variant="inset" primary={item.name} />

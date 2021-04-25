@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Paper from '@material-ui/core/Paper';
-import Ionicon from 'react-ionicons';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -99,7 +98,7 @@ function MegaMenu(props) {
                       <Grid container>
                         <Grid item md={3} container justify="center">
                           <span className={classes.bigIcon}>
-                            <Ionicon icon={item.icon} />
+                            <i className={classNames(classes.icon, item.icon)} />
                           </span>
                         </Grid>
                         <Grid item md={9}>

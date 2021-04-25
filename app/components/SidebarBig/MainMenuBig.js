@@ -11,7 +11,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import Ionicon from 'react-ionicons';
 import { openMenuAction, closeMenuAction } from 'dan-redux/actions/uiActions';
 import MenuProfile from './MenuProfile';
 import styles from './sidebarBig-jss';
@@ -84,7 +83,7 @@ function MainMenuBig(props) {
           }
           onClick={() => handleLoadMenu(item.child, item.key)}
         >
-          <Ionicon className={classes.icon} icon={item.icon} />
+          <i className={classNames(classes.icon, item.icon)} />
           <span className={classes.text}>
             { item.name }
           </span>
@@ -100,7 +99,7 @@ function MainMenuBig(props) {
         to={item.linkParent}
         onClick={closeDrawer}
       >
-        <Ionicon className={classes.icon} icon={item.icon} />
+        <i className={classNames(classes.icon, item.icon)} />
         <span className={classes.text}>
           { item.name }
         </span>
@@ -132,7 +131,7 @@ function MainMenuBig(props) {
         onClick={() => handleLoadPage()}
       >
         <ListItemIcon>
-          <Ionicon className={classes.icon} icon={item.icon} />
+          <i className={classNames(classes.icon, item.icon)} />
         </ListItemIcon>
         <ListItemText
           className={classes.text}

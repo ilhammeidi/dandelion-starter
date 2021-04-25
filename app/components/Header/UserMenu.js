@@ -53,7 +53,7 @@ function UserMenu(props) {
         className={classNames(classes.notifIcon, dark ? classes.dark : classes.light)}
       >
         <Badge className={classes.badge} badgeContent={4} color="secondary">
-          <i className="ion-ios-bell-outline" />
+          <i className="ion-ios-notifications-outline" />
         </Badge>
       </IconButton>
       <Menu

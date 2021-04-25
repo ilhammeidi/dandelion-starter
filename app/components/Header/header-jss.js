@@ -34,7 +34,7 @@ const styles = theme => ({
         },
       },
       '& $headerTitle': {
-        left: theme.spacing(4),
+        left: 0,
       }
     },
     '&$right': {
@@ -303,7 +303,7 @@ const styles = theme => ({
   },
   mainMenu: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(1, 0),
+    padding: theme.spacing(2, 0),
     boxShadow: theme.shadows[3],
     position: 'relative',
     transition: 'padding 0.3s ease',
@@ -413,10 +413,9 @@ const styles = theme => ({
   bigIcon: {
     display: 'block',
     marginTop: 40,
-    '& svg': {
-      width: 100,
-      height: 100,
-      fill: theme.palette.primary.main,
+    '& i': {
+      fontSize: 100,
+      color: theme.palette.primary.main,
       margin: '0 auto',
       display: 'inherit'
     }
@@ -449,8 +448,8 @@ const styles = theme => ({
     },
     '&$invert': {
       '& $button': {
-        '& svg': {
-          fill: fade(theme.palette.text.primary, 0.5),
+        '& i': {
+          color: fade(theme.palette.text.primary, 0.5),
         }
       }
     }

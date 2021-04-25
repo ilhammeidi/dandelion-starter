@@ -27,7 +27,7 @@ function SidebarBig(props) {
             <MainMenuBig
               dataMenu={dataMenu}
               loadTransition={loadTransition}
-              drawerPaper="true"
+              drawerPaper
               toggleDrawerOpen={toggleDrawerOpen}
               mobile
             />

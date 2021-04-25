@@ -134,24 +134,24 @@ function Header(props) {
               {fullScreen ? (
                 <Tooltip title="Exit Full Screen" placement="bottom">
                   <IconButton className={classes.button} onClick={closeFullScreen}>
-                    <i className="ion-ios-crop" />
+                    <i className="ion-ios-qr-scanner-outline" />
                   </IconButton>
                 </Tooltip>
               ) : (
                 <Tooltip title="Full Screen" placement="bottom">
                   <IconButton className={classes.button} onClick={openFullScreen}>
-                    <i className="ion-ios-crop" />
+                    <i className="ion-ios-qr-scanner-outline" />
                   </IconButton>
                 </Tooltip>
               )}
               <Tooltip title="Turn Dark/Light" placement="bottom">
                 <IconButton className={classes.button} onClick={() => turnMode(mode)}>
-                  <i className="ion-ios-lightbulb-outline" />
+                  <i className="ion-ios-bulb-outline" />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Show Guide" placement="bottom">
                 <IconButton className={classes.button} onClick={openGuide}>
-                  <i className="ion-ios-help-outline" />
+                  <i className="ion-ios-help-circle-outline" />
                 </IconButton>
               </Tooltip>
             </div>
