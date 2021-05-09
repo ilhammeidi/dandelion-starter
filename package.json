@@ -134,7 +134,7 @@
     "jss": "^10.0.0",
     "jss-rtl": "^0.3.0",
     "keycode": "^2.2.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "minimist": "^1.2.5",
     "moment": "^2.22.2",
     "mui-datatables": "^3.7.7",
