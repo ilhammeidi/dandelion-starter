@@ -151,7 +151,7 @@
     "react-clock": "^2.3.0",
     "react-countup": "^3.0.3",
     "react-dom": "16.13.1",
-    "react-draft-wysiwyg": "^1.14.5",
+    "react-draft-wysiwyg": "^1.14.6",
     "react-dropzone": "^10.2.1",
     "react-event-listener": "^0.6.1",
     "react-helmet": "6.1.0",
