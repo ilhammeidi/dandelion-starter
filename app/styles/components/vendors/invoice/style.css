@@ -9,7 +9,7 @@
 #page-wrap textarea { border: 0; font: 14px sans-serif; overflow: hidden; resize: none; }
 #page-wrap table { border-collapse: collapse; }
 #page-wrap table td, #page-wrap table th { border: 1px solid black; padding: 5px; }
-
+#page-wrap a { cursor: pointer; }
 #header { height: 35px; width: 100%; margin: 20px 0; background: #222 !important; text-align: center; color: white; font: bold 15px Helvetica, Sans-Serif; text-decoration: uppercase; letter-spacing: 20px; padding: 8px 0px; }
 
 #address { width: 250px; height: 150px; float: left; }

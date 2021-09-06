@@ -135,6 +135,7 @@ const applicationTheme = (color, mode, direction) => ({
     },
     MuiInput: {
       root: {
+        overflow: 'hidden',
         border:
           mode === 'dark'
             ? '1px solid rgba(255,255,255,0.32)'
@@ -144,6 +145,9 @@ const applicationTheme = (color, mode, direction) => ({
         transition: 'border 0.3s ease',
       },
       underline: {
+        '&[role="radiogroup"]': {
+          alignItems: 'flex-start',
+        },
         '&:after': {
           height: 'calc(100% + 1px)',
           borderRadius: 8,
@@ -159,16 +163,34 @@ const applicationTheme = (color, mode, direction) => ({
         fontSize: 14,
       },
       multiline: {
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingTop: 24,
+        paddingTop: 24
       },
+    },
+    MuiAutocomplete: {
+      inputRoot: {
+        padding: '24px 8px',
+        top: -3,
+        '& $endAdornment': {
+          paddingTop: 0
+        }
+      },
+      tag: {
+        padding: '0 !important'
+      }
     },
     MuiInputLabel: {
       formControl: {
         top: 12,
         left: 10,
         transform: 'translate(0, 22px) scale(1)',
+      },
+      animated: {
+        '& + div': {
+          paddingBottom: 4,
+          '& input, > div, > select': {
+            padding: '24px 8px 0',
+          }
+        }
       },
       shrink: {
         transform: 'translate(0, 13px) scale(0.7)',
@@ -186,16 +208,21 @@ const applicationTheme = (color, mode, direction) => ({
           transform: 'translate(4px, -16px) scale(0.75)',
         },
       },
+      root: {
+        '& + div': {
+          alignItems: 'flex-end'
+        }
+      }
     },
     MuiFormLabel: {
       root: {
-        fontSize: 14,
+        fontSize: 14
       },
     },
     MuiFormHelperText: {
-      root: {
-        paddingLeft: 5,
-      },
+      contained: {
+        marginLeft: 4
+      }
     },
     MuiSelect: {
       root: {
@@ -209,25 +236,20 @@ const applicationTheme = (color, mode, direction) => ({
         paddingRight: '24px',
       }
     },
-    MuiFormControl: {
+    MuiSvgIcon: {
       root: {
-        '& label + div': {
-          alignItems: 'flex-end',
-          '&[role="radiogroup"]': {
-            alignItems: 'flex-start',
-          },
-          paddingBottom: 4,
-          '& input, > div, > select': {
-            padding: '24px 8px 0',
-          },
-        },
-      },
+        fontSize: '1.2rem'
+      }
+    },
+    MuiIcon: {
+      root: {
+        fontSize: '1.2rem'
+      }
     },
     MuiInputAdornment: {
       root: {
         alignItems: 'flex-end',
-        paddingLeft: 0,
-        paddingRight: 0,
+        height: 'auto',
         '& button': {
           width: 32,
           height: 32,
@@ -237,16 +259,17 @@ const applicationTheme = (color, mode, direction) => ({
           minWidth: 24,
           lineHeight: '16px'
         },
-        '& svg': {
-          top: 3,
-          position: 'relative'
-        }
       },
       positionStart: {
         marginLeft: 0,
+        marginRight: 0,
+        '& + *': {
+          paddingLeft: '0 !important'
+        }
       },
       positionEnd: {
         marginRight: 0,
+        marginLeft: 0
       },
     },
     MuiToolbar: {
@@ -322,7 +345,7 @@ const applicationTheme = (color, mode, direction) => ({
         color: themePalette(color, mode).palette.primary.main,
       },
     },
-    MuiExpansionPanel: {
+    MuiAccordion: {
       root: {
         '&:first-child': {
           borderTopLeftRadius: 16,
@@ -442,8 +465,30 @@ const applicationTheme = (color, mode, direction) => ({
       input: {
         flex: 1
       }
+    },
+    MUIDataTable: {
+      responsiveStacked: {
+        overflow: 'auto !important',
+        overflowX: 'auto !important',
+      },
+      tableRoot: {
+        minWidth: 360
+      }
+    },
+    MUIDataTablePagination: {
+      toolbar: {
+        padding: 0,
+        '& > p:nth-child(2)': {
+          '@media (max-width: 400px)': {
+            display: 'none'
+          }
+        },
+      },
+      root: {
+        padding: 0
+      }
     }
-  },
+  }
 });
 
 export default applicationTheme;

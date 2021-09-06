@@ -21,8 +21,6 @@ const ReactBoilerplate = {
        * by listing them here.
        */
       exclude: [
-        '@types/googlemaps',
-        '@types/markerclustererplus',
         'autosuggest-highlight',
         'chalk',
         'compression',

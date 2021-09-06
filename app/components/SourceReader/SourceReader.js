@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
 import { connect } from 'react-redux';
-import SyntaxHighlighter, { registerLanguage } from 'react-syntax-highlighter/prism-light';
-import jsx from 'react-syntax-highlighter/languages/prism/jsx';
-import lightStyle from 'react-syntax-highlighter/styles/prism/prism';
-import darkStyle from 'react-syntax-highlighter/styles/prism/xonokai';
+import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/prism-light';
+import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import lightStyle from 'react-syntax-highlighter/dist/esm/styles/prism/prism';
+import darkStyle from 'react-syntax-highlighter/dist/esm/styles/prism/xonokai';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -30,6 +30,7 @@ const styles = theme => ({
     marginRight: theme.spacing(1),
   },
   source: {
+    textAlign: 'left',
     overflow: 'hidden',
     height: 0,
     position: 'relative',
@@ -47,10 +48,9 @@ const styles = theme => ({
   },
   open: {
     height: 'auto',
-    minHeight: 50,
+    minHeight: 20,
   },
   src: {
-    textAlign: 'left',
     padding: 10,
     position: 'absolute',
     top: 10,
@@ -60,7 +60,7 @@ const styles = theme => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     '& span': {
       fontSize: 14,
     },
@@ -78,77 +78,89 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginTop: theme.spacing(3)
+    '& button': {
+      background: 'rgba(255, 255, 255, 0.4)',
+      color: '#000 !important',
+      '&:hover': {
+        background: 'rgba(255, 255, 255, 0.4) !important',
+      }
+    },
   },
 });
 
 function SourceReader(props) {
+  const {
+    classes,
+    componentName,
+    mode
+  } = props;
   const [raws, setRaws] = useState([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [style, setStyle] = useState(props.mode);
+  const [style, setStyle] = useState(mode);
 
   const sourceOpen = () => {
-    const { componentName } = props;
-    const name = componentName;
     setLoading(true);
-    Axios.get(url + name).then(result => {
-      setRaws(result.data.records);
-      setLoading(false);
-    });
-    setOpen(!open);
   };
 
   const handleStyle = (event, value) => {
     setStyle(value);
   };
 
-  const { classes, componentName } = props;
-  registerLanguage('jsx', jsx);
-  if (codePreview.enable) {
-    return (
-      <div>
-        <Button onClick={sourceOpen} color="secondary" className={classes.button} size="small">
-          { open ? (
-            <Close className={classNames(classes.leftIcon, classes.iconSmall)} />
-          ) : (
-            <Code className={classNames(classes.leftIcon, classes.iconSmall)} />
-          )}
-          { open ? 'Hide Code' : 'Show Code' }
-        </Button>
-        <section className={classNames(classes.source, open ? classes.open : '')}>
-          <div className={classes.src}>
-            <p>
-              <Icon className="description">description</Icon>
-              src/app/
-              {componentName}
-            </p>
-            <div className={classes.toggleContainer}>
-              <ToggleButtonGroup value={style} exclusive onChange={handleStyle}>
-                <ToggleButton value="light">
-                  Light
-                </ToggleButton>
-                <ToggleButton value="dark">
-                  Dark
-                </ToggleButton>
-              </ToggleButtonGroup>
-            </div>
+  useEffect(() => {
+    if (loading) {
+      Axios.get(url + componentName).then(result => {
+        setRaws(result.data.records);
+        setLoading(false);
+      });
+
+      setOpen(!open);
+    }
+  }, [loading]);
+
+  SyntaxHighlighter.registerLanguage('jsx', jsx);
+  if (!codePreview.enable) { return false; }
+  return (
+    <div>
+      <Button onClick={sourceOpen} color="secondary" className={classes.button} size="small">
+        { open ? (
+          <Close className={classNames(classes.leftIcon, classes.iconSmall)} />
+        ) : (
+          <Code className={classNames(classes.leftIcon, classes.iconSmall)} />
+        )}
+        { open ? 'Hide Code' : 'Show Code' }
+      </Button>
+      <section dir="ltr" className={classNames(classes.source, open ? classes.open : '')}>
+        <div className={classes.src}>
+          <p>
+            <Icon className="description">description</Icon>
+            src/app/
+            {componentName}
+          </p>
+          <div className={classes.toggleContainer}>
+            <ToggleButtonGroup value={style} exclusive onChange={handleStyle}>
+              <ToggleButton value="light">
+                Light
+              </ToggleButton>
+              <ToggleButton value="dark">
+                Dark
+              </ToggleButton>
+            </ToggleButtonGroup>
           </div>
-          {loading && (
-            <LinearProgress color="secondary" className={classes.preloader} />
-          )}
-          {raws.map((raw, index) => ([
-            <div key={index.toString()}>
-              <SyntaxHighlighter language="jsx" style={style === 'dark' ? darkStyle : lightStyle} showLineNumbers="true">
-                {raw.source.toString()}
-              </SyntaxHighlighter>
-            </div>
-          ]))}
-        </section>
-      </div>
-    );
-  }
-  return false;
+        </div>
+        {loading && (
+          <LinearProgress color="secondary" className={classes.preloader} />
+        )}
+        {raws.map((raw, index) => ([
+          <div key={index.toString()}>
+            <SyntaxHighlighter language="jsx" style={style === 'dark' ? darkStyle : lightStyle} showLineNumbers="true">
+              {raw.source.toString()}
+            </SyntaxHighlighter>
+          </div>
+        ]))}
+      </section>
+    </div>
+  );
 }
 
 SourceReader.propTypes = {
