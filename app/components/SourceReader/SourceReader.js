@@ -169,9 +169,8 @@ SourceReader.propTypes = {
   mode: PropTypes.string.isRequired,
 };
 
-const reducer = 'ui';
 const mapStateToProps = state => ({
-  mode: state.getIn([reducer, 'type']),
+  mode: state.ui.type
 });
 
 const AppMapped = connect(

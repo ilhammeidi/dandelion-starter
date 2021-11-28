@@ -23,9 +23,8 @@ NotFoundDedicated.propTypes = {
   gradient: PropTypes.bool.isRequired,
 };
 
-const reducer = 'ui';
 const mapStateToProps = state => ({
-  gradient: state.getIn([reducer, 'gradient'])
+  gradient: state.ui.gradient
 });
 
 const NotFoundDedicatedMaped = connect(

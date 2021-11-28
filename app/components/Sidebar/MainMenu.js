@@ -122,7 +122,7 @@ function MainMenu(props) {
 
 MainMenu.propTypes = {
   classes: PropTypes.object.isRequired,
-  open: PropTypes.object.isRequired,
+  open: PropTypes.array.isRequired,
   openSubMenu: PropTypes.func.isRequired,
   toggleDrawerOpen: PropTypes.func.isRequired,
   loadTransition: PropTypes.func.isRequired,
@@ -130,11 +130,9 @@ MainMenu.propTypes = {
 };
 
 const openAction = (key, keyParent) => ({ type: 'OPEN_SUBMENU', key, keyParent });
-const reducer = 'ui';
 
 const mapStateToProps = state => ({
-  ...state,
-  open: state.getIn([reducer, 'subMenuOpen'])
+  open: state.ui.subMenuOpen
 });
 
 const mapDispatchToProps = dispatch => ({

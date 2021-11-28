@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import { Field, reduxForm } from 'redux-form/immutable';
+import { Field, reduxForm } from 'redux-form';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -167,17 +167,15 @@ LoginForm.propTypes = {
 };
 
 const LoginFormReduxed = reduxForm({
-  form: 'immutableExample',
+  form: 'loginForm',
   enableReinitialize: true,
 })(LoginForm);
 
-const reducerLogin = 'login';
-const reducerUi = 'ui';
 const FormInit = connect(
   state => ({
     force: state,
-    initialValues: state.getIn([reducerLogin, 'usersLogin']),
-    deco: state.getIn([reducerUi, 'decoration'])
+    initialValues: state.login.usersLogin,
+    deco: state.ui.decoration
   }),
 )(LoginFormReduxed);
 

@@ -46,7 +46,7 @@ function ThemeWrapper(props) {
   const [progress, setProgress] = useState(0);
   const [theme, setTheme] = useState(
     // eslint-disable-next-line
-    createMuiTheme(applicationTheme(props.color, props.mode))
+    createMuiTheme(applicationTheme(props.color, props.mode, props.direction))
   );
 
   useEffect(() => {
@@ -102,16 +102,16 @@ function ThemeWrapper(props) {
 ThemeWrapper.propTypes = {
   classes: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
+  direction: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   mode: PropTypes.string.isRequired,
   changeMode: PropTypes.func.isRequired,
 };
 
-const reducer = 'ui';
 const mapStateToProps = state => ({
-  force: state, // force state from reducer
-  color: state.getIn([reducer, 'theme']),
-  mode: state.getIn([reducer, 'type']),
+  color: state.ui.theme,
+  mode: state.ui.type,
+  direction: state.ui.direction,
 });
 
 const dispatchToProps = dispatch => ({

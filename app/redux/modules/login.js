@@ -1,19 +1,23 @@
-import { Map, fromJS } from 'immutable';
+import produce from 'immer';
 import { INIT } from '../constants/reduxFormConstants';
 
 const initialState = {
-  usersLogin: Map({
+  usersLogin: {
     email: 'johndoe@mail.com',
     password: '12345678',
     remember: false
-  })
+  }
 };
-const initialImmutableState = fromJS(initialState);
-export default function reducer(state = initialImmutableState, action = {}) {
+
+/* eslint-disable default-case, no-param-reassign */
+const loginReducer = (state = initialState, action = {}) => produce(state, draft => {
   switch (action.type) {
     case INIT:
-      return state;
+      draft.userLogin = state;
+      break;
     default:
-      return state;
+      break;
   }
-}
+});
+
+export default loginReducer;

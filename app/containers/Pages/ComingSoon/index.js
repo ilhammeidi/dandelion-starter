@@ -76,9 +76,9 @@ function ComingSoon(props) {
                 </aside>
               </div>
               <div className={classNames(classes.lockForm, classes.centerAdornment)}>
-                <IconButton color="primary" className={classes.button} href="#"><i className="ion-social-facebook" /></IconButton>
-                <IconButton color="primary" className={classes.button} href="#"><i className="ion-social-twitter" /></IconButton>
-                <IconButton color="primary" className={classes.button} href="#"><i className="ion-social-github" /></IconButton>
+                <IconButton color="primary" className={classes.button} href="#"><i className="ion-logo-facebook" /></IconButton>
+                <IconButton color="primary" className={classes.button} href="#"><i className="ion-logo-twitter" /></IconButton>
+                <IconButton color="primary" className={classes.button} href="#"><i className="ion-logo-github" /></IconButton>
               </div>
             </section>
           </Paper>
@@ -93,11 +93,10 @@ ComingSoon.propTypes = {
   deco: PropTypes.bool.isRequired,
 };
 
-const reducerUi = 'ui';
 const FormInit = connect(
   state => ({
-    force: state,
-    deco: state.getIn([reducerUi, 'decoration'])
+    ...state,
+    deco: state.ui.decoration
   }),
 )(ComingSoon);
 

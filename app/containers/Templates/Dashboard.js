@@ -209,16 +209,14 @@ Dashboard.propTypes = {
   layout: PropTypes.string.isRequired
 };
 
-const reducer = 'ui';
 const mapStateToProps = state => ({
-  sidebarOpen: state.getIn([reducer, 'sidebarOpen']),
-  pageLoaded: state.getIn([reducer, 'pageLoaded']),
-  mode: state.getIn([reducer, 'type']),
-  gradient: state.getIn([reducer, 'gradient']),
-  deco: state.getIn([reducer, 'decoration']),
-  layout: state.getIn([reducer, 'layout']),
-  bgPosition: state.getIn([reducer, 'bgPosition']),
-  ...state,
+  sidebarOpen: state.ui.sidebarOpen,
+  pageLoaded: state.ui.pageLoaded,
+  mode: state.ui.type,
+  gradient: state.ui.gradient,
+  deco: state.ui.decoration,
+  layout: state.ui.layout,
+  bgPosition: state.ui.bgPosition,
 });
 
 const mapDispatchToProps = dispatch => ({

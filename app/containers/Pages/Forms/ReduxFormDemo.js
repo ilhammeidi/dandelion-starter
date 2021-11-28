@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { Field, reduxForm } from 'redux-form/immutable';
+import { Field, reduxForm } from 'redux-form';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Grid from '@material-ui/core/Grid';
@@ -75,6 +75,7 @@ const initData = {
 };
 
 function ReduxFormDemo(props) {
+  const trueBool = true;
   const {
     classes,
     handleSubmit,
@@ -82,7 +83,7 @@ function ReduxFormDemo(props) {
     reset,
     submitting,
     init,
-    clear
+    clear,
   } = props;
   return (
     <div>
@@ -140,7 +141,7 @@ function ReduxFormDemo(props) {
                     name="selection"
                     component={SelectRedux}
                     placeholder="Selection"
-                    autoWidth
+                    autoWidth={trueBool}
                   >
                     <MenuItem value="option1">Option One</MenuItem>
                     <MenuItem value="option2">Option Two</MenuItem>
@@ -162,7 +163,7 @@ function ReduxFormDemo(props) {
                   component={TextFieldRedux}
                   placeholder="Textarea"
                   label="Textarea"
-                  multiline
+                  multiline={trueBool}
                   rows={4}
                 />
               </div>
@@ -206,15 +207,13 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const ReduxFormMapped = reduxForm({
-  form: 'immutableExample',
+  form: 'reduxFormDemo',
   enableReinitialize: true,
 })(ReduxFormDemo);
 
-const reducer = 'initval';
 const FormInit = connect(
   state => ({
-    force: state,
-    initialValues: state.getIn([reducer, 'formValues'])
+    initialValues: state.initval.formValues
   }),
   mapDispatchToProps,
 )(ReduxFormMapped);

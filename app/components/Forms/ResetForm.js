@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form/immutable';
+import { Field, reduxForm } from 'redux-form';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import ArrowForward from '@material-ui/icons/ArrowForward';
@@ -81,15 +81,13 @@ ResetForm.propTypes = {
 };
 
 const ResetFormReduxed = reduxForm({
-  form: 'immutableEResetFrm',
+  form: 'resetFrm',
   enableReinitialize: true,
 })(ResetForm);
 
-const reducer = 'ui';
 const RegisterFormMapped = connect(
   state => ({
-    force: state,
-    deco: state.getIn([reducer, 'decoration'])
+    deco: state.ui.decoration
   }),
 )(ResetFormReduxed);
 

@@ -1,4 +1,4 @@
-import { fromJS, List } from 'immutable';
+import produce from 'immer';
 import MenuContent from 'dan-api/ui/menu';
 import {
   TOGGLE_SIDEBAR,
@@ -26,10 +26,10 @@ const initialState = {
   bgPosition: 'half', // half, header, full
   layout: 'left-sidebar', // big-sidebar, left-sidebar, top-navigation, mega-menu
   /* End settings */
-  palette: List([
+  palette: [
     { name: 'Mint', value: 'blueCyanTheme' },
-    { name: 'Monochrome', value: 'greyTheme' },
-  ]),
+    { name: 'Monochrome', value: 'greyTheme' }
+  ],
   sidebarOpen: true,
   pageLoaded: false,
   subMenuOpen: []
@@ -54,87 +54,78 @@ const setNavCollapse = (arr, curRoute) => {
   return headMenu;
 };
 
-const initialImmutableState = fromJS(initialState);
-
-export default function reducer(state = initialImmutableState, action = {}) {
+/* eslint-disable default-case, no-param-reassign */
+const uiReducer = (state = initialState, action = {}) => produce(state, draft => {
   switch (action.type) {
     case TOGGLE_SIDEBAR:
-      return state.withMutations((mutableState) => {
-        mutableState.set('sidebarOpen', !state.get('sidebarOpen'));
-      });
+      draft.sidebarOpen = !state.sidebarOpen;
+      break;
     case OPEN_MENU:
-      return state.withMutations((mutableState) => {
-        mutableState.set('sidebarOpen', true);
-      });
+      draft.sidebarOpen = true;
+      break;
     case CLOSE_MENU:
-      return state.withMutations((mutableState) => {
-        mutableState.set('sidebarOpen', false);
-      });
-    case OPEN_SUBMENU:
-      return state.withMutations((mutableState) => {
-        // Set initial open parent menu
-        const activeParent = setNavCollapse(
-          getMenus(MenuContent),
-          action.initialLocation
-        );
+      draft.sidebarOpen = false;
+      draft.subMenuOpen = [];
+      break;
+    case OPEN_SUBMENU: {
+      // Set initial open parent menu
+      const activeParent = setNavCollapse(
+        getMenus(MenuContent),
+        action.initialLocation
+      );
 
-        // Once page loaded will expand the parent menu
-        if (action.initialLocation) {
-          mutableState.set('subMenuOpen', List([activeParent]));
-          return;
+      // Once page loaded will expand the parent menu
+      if (action.initialLocation) {
+        draft.subMenuOpen = [activeParent];
+        const path = action.initialLocation.split('/');
+        if (path.length <= 3 && action.initialLocation !== '/app') {
+          draft.sidebarOpen = false;
         }
+        return;
+      }
 
-        // Expand / Collapse parent menu
-        const menuList = state.get('subMenuOpen');
-        if (menuList.indexOf(action.key) > -1) {
-          if (action.keyParent) {
-            mutableState.set('subMenuOpen', List([action.keyParent]));
-          } else {
-            mutableState.set('subMenuOpen', List([]));
-          }
-        } else {
-          mutableState.set('subMenuOpen', List([action.key, action.keyParent]));
-        }
-      });
-    case CHANGE_RANDOM_THEME:
-      return state.withMutations((mutableState) => {
-        const paletteArray = state.get('palette').toJS();
-        const random = paletteArray[Math.floor(Math.random() * paletteArray.length)];
-        mutableState.set('theme', random.value);
-      });
+      // Expand / Collapse parent menu
+      const menuList = state.subMenuOpen;
+      if (menuList.indexOf(action.key) > -1) {
+        draft.subMenuOpen = [];
+      } else {
+        draft.subMenuOpen = [action.key, action.keyParent];
+      }
+      break;
+    }
+    case CHANGE_RANDOM_THEME: {
+      const paletteArray = state.palette;
+      const random = paletteArray[Math.floor(Math.random() * paletteArray.length)];
+      draft.theme = random.value;
+      break;
+    }
     case CHANGE_THEME:
-      return state.withMutations((mutableState) => {
-        mutableState.set('theme', action.theme);
-      });
+      draft.theme = action.theme;
+      break;
     case CHANGE_MODE:
-      return state.withMutations((mutableState) => {
-        mutableState.set('type', action.mode);
-      });
+      draft.type = action.mode;
+      break;
     case CHANGE_GRADIENT:
-      return state.withMutations((mutableState) => {
-        mutableState.set('gradient', action.gradient);
-      });
+      draft.gradient = action.gradient;
+      break;
     case CHANGE_DECO:
-      return state.withMutations((mutableState) => {
-        mutableState.set('decoration', action.deco);
-      });
+      draft.decoration = action.deco;
+      break;
     case CHANGE_BG_POSITION:
-      return state.withMutations((mutableState) => {
-        mutableState.set('bgPosition', action.position);
-      });
+      draft.bgPosition = action.position;
+      break;
     case CHANGE_LAYOUT:
-      return state.withMutations((mutableState) => {
-        mutableState.set('layout', action.layout);
-      });
+      draft.layout = action.layout;
+      break;
     case CHANGE_DIRECTION:
-      return state.withMutations((mutableState) => {
-        mutableState.set('direction', action.direction);
-      });
+      draft.direction = action.direction;
+      break;
     case LOAD_PAGE:
-      return state.withMutations((mutableState) => {
-        mutableState.set('pageLoaded', action.isLoaded);
-      });
+      draft.pageLoaded = action.isLoaded;
+      break;
     default:
-      return state;
+      break;
   }
-}
+});
+
+export default uiReducer;

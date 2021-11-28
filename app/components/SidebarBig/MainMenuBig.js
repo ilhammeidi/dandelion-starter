@@ -35,7 +35,7 @@ function MainMenuBig(props) {
   const handleLoadMenu = (menu, key) => {
     const { openDrawer, mobile } = props;
     setSelectedMenu(menu);
-    setMenuLoaded(false); // unload transtion menu
+    setMenuLoaded(false); // unload transition menu
     openSubMenu(key);
     setTimeout(() => {
       setMenuLoaded(true); // load transtion menu
@@ -46,13 +46,18 @@ function MainMenuBig(props) {
     }
   };
 
+  const handleLoadSingleMenu = () => {
+    setSelectedMenu([]);
+    closeDrawer();
+  };
+
   const handleLoadPage = () => {
     const { loadTransition, toggleDrawerOpen } = props;
     toggleDrawerOpen();
     loadTransition(false);
   };
 
-  const currentMenu = dataMenu.filter(item => item.key === open.get(0));
+  const currentMenu = dataMenu.filter(item => item.key === open[0]);
   const activeMenu = (key, child) => {
     if (selectedMenu.length < 1) {
       if (open.indexOf(key) > -1) {
@@ -94,10 +99,11 @@ function MainMenuBig(props) {
       <ButtonBase
         key={index.toString()}
         focusRipple
-        className={classNames(classes.menuHead, open.indexOf(item.key) > -1 ? classes.active : '')}
+        className={classes.menuHead}
         component={LinkBtn}
+        activeClassName={classes.active}
         to={item.linkParent}
-        onClick={closeDrawer}
+        onClick={() => handleLoadSingleMenu(item.key)}
       >
         <i className={classNames(classes.icon, item.icon)} />
         <span className={classes.text}>
@@ -182,7 +188,7 @@ function MainMenuBig(props) {
 
 MainMenuBig.propTypes = {
   classes: PropTypes.object.isRequired,
-  open: PropTypes.object.isRequired,
+  open: PropTypes.array.isRequired,
   dataMenu: PropTypes.array.isRequired,
   openDrawer: PropTypes.func.isRequired,
   openSubMenu: PropTypes.func.isRequired,
@@ -198,12 +204,10 @@ MainMenuBig.defaultProps = {
   mobile: false
 };
 
-const reducer = 'ui';
 const openAction = key => ({ type: 'OPEN_SUBMENU', key });
 
 const mapStateToProps = state => ({
-  open: state.getIn([reducer, 'subMenuOpen']),
-  ...state
+  open: state.ui.subMenuOpen
 });
 
 const mapDispatchToProps = dispatch => ({

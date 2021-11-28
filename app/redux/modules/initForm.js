@@ -1,22 +1,22 @@
-import { fromJS, Map } from 'immutable';
+import produce from 'immer';
 import { INIT, CLEAR } from '../constants/reduxFormConstants';
 
 const initialState = {
-  formValues: Map()
+  formValues: {}
 };
 
-const initialImmutableState = fromJS(initialState);
-export default function reducer(state = initialImmutableState, action = {}) {
+/* eslint-disable default-case, no-param-reassign */
+const initFormReducer = (state = initialState, action = {}) => produce(state, draft => {
   switch (action.type) {
     case INIT:
-      return state.withMutations((mutableState) => {
-        mutableState.set('formValues', action.data);
-      });
+      draft.formValues = action.data;
+      break;
     case CLEAR:
-      return state.withMutations((mutableState) => {
-        mutableState.set('formValues', []);
-      });
+      draft.formValues = {};
+      break;
     default:
-      return state;
+      break;
   }
-}
+});
+
+export default initFormReducer;
