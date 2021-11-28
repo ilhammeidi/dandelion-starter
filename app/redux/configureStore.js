@@ -12,7 +12,7 @@ import createReducer from './reducers';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['ui']
+  whitelist: ['ui']
 };
 
 export default function configureStore(initialState = {}, history) {

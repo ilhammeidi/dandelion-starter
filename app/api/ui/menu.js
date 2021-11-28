@@ -23,19 +23,19 @@ module.exports = [
       {
         key: 'dashboard',
         name: 'Dashboard',
-        link: '/app/dashboard',
+        link: '/app/pages/dashboard',
         icon: 'ion-ios-home-outline',
       },
       {
         key: 'form',
         name: 'Form',
-        link: '/app/form',
+        link: '/app/pages/form',
         icon: 'ion-ios-list-box-outline',
       },
       {
         key: 'table',
         name: 'Table',
-        link: '/app/table',
+        link: '/app/pages/table',
         icon: 'ion-ios-grid-outline',
       },
       {
@@ -140,6 +140,6 @@ module.exports = [
     key: 'no_child',
     name: 'One Level Menu',
     icon: 'ion-ios-document-outline',
-    linkParent: '/app',
+    linkParent: '/app/blank-page',
   }
 ];
