@@ -252,6 +252,7 @@
     "react-test-renderer": "16.8.6",
     "react-testing-library": "6.1.2",
     "react-to-print": "^2.0.0-alpha-4",
+    "redux-persist": "^6.0.0",
     "rimraf": "2.6.3",
     "sass": "^1.37.5",
     "sass-loader": "8.0.0",
