@@ -21,10 +21,10 @@ function Application(props) {
       <Switch>
         <Route exact path="/app" component={BlankPage} />
         <Route exact path="/app/blank-page" component={BlankPage} />
-        <Route path="/app/page/dashboard" component={DashboardPage} />
-        <Route path="/app/page/form" component={Form} />
-        <Route path="/app/page/table" component={Table} />
-        <Route path="/app/page-list" component={Parent} />
+        <Route path="/app/pages/dashboard" component={DashboardPage} />
+        <Route path="/app/pages/form" component={Form} />
+        <Route path="/app/pages/table" component={Table} />
+        <Route path="/app/pages" component={Parent} />
         <Route path="/app/pages/not-found" component={NotFound} />
         <Route path="/app/pages/error" component={Error} />
         <Route component={NotFound} />

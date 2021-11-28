@@ -23,19 +23,19 @@ module.exports = [
       {
         key: 'dashboard',
         name: 'Dashboard',
-        link: '/app/page/dashboard',
+        link: '/app/pages/dashboard',
         icon: 'ion-ios-home-outline',
       },
       {
         key: 'form',
         name: 'Form',
-        link: '/app/page/form',
+        link: '/app/pages/form',
         icon: 'ion-ios-list-box-outline',
       },
       {
         key: 'table',
         name: 'Table',
-        link: '/app/page/table',
+        link: '/app/pages/table',
         icon: 'ion-ios-grid-outline',
       },
       {

@@ -12,7 +12,8 @@ import { PapperBlock } from 'dan-components';
 const styles = {
   link: {
     display: 'block',
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
+    marginLeft: 24
   },
   title: {
     margin: '20px 16px 5px',
