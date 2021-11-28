@@ -16,7 +16,7 @@ function ReduxForm() {
 
   const showResult = values => {
     setTimeout(() => {
-      setValueForm(values);
+      setValueForm(JSON.stringify(values));
       console.log(`You submitted:\n\n${valueForm}`); // eslint-disable-line
     }, 500); // simulate server latency
   };
