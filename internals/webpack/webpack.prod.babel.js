@@ -12,7 +12,6 @@ module.exports = require('./webpack.base.babel')({
 
   // In production, we skip all hot-reloading stuff
   entry: [
-    require.resolve('react-app-polyfill/ie11'),
     path.join(process.cwd(), 'app/app.js'),
   ],
 

@@ -1,4 +1,4 @@
-import { fade } from '@material-ui/core/styles/colorManipulator';
+import { alpha } from '@material-ui/core/styles';
 import cyan from '@material-ui/core/colors/cyan';
 import indigo from '@material-ui/core/colors/indigo';
 import red from '@material-ui/core/colors/red';
@@ -15,7 +15,7 @@ const rootWraper = {
 const wrapper = (theme, opacity) => ({
   padding: theme.spacing(3),
   textAlign: 'center',
-  backgroundColor: fade(theme.palette.background.paper, opacity),
+  backgroundColor: alpha(theme.palette.background.paper, opacity),
   backgroundRepeat: 'no-repeat',
   color: theme.palette.text.primary,
   backgroundSize: 'cover',
@@ -353,10 +353,10 @@ const styles = theme => ({
       color: `${theme.palette.common.white} !important`,
     },
     '& label + div': {
-      background: fade(theme.palette.primary.light, 0.3),
+      background: alpha(theme.palette.primary.light, 0.3),
       border: 'none',
       '& svg': {
-        fill: fade(theme.palette.common.white, 0.7)
+        fill: alpha(theme.palette.common.white, 0.7)
       }
     }
   },

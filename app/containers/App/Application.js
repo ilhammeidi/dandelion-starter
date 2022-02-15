@@ -24,9 +24,9 @@ function Application(props) {
         <Route path="/app/pages/dashboard" component={DashboardPage} />
         <Route path="/app/pages/form" component={Form} />
         <Route path="/app/pages/table" component={Table} />
-        <Route path="/app/pages" component={Parent} />
         <Route path="/app/pages/not-found" component={NotFound} />
         <Route path="/app/pages/error" component={Error} />
+        <Route exact path="/app/pages" component={Parent} />
         <Route component={NotFound} />
       </Switch>
     </Dashboard>

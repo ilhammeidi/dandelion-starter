@@ -1,15 +1,21 @@
-import { lighten } from '@material-ui/core/styles/colorManipulator';
+import { lighten } from '@material-ui/core/styles';
 const styles = theme => ({
-  root: theme.mixins.gutters({
+  root: {
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(3),
     marginBottom: theme.spacing(3),
     boxShadow: theme.shade.light,
     color: theme.palette.text.primary,
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3),
+    },
     '&$noMargin': {
       margin: 0
     },
-  }),
+  },
   descBlock: {
     display: 'flex',
     alignItems: 'center',

@@ -1,4 +1,4 @@
-import { fade } from '@material-ui/core/styles/colorManipulator';
+import { alpha } from '@material-ui/core/styles';
 import lightGreen from '@material-ui/core/colors/lightGreen';
 import red from '@material-ui/core/colors/red';
 import amber from '@material-ui/core/colors/amber';
@@ -19,7 +19,7 @@ const styles = theme => ({
       content: '""',
       width: '100%',
       height: '100%',
-      backgroundColor: theme.palette.type === 'dark' ? fade(theme.palette.background.paper, 0.75) : fade(theme.palette.background.paper, 0.9),
+      backgroundColor: theme.palette.type === 'dark' ? alpha(theme.palette.background.paper, 0.75) : alpha(theme.palette.background.paper, 0.9),
       boxShadow: theme.shade.light,
       backdropFilter: 'saturate(180%) blur(20px)',
       position: 'absolute',
@@ -131,14 +131,14 @@ const styles = theme => ({
         borderRadius: 5,
         top: 0,
         left: 0,
-        background: fade(theme.palette.primary.main, 0.5)
+        background: alpha(theme.palette.primary.main, 0.5)
       },
       '& $icon, $text': {
         color: theme.palette.type === 'dark' ? theme.palette.primary.main : theme.palette.primary.main,
       },
     },
     '& $icon': {
-      color: fade(theme.palette.text.secondary, 0.54),
+      color: alpha(theme.palette.text.secondary, 0.54),
       display: 'block',
       fontSize: 28,
       marginBottom: theme.spacing(1),
@@ -167,7 +167,7 @@ const styles = theme => ({
       paddingBottom: theme.spacing(8),
     },
     '& $icon': {
-      color: fade(theme.palette.text.secondary, 0.54),
+      color: alpha(theme.palette.text.secondary, 0.54),
       fontSize: 22,
     },
     '& $text': {
@@ -191,7 +191,7 @@ const styles = theme => ({
         minWidth: 'auto'
       },
       '&$active': {
-        backgroundColor: theme.palette.type === 'dark' ? fade(theme.palette.primary.main, 0.24) : theme.palette.primary.light,
+        backgroundColor: theme.palette.type === 'dark' ? alpha(theme.palette.primary.main, 0.24) : alpha(theme.palette.primary.main, 0.3),
         '& $icon': {
           color: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark,
         },
@@ -201,7 +201,7 @@ const styles = theme => ({
           }
         },
         '&:hover': {
-          backgroundColor: theme.palette.type === 'dark' ? fade(theme.palette.secondary.light, 0.24) : fade(theme.palette.secondary.light, 0.24),
+          backgroundColor: theme.palette.type === 'dark' ? alpha(theme.palette.primary.main, 0.24) : alpha(theme.palette.primary.main, 0.3),
         }
       }
     }

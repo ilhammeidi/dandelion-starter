@@ -49,7 +49,7 @@ function Parent(props) {
       );
     }
     return (
-      <Typography className={classes.title} variant="h6">
+      <Typography key={index.toString()} className={classes.title} variant="h6">
         { item.name }
       </Typography>
     );

@@ -19,7 +19,6 @@ export const TextFieldRedux = ({ meta: { touched, error }, input, ...rest }) => 
   );
 };
 
-
 TextFieldRedux.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object,

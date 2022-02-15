@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -175,9 +175,7 @@ function HeaderMenu(props) {
         </Toolbar>
       </div>
       <Hidden mdDown>
-        <Fragment>
-          { type === 'mega-menu' ? <MegaMenu dataMenu={dataMenu} /> : <DropListMenu dataMenu={dataMenu} />}
-        </Fragment>
+        { type === 'mega-menu' ? <MegaMenu dataMenu={dataMenu} /> : <DropListMenu dataMenu={dataMenu} />}
       </Hidden>
       <Hidden lgUp>
         <SwipeableDrawer

@@ -96,7 +96,7 @@ function MegaMenu(props) {
                   <Paper className={classes.dropDownMenu}>
                     <ClickAwayListener onClickAway={handleClose}>
                       <Grid container>
-                        <Grid item md={3} container justify="center">
+                        <Grid item md={3} container justifyContent="center">
                           <span className={classes.bigIcon}>
                             <i className={classNames(classes.icon, item.icon)} />
                           </span>

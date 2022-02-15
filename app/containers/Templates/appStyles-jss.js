@@ -1,4 +1,4 @@
-import { darken } from '@material-ui/core/styles/colorManipulator';
+import { darken } from '@material-ui/core/styles';
 import bg from 'dan-images/petal_bg.svg';
 
 export const gradientBgLight = (theme) => `linear-gradient(-45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.main} 33%, ${theme.palette.secondary.main} 100%);`;

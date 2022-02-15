@@ -6,7 +6,7 @@ import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/styles';
 import { bindActionCreators } from 'redux';
-import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { withStyles, createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { changeModeAction } from 'dan-redux/actions/uiActions';
 import applicationTheme from '../../styles/theme/applicationTheme';
 
@@ -46,7 +46,7 @@ function ThemeWrapper(props) {
   const [progress, setProgress] = useState(0);
   const [theme, setTheme] = useState(
     // eslint-disable-next-line
-    createMuiTheme(applicationTheme(props.color, props.mode, props.direction))
+    createTheme(applicationTheme(props.color, props.mode, props.direction))
   );
 
   useEffect(() => {
@@ -65,10 +65,10 @@ function ThemeWrapper(props) {
     };
   }, []);
 
-  const handleChangeMode = mode => {
+  const handleChangeMode = mode => { // eslint-disable-line
     const { color, changeMode } = props;
     setTheme(
-      createMuiTheme(
+      createTheme(
         applicationTheme(color, mode)
       )
     );

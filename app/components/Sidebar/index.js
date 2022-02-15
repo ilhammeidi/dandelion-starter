@@ -34,7 +34,6 @@ function Sidebar(props) {
     };
   }, []);
 
-
   const handleOpen = event => {
     setAnchorEl(event.currentTarget);
   };

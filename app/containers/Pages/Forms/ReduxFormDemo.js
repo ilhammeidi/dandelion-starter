@@ -87,7 +87,7 @@ function ReduxFormDemo(props) {
   } = props;
   return (
     <div>
-      <Grid container spacing={3} alignItems="flex-start" direction="row" justify="center">
+      <Grid container spacing={3} alignItems="flex-start" direction="row" justifyContent="center">
         <Grid item xs={12} md={6}>
           <Paper className={classes.root}>
             <Typography variant="h5" component="h3">

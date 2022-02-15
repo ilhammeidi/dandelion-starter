@@ -4,6 +4,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+// const ESLintPlugin = require('eslint-webpack-plugin');
 
 const HappyPack = require('happypack');
 const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
@@ -11,31 +12,15 @@ const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 module.exports = options => ({
   mode: options.mode,
   entry: options.entry,
-  output: Object.assign(
-    {
-      // Compile into js/build.js
-      path: path.resolve(process.cwd(), 'build'),
-      publicPath: '/',
-    },
-    options.output,
-  ), // Merge with env dependent settings
+  output: {
+    // Compile into js/build.js
+    path: path.resolve(process.cwd(), 'build'),
+    publicPath: '/',
+    ...options.output,
+  }, // Merge with env dependent settings
   optimization: options.optimization,
   module: {
     rules: [
-      /*
-        Disabled eslint by default.
-        You can enable it to maintain and keep clean your code.
-        NOTE: By enable eslint running app process at beginning will slower
-      */
-      //      {
-      //        enforce: 'pre',
-      //        test: /\.js?$/,
-      //        exclude: [/node_modules/],
-      //        loader: 'eslint-loader',
-      //        options: {
-      //          quiet: true,
-      //        }
-      //      },
       {
         test: /\.jsx?$/, // Transform all .js and .jsx files required somewhere with Babel
         exclude: /node_modules/,
@@ -55,13 +40,34 @@ module.exports = options => ({
         // for a list of loaders, see https://webpack.js.org/loaders/#styling
         test: /\.css$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader',
+          options:
+          {
+            esModule: false,
+            sourceMap: false,
+            importLoaders: 10,
+            modules: false
+          }
+        }]
       },
       {
         // Preprocess 3rd party .css files located in node_modules
         test: /\.css$/,
         include: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader',
+          options:
+          {
+            esModule: false,
+            importLoaders: 10,
+            modules: false
+          }
+        }]
       },
       {
         test: /\.(eot|otf|ttf|woff|woff2)$/,
@@ -76,10 +82,10 @@ module.exports = options => ({
           loader: 'css-loader',
           options:
           {
+            esModule: false,
             sourceMap: false,
-            importLoaders: 2,
-            modules: true,
-            localIdentName: '[local]__[hash:base64:5]'
+            importLoaders: 10,
+            modules: true
           }
         },
         {
@@ -162,6 +168,15 @@ module.exports = options => ({
     fs: 'empty'
   },
   plugins: options.plugins.concat([
+    /*
+      Disabled eslint by default.
+      You can enable it to maintain and keep clean your code.
+      NOTE: By enable eslint running app process at beginning will slower
+    */
+    //    new ESLintPlugin({
+    //      extensions: ['js', 'jsx'],
+    //      exclude: ['node_modules']
+    //    }),
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; Terser will automatically
     // drop any unreachable code.

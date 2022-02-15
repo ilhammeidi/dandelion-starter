@@ -122,7 +122,6 @@ FlairedEdges.defaultProps = {
 
 export const FlairedEdgesDivider = withStyles(styles)(FlairedEdges);
 
-
 export const Content = props => {
   const {
     classes,

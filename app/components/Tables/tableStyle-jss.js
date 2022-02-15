@@ -1,4 +1,4 @@
-import { lighten, darken, fade } from '@material-ui/core/styles/colorManipulator';
+import { lighten, darken, alpha } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
 const styles = theme => ({
@@ -81,7 +81,7 @@ const styles = theme => ({
   */
   stripped: {
     '& tbody tr:nth-child(even)': {
-      background: theme.palette.type === 'dark' ? fade(theme.palette.grey[900], 0.5) : theme.palette.grey[50]
+      background: theme.palette.type === 'dark' ? alpha(theme.palette.grey[900], 0.5) : theme.palette.grey[50]
     }
   },
   hover: {
@@ -174,7 +174,7 @@ const styles = theme => ({
   chartTable: {
     '& svg': {
       '& [class*="recharts-bar-rectangle"] path': {
-        fill: fade(theme.palette.primary.main, 0.5)
+        fill: alpha(theme.palette.primary.main, 0.5)
       }
     }
   }
