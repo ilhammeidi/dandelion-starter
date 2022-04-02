@@ -21,22 +21,34 @@ const ReactBoilerplate = {
        * by listing them here.
        */
       exclude: [
+        '@date-io/moment',
+        '@material-ui/pickers',
+        '@react-dnd',
         'autosuggest-highlight',
         'chalk',
         'compression',
         'convert-source-map',
         'cross-env',
         'dotenv',
+        'dnd-core',
+        'eslint-webpack-plugin',
         'etag',
         'express',
         'fs',
+        'html-webpack-plugin',
         'ip',
+        'lint-staged',
         'minimist',
         'moment',
+        'mui-datatables',
+        'optimize-css-assets-webpack-plugin',
+        'react-trello',
         'sanitize.css',
         'serve-favicon',
         'slick-carousel',
-        'tunnel-agent'
+        'tunnel-agent',
+        'terser-webpack-plugin',
+        'url-loader'
       ],
 
       /**

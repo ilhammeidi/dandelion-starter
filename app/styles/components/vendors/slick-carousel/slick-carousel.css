@@ -86,7 +86,7 @@ button.slick-arrow:before{
   font-size: 36px;
 }
 button.slick-arrow:hover,
-button.slick-arrow:focus: {
+button.slick-arrow:hover {
   background-color: grey;
 }
 .slick-center{

@@ -10,7 +10,7 @@
     position: absolute;
   }
   .editing{
-    background: rgba(249, 251, 231, 0.4);
+    background: rgba(249, 251, 231, 0.4) !important;
     td .crudInput{
       &:before{
         opacity: 1;

@@ -4,9 +4,9 @@
 import { reducer as form } from 'redux-form';
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import history from 'utils/history';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import history from '../utils/history';
 import login from './modules/login';
 import uiReducer from './modules/ui';
 import initval from './modules/initForm';

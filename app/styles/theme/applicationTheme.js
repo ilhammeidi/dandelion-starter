@@ -187,7 +187,7 @@ const applicationTheme = (color, mode, direction) => ({
       animated: {
         '& + div': {
           paddingBottom: 4,
-          '& input, > div, > select': {
+          '& input, > .MuiInputAdornment-positionStart, > select': {
             padding: '24px 8px 0',
           }
         }
@@ -210,7 +210,10 @@ const applicationTheme = (color, mode, direction) => ({
       },
       root: {
         '& + div': {
-          alignItems: 'flex-end'
+          '& .MuiSelect-root': {
+            paddingBottom: 0,
+            paddingTop: '24px'
+          }
         }
       }
     },
@@ -249,7 +252,7 @@ const applicationTheme = (color, mode, direction) => ({
     MuiInputAdornment: {
       root: {
         alignItems: 'flex-end',
-        height: 'auto',
+        height: 'auto !important',
         '& button': {
           width: 32,
           height: 32,

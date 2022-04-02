@@ -34,6 +34,7 @@ module.exports = require('./webpack.base.babel')({
     path: outputPath,
     library: '[name]',
   },
+  legacyNodePolyfills: false,
   plugins: [
     new webpack.DllPlugin({
       name: '[name]',

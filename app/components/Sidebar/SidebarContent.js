@@ -25,7 +25,7 @@ function SidebarContent(props) {
     const mainContent = document.getElementById('sidebar');
     mainContent.addEventListener('scroll', handleScroll);
     return () => {
-      mainContent.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

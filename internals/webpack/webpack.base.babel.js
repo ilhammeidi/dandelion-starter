@@ -4,7 +4,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
-// const ESLintPlugin = require('eslint-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const HappyPack = require('happypack');
 const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
@@ -164,19 +164,20 @@ module.exports = options => ({
       },
     ],
   },
-  node: {
-    fs: 'empty'
-  },
   plugins: options.plugins.concat([
     /*
       Disabled eslint by default.
       You can enable it to maintain and keep clean your code.
       NOTE: By enable eslint running app process at beginning will slower
     */
-    //    new ESLintPlugin({
-    //      extensions: ['js', 'jsx'],
-    //      exclude: ['node_modules']
-    //    }),
+    new ESLintPlugin({
+      extensions: 'js',
+      exclude: 'node_modules',
+      failOnWarning: true,
+      failOnError: true,
+      emitError: true,
+      emitWarning: true,
+    }),
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; Terser will automatically
     // drop any unreachable code.
@@ -187,6 +188,9 @@ module.exports = options => ({
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
+    }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser'
     }),
     new webpack.ContextReplacementPlugin(/^\.\/locale$/, context => {
       if (!/\/moment\//.test(context.context)) { return; }
@@ -200,9 +204,26 @@ module.exports = options => ({
     })
   ]),
   resolve: {
-    modules: ['node_modules', 'app'],
+    modules: ['browser', 'domain', 'node_modules', 'app'],
     extensions: ['.js', '.jsx', '.react.js'],
     mainFields: ['browser', 'jsnext:main', 'main'],
+    fallback: {
+      fs: false,
+      domain: false,
+      path: false,
+      os: false,
+      assert: false,
+      crypto: false,
+      util: false,
+      stream: false,
+      url: false,
+      http: false,
+      https: false,
+      zlib: false,
+      vm: false,
+      console: false,
+      tty: false,
+    },
     alias: {
       'dan-components': path.resolve(__dirname, '../../app/components/'),
       'dan-actions': path.resolve(__dirname, '../../app/actions/'),

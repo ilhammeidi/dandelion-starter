@@ -1,6 +1,6 @@
 {
   "extends": [
-    "eslint-config-airbnb",
+    "airbnb-base",
     "plugin:flowtype/recommended"
   ],
   "env": {
@@ -10,17 +10,12 @@
   },
   "parser": "@babel/eslint-parser",
   "rules": {
+    "no-unused-vars": 0,
+    "import/no-import-module-exports": 0,
     "no-nested-ternary": 0,
     "import/no-unresolved": 0,
     "import/no-named-as-default": 0,
     "no-unused-expressions": 0,
-    "import/no-import-module-exports": "off",
-    "jsx-a11y/control-has-associated-label": "off",
-    "react/destructuring-assignment": "off",
-    "react/no-unstable-nested-components": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/jsx-fragments": "off",
-    "react/function-component-definition" : "off",
     "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
     "indent": [2, 2, {"SwitchCase": 1}],
     "no-console": 0,
@@ -43,11 +38,6 @@
     "jsx-a11y/anchor-is-valid": 0,
     "react/default-props-match-prop-types": 0,
     "arrow-parens": 0,
-    "jsx-a11y/label-has-for": [ 2, {
-        "required": {
-            "every": [ "id" ]
-        },
-    }],
   },
   "plugins": [
     "react",
@@ -55,7 +45,7 @@
     "flowtype"
   ],
   "settings": {
-    "import/parser": "@babel/eslint-parser",
+    "import/parser": "babel-eslint",
     "import/resolve": {
       "moduleDirectory": ["node_modules", "src"]
     }
