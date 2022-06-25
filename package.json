@@ -153,7 +153,7 @@
     "keycode": "^2.2.0",
     "lodash": "^4.17.20",
     "minimist": "^1.2.5",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "mui-datatables": "^3.8.2",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "organism-react-scroll-nav": "^0.15.0",
