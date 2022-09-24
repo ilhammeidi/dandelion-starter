@@ -13,7 +13,7 @@
 -   Clean code maintained by eslint
 
 # Get Ultimate Version
-![enter image description here](https://res.cloudinary.com/walden-global-services/image/upload/v1545108228/promo/SocmedPromo_Dec.jpg)
+![enter image description here](https://github.com/ilhammeidi/dandelion-docs/blob/gh-pages/images/banner.jpg?raw=true)
 
 [GET IT NOW on Envato Market](https://themeforest.net/item/dandelion-pro-react-admin-dashboard-template/22890261)
 
