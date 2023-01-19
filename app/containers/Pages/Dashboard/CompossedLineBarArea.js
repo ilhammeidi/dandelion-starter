@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from 'tss-react/mui';
-import { createTheme, adaptV4Theme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import ThemePallete from 'dan-api/palette/themePalette';
 import {
   ComposedChart,
@@ -27,7 +27,7 @@ const useStyles = makeStyles()(() => ({
   }
 }));
 
-const theme = createTheme(adaptV4Theme(ThemePallete.yellowCyanTheme));
+const theme = createTheme(ThemePallete.yellowCyanTheme);
 const color = ({
   main: theme.palette.primary.main,
   maindark: theme.palette.primary.dark,

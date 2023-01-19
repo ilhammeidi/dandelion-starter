@@ -164,6 +164,7 @@ module.exports = options => ({
       },
     ],
   },
+  ignoreWarnings: [/Failed to parse source map/, /failed to load source map/],
   plugins: options.plugins.concat([
     /*
       Disabled eslint by default.

@@ -7,24 +7,22 @@ import parse from 'autosuggest-highlight/parse';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import MenuItem from '@mui/material/MenuItem';
-
 import suggestionsApi from 'dan-api/ui/menu';
 import useStyles from './search-jss';
 
 const menu = [];
 
 function renderInput(inputProps) {
-  const { classes } = useStyles();
-  const { ref, ...other } = inputProps;
+  const { ref, ...rest } = inputProps;
 
   return (
     <TextField
       variant="standard"
-      className={classes.inputHeader}
+      className="input-header"
       fullWidth
       InputProps={{
         inputRef: ref,
-        ...other,
+        ...rest,
       }} />
   );
 }
@@ -137,7 +135,6 @@ function SearchUi(props) {
       renderSuggestion={renderSuggestion}
       className={classes.autocomplete}
       inputProps={{
-
         placeholder: 'Search UI',
         value,
         onChange: handleChange,
@@ -147,7 +144,6 @@ function SearchUi(props) {
 }
 
 SearchUi.propTypes = {
-
   history: PropTypes.object.isRequired,
 };
 

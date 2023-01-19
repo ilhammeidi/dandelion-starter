@@ -83,7 +83,7 @@ const useStyles = makeStyles()((theme) => ({
   -----------------------
   */
   stripped: {
-    '& tbody tr:nth-child(even)': {
+    '& tbody tr:nth-of-type(even)': {
       background: theme.palette.mode === 'dark' ? alpha(theme.palette.grey[900], 0.5) : theme.palette.grey[50]
     }
   },
@@ -101,7 +101,7 @@ const useStyles = makeStyles()((theme) => ({
       border: theme.palette.mode === 'dark' ? `1px solid ${theme.palette.grey[900]}` : `1px solid ${theme.palette.primary.light}`
     },
     '& tr td, tr th': {
-      '&:first-child': {
+      '&:first-of-type': {
         borderLeft: 'none'
       },
       '&:last-child': {

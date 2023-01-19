@@ -186,7 +186,7 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
       textAlign: 'left',
       paddingLeft: 0,
       margin: '4px 0',
-      '& > div:first-child': {
+      '& > div:first-of-type': {
         margin: `0 ${theme.spacing(1)}`,
         minWidth: 'auto'
       },

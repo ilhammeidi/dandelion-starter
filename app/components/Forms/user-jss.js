@@ -187,8 +187,8 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     fontWeight: 'bold',
     color: theme.palette.primary.main,
     paddingBottom: theme.spacing(3),
-    '-webkit-background-clip': 'text',
-    '-webkit-text-fill-color': 'transparent',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
     [theme.breakpoints.down('md')]: {
       fontSize: '2.55em'
     }

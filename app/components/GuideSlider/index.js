@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import MobileStepper from '@mui/material/MobileStepper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -10,6 +9,7 @@ import SwipeableViews from 'react-swipeable-views';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Slide from '@mui/material/Slide';
+import { useTheme } from '@mui/material/styles';
 import guideData from 'dan-api/dummy/guideData';
 import useStyles from './guide-jss';
 
@@ -21,6 +21,7 @@ const Transition = React.forwardRef(function Transition(props, ref) { // eslint-
 
 function GuideSlider(props) {
   const { classes } = useStyles();
+  const theme = useTheme();
   const [activeStepSwipe, setActiveStepSwipe] = useState(0);
 
   const handleNextSwipe = () => {
@@ -42,8 +43,6 @@ function GuideSlider(props) {
   };
 
   const {
-
-    theme,
     openGuide,
     closeGuide
   } = props;
@@ -110,8 +109,6 @@ function GuideSlider(props) {
 GuideSlider.propTypes = {
   openGuide: PropTypes.bool.isRequired,
   closeGuide: PropTypes.func.isRequired,
-
-  theme: PropTypes.object.isRequired,
 };
 
 export default GuideSlider;

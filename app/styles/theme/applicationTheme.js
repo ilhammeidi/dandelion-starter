@@ -393,7 +393,7 @@ const applicationTheme = (color, mode, direction) => ({
     MuiAccordion: {
       styleOverrides: {
         root: {
-          '&:first-child': {
+          '&:first-of-type': {
             borderTopLeftRadius: 16,
             borderTopRightRadius: 16,
           },
@@ -550,7 +550,7 @@ const applicationTheme = (color, mode, direction) => ({
       styleOverrides: {
         toolbar: {
           padding: 0,
-          '& > p:nth-child(2)': {
+          '& > p:nth-of-type(2)': {
             '@media (max-width: 400px)': {
               display: 'none'
             }

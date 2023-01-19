@@ -64,53 +64,53 @@ const useStyles = makeStyles()((theme) => ({
     justifyContent: 'flex-start',
     margin: `${theme.spacing(1)} 0`,
   },
-  inputHeader: {
-    font: 'inherit',
-    padding: `${theme.spacing(1)} ${theme.spacing(1)} ${theme.spacing(1)} ${theme.spacing(9)}`,
-    border: 0,
-    display: 'block',
-    verticalAlign: 'middle',
-    whiteSpace: 'normal',
-    background: 'none',
-    margin: 0, // Reset for Safari
-    color: 'inherit',
-    [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    },
-    '& > div': {
-      border: 'none',
-      '&:after': {
-        display: 'none'
-      },
-    },
-    '& input': {
-      transition: theme.transitions.create('width'),
-      padding: 0,
-      color: theme.palette.common.white,
-      width: 100,
-      '&:focus': {
-        width: 250,
-        textIndent: 0,
-        outline: 0,
-      },
-    },
-    '& ::-webkit-input-placeholder': { /* Chrome/Opera/Safari */
-      color: 'rgba(255,255,255,1)'
-    },
-    '& ::-moz-placeholder': { /* Firefox 19+ */
-      color: 'rgba(255,255,255,1)'
-    },
-    '& :-ms-input-placeholder': { /* IE 10+ */
-      color: 'rgba(255,255,255,1)'
-    },
-    '& :-moz-placeholder': { /* Firefox 18- */
-      color: 'rgba(255,255,255,1)'
-    },
-  },
   containerSearch: {
     flexGrow: 1,
     position: 'relative',
-    color: theme.palette.text.primary
+    color: theme.palette.text.primary,
+    '& [class*="input-header"]': {
+      font: 'inherit',
+      padding: `${theme.spacing(1)} ${theme.spacing(1)} ${theme.spacing(1)} ${theme.spacing(9)}`,
+      border: 0,
+      display: 'block',
+      verticalAlign: 'middle',
+      whiteSpace: 'normal',
+      background: 'none',
+      margin: 0, // Reset for Safari
+      color: 'inherit',
+      [theme.breakpoints.down('sm')]: {
+        display: 'none'
+      },
+      '& > div': {
+        border: 'none',
+        '&:after': {
+          display: 'none'
+        },
+      },
+      '& input': {
+        transition: theme.transitions.create('width'),
+        padding: 0,
+        color: theme.palette.common.white,
+        width: 100,
+        '&:focus': {
+          width: 250,
+          textIndent: 0,
+          outline: 0,
+        },
+      },
+      '& ::-webkit-input-placeholder': { /* Chrome/Opera/Safari */
+        color: 'rgba(255,255,255,1)'
+      },
+      '& ::-moz-placeholder': { /* Firefox 19+ */
+        color: 'rgba(255,255,255,1)'
+      },
+      '& :-ms-input-placeholder': { /* IE 10+ */
+        color: 'rgba(255,255,255,1)'
+      },
+      '& :-moz-placeholder': { /* Firefox 18- */
+        color: 'rgba(255,255,255,1)'
+      },
+    },
   },
   suggestionsContainerOpen: {
     position: 'absolute',

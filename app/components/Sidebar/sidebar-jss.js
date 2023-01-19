@@ -156,7 +156,7 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
   },
   dense: {
     marginLeft: -15,
-    [`& > .${classes.title}:first-child`]: {
+    [`& > .${classes.title}:first-of-type`]: {
       margin: '0'
     },
     [`& .${classes.head}`]: {

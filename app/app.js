@@ -8,6 +8,7 @@
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ConnectedRouter } from 'connected-react-router';
@@ -45,8 +46,9 @@ const initialState = {};
 const { store, persistor } = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
+const root = createRoot(MOUNT_NODE);
 const render = messages => {
-  ReactDOM.render(
+  root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <LanguageProvider messages={messages}>
@@ -55,8 +57,7 @@ const render = messages => {
           </ConnectedRouter>
         </LanguageProvider>
       </PersistGate>
-    </Provider>,
-    MOUNT_NODE,
+    </Provider>
   );
 };
 
@@ -90,7 +91,7 @@ if (!window.Intl) {
 /**
 Offline access for production mode.
 Uncomment this code bellow to register Service Worker.
-**/
+* */
 
 //  if ('serviceWorker' in navigator) {
 //    window.addEventListener('load', () => {
