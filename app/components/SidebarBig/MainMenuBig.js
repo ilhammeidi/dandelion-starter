@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import List from '@material-ui/core/List';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import List from '@mui/material/List';
+import ListSubheader from '@mui/material/ListSubheader';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ButtonBase from '@mui/material/ButtonBase';
 import { openMenuAction, closeMenuAction } from 'dan-redux/actions/uiActions';
 import MenuProfile from './MenuProfile';
-import styles from './sidebarBig-jss';
+import useStyles from './sidebarBig-jss';
 
 const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
   return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
 });
 
 function MainMenuBig(props) {
+  const { classes, cx } = useStyles();
   const [selectedMenu, setSelectedMenu] = useState([]);
   const [menuLoaded, setMenuLoaded] = useState(true);
 
   const {
-    
+
     open,
     closeDrawer,
     dataMenu,
@@ -81,14 +81,14 @@ function MainMenuBig(props) {
           key={index.toString()}
           focusRipple
           className={
-            classNames(
+            cx(
               classes.menuHead,
               activeMenu(item.key, item.child) ? classes.active : ''
             )
           }
           onClick={() => handleLoadMenu(item.child, item.key)}
         >
-          <i className={classNames(classes.icon, item.icon)} />
+          <i className={cx(classes.icon, item.icon)} />
           <span className={classes.text}>
             { item.name }
           </span>
@@ -105,7 +105,7 @@ function MainMenuBig(props) {
         to={item.linkParent}
         onClick={() => handleLoadSingleMenu(item.key)}
       >
-        <i className={classNames(classes.icon, item.icon)} />
+        <i className={cx(classes.icon, item.icon)} />
         <span className={classes.text}>
           { item.name }
         </span>
@@ -137,7 +137,7 @@ function MainMenuBig(props) {
         onClick={() => handleLoadPage()}
       >
         <ListItemIcon>
-          <i className={classNames(classes.icon, item.icon)} />
+          <i className={cx(classes.icon, item.icon)} />
         </ListItemIcon>
         <ListItemText
           className={classes.text}
@@ -159,7 +159,7 @@ function MainMenuBig(props) {
       <List
         dense
         className={
-          classNames(
+          cx(
             classes.fixedWrap,
             classes.childMenuWrap,
             menuLoaded && classes.menuLoaded
@@ -174,12 +174,12 @@ function MainMenuBig(props) {
   return (
     <aside className={classes.bigSidebar}>
       <nav className={classes.category}>
-        <div className={classNames(classes.fixedWrap, !drawerPaper && classes.userShifted)}>
+        <div className={cx(classes.fixedWrap, !drawerPaper && classes.userShifted)}>
           <MenuProfile />
           {getMenus(dataMenu)}
         </div>
       </nav>
-      <nav className={classNames(classes.listMenu, !drawerPaper && classes.drawerPaperClose)}>
+      <nav className={cx(classes.listMenu, !drawerPaper && classes.drawerPaperClose)}>
         {renderChildMenu()}
       </nav>
     </aside>
@@ -187,7 +187,7 @@ function MainMenuBig(props) {
 }
 
 MainMenuBig.propTypes = {
-  
+
   open: PropTypes.array.isRequired,
   dataMenu: PropTypes.array.isRequired,
   openDrawer: PropTypes.func.isRequired,

@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
-import Switch from '@material-ui/core/Switch';
+import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import Checkbox from '@mui/material/Checkbox';
+import Switch from '@mui/material/Switch';
 
 /* Textfield */
 export const TextFieldRedux = ({ meta: { touched, error }, input, ...rest }) => {
   const [val, setVal] = useState('');
   return (
     <TextField
+      variant="standard"
       {...rest}
       {...input}
       value={val || input.value}
       onChange={(e) => setVal(e.target.value)}
-      error={touched && Boolean(error)}
-    />
+      error={touched && Boolean(error)} />
   );
 };
 
@@ -31,10 +31,7 @@ TextFieldRedux.defaultProps = {
 
 /* Select */
 export const SelectRedux = ({ input, children, ...rest }) => (
-  <Select
-    {...input}
-    {...rest}
-  >
+  <Select variant="standard" {...input} {...rest}>
     {children}
   </Select>
 );

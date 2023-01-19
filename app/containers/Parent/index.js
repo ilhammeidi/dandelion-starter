@@ -1,15 +1,16 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Helmet } from 'react-helmet';
+import { makeStyles } from 'tss-react/mui';
 import brand from 'dan-api/dummy/brand';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import MenuContent from 'dan-api/ui/menu';
 import { PapperBlock } from 'dan-components';
 
-const styles = {
+const useStyles = makeStyles()(() => ({
   link: {
     display: 'block',
     textTransform: 'capitalize',
@@ -20,12 +21,13 @@ const styles = {
     textTransform: 'uppercase',
     fontSize: 12,
   }
-};
+}));
 
 function Parent(props) {
+  const { classes } = useStyles();
   const title = brand.name;
   const description = brand.desc;
-  const {  history } = props;
+  const { history } = props;
   // Get Path Location
   let parts = history.location.pathname.split('/');
   const place = parts[parts.length - 1];
@@ -73,7 +75,7 @@ function Parent(props) {
 }
 
 Parent.propTypes = {
-  
+
   history: PropTypes.object.isRequired,
 };
 

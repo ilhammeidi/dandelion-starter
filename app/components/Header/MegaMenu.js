@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
-import Fade from '@material-ui/core/Fade';
-import Popper from '@material-ui/core/Popper';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import Fade from '@mui/material/Fade';
+import Popper from '@mui/material/Popper';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import styles from './header-jss';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import useStyles from './header-jss';
 
 const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
   return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
@@ -24,6 +24,7 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
 
 // eslint-disable-next-line
 function MegaMenu(props) {
+  const { classes, cx } = useStyles();
   const [active, setActive] = useState([]);
   const [openMenu, setOpenMenu] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -56,7 +57,7 @@ function MegaMenu(props) {
     setOpenMenu([]);
   };
 
-  const {  open, dataMenu } = props;
+  const { open, dataMenu } = props;
   const getMenus = (parent, menuArray) => menuArray.map((item, index) => {
     if (item.multilevel) {
       return false;
@@ -69,7 +70,7 @@ function MegaMenu(props) {
             component={LinkBtn}
             to={item.linkParent ? item.linkParent : '#'}
             className={
-              classNames(
+              cx(
                 classes.headMenu,
                 open.indexOf(item.key) > -1 ? classes.opened : '',
                 active.indexOf(item.key) > -1 ? classes.selected : ''
@@ -98,7 +99,7 @@ function MegaMenu(props) {
                       <Grid container>
                         <Grid item md={3} container justifyContent="center">
                           <span className={classes.bigIcon}>
-                            <i className={classNames(classes.icon, item.icon)} />
+                            <i className={cx(classes.icon, item.icon)} />
                           </span>
                         </Grid>
                         <Grid item md={9}>
@@ -152,7 +153,7 @@ function MegaMenu(props) {
 }
 
 MegaMenu.propTypes = {
-  
+
   open: PropTypes.array.isRequired,
   openSubMenu: PropTypes.func.isRequired,
   dataMenu: PropTypes.array.isRequired,

@@ -1,29 +1,28 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 
-
 import { Field, reduxForm } from 'redux-form';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import IconButton from '@material-ui/core/IconButton';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Typography from '@material-ui/core/Typography';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import AllInclusive from '@material-ui/icons/AllInclusive';
-import Brightness5 from '@material-ui/icons/Brightness5';
-import People from '@material-ui/icons/People';
-import ArrowForward from '@material-ui/icons/ArrowForward';
-import Paper from '@material-ui/core/Paper';
-import Icon from '@material-ui/core/Icon';
-import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import Typography from '@mui/material/Typography';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import AllInclusive from '@mui/icons-material/AllInclusive';
+import Brightness5 from '@mui/icons-material/Brightness5';
+import People from '@mui/icons-material/People';
+import ArrowForward from '@mui/icons-material/ArrowForward';
+import Paper from '@mui/material/Paper';
+import Icon from '@mui/material/Icon';
+import Hidden from '@mui/material/Hidden';
 import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
 import { TextFieldRedux, CheckboxRedux } from './ReduxFormMUI';
-import styles from './user-jss';
+import useStyles from './user-jss';
 import { ContentDivider } from '../Divider';
 
 // validation functions
@@ -39,6 +38,7 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
 });
 
 function LoginForm(props) {
+  const { classes, cx } = useStyles();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => {
@@ -50,7 +50,7 @@ function LoginForm(props) {
   };
 
   const {
-    
+
     handleSubmit,
     pristine,
     submitting,
@@ -59,13 +59,13 @@ function LoginForm(props) {
   return (
     <Fragment>
       <Hidden mdUp>
-        <NavLink to="/" className={classNames(classes.brand, classes.outer)}>
+        <NavLink to="/" className={cx(classes.brand, classes.outer)}>
           <img src={logo} alt={brand.name} />
           {brand.name}
         </NavLink>
       </Hidden>
-      <Paper className={classNames(classes.paperWrap, deco && classes.petal)}>
-        <Hidden smDown>
+      <Paper className={cx(classes.paperWrap, deco && classes.petal)}>
+        <Hidden mdDown>
           <div className={classes.topBar}>
             <NavLink to="/" className={classes.brand}>
               <img src={logo} alt={brand.name} />
@@ -86,15 +86,15 @@ function LoginForm(props) {
         <section className={classes.socmedLogin}>
           <div className={classes.btnArea}>
             <Button variant="outlined" size="small" className={classes.redBtn} type="button">
-              <AllInclusive className={classNames(classes.leftIcon, classes.iconSmall)} />
+              <AllInclusive className={cx(classes.leftIcon, classes.iconSmall)} />
               Socmed 1
             </Button>
             <Button variant="outlined" size="small" className={classes.blueBtn} type="button">
-              <Brightness5 className={classNames(classes.leftIcon, classes.iconSmall)} />
+              <Brightness5 className={cx(classes.leftIcon, classes.iconSmall)} />
               Socmed 2
             </Button>
             <Button variant="outlined" size="small" className={classes.cyanBtn} type="button">
-              <People className={classNames(classes.leftIcon, classes.iconSmall)} />
+              <People className={cx(classes.leftIcon, classes.iconSmall)} />
               Socmed 3
             </Button>
           </div>
@@ -103,7 +103,7 @@ function LoginForm(props) {
         <section className={classes.formWrap}>
           <form onSubmit={handleSubmit}>
             <div>
-              <FormControl className={classes.formControl}>
+              <FormControl variant="standard" className={classes.formControl}>
                 <Field
                   name="email"
                   component={TextFieldRedux}
@@ -116,7 +116,7 @@ function LoginForm(props) {
               </FormControl>
             </div>
             <div>
-              <FormControl className={classes.formControl}>
+              <FormControl variant="standard" className={classes.formControl}>
                 <Field
                   name="password"
                   component={TextFieldRedux}
@@ -129,7 +129,7 @@ function LoginForm(props) {
                           aria-label="Toggle password visibility"
                           onClick={handleClickShowPassword}
                           onMouseDown={handleMouseDownPassword}
-                        >
+                          size="large">
                           {showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       </InputAdornment>
@@ -148,7 +148,7 @@ function LoginForm(props) {
             <div className={classes.btnArea}>
               <Button variant="contained" color="primary" size="large" type="submit">
                 Continue
-                <ArrowForward className={classNames(classes.rightIcon, classes.iconSmall)} disabled={submitting || pristine} />
+                <ArrowForward className={cx(classes.rightIcon, classes.iconSmall)} disabled={submitting || pristine} />
               </Button>
             </div>
           </form>
@@ -159,7 +159,7 @@ function LoginForm(props) {
 }
 
 LoginForm.propTypes = {
-  
+
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,

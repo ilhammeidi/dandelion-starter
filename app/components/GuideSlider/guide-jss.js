@@ -1,5 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles'; 
-const useStyles = makeStyles((theme) => {
+import { makeStyles } from 'tss-react/mui';
+const useStyles = makeStyles()((theme) => ({
   root: {
     padding: 0,
     overflow: 'hidden'
@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => {
       marginBottom: theme.spacing(2)
     }
   }
-});
+}));
 
+// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
 export default useStyles;

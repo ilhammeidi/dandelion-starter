@@ -1,17 +1,18 @@
 import React, { Fragment } from 'react';
 import { PropTypes } from 'prop-types';
 
-import Fade from '@material-ui/core/Fade';
-import Typography from '@material-ui/core/Typography';
+import Fade from '@mui/material/Fade';
+import Typography from '@mui/material/Typography';
 
 import { HeaderMenu, BreadCrumb } from 'dan-components';
 import dataMenu from 'dan-api/ui/menu';
 import Decoration from '../Decoration';
-import styles from '../appStyles-jss';
+import useStyles from '../appStyles-jss';
 
 function DropMenuLayout(props) {
+  const { classes, cx } = useStyles();
   const {
-    
+
     children,
     pageLoaded,
     mode,
@@ -43,7 +44,7 @@ function DropMenuLayout(props) {
       />
       <main
         className={
-          classNames(
+          cx(
             classes.content,
             classes.highMargin
           )
@@ -57,7 +58,7 @@ function DropMenuLayout(props) {
           bgPosition={bgPosition}
           horizontalMenu
         />
-        <section className={classNames(classes.mainWrap, classes.topbarLayout)}>
+        <section className={cx(classes.mainWrap, classes.topbarLayout)}>
           {titleException.indexOf(history.location.pathname) < 0 && (
             <div className={classes.pageTitle}>
               <Typography component="h4" className={bgPosition === 'header' ? classes.darkTitle : classes.lightTitle} variant="h4">{place}</Typography>
@@ -81,7 +82,7 @@ function DropMenuLayout(props) {
 }
 
 DropMenuLayout.propTypes = {
-  
+
   children: PropTypes.node.isRequired,
   history: PropTypes.object.isRequired,
   changeMode: PropTypes.func.isRequired,

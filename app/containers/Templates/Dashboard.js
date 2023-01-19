@@ -11,9 +11,10 @@ import RightSidebarLayout from './layouts/RightSidebarLayout';
 import LeftSidebarBigLayout from './layouts/LeftSidebarBigLayout';
 import DropMenuLayout from './layouts/DropMenuLayout';
 import MegaMenuLayout from './layouts/MegaMenuLayout';
-import styles from './appStyles-jss';
+import useStyles from './appStyles-jss';
 
 function Dashboard(props) {
+  const { classes, cx } = useStyles();
   // Initial header style
   const [openGuide, setOpenGuide] = useState(false);
   const [appHeight, setAppHeight] = useState(0);
@@ -54,7 +55,7 @@ function Dashboard(props) {
   };
 
   const {
-    
+
     children,
     toggleDrawer,
     sidebarOpen,
@@ -75,7 +76,7 @@ function Dashboard(props) {
     <div
       style={{ minHeight: appHeight }}
       className={
-        classNames(
+        cx(
           classes.appFrameInner,
           layout === 'top-navigation' || layout === 'mega-menu' ? classes.topNav : classes.sideNav,
           mode === 'dark' ? 'dark-mode' : 'light-mode'
@@ -193,7 +194,7 @@ function Dashboard(props) {
 }
 
 Dashboard.propTypes = {
-  
+
   children: PropTypes.node.isRequired,
   history: PropTypes.object.isRequired,
   initialOpen: PropTypes.func.isRequired,

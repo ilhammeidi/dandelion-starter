@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles'; 
-import Paper from '@material-ui/core/Paper';
+import { makeStyles } from 'tss-react/mui';
+import Paper from '@mui/material/Paper';
 import { Field, reduxForm } from 'redux-form';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import Grid from '@material-ui/core/Grid';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Typography from '@material-ui/core/Typography';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import Grid from '@mui/material/Grid';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Typography from '@mui/material/Typography';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import {
   CheckboxRedux,
   SelectRedux,
@@ -40,7 +40,7 @@ const email = value => (
     : undefined
 );
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles()((theme) => ({
   root: {
     flexGrow: 1,
     padding: 30
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => {
     margin: theme.spacing(4),
     textAlign: 'center'
   },
-});
+}));
 
 const initData = {
   text: 'Sample Text',
@@ -75,9 +75,10 @@ const initData = {
 };
 
 function ReduxFormDemo(props) {
+  const { classes } = useStyles();
   const trueBool = true;
   const {
-    
+
     handleSubmit,
     pristine,
     reset,
@@ -135,7 +136,7 @@ function ReduxFormDemo(props) {
                 </Field>
               </div>
               <div>
-                <FormControl className={classes.field}>
+                <FormControl variant="standard" className={classes.field}>
                   <InputLabel htmlFor="selection">Selection</InputLabel>
                   <Field
                     name="selection"
@@ -192,7 +193,7 @@ renderRadioGroup.propTypes = {
 };
 
 ReduxFormDemo.propTypes = {
-  
+
   handleSubmit: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,

@@ -1,11 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles'; 
-import { alpha } from '@material-ui/core/styles';
-import cyan from '@material-ui/core/colors/cyan';
-import indigo from '@material-ui/core/colors/indigo';
-import red from '@material-ui/core/colors/red';
+import { makeStyles } from 'tss-react/mui';
+import { alpha } from '@mui/material/styles';
 import bg from 'dan-images/petal_grey_bg.svg';
 import bgLight from 'dan-images/petal_bg.svg';
 import { gradientBgLight } from 'containers/Templates/appStyles-jss';
+import { cyan, indigo, red } from '@mui/material/colors';
 const rootWraper = {
   display: 'flex',
   width: '100%',
@@ -24,7 +22,7 @@ const wrapper = (theme, opacity) => ({
   backgroundAttachment: 'fixed'
 });
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles()((theme, _params, classes) => ({
   root: {
     ...rootWraper
   },
@@ -37,7 +35,7 @@ const useStyles = makeStyles((theme) => {
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       overflow: 'hidden'
     },
   },
@@ -46,7 +44,7 @@ const useStyles = makeStyles((theme) => {
     alignItems: 'center',
     justifyContent: 'flex-end',
     width: '100%',
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       overflow: 'hidden'
     },
   },
@@ -60,7 +58,7 @@ const useStyles = makeStyles((theme) => {
     [theme.breakpoints.up('md')]: {
       width: 480,
     },
-    '& $topBar': {
+    [`& .${classes.topBar}`]: {
       marginBottom: theme.spacing(4)
     }
   },
@@ -71,21 +69,21 @@ const useStyles = makeStyles((theme) => {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    '& $topBar': {
+    [`& .${classes.topBar}`]: {
       width: '100%'
     }
   },
   petal: {
-    backgroundImage: theme.palette.type === 'dark' ? `url(${bgLight})` : `url(${bg})`,
+    backgroundImage: theme.palette.mode === 'dark' ? `url(${bgLight})` : `url(${bg})`,
   },
   icon: {},
   topBar: {
     display: 'flex',
     justifyContent: 'space-between',
-    '& $icon': {
+    [`& .${classes.icon}`]: {
       marginRight: theme.spacing(1)
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       justifyContent: 'center',
       marginBottom: theme.spacing(3),
       '& a': {
@@ -104,10 +102,10 @@ const useStyles = makeStyles((theme) => {
     fontWeight: 500,
     color: theme.palette.text.primary,
     textDecoration: 'none',
-    '&$outer': {
+    [`&.${classes.outer}`]: {
       color: theme.palette.common.white,
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       margin: theme.spacing(2)
     },
     '& img': {
@@ -125,7 +123,7 @@ const useStyles = makeStyles((theme) => {
   },
   pageFormWrap: {
     width: '100%',
-    margin: `${theme.spacing(2)}px auto`,
+    margin: `${theme.spacing(2)} auto`,
     [theme.breakpoints.up('sm')]: {
       width: 480,
     },
@@ -153,7 +151,7 @@ const useStyles = makeStyles((theme) => {
     margin: '0 auto',
     '& button': {
       padding: '4px 16px',
-      margin: `0 ${theme.spacing(1)}px`
+      margin: `0 ${theme.spacing(1)}`
     },
     [theme.breakpoints.only('sm')]: {
       width: 480,
@@ -164,13 +162,13 @@ const useStyles = makeStyles((theme) => {
     [theme.breakpoints.up('md')]: {
       width: 720
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginBottom: theme.spacing(3)
     },
   },
   sideFormWrap: {
     height: '100%',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%'
     }
   },
@@ -191,7 +189,7 @@ const useStyles = makeStyles((theme) => {
     paddingBottom: theme.spacing(3),
     '-webkit-background-clip': 'text',
     '-webkit-text-fill-color': 'transparent',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       fontSize: '2.55em'
     }
   },
@@ -201,7 +199,7 @@ const useStyles = makeStyles((theme) => {
     textAlign: 'center',
     '& h1': {
       display: 'block',
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('lg')]: {
         fontSize: 32,
         lineHeight: '48px'
       }
@@ -209,7 +207,7 @@ const useStyles = makeStyles((theme) => {
     '& p': {
       color: theme.palette.common.white,
       fontSize: 18,
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('lg')]: {
         fontSize: 14,
       }
     }
@@ -218,18 +216,18 @@ const useStyles = makeStyles((theme) => {
   btnArea: {
     display: 'flex',
     justifyContent: 'space-around',
-    margin: `${theme.spacing(2)}px 0`,
+    margin: `${theme.spacing(2)} 0`,
     fontSize: 12,
-    '& $label': {
+    [`& .${classes.label}`]: {
       fontSize: 12,
       '& span': {
         fontSize: 12
       }
     },
     '& button': {
-      margin: `0 ${theme.spacing(1)}px`
+      margin: `0 ${theme.spacing(1)}`
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
       '& button': {
         width: '100%',
@@ -293,7 +291,7 @@ const useStyles = makeStyles((theme) => {
     position: 'relative'
   },
   tab: {
-    margin: `${theme.spacing(3)}px 0 ${theme.spacing(1)}px`,
+    margin: `${theme.spacing(3)} 0 ${theme.spacing(1)}`,
   },
   link: {
     fontSize: '0.875rem',
@@ -306,11 +304,11 @@ const useStyles = makeStyles((theme) => {
   socmedFull: {
     textAlign: 'center',
     width: '100%',
-    margin: `${theme.spacing(3)}px ${theme.spacing(1)}px`,
+    margin: `${theme.spacing(3)} ${theme.spacing(1)}`,
     '& button': {
       width: '100%',
       display: 'block',
-      margin: `0 auto ${theme.spacing(2)}px`
+      margin: `0 auto ${theme.spacing(2)}`
     },
     [theme.breakpoints.up('sm')]: {
       '& button': {
@@ -322,7 +320,7 @@ const useStyles = makeStyles((theme) => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column'
     }
   },
@@ -335,7 +333,7 @@ const useStyles = makeStyles((theme) => {
   },
   notifyForm: {
     alignItems: 'baseline',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       '& button': {
         marginTop: theme.spacing(3),
         width: '100%'
@@ -372,7 +370,7 @@ const useStyles = makeStyles((theme) => {
   userName: {
     color: theme.palette.common.white,
     fontWeight: theme.typography.fontWeightMedium,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(3),
       textAlign: 'center'
     }
@@ -408,8 +406,9 @@ const useStyles = makeStyles((theme) => {
   optArea: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: `0 ${theme.spacing(0.5)}px`
+    padding: `0 ${theme.spacing(0.5)}`
   },
-});
+}));
 
+// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
 export default useStyles;

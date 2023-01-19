@@ -3,13 +3,14 @@ import { PropTypes } from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import styles from 'containers/Templates/appStyles-jss';
+import useStyles from 'containers/Templates/appStyles-jss';
 import { ErrorWrap } from 'dan-components';
 
 function NotFoundDedicated(props) {
-  const {  gradient } = props;
+  const { classes, cx } = useStyles();
+  const { gradient } = props;
   return (
-    <div className={classNames(classes.appFrameOuter, gradient ? classes.gradientBg : classes.solidBg)}>
+    <div className={cx(classes.appFrameOuter, gradient ? classes.gradientBg : classes.solidBg)}>
       <main className={classes.outerContent} id="mainContent">
         <div className={classes.petal} />
         <ErrorWrap title="404" desc="Oops, Page Not Found :(" />
@@ -19,7 +20,7 @@ function NotFoundDedicated(props) {
 }
 
 NotFoundDedicated.propTypes = {
-  
+
   gradient: PropTypes.bool.isRequired,
 };
 

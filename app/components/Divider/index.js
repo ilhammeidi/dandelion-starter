@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './divider-jss';
+import useStyles from './divider-jss';
 
 /* Gradient Divider */
 export const GradientDivider = props => {
+  const { classes } = useStyles();
   const {
     thin,
-    
+
     ...rest
   } = props;
   return (
@@ -17,7 +18,7 @@ export const GradientDivider = props => {
 
 GradientDivider.propTypes = {
   thin: PropTypes.number,
-  
+
 };
 
 GradientDivider.defaultProps = {
@@ -27,9 +28,10 @@ GradientDivider.defaultProps = {
 /* Dash Divider */
 
 export const DashDivider = props => {
+  const { classes } = useStyles();
   const {
     thin,
-    
+
     ...rest
   } = props;
   return (
@@ -38,7 +40,7 @@ export const DashDivider = props => {
 };
 
 DashDivider.propTypes = {
-  
+
   thin: PropTypes.number,
 };
 
@@ -49,8 +51,9 @@ DashDivider.defaultProps = {
 /* Shadow Divider */
 
 export const ShadowDivider = props => {
+  const { classes } = useStyles();
   const {
-    
+
     thin,
     ...rest
   } = props;
@@ -70,8 +73,9 @@ ShadowDivider.defaultProps = {
 /* Shadow Inset */
 
 export const InsetDivider = props => {
+  const { classes } = useStyles();
   const {
-    
+
     thin,
     ...rest
   } = props;
@@ -81,7 +85,7 @@ export const InsetDivider = props => {
 };
 
 InsetDivider.propTypes = {
-  
+
   thin: PropTypes.number,
 };
 
@@ -92,8 +96,9 @@ InsetDivider.defaultProps = {
 /* Shadow FlairedEdges */
 
 export const FlairedEdgesDivider = props => {
+  const { classes } = useStyles();
   const {
-    
+
     thin,
     ...rest
   } = props;
@@ -103,7 +108,7 @@ export const FlairedEdgesDivider = props => {
 };
 
 FlairedEdgesDivider.propTypes = {
-  
+
   thin: PropTypes.number,
 };
 
@@ -112,8 +117,9 @@ FlairedEdgesDivider.defaultProps = {
 };
 
 export const ContentDivider = props => {
+  const { classes } = useStyles();
   const {
-    
+
     thin,
     content,
     ...rest
@@ -124,7 +130,7 @@ export const ContentDivider = props => {
 };
 
 ContentDivider.propTypes = {
-  
+
   thin: PropTypes.number,
   content: PropTypes.string.isRequired,
 };

@@ -1,12 +1,11 @@
-import { makeStyles } from '@material-ui/core/styles'; 
-import { alpha } from '@material-ui/core/styles';
-import lightGreen from '@material-ui/core/colors/lightGreen';
-import red from '@material-ui/core/colors/red';
-import amber from '@material-ui/core/colors/amber';
-import grey from '@material-ui/core/colors/grey';
+import { makeStyles } from 'tss-react/mui';
+import { alpha } from '@mui/material/styles';
+import {
+  lightGreen, red, amber, grey
+} from '@mui/material/colors';
 
 const drawerWidth = 240;
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles()((theme, _params, classes) => ({
   user: {
     justifyContent: 'center'
   },
@@ -29,7 +28,7 @@ const useStyles = makeStyles((theme) => {
     width: drawerWidth,
   },
   opened: {
-    '& $primary, & $icon': {
+    [`& .${classes.primary}, & .${classes.icon}`]: {
       color: theme.palette.primary.main,
     },
     '&:before': {
@@ -51,10 +50,10 @@ const useStyles = makeStyles((theme) => {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    '& $user': {
+    [`& .${classes.user}`]: {
       justifyContent: 'flex-start'
     },
-    '& $bigAvatar': {
+    [`& .${classes.bigAvatar}`]: {
       width: 40,
       height: 40,
     },
@@ -68,10 +67,10 @@ const useStyles = makeStyles((theme) => {
         display: 'block'
       }
     },
-    '& $brand': {
+    [`& .${classes.brand}`]: {
       display: 'none'
     },
-    '& $profile': {
+    [`& .${classes.profile}`]: {
       flexDirection: 'row',
       top: theme.spacing(6),
       padding: theme.spacing(0.5),
@@ -80,11 +79,11 @@ const useStyles = makeStyles((theme) => {
         width: 'auto'
       }
     },
-    '& $avatar': {
+    [`& .${classes.avatar}`]: {
       marginRight: theme.spacing(3)
     },
-    '& $menuContainer': {
-      '&$menuContainer': {
+    [`& .${classes.menuContainer}`]: {
+      [`&.${classes.menuContainer}`]: {
         paddingTop: theme.spacing(10),
         paddingBottom: 0,
       }
@@ -94,14 +93,14 @@ const useStyles = makeStyles((theme) => {
     // Make the items inside not wrap when transitioning:
     height: '100%',
     position: 'fixed',
-    backgroundColor: theme.palette.type === 'dark' ? alpha(theme.palette.background.paper, 0.75) : alpha(theme.palette.background.paper, 0.9),
+    backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.75) : alpha(theme.palette.background.paper, 0.9),
     boxShadow: theme.shade.light,
     backdropFilter: 'saturate(180%) blur(20px)'
   },
   drawerInnerMobile: {
     // Make the items inside not wrap when transitioning:
     height: '100%',
-    backgroundColor: theme.palette.type === 'dark' ? alpha(theme.palette.background.paper, 0.75) : alpha(theme.palette.background.paper, 0.95),
+    backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.background.paper, 0.75) : alpha(theme.palette.background.paper, 0.95),
   },
   drawerHeader: {
     padding: '0',
@@ -135,8 +134,8 @@ const useStyles = makeStyles((theme) => {
   nested: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
-    margin: `${theme.spacing(0.5)}px 0`,
-    [theme.breakpoints.down('lg')]: {
+    margin: `${theme.spacing(0.5)} 0`,
+    [theme.breakpoints.down('xl')]: {
       paddingLeft: theme.spacing(3)
     }
   },
@@ -157,23 +156,23 @@ const useStyles = makeStyles((theme) => {
   },
   dense: {
     marginLeft: -15,
-    '& > $title:first-child': {
+    [`& > .${classes.title}:first-child`]: {
       margin: '0'
     },
-    '& $head': {
+    [`& .${classes.head}`]: {
       paddingLeft: theme.spacing(10)
     }
   },
   active: {
-    backgroundColor: theme.palette.type === 'dark' ? alpha(theme.palette.primary.main, 0.24) : alpha(theme.palette.primary.main, 0.3),
-    '& $primary': {
-      color: theme.palette.type === 'dark' ? theme.palette.common.white : theme.palette.primary.dark,
+    backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) : alpha(theme.palette.primary.main, 0.3),
+    [`& .${classes.primary}`]: {
+      color: theme.palette.mode === 'dark' ? theme.palette.common.white : theme.palette.primary.dark,
     },
-    '& $icon': {
+    [`& .${classes.icon}`]: {
       color: theme.palette.primary.dark,
     },
     '&:hover, &:focus': {
-      backgroundColor: theme.palette.type === 'dark' ? alpha(theme.palette.primary.main, 0.24) : alpha(theme.palette.primary.main, 0.3),
+      backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) : alpha(theme.palette.primary.main, 0.3),
     }
   },
   nolist: {
@@ -188,11 +187,11 @@ const useStyles = makeStyles((theme) => {
   },
   iconed: {},
   head: {
-    padding: `${theme.spacing(1)}px 0`,
-    margin: `${theme.spacing(1)}px 0`,
-    borderRadius: `0 ${theme.spacing(3)}px ${theme.spacing(3)}px 0`,
+    padding: `${theme.spacing(1)} 0`,
+    margin: `${theme.spacing(1)} 0`,
+    borderRadius: `0 ${theme.spacing(3)} ${theme.spacing(3)} 0`,
     paddingLeft: theme.spacing(3),
-    '&$iconed': {
+    [`&.${classes.iconed}`]: {
       paddingLeft: theme.spacing(3),
     },
     '& svg[class^="MuiSvgIcon"]': {
@@ -201,12 +200,12 @@ const useStyles = makeStyles((theme) => {
     },
   },
   headCapital: {
-    padding: `${theme.spacing(1)}px 0 ${theme.spacing(1)}px ${theme.spacing(9)}px`,
+    padding: `${theme.spacing(1)} 0 ${theme.spacing(1)} ${theme.spacing(9)}`,
     left: theme.spacing(1) * -2,
     position: 'relative',
     textTransform: 'uppercase',
-    borderRadius: `0 ${theme.spacing(3)}px ${theme.spacing(3)}px 0`,
-    margin: `${theme.spacing(1)}px`,
+    borderRadius: `0 ${theme.spacing(3)} ${theme.spacing(3)} 0`,
+    margin: theme.spacing(1),
     '& span': {
       fontSize: 14
     }
@@ -264,7 +263,7 @@ const useStyles = makeStyles((theme) => {
     textAlign: 'center',
     alignItems: 'center',
     position: 'absolute',
-    margin: `${theme.spacing(2)}px 0`,
+    margin: `${theme.spacing(2)} 0`,
     zIndex: 0,
     '& h4': {
       fontSize: 18,
@@ -320,25 +319,25 @@ const useStyles = makeStyles((theme) => {
     width: drawerWidth,
     position: 'relative',
     display: 'block',
-    padding: `${theme.spacing(5)}px 0`,
-    '&$withProfile': {
+    padding: `${theme.spacing(5)} 0`,
+    [`&.${classes.withProfile}`]: {
       paddingTop: theme.spacing(18)
     },
-    '&$landingNav': {
+    [`&.${classes.landingNav}`]: {
       [theme.breakpoints.up('lg')]: {
         paddingTop: theme.spacing(5)
       },
-      [theme.breakpoints.down('lg')]: {
+      [theme.breakpoints.down('xl')]: {
         height: 'calc(100% - 164px)',
         paddingTop: theme.spacing(5)
       }
     },
-    '&$rounded': {
+    [`&.${classes.rounded}`]: {
       paddingRight: theme.spacing(1.5),
       '& a': {
-        borderRadius: `0 ${theme.spacing(3)}px ${theme.spacing(3)}px 0`,
+        borderRadius: `0 ${theme.spacing(3)} ${theme.spacing(3)} 0`,
       },
-      '& $opened': {
+      [`& .${classes.opened}`]: {
         '&:before': {
           background: theme.palette.primary.main
         }
@@ -364,6 +363,7 @@ const useStyles = makeStyles((theme) => {
   badge: {
     height: 'auto'
   }
-});
+}));
 
+// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
 export default useStyles;

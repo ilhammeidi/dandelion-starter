@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import ArrowForward from '@material-ui/icons/ArrowForward';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import ArrowForward from '@mui/icons-material/ArrowForward';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
 import { TextFieldRedux } from './ReduxFormMUI';
-import styles from './user-jss';
+import useStyles from './user-jss';
 
 // validation functions
 const required = value => (value === null ? 'Required' : undefined);
@@ -24,15 +23,16 @@ const email = value => (
 );
 
 function ResetForm(props) {
+  const { classes, cx } = useStyles();
   const {
-    
+
     handleSubmit,
     pristine,
     submitting,
     deco,
   } = props;
   return (
-    <Paper className={classNames(classes.paperWrap, deco && classes.petal)}>
+    <Paper className={cx(classes.paperWrap, deco && classes.petal)}>
       <div className={classes.topBar}>
         <NavLink to="/" className={classes.brand}>
           <img src={logo} alt={brand.name} />
@@ -48,7 +48,7 @@ function ResetForm(props) {
       <section className={classes.formWrap}>
         <form onSubmit={handleSubmit}>
           <div>
-            <FormControl className={classes.formControl}>
+            <FormControl variant="standard" className={classes.formControl}>
               <Field
                 name="email"
                 component={TextFieldRedux}
@@ -63,7 +63,7 @@ function ResetForm(props) {
           <div className={classes.btnArea}>
             <Button variant="contained" color="primary" type="submit">
               Send Reset Link
-              <ArrowForward className={classNames(classes.rightIcon, classes.iconSmall)} disabled={submitting || pristine} />
+              <ArrowForward className={cx(classes.rightIcon, classes.iconSmall)} disabled={submitting || pristine} />
             </Button>
           </div>
         </form>
@@ -73,7 +73,7 @@ function ResetForm(props) {
 }
 
 ResetForm.propTypes = {
-  
+
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,

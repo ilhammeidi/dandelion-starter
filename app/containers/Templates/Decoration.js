@@ -1,15 +1,15 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-
 import decorationLight from 'dan-images/decoration_light.svg';
 import decorationDark from 'dan-images/decoration_dark.svg';
 import petalLight from 'dan-images/petal_bg.svg';
-import styles from './appStyles-jss';
+import useStyles from './appStyles-jss';
 
 function Decoration(props) {
+  const { classes, cx } = useStyles();
   const {
-    
+
     mode,
     gradient,
     decoration,
@@ -52,7 +52,7 @@ function Decoration(props) {
   return (
     <div className={classes.bgWrap}>
       <div
-        className={classNames(
+        className={cx(
           classes.bgbar,
           horizontalMenu && classes.highTop,
           gradient ? classes.gradientBg : classes.solidBg,
@@ -66,7 +66,7 @@ function Decoration(props) {
 }
 
 Decoration.propTypes = {
-  
+
   mode: PropTypes.string.isRequired,
   gradient: PropTypes.bool.isRequired,
   decoration: PropTypes.bool.isRequired,

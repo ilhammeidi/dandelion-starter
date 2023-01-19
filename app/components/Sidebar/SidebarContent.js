@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-
 import { NavLink } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Avatar from '@material-ui/core/Avatar';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Avatar from '@mui/material/Avatar';
 import brand from 'dan-api/dummy/brand';
 import dummy from 'dan-api/dummy/dummyContents';
 import logo from 'dan-images/logo.svg';
 import MainMenu from './MainMenu';
-import styles from './sidebar-jss';
+import useStyles from './sidebar-jss';
 
 function SidebarContent(props) {
+  const { classes, cx } = useStyles();
   const [transform, setTransform] = useState(0);
 
   const handleScroll = (event) => {
@@ -30,7 +30,7 @@ function SidebarContent(props) {
   }, []);
 
   const {
-    
+
     turnDarker,
     drawerPaper,
     toggleDrawerOpen,
@@ -59,26 +59,26 @@ function SidebarContent(props) {
   };
 
   return (
-    <div className={classNames(classes.drawerInner, !drawerPaper ? classes.drawerPaperClose : '')}>
+    <div className={cx(classes.drawerInner, !drawerPaper ? classes.drawerPaperClose : '')}>
       <div className={classes.drawerHeader}>
-        <NavLink to="/app" className={classNames(classes.brand, classes.brandBar, turnDarker && classes.darker)}>
+        <NavLink to="/app" className={cx(classes.brand, classes.brandBar, turnDarker && classes.darker)}>
           <img src={logo} alt={brand.name} />
           {brand.name}
         </NavLink>
         {isLogin && (
           <div
-            className={classNames(classes.profile, classes.user)}
+            className={cx(classes.profile, classes.user)}
             style={{ opacity: 1 - (transform / 100), marginTop: transform * -0.3 }}
           >
             <Avatar
               alt={dummy.user.name}
               src={dummy.user.avatar}
-              className={classNames(classes.avatar, classes.bigAvatar)}
+              className={cx(classes.avatar, classes.bigAvatar)}
             />
             <div>
               <h4>{dummy.user.name}</h4>
               <Button size="small" onClick={openMenuStatus}>
-                <i className={classNames(classes.dotStatus, setStatus(status))} />
+                <i className={cx(classes.dotStatus, setStatus(status))} />
                 {status}
               </Button>
               <Menu
@@ -89,19 +89,19 @@ function SidebarContent(props) {
                 className={classes.statusMenu}
               >
                 <MenuItem onClick={() => changeStatus('online')}>
-                  <i className={classNames(classes.dotStatus, classes.online)} />
+                  <i className={cx(classes.dotStatus, classes.online)} />
                   Online
                 </MenuItem>
                 <MenuItem onClick={() => changeStatus('idle')}>
-                  <i className={classNames(classes.dotStatus, classes.idle)} />
+                  <i className={cx(classes.dotStatus, classes.idle)} />
                   Idle
                 </MenuItem>
                 <MenuItem onClick={() => changeStatus('bussy')}>
-                  <i className={classNames(classes.dotStatus, classes.bussy)} />
+                  <i className={cx(classes.dotStatus, classes.bussy)} />
                   Bussy
                 </MenuItem>
                 <MenuItem onClick={() => changeStatus('offline')}>
-                  <i className={classNames(classes.dotStatus, classes.offline)} />
+                  <i className={cx(classes.dotStatus, classes.offline)} />
                   Offline
                 </MenuItem>
               </Menu>
@@ -112,7 +112,7 @@ function SidebarContent(props) {
       <div
         id="sidebar"
         className={
-          classNames(
+          cx(
             classes.menuContainer,
             leftSidebar && classes.rounded,
             isLogin && classes.withProfile
@@ -126,7 +126,7 @@ function SidebarContent(props) {
 }
 
 SidebarContent.propTypes = {
-  
+
   drawerPaper: PropTypes.bool.isRequired,
   turnDarker: PropTypes.bool,
   toggleDrawerOpen: PropTypes.func,

@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import Toolbar from '@material-ui/core/Toolbar';
+import Toolbar from '@mui/material/Toolbar';
 
-import Typography from '@material-ui/core/Typography';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import styles from 'dan-components/Tables/tableStyle-jss';
+import Typography from '@mui/material/Typography';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import useStyles from 'dan-components/Tables/tableStyle-jss';
 
 let id = 0;
 function createData(name, calories, fat, carbs, protein) {
@@ -33,7 +33,7 @@ const data = [
 ];
 
 function StrippedTable(props) {
-  
+  const { classes, cx } = useStyles();
   return (
     <Fragment>
       <Toolbar className={classes.toolbar}>
@@ -42,7 +42,7 @@ function StrippedTable(props) {
         </div>
       </Toolbar>
       <div className={classes.rootTable}>
-        <Table className={classNames(classes.table, classes.stripped)}>
+        <Table className={cx(classes.table, classes.stripped)}>
           <TableHead>
             <TableRow>
               <TableCell padding="normal">Dessert (100g serving)</TableCell>
@@ -70,7 +70,7 @@ function StrippedTable(props) {
 }
 
 StrippedTable.propTypes = {
-  
+
 };
 
 export default StrippedTable;

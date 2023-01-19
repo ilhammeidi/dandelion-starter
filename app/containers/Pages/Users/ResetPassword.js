@@ -4,11 +4,11 @@ import brand from 'dan-api/dummy/brand';
 import PropTypes from 'prop-types';
 
 import { ResetForm } from 'dan-components';
-import styles from '../../../components/Forms/user-jss';
+import useStyles from '../../../components/Forms/user-jss';
 
 function ResetPassword(props) {
   const [valueForm, setValueForm] = useState(null);
-
+  const { classes } = useStyles();
   const submitForm = useCallback((values) => {
     setValueForm(values);
     setTimeout(() => {
@@ -18,7 +18,7 @@ function ResetPassword(props) {
 
   const title = brand.name + ' - Reset Password';
   const description = brand.desc;
-  
+
   return (
     <div className={classes.root}>
       <Helmet>
@@ -39,7 +39,7 @@ function ResetPassword(props) {
 }
 
 ResetPassword.propTypes = {
-  
+
 };
 
 export default ResetPassword;

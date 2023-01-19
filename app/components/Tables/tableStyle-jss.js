@@ -1,9 +1,10 @@
-import { lighten, darken, alpha } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles'; 
-import green from '@material-ui/core/colors/green';
-import red from '@material-ui/core/colors/red';
+import { lighten, darken, alpha } from '@mui/material/styles';
+import { makeStyles } from 'tss-react/mui';
+import { green, red } from '@mui/material/colors';
 
-const useStyles = makeStyles((theme) => {
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Unexpected value type of ConditionalExpression.
+const useStyles = makeStyles()((theme) => ({
   root: {
     paddingRight: theme.spacing(1),
   },
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => {
     overflowX: 'auto',
   },
   highlight:
-    theme.palette.type === 'light' ? {
+    theme.palette.mode === 'light' ? {
       color: theme.palette.secondary.main,
       backgroundColor: lighten(theme.palette.secondary.light, 0.85),
     } : {
@@ -48,18 +49,18 @@ const useStyles = makeStyles((theme) => {
     color: theme.palette.text.secondary,
   },
   toolbar: {
-    backgroundColor: theme.palette.type === 'dark' ? darken(theme.palette.primary.light, 0.6) : theme.palette.primary.light,
+    backgroundColor: theme.palette.mode === 'dark' ? darken(theme.palette.primary.light, 0.6) : theme.palette.primary.light,
     minHeight: 48,
   },
   title: {
     flex: '0 0 auto',
     '& h6': {
       fontSize: 16,
-      color: theme.palette.type === 'dark' ? darken(theme.palette.primary.light, 0.2) : darken(theme.palette.primary.dark, 0.2),
+      color: theme.palette.mode === 'dark' ? darken(theme.palette.primary.light, 0.2) : darken(theme.palette.primary.dark, 0.2),
     }
   },
   button: {
-    margin: `${theme.spacing(1)}px 0`,
+    margin: `${theme.spacing(1)} 0`,
   },
   iconSmall: {
     fontSize: 20,
@@ -83,21 +84,21 @@ const useStyles = makeStyles((theme) => {
   */
   stripped: {
     '& tbody tr:nth-child(even)': {
-      background: theme.palette.type === 'dark' ? alpha(theme.palette.grey[900], 0.5) : theme.palette.grey[50]
+      background: theme.palette.mode === 'dark' ? alpha(theme.palette.grey[900], 0.5) : theme.palette.grey[50]
     }
   },
   hover: {
     '& tbody tr:hover': {
-      background: theme.palette.type === 'dark' ? darken(theme.palette.primary.light, 0.8) : lighten(theme.palette.primary.light, 0.5)
+      background: theme.palette.mode === 'dark' ? darken(theme.palette.primary.light, 0.8) : lighten(theme.palette.primary.light, 0.5)
     }
   },
   bordered: {
-    border: theme.palette.type === 'dark' ? `1px solid ${theme.palette.grey[900]}` : `1px solid ${theme.palette.primary.light}`,
+    border: theme.palette.mode === 'dark' ? `1px solid ${theme.palette.grey[900]}` : `1px solid ${theme.palette.primary.light}`,
     '& thead tr': {
-      background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.light
+      background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.primary.light
     },
     '& td, th': {
-      border: theme.palette.type === 'dark' ? `1px solid ${theme.palette.grey[900]}` : `1px solid ${theme.palette.primary.light}`
+      border: theme.palette.mode === 'dark' ? `1px solid ${theme.palette.grey[900]}` : `1px solid ${theme.palette.primary.light}`
     },
     '& tr td, tr th': {
       '&:first-child': {
@@ -180,6 +181,7 @@ const useStyles = makeStyles((theme) => {
       }
     }
   }
-});
+}));
 
+// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
 export default useStyles;

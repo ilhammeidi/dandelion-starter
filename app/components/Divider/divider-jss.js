@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles'; 
+import { makeStyles } from 'tss-react/mui';
 
 const space = {
   margin: '40px 0'
 };
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles()((theme) => ({
   gradient: {
     extend: space,
     border: 0,
@@ -54,9 +54,9 @@ const useStyles = makeStyles((theme) => {
     extend: space,
     padding: 0,
     border: 'none',
-    borderTop: theme.palette.type === 'dark' ? `1px solid ${theme.palette.grey[700]}` : `1px solid ${theme.palette.grey[300]}`,
+    borderTop: theme.palette.mode === 'dark' ? `1px solid ${theme.palette.grey[700]}` : `1px solid ${theme.palette.grey[300]}`,
     color: theme.palette.text.secondary,
-    margin: `${theme.spacing(4)}px ${theme.spacing(0.5)}px ${theme.spacing(2)}px`,
+    margin: `${theme.spacing(4)} ${theme.spacing(0.5)} ${theme.spacing(2)}`,
     textAlign: 'center',
     '&:after': {
       content: 'attr(data-content)',
@@ -68,6 +68,7 @@ const useStyles = makeStyles((theme) => {
       background: theme.palette.background.paper
     }
   }
-});
+}));
 
+// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
 export default useStyles;

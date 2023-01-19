@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles'; 
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles()((theme, _params, classes) => ({
   dark: {},
   breadcrumbs: {
     position: 'relative',
@@ -20,13 +20,14 @@ const useStyles = makeStyles((theme) => {
         margin: '0 5px'
       }
     },
-    '&$dark': {
+    [`&.${classes.dark}`]: {
       color: theme.palette.text.secondary,
       '& a': {
         color: theme.palette.text.primary
       }
     }
   }
-});
+}));
 
+// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
 export default useStyles;

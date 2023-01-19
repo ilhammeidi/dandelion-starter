@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Avatar from '@material-ui/core/Avatar';
+import ButtonBase from '@mui/material/ButtonBase';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Avatar from '@mui/material/Avatar';
 import dummy from 'dan-api/dummy/dummyContents';
-import styles from './sidebarBig-jss';
+import useStyles from './sidebarBig-jss';
 
 function MenuProfile(props) {
+  const { classes, cx } = useStyles();
   const [status, setStatus] = useState(dummy.user.status);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -26,7 +26,6 @@ function MenuProfile(props) {
     handleClose();
   };
 
-  
   const changeStatus = st => {
     switch (st) {
       case 'online':
@@ -46,9 +45,9 @@ function MenuProfile(props) {
         <Avatar
           alt={dummy.user.name}
           src={dummy.user.avatar}
-          className={classNames(classes.avatar, classes.bigAvatar)}
+          className={cx(classes.avatar, classes.bigAvatar)}
         />
-        <i className={classNames(classes.dotStatus, classes.pinned, changeStatus(status))} />
+        <i className={cx(classes.dotStatus, classes.pinned, changeStatus(status))} />
       </ButtonBase>
       <Menu
         id="status-menu"
@@ -61,28 +60,28 @@ function MenuProfile(props) {
           <Avatar
             alt={dummy.user.name}
             src={dummy.user.avatar}
-            className={classNames(classes.avatar, classes.bigAvatar)}
+            className={cx(classes.avatar, classes.bigAvatar)}
           />
           <div className={classes.name}>
             <h5>{dummy.user.name}</h5>
-            <i className={classNames(classes.dotStatus, changeStatus(status))} />
+            <i className={cx(classes.dotStatus, changeStatus(status))} />
             {status}
           </div>
         </MenuItem>
         <MenuItem onClick={() => handleChangeStatus('online')}>
-          <i className={classNames(classes.dotStatus, classes.online)} />
+          <i className={cx(classes.dotStatus, classes.online)} />
           online
         </MenuItem>
         <MenuItem onClick={() => handleChangeStatus('idle')}>
-          <i className={classNames(classes.dotStatus, classes.idle)} />
+          <i className={cx(classes.dotStatus, classes.idle)} />
           idle
         </MenuItem>
         <MenuItem onClick={() => handleChangeStatus('bussy')}>
-          <i className={classNames(classes.dotStatus, classes.bussy)} />
+          <i className={cx(classes.dotStatus, classes.bussy)} />
           bussy
         </MenuItem>
         <MenuItem onClick={() => handleChangeStatus('offline')}>
-          <i className={classNames(classes.dotStatus, classes.offline)} />
+          <i className={cx(classes.dotStatus, classes.offline)} />
           offline
         </MenuItem>
       </Menu>
@@ -91,7 +90,7 @@ function MenuProfile(props) {
 }
 
 MenuProfile.propTypes = {
-  
+
 };
 
 MenuProfile.defaultProps = {

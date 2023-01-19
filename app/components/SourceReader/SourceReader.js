@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles'; 
+import { makeStyles } from 'tss-react/mui';
 import Axios from 'axios';
 import { connect } from 'react-redux';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/prism-light';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import lightStyle from 'react-syntax-highlighter/dist/esm/styles/prism/prism';
 import darkStyle from 'react-syntax-highlighter/dist/esm/styles/prism/xonokai';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Code from '@material-ui/icons/Code';
-import Close from '@material-ui/icons/Close';
-import Icon from '@material-ui/core/Icon';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import LinearProgress from '@mui/material/LinearProgress';
+import Code from '@mui/icons-material/Code';
+import Close from '@mui/icons-material/Close';
+import Icon from '@mui/material/Icon';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import codePreview from '../../config/codePreview';
 
 const url = '/api/docs?src=';
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles()((theme) => ({
   button: {
     margin: '8px 5px',
   },
@@ -86,11 +86,12 @@ const useStyles = makeStyles((theme) => {
       }
     },
   },
-});
+}));
 
 function SourceReader(props) {
+  const { classes, cx } = useStyles();
   const {
-    
+
     componentName,
     mode
   } = props;
@@ -124,13 +125,13 @@ function SourceReader(props) {
     <div>
       <Button onClick={sourceOpen} color="secondary" className={classes.button} size="small">
         { open ? (
-          <Close className={classNames(classes.leftIcon, classes.iconSmall)} />
+          <Close className={cx(classes.leftIcon, classes.iconSmall)} />
         ) : (
-          <Code className={classNames(classes.leftIcon, classes.iconSmall)} />
+          <Code className={cx(classes.leftIcon, classes.iconSmall)} />
         )}
         { open ? 'Hide Code' : 'Show Code' }
       </Button>
-      <section dir="ltr" className={classNames(classes.source, open ? classes.open : '')}>
+      <section dir="ltr" className={cx(classes.source, open ? classes.open : '')}>
         <div className={classes.src}>
           <p>
             <Icon className="description">description</Icon>
@@ -165,7 +166,7 @@ function SourceReader(props) {
 
 SourceReader.propTypes = {
   componentName: PropTypes.string.isRequired,
-  
+
   mode: PropTypes.string.isRequired,
 };
 

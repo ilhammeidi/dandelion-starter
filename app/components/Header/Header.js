@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-
-import Typography from '@material-ui/core/Typography';
-import Hidden from '@material-ui/core/Hidden';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import SearchIcon from '@material-ui/icons/Search';
-import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import Typography from '@mui/material/Typography';
+import Hidden from '@mui/material/Hidden';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import SearchIcon from '@mui/icons-material/Search';
+import Fab from '@mui/material/Fab';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 import UserMenu from './UserMenu';
 import SearchUi from '../Search/SearchUi';
-import styles from './header-jss';
+import useStyles from './header-jss';
 
 const elem = document.documentElement;
 
 function Header(props) {
+  const { classes, cx } = useStyles();
   const [open] = useState(false);
   const [fullScreen, setFullScreen] = useState(false);
   const [turnDarker, setTurnDarker] = useState(false);
@@ -85,7 +85,7 @@ function Header(props) {
   };
 
   const {
-    
+
     toggleDrawerOpen,
     margin,
     position,
@@ -109,7 +109,7 @@ function Header(props) {
   return (
     <AppBar
       className={
-        classNames(
+        cx(
           classes.appBar,
           classes.floatingBar,
           margin && classes.appBarShift,
@@ -128,47 +128,47 @@ function Header(props) {
         >
           <MenuIcon />
         </Fab>
-        <Hidden smDown>
+        <Hidden mdDown>
           <div className={classes.headerProperties}>
-            <div className={classNames(classes.headerAction, showTitle && classes.fadeOut)}>
+            <div className={cx(classes.headerAction, showTitle && classes.fadeOut)}>
               {fullScreen ? (
                 <Tooltip title="Exit Full Screen" placement="bottom">
-                  <IconButton className={classes.button} onClick={closeFullScreen}>
+                  <IconButton className={classes.button} onClick={closeFullScreen} size="large">
                     <i className="ion-ios-qr-scanner-outline" />
                   </IconButton>
                 </Tooltip>
               ) : (
                 <Tooltip title="Full Screen" placement="bottom">
-                  <IconButton className={classes.button} onClick={openFullScreen}>
+                  <IconButton className={classes.button} onClick={openFullScreen} size="large">
                     <i className="ion-ios-qr-scanner-outline" />
                   </IconButton>
                 </Tooltip>
               )}
               <Tooltip title="Turn Dark/Light" placement="bottom">
-                <IconButton className={classes.button} onClick={() => turnMode(mode)}>
+                <IconButton className={classes.button} onClick={() => turnMode(mode)} size="large">
                   <i className="ion-ios-bulb-outline" />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Show Guide" placement="bottom">
-                <IconButton className={classes.button} onClick={openGuide}>
+                <IconButton className={classes.button} onClick={openGuide} size="large">
                   <i className="ion-ios-help-circle-outline" />
                 </IconButton>
               </Tooltip>
             </div>
-            <Typography component="h2" className={classNames(classes.headerTitle, showTitle && classes.show)}>
+            <Typography component="h2" className={cx(classes.headerTitle, showTitle && classes.show)}>
               {title}
             </Typography>
           </div>
         </Hidden>
         <div className={classes.searchWrapper}>
-          <div className={classNames(classes.wrapper, classes.light)}>
+          <div className={cx(classes.wrapper, classes.light)}>
             <div className={classes.search}>
               <SearchIcon />
             </div>
             <SearchUi history={history} />
           </div>
         </div>
-        <Hidden xsDown>
+        <Hidden smDown>
           <span className={classes.separatorV} />
         </Hidden>
         <UserMenu />
@@ -178,7 +178,7 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  
+
   toggleDrawerOpen: PropTypes.func.isRequired,
   margin: PropTypes.bool.isRequired,
   gradient: PropTypes.bool.isRequired,
