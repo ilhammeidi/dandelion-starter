@@ -191,7 +191,7 @@ const applicationTheme = (color, mode, direction) => ({
     MuiInputLabel: {
       styleOverrides: {
         formControl: {
-          top: 12,
+          top: 10,
           left: 10,
           transform: 'translate(0, 22px) scale(1)',
         },
@@ -221,7 +221,7 @@ const applicationTheme = (color, mode, direction) => ({
         },
         root: {
           '& + div': {
-            '& .MuiSelect-root': {
+            '& .MuiSelect-select': {
               paddingBottom: 0,
               paddingTop: '24px'
             }

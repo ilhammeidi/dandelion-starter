@@ -76,7 +76,7 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
       padding: theme.spacing(0.5),
       textAlign: 'left',
       '& button': {
-        width: 'auto'
+        width: 'auto',
       }
     },
     [`& .${classes.avatar}`]: {
@@ -164,7 +164,7 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     }
   },
   active: {
-    backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) : alpha(theme.palette.primary.main, 0.3),
+    backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) + ' !important' : alpha(theme.palette.primary.main, 0.3) + ' !important',
     [`& .${classes.primary}`]: {
       color: theme.palette.mode === 'dark' ? theme.palette.common.white : theme.palette.primary.dark,
     },
@@ -274,6 +274,7 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
       width: 110
     },
     '& button': {
+      color: theme.palette.text.primary,
       fontSize: 12,
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',

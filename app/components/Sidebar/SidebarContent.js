@@ -30,7 +30,6 @@ function SidebarContent(props) {
   }, []);
 
   const {
-
     turnDarker,
     drawerPaper,
     toggleDrawerOpen,

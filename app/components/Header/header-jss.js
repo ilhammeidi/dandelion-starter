@@ -234,7 +234,7 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     left: 0,
     top: 0,
     [theme.breakpoints.up('lg')]: {
-      top: theme.spacing(1) * -8,
+      top: theme.spacing(-8)
     }
   },
   separatorV: {
@@ -318,7 +318,8 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     padding: `${theme.spacing(0.5)} ${theme.spacing(1)} ${theme.spacing(0.5)} ${theme.spacing(2)}`,
     minHeight: 'auto',
     margin: `0 ${theme.spacing(0.5)}`,
-    lineHeight: '2em'
+    lineHeight: '2em',
+    color: theme.palette.text.primary
   },
   opened: {
     color: theme.palette.primary.main,
