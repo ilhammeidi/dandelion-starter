@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import dummy from 'dan-api/dummy/dummyContents';
 import useStyles from './sidebarBig-jss';
 
-function MenuProfile(props) {
+function MenuProfile() {
   const { classes, cx } = useStyles();
   const [status, setStatus] = useState(dummy.user.status);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -88,14 +88,5 @@ function MenuProfile(props) {
     </div>
   );
 }
-
-MenuProfile.propTypes = {
-
-};
-
-MenuProfile.defaultProps = {
-  anchorEl: null,
-  isLogin: false,
-};
 
 export default MenuProfile;

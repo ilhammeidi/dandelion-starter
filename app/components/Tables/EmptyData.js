@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TableIcon from '@mui/icons-material/Apps';
 import useStyles from 'dan-components/Tables/tableStyle-jss';
 
-function EmptyData(props) {
+function EmptyData() {
   const { classes } = useStyles();
   return (
     <div className={classes.nodata}>
@@ -13,9 +13,5 @@ function EmptyData(props) {
     </div>
   );
 }
-
-EmptyData.propTypes = {
-
-};
 
 export default EmptyData;

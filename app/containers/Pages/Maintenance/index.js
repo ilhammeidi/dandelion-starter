@@ -54,7 +54,7 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-function Maintenance(props) {
+function Maintenance() {
   const title = brand.name + ' - Maintenance';
   const description = brand.desc;
   const { classes } = useStyles();
@@ -87,9 +87,5 @@ function Maintenance(props) {
     </div>
   );
 }
-
-Maintenance.propTypes = {
-
-};
 
 export default Maintenance;

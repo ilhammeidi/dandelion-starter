@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { LoginForm } from 'dan-components';
 import useStyles from 'dan-components/Forms/user-jss';
 
-function Login(props) {
+function Login() {
   const [valueForm, setValueForm] = useState(null);
   const { classes } = useStyles();
   const submitForm = values => {
@@ -38,9 +38,5 @@ function Login(props) {
     </div>
   );
 }
-
-Login.propTypes = {
-
-};
 
 export default Login;

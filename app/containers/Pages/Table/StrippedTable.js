@@ -32,7 +32,7 @@ const data = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-function StrippedTable(props) {
+function StrippedTable() {
   const { classes, cx } = useStyles();
   return (
     <Fragment>
@@ -68,9 +68,5 @@ function StrippedTable(props) {
     </Fragment>
   );
 }
-
-StrippedTable.propTypes = {
-
-};
 
 export default StrippedTable;

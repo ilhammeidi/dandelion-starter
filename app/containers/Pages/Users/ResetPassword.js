@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { ResetForm } from 'dan-components';
 import useStyles from '../../../components/Forms/user-jss';
 
-function ResetPassword(props) {
+function ResetPassword() {
   const [valueForm, setValueForm] = useState(null);
   const { classes } = useStyles();
   const submitForm = useCallback((values) => {
@@ -37,9 +37,5 @@ function ResetPassword(props) {
     </div>
   );
 }
-
-ResetPassword.propTypes = {
-
-};
 
 export default ResetPassword;

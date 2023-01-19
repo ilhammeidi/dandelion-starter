@@ -6,7 +6,7 @@ import brand from 'dan-api/dummy/brand';
 import { RegisterForm } from 'dan-components';
 import useStyles from 'dan-components/Forms/user-jss';
 
-function Register(props) {
+function Register() {
   const [valueForm, setValueForm] = useState(null);
   const { classes } = useStyles();
   const submitForm = values => {
@@ -38,9 +38,5 @@ function Register(props) {
     </div>
   );
 }
-
-Register.propTypes = {
-
-};
 
 export default Register;

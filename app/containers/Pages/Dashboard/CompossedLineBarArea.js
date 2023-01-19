@@ -35,7 +35,7 @@ const color = ({
   third: blue[500],
 });
 
-function CompossedLineBarArea(props) {
+function CompossedLineBarArea() {
   const { classes } = useStyles();
   return (
     <div className={classes.chartFluid}>
@@ -65,9 +65,5 @@ function CompossedLineBarArea(props) {
     </div>
   );
 }
-
-CompossedLineBarArea.propTypes = {
-
-};
 
 export default CompossedLineBarArea;

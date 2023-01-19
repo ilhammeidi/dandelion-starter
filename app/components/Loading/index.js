@@ -16,7 +16,4 @@ function Loading() {
   return (<CircularProgress className={classes.circularProgress} size={90} thickness={1} color="secondary" />);
 }
 
-Loading.propTypes = {
-
-};
 export default Loading;
