@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+
+
 import { Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
@@ -42,7 +42,7 @@ function UserMenu(props) {
     setMenuState({ anchorEl: null, openMenu: null });
   };
 
-  const { classes, dark } = props;
+  const {  dark } = props;
   const { anchorEl, openMenu } = menuState;
   return (
     <div>
@@ -170,7 +170,7 @@ function UserMenu(props) {
 }
 
 UserMenu.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   dark: PropTypes.bool,
 };
 
@@ -178,4 +178,4 @@ UserMenu.defaultProps = {
   dark: false
 };
 
-export default withStyles(styles)(UserMenu);
+export default UserMenu;

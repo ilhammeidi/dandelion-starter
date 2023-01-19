@@ -1,3 +1,4 @@
+import { makeStyles } from '@material-ui/core/styles'; 
 import { alpha } from '@material-ui/core/styles';
 import lightGreen from '@material-ui/core/colors/lightGreen';
 import red from '@material-ui/core/colors/red';
@@ -7,7 +8,7 @@ import grey from '@material-ui/core/colors/grey';
 const categoryWidth = 100;
 const listWidth = 180;
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => {
   bigSidebar: {
     color: theme.palette.text.primary,
     padding: `${theme.spacing(1)}px 0`,
@@ -241,4 +242,4 @@ const styles = theme => ({
   }
 });
 
-export default styles;
+export default useStyles;

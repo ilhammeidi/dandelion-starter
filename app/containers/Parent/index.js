@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import MenuContent from 'dan-api/ui/menu';
@@ -25,7 +25,7 @@ const styles = {
 function Parent(props) {
   const title = brand.name;
   const description = brand.desc;
-  const { classes, history } = props;
+  const {  history } = props;
   // Get Path Location
   let parts = history.location.pathname.split('/');
   const place = parts[parts.length - 1];
@@ -73,8 +73,8 @@ function Parent(props) {
 }
 
 Parent.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   history: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Parent);
+export default Parent;

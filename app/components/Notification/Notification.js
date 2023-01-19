@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'; 
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => {
   close: {
     width: theme.spacing(4),
     height: theme.spacing(4),
@@ -22,7 +22,7 @@ function Notification(props) {
     close('crudTableDemo');
   };
 
-  const { classes, message } = props;
+  const {  message } = props;
   return (
     <Snackbar
       anchorOrigin={{
@@ -52,9 +52,9 @@ function Notification(props) {
 }
 
 Notification.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   close: PropTypes.func.isRequired,
   message: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(Notification);
+export default Notification;

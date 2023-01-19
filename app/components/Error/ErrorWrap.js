@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'; 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Route, Link } from 'react-router-dom';
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => {
   errorWrap: {
     background: theme.palette.background.paper,
     boxShadow: theme.shadows[2],
@@ -52,7 +52,7 @@ const ErrorWrap = (props) => (
       if (staticContext) {
         staticContext.status = 404; // eslint-disable-line
       }
-      const { classes, title, desc } = props;
+      const {  title, desc } = props;
       return (
         <div className={classes.errorWrap}>
           <Typography className={classes.title} variant="h1">{title}</Typography>
@@ -73,9 +73,9 @@ const ErrorWrap = (props) => (
 );
 
 ErrorWrap.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   desc: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(ErrorWrap);
+export default ErrorWrap;

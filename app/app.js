@@ -86,9 +86,18 @@ if (!window.Intl) {
 } else {
   render(translationMessages);
 }
-// Install ServiceWorker and AppCache in the end since
-// it's not most important operation and if main code fails,
-// we do not want it installed
-//  if (process.env.NODE_ENV === 'production') {
-//    require('offline-plugin/runtime').install(); // eslint-disable-line global-require
+
+/**
+Offline access for production mode.
+Uncomment this code bellow to register Service Worker.
+**/
+
+//  if ('serviceWorker' in navigator) {
+//    window.addEventListener('load', () => {
+//      navigator.serviceWorker.register('/service-worker.js').then(registration => {
+//        console.log('SW registered: ', registration);
+//      }).catch(registrationError => {
+//        console.log('SW registration failed: ', registrationError);
+//      });
+//    });
 //  }

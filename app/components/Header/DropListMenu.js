@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Popper from '@material-ui/core/Popper';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import classNames from 'classnames';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -55,7 +55,7 @@ function MainMenu(props) {
     setOpenMenu([]);
   };
 
-  const { classes, open, dataMenu } = props;
+  const {  open, dataMenu } = props;
   const getMenus = (parent, menuArray) => menuArray.map((item, index) => {
     if (item.multilevel) {
       return false;
@@ -136,7 +136,7 @@ function MainMenu(props) {
 }
 
 MainMenu.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   open: PropTypes.array.isRequired,
   openSubMenu: PropTypes.func.isRequired,
   dataMenu: PropTypes.array.isRequired,
@@ -157,4 +157,4 @@ const MainMenuMapped = connect(
   mapDispatchToProps
 )(MainMenu);
 
-export default withStyles(styles)(MainMenuMapped);
+export default MainMenuMapped;

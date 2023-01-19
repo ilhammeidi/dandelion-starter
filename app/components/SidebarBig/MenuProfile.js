@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+
+
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -26,7 +26,7 @@ function MenuProfile(props) {
     handleClose();
   };
 
-  const { classes } = props;
+  
   const changeStatus = st => {
     switch (st) {
       case 'online':
@@ -91,7 +91,7 @@ function MenuProfile(props) {
 }
 
 MenuProfile.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
 };
 
 MenuProfile.defaultProps = {
@@ -99,4 +99,4 @@ MenuProfile.defaultProps = {
   isLogin: false,
 };
 
-export default withStyles(styles)(MenuProfile);
+export default MenuProfile;

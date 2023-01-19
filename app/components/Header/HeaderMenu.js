@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+
 import AppBar from '@material-ui/core/AppBar';
 import { NavLink } from 'react-router-dom';
 import Toolbar from '@material-ui/core/Toolbar';
 import SearchIcon from '@material-ui/icons/Search';
-import classNames from 'classnames';
+
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import logo from 'dan-images/logo.svg';
@@ -97,7 +97,7 @@ function HeaderMenu(props) {
   };
 
   const {
-    classes,
+    
     type,
     dataMenu,
     history,
@@ -206,7 +206,7 @@ function HeaderMenu(props) {
 }
 
 HeaderMenu.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   type: PropTypes.string.isRequired,
   dataMenu: PropTypes.array.isRequired,
   openMobileNav: PropTypes.bool.isRequired,
@@ -225,4 +225,4 @@ HeaderMenu.defaultProps = {
   logoLink: '/',
 };
 
-export default withStyles(styles)(HeaderMenu);
+export default HeaderMenu;

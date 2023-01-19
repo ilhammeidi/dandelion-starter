@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'; 
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Build from '@material-ui/icons/Build';
@@ -10,7 +10,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Settings from '@material-ui/icons/SettingsApplications';
 import Warning from '@material-ui/icons/Warning';
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => {
   container: {
     textAlign: 'center'
   },
@@ -57,7 +57,7 @@ const styles = theme => ({
 function Maintenance(props) {
   const title = brand.name + ' - Maintenance';
   const description = brand.desc;
-  const { classes } = props;
+  
   return (
     <div className={classes.root}>
       <Helmet>
@@ -88,7 +88,7 @@ function Maintenance(props) {
 }
 
 Maintenance.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
 };
 
-export default withStyles(styles)(Maintenance);
+export default Maintenance;

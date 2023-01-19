@@ -1,3 +1,4 @@
+import { makeStyles } from '@material-ui/core/styles'; 
 import { darken } from '@material-ui/core/styles';
 import bg from 'dan-images/petal_bg.svg';
 
@@ -11,7 +12,7 @@ const appFrame = {
   zIndex: 1,
 };
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => {
   root: {
     width: '100%',
     marginTop: 0,
@@ -224,4 +225,4 @@ const styles = theme => ({
   }
 });
 
-export default styles;
+export default useStyles;

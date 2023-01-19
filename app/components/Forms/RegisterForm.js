@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+
+
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
@@ -50,7 +50,7 @@ function RegisterForm(props) {
   };
 
   const {
-    classes,
+    
     handleSubmit,
     pristine,
     submitting,
@@ -188,7 +188,7 @@ function RegisterForm(props) {
 }
 
 RegisterForm.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -206,4 +206,4 @@ const RegisterFormMapped = connect(
   }),
 )(RegisterFormReduxed);
 
-export default withStyles(styles)(RegisterFormMapped);
+export default RegisterFormMapped;

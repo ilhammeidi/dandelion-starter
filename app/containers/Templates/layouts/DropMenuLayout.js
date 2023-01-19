@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { PropTypes } from 'prop-types';
-import classNames from 'classnames';
+
 import Fade from '@material-ui/core/Fade';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+
 import { HeaderMenu, BreadCrumb } from 'dan-components';
 import dataMenu from 'dan-api/ui/menu';
 import Decoration from '../Decoration';
@@ -11,7 +11,7 @@ import styles from '../appStyles-jss';
 
 function DropMenuLayout(props) {
   const {
-    classes,
+    
     children,
     pageLoaded,
     mode,
@@ -81,7 +81,7 @@ function DropMenuLayout(props) {
 }
 
 DropMenuLayout.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   children: PropTypes.node.isRequired,
   history: PropTypes.object.isRequired,
   changeMode: PropTypes.func.isRequired,
@@ -98,4 +98,4 @@ DropMenuLayout.propTypes = {
   handleOpenGuide: PropTypes.func.isRequired
 };
 
-export default (withStyles(styles)(DropMenuLayout));
+export default DropMenuLayout;

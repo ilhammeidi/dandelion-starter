@@ -1,7 +1,9 @@
 import { lighten, darken, alpha } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'; 
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
-const styles = theme => ({
+
+const useStyles = makeStyles((theme) => {
   root: {
     paddingRight: theme.spacing(1),
   },
@@ -180,4 +182,4 @@ const styles = theme => ({
   }
 });
 
-export default styles;
+export default useStyles;

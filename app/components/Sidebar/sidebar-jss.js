@@ -1,3 +1,4 @@
+import { makeStyles } from '@material-ui/core/styles'; 
 import { alpha } from '@material-ui/core/styles';
 import lightGreen from '@material-ui/core/colors/lightGreen';
 import red from '@material-ui/core/colors/red';
@@ -5,7 +6,7 @@ import amber from '@material-ui/core/colors/amber';
 import grey from '@material-ui/core/colors/grey';
 
 const drawerWidth = 240;
-const styles = theme => ({
+const useStyles = makeStyles((theme) => {
   user: {
     justifyContent: 'center'
   },
@@ -365,4 +366,4 @@ const styles = theme => ({
   }
 });
 
-export default styles;
+export default useStyles;

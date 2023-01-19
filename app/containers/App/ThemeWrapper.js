@@ -6,7 +6,7 @@ import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/styles';
 import { bindActionCreators } from 'redux';
-import { withStyles, createTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { changeModeAction } from 'dan-redux/actions/uiActions';
 import applicationTheme from '../../styles/theme/applicationTheme';
 
@@ -75,7 +75,7 @@ function ThemeWrapper(props) {
     changeMode(mode);
   };
 
-  const { classes, children } = props;
+  const {  children } = props;
   return (
     <StylesProvider jss={jss}>
       <MuiThemeProvider theme={theme}>
@@ -100,7 +100,7 @@ function ThemeWrapper(props) {
 }
 
 ThemeWrapper.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   children: PropTypes.node.isRequired,
   direction: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
@@ -123,4 +123,4 @@ const ThemeWrapperMapped = connect(
   dispatchToProps
 )(ThemeWrapper);
 
-export default withStyles(styles)(ThemeWrapperMapped);
+export default ThemeWrapperMapped;

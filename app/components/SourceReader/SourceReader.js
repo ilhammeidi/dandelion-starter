@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'; 
 import Axios from 'axios';
 import { connect } from 'react-redux';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/prism-light';
@@ -8,7 +8,7 @@ import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import lightStyle from 'react-syntax-highlighter/dist/esm/styles/prism/prism';
 import darkStyle from 'react-syntax-highlighter/dist/esm/styles/prism/xonokai';
 import Button from '@material-ui/core/Button';
-import classNames from 'classnames';
+
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Code from '@material-ui/icons/Code';
 import Close from '@material-ui/icons/Close';
@@ -19,7 +19,7 @@ import codePreview from '../../config/codePreview';
 
 const url = '/api/docs?src=';
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => {
   button: {
     margin: '8px 5px',
   },
@@ -90,7 +90,7 @@ const styles = theme => ({
 
 function SourceReader(props) {
   const {
-    classes,
+    
     componentName,
     mode
   } = props;
@@ -165,7 +165,7 @@ function SourceReader(props) {
 
 SourceReader.propTypes = {
   componentName: PropTypes.string.isRequired,
-  classes: PropTypes.object.isRequired,
+  
   mode: PropTypes.string.isRequired,
 };
 
@@ -177,4 +177,4 @@ const AppMapped = connect(
   mapStateToProps,
 )(SourceReader);
 
-export default withStyles(styles)(AppMapped);
+export default AppMapped;

@@ -1,9 +1,10 @@
+import { makeStyles } from '@material-ui/core/styles'; 
 import { alpha, darken } from '@material-ui/core/styles';
 import { gradientBgLight, gradientBgDark } from 'containers/Templates/appStyles-jss';
 const drawerWidth = 240;
 const drawerBigWidth = 280;
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => {
   appBar: {
     background: 'rgba(0,0,0,0)',
     zIndex: theme.zIndex.drawer + 1,
@@ -480,4 +481,4 @@ const styles = theme => ({
   }
 });
 
-export default styles;
+export default useStyles;

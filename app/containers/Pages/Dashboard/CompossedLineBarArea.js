@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createTheme, withStyles } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import ThemePallete from 'dan-api/palette/themePalette';
 import blue from '@material-ui/core/colors/blue';
 import {
@@ -35,7 +35,7 @@ const color = ({
 });
 
 function CompossedLineBarArea(props) {
-  const { classes } = props;
+  
   return (
     <div className={classes.chartFluid}>
       <ResponsiveContainer>
@@ -66,7 +66,7 @@ function CompossedLineBarArea(props) {
 }
 
 CompossedLineBarArea.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
 };
 
-export default withStyles(styles)(CompossedLineBarArea);
+export default CompossedLineBarArea;

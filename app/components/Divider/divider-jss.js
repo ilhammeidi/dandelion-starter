@@ -1,7 +1,9 @@
+import { makeStyles } from '@material-ui/core/styles'; 
+
 const space = {
   margin: '40px 0'
 };
-const styles = theme => ({
+const useStyles = makeStyles((theme) => {
   gradient: {
     extend: space,
     border: 0,
@@ -68,4 +70,4 @@ const styles = theme => ({
   }
 });
 
-export default styles;
+export default useStyles;

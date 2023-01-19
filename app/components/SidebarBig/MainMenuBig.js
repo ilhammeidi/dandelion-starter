@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+
+
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -24,7 +24,7 @@ function MainMenuBig(props) {
   const [menuLoaded, setMenuLoaded] = useState(true);
 
   const {
-    classes,
+    
     open,
     closeDrawer,
     dataMenu,
@@ -187,7 +187,7 @@ function MainMenuBig(props) {
 }
 
 MainMenuBig.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   open: PropTypes.array.isRequired,
   dataMenu: PropTypes.array.isRequired,
   openDrawer: PropTypes.func.isRequired,
@@ -221,4 +221,4 @@ const MainMenuBigMapped = connect(
   mapDispatchToProps,
 )(MainMenuBig);
 
-export default withStyles(styles)(MainMenuBigMapped);
+export default MainMenuBigMapped;

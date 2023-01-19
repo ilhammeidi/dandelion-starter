@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+
+
 import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -30,7 +30,7 @@ function SidebarContent(props) {
   }, []);
 
   const {
-    classes,
+    
     turnDarker,
     drawerPaper,
     toggleDrawerOpen,
@@ -126,7 +126,7 @@ function SidebarContent(props) {
 }
 
 SidebarContent.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   drawerPaper: PropTypes.bool.isRequired,
   turnDarker: PropTypes.bool,
   toggleDrawerOpen: PropTypes.func,
@@ -149,4 +149,4 @@ SidebarContent.defaultProps = {
   isLogin: true,
 };
 
-export default withStyles(styles)(SidebarContent);
+export default SidebarContent;

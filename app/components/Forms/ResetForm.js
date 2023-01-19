@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+
+
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
@@ -25,7 +25,7 @@ const email = value => (
 
 function ResetForm(props) {
   const {
-    classes,
+    
     handleSubmit,
     pristine,
     submitting,
@@ -73,7 +73,7 @@ function ResetForm(props) {
 }
 
 ResetForm.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -91,4 +91,4 @@ const RegisterFormMapped = connect(
   }),
 )(ResetFormReduxed);
 
-export default withStyles(styles)(RegisterFormMapped);
+export default RegisterFormMapped;

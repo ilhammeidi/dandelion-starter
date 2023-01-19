@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+
 import brand from 'dan-api/dummy/brand';
 import { RegisterForm } from 'dan-components';
 import styles from 'dan-components/Forms/user-jss';
@@ -19,7 +19,7 @@ function Register(props) {
 
   const title = brand.name + ' - Register';
   const description = brand.desc;
-  const { classes } = props;
+  
   return (
     <div className={classes.root}>
       <Helmet>
@@ -40,7 +40,7 @@ function Register(props) {
 }
 
 Register.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
 };
 
-export default withStyles(styles)(Register);
+export default Register;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
-import classNames from 'classnames';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+
 import { GuideSlider } from 'dan-components';
 import { toggleAction, openAction, playTransitionAction } from 'dan-redux/actions/uiActions';
 import LeftSidebarLayout from './layouts/LeftSidebarLayout';
@@ -54,7 +54,7 @@ function Dashboard(props) {
   };
 
   const {
-    classes,
+    
     children,
     toggleDrawer,
     sidebarOpen,
@@ -193,7 +193,7 @@ function Dashboard(props) {
 }
 
 Dashboard.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   children: PropTypes.node.isRequired,
   history: PropTypes.object.isRequired,
   initialOpen: PropTypes.func.isRequired,
@@ -230,4 +230,4 @@ const DashboardMaped = connect(
   mapDispatchToProps
 )(Dashboard);
 
-export default (withStyles(styles)(DashboardMaped));
+export default DashboardMaped;

@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+
+
 import { Field, reduxForm } from 'redux-form';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
@@ -50,7 +50,7 @@ function LoginForm(props) {
   };
 
   const {
-    classes,
+    
     handleSubmit,
     pristine,
     submitting,
@@ -159,7 +159,7 @@ function LoginForm(props) {
 }
 
 LoginForm.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -179,4 +179,4 @@ const FormInit = connect(
   }),
 )(LoginFormReduxed);
 
-export default withStyles(styles)(FormInit);
+export default FormInit;

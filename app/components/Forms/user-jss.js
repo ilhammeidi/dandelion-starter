@@ -1,3 +1,4 @@
+import { makeStyles } from '@material-ui/core/styles'; 
 import { alpha } from '@material-ui/core/styles';
 import cyan from '@material-ui/core/colors/cyan';
 import indigo from '@material-ui/core/colors/indigo';
@@ -23,7 +24,7 @@ const wrapper = (theme, opacity) => ({
   backgroundAttachment: 'fixed'
 });
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => {
   root: {
     ...rootWraper
   },
@@ -411,4 +412,4 @@ const styles = theme => ({
   },
 });
 
-export default styles;
+export default useStyles;

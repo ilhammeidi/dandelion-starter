@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -29,7 +29,7 @@ function MainMenu(props) {
   };
 
   const {
-    classes,
+    
     openSubMenu,
     open,
     dataMenu
@@ -121,7 +121,7 @@ function MainMenu(props) {
 }
 
 MainMenu.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   open: PropTypes.array.isRequired,
   openSubMenu: PropTypes.func.isRequired,
   toggleDrawerOpen: PropTypes.func.isRequired,
@@ -144,4 +144,4 @@ const MainMenuMapped = connect(
   mapDispatchToProps
 )(MainMenu);
 
-export default withStyles(styles)(MainMenuMapped);
+export default MainMenuMapped;

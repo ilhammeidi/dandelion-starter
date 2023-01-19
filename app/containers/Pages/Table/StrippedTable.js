@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+
 import Toolbar from '@material-ui/core/Toolbar';
-import classNames from 'classnames';
+
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -33,7 +33,7 @@ const data = [
 ];
 
 function StrippedTable(props) {
-  const { classes } = props;
+  
   return (
     <Fragment>
       <Toolbar className={classes.toolbar}>
@@ -70,7 +70,7 @@ function StrippedTable(props) {
 }
 
 StrippedTable.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
 };
 
-export default withStyles(styles)(StrippedTable);
+export default StrippedTable;

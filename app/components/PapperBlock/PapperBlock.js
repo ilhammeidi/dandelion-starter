@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+
+
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import styles from './papperStyle-jss';
 
 function PapperBlock(props) {
   const {
-    classes,
+    
     title,
     desc,
     children,
@@ -43,7 +43,7 @@ function PapperBlock(props) {
 }
 
 PapperBlock.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   title: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
   icon: PropTypes.string,
@@ -62,4 +62,4 @@ PapperBlock.defaultProps = {
   icon: 'ion-ios-bookmark-outline'
 };
 
-export default withStyles(styles)(PapperBlock);
+export default PapperBlock;

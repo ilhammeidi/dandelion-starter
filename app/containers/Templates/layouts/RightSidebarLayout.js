@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { PropTypes } from 'prop-types';
-import classNames from 'classnames';
+
 import Fade from '@material-ui/core/Fade';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+
 import {
   Header,
   Sidebar,
@@ -15,7 +15,7 @@ import styles from '../appStyles-jss';
 
 function RightSidebarLayout(props) {
   const {
-    classes,
+    
     children,
     toggleDrawer,
     sidebarOpen,
@@ -83,7 +83,7 @@ function RightSidebarLayout(props) {
 }
 
 RightSidebarLayout.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   children: PropTypes.node.isRequired,
   history: PropTypes.object.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
@@ -100,4 +100,4 @@ RightSidebarLayout.propTypes = {
   handleOpenGuide: PropTypes.func.isRequired
 };
 
-export default (withStyles(styles)(RightSidebarLayout));
+export default RightSidebarLayout;

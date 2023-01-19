@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'; 
 import Paper from '@material-ui/core/Paper';
 import { Field, reduxForm } from 'redux-form';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -40,7 +40,7 @@ const email = value => (
     : undefined
 );
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => {
   root: {
     flexGrow: 1,
     padding: 30
@@ -77,7 +77,7 @@ const initData = {
 function ReduxFormDemo(props) {
   const trueBool = true;
   const {
-    classes,
+    
     handleSubmit,
     pristine,
     reset,
@@ -192,7 +192,7 @@ renderRadioGroup.propTypes = {
 };
 
 ReduxFormDemo.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   handleSubmit: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
@@ -218,4 +218,4 @@ const FormInit = connect(
   mapDispatchToProps,
 )(ReduxFormMapped);
 
-export default withStyles(styles)(FormInit);
+export default FormInit;

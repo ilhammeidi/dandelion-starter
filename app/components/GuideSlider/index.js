@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -41,7 +41,7 @@ function GuideSlider(props) {
   };
 
   const {
-    classes,
+    
     theme,
     openGuide,
     closeGuide
@@ -109,8 +109,8 @@ function GuideSlider(props) {
 GuideSlider.propTypes = {
   openGuide: PropTypes.bool.isRequired,
   closeGuide: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
+  
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(GuideSlider);
+export default GuideSlider;

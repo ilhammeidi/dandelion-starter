@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+
+
 import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -48,7 +48,7 @@ function Sidebar(props) {
   };
 
   const {
-    classes,
+    
     open,
     toggleDrawerOpen,
     loadTransition,
@@ -111,7 +111,7 @@ function Sidebar(props) {
 }
 
 Sidebar.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   toggleDrawerOpen: PropTypes.func.isRequired,
   loadTransition: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
@@ -123,4 +123,4 @@ Sidebar.defaultProps = {
   leftSidebar: true
 };
 
-export default withStyles(styles)(Sidebar);
+export default Sidebar;

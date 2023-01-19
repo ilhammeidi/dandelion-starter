@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-import { withStyles } from '@material-ui/core/styles';
+
 import { SourceReader, PapperBlock } from 'dan-components';
 import ReduxFormDemo from './ReduxFormDemo';
 
@@ -48,4 +48,4 @@ function ReduxForm() {
   );
 }
 
-export default withStyles(styles)(ReduxForm);
+export default ReduxForm;

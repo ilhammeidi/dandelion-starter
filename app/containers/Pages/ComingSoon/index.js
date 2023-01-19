@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import classNames from 'classnames';
+
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -15,7 +15,7 @@ import logo from 'dan-images/logo.svg';
 import styles from 'dan-components/Forms/user-jss';
 
 function ComingSoon(props) {
-  const { classes, deco } = props;
+  const {  deco } = props;
   const [email, setEmail] = useState('');
 
   const handleChange = event => {
@@ -89,7 +89,7 @@ function ComingSoon(props) {
 }
 
 ComingSoon.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   deco: PropTypes.bool.isRequired,
 };
 
@@ -100,4 +100,4 @@ const FormInit = connect(
   }),
 )(ComingSoon);
 
-export default withStyles(styles)(FormInit);
+export default FormInit;

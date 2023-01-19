@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { PropTypes } from 'prop-types';
-import classNames from 'classnames';
+
 import Fade from '@material-ui/core/Fade';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+
 import {
   Header,
   SidebarBig,
@@ -15,7 +15,7 @@ import styles from '../appStyles-jss';
 
 function LeftSidebarBigLayout(props) {
   const {
-    classes,
+    
     children,
     toggleDrawer,
     sidebarOpen,
@@ -82,7 +82,7 @@ function LeftSidebarBigLayout(props) {
 }
 
 LeftSidebarBigLayout.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   children: PropTypes.node.isRequired,
   history: PropTypes.object.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
@@ -99,4 +99,4 @@ LeftSidebarBigLayout.propTypes = {
   handleOpenGuide: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(LeftSidebarBigLayout);
+export default LeftSidebarBigLayout;

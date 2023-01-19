@@ -1,4 +1,6 @@
-const styles = theme => ({
+import { makeStyles } from '@material-ui/core/styles'; 
+
+const useStyles = makeStyles((theme) => {
   dark: {},
   breadcrumbs: {
     position: 'relative',
@@ -27,4 +29,4 @@ const styles = theme => ({
   }
 });
 
-export default styles;
+export default useStyles;

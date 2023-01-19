@@ -1,5 +1,7 @@
+import { makeStyles } from '@material-ui/core/styles'; 
 import { lighten } from '@material-ui/core/styles';
-const styles = theme => ({
+
+const useStyles = makeStyles((theme) => {
   root: {
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(3),
@@ -99,4 +101,4 @@ const styles = theme => ({
   }
 });
 
-export default styles;
+export default useStyles;

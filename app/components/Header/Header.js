@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+
+
 import Typography from '@material-ui/core/Typography';
 import Hidden from '@material-ui/core/Hidden';
 import AppBar from '@material-ui/core/AppBar';
@@ -85,7 +85,7 @@ function Header(props) {
   };
 
   const {
-    classes,
+    
     toggleDrawerOpen,
     margin,
     position,
@@ -178,7 +178,7 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   toggleDrawerOpen: PropTypes.func.isRequired,
   margin: PropTypes.bool.isRequired,
   gradient: PropTypes.bool.isRequired,
@@ -190,4 +190,4 @@ Header.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Header);
+export default Header;

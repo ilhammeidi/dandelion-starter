@@ -7,14 +7,14 @@ import parse from 'autosuggest-highlight/parse';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-import { withStyles } from '@material-ui/core/styles';
+
 import suggestionsApi from 'dan-api/ui/menu';
 import styles from './search-jss';
 
 const menu = [];
 
 function renderInput(inputProps) {
-  const { classes, ref, ...other } = inputProps;
+  const {  ref, ...other } = inputProps;
 
   return (
     <TextField
@@ -116,7 +116,7 @@ function SearchUi(props) {
     }
   };
 
-  const { classes } = props;
+  
 
   return (
     <Autosuggest
@@ -136,7 +136,7 @@ function SearchUi(props) {
       renderSuggestion={renderSuggestion}
       className={classes.autocomplete}
       inputProps={{
-        classes,
+        
         placeholder: 'Search UI',
         value,
         onChange: handleChange,
@@ -146,8 +146,8 @@ function SearchUi(props) {
 }
 
 SearchUi.propTypes = {
-  classes: PropTypes.object.isRequired,
+  
   history: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SearchUi);
+export default SearchUi;
