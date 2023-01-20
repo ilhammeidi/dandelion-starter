@@ -16,7 +16,7 @@ import AllInclusive from '@mui/icons-material/AllInclusive';
 import Brightness5 from '@mui/icons-material/Brightness5';
 import People from '@mui/icons-material/People';
 import Icon from '@mui/material/Icon';
-import Hidden from '@mui/material/Hidden';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
 import { TextFieldRedux, CheckboxRedux } from './ReduxFormMUI';
@@ -45,6 +45,9 @@ function RegisterForm(props) {
   const { classes, cx } = useStyles();
   const [tab, setTab] = useState(0);
 
+  const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
+  const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
+
   const handleChangeTab = (event, value) => {
     setTab(value);
   };
@@ -57,14 +60,14 @@ function RegisterForm(props) {
   } = props;
   return (
     <Fragment>
-      <Hidden mdUp>
+      {!mdUp && (
         <NavLink to="/" className={cx(classes.brand, classes.outer)}>
           <img src={logo} alt={brand.name} />
           {brand.name}
         </NavLink>
-      </Hidden>
+      )}
       <Paper className={cx(classes.paperWrap, deco && classes.petal)}>
-        <Hidden mdDown>
+        {!mdDown && (
           <div className={classes.topBar}>
             <NavLink to="/" className={classes.brand}>
               <img src={logo} alt={brand.name} />
@@ -75,7 +78,7 @@ function RegisterForm(props) {
               Already have account ?
             </Button>
           </div>
-        </Hidden>
+        )}
         <Typography variant="h4" className={classes.title} gutterBottom>
           Register
         </Typography>

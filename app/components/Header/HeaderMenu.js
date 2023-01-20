@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
-
 import AppBar from '@mui/material/AppBar';
 import { NavLink } from 'react-router-dom';
 import Toolbar from '@mui/material/Toolbar';
 import SearchIcon from '@mui/icons-material/Search';
-
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import logo from 'dan-images/logo.svg';
 import brand from 'dan-api/dummy/brand';
-import Hidden from '@mui/material/Hidden';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import dummy from 'dan-api/dummy/dummyContents';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -109,6 +107,11 @@ function HeaderMenu(props) {
     isLogin,
     logoLink
   } = props;
+
+  const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
+  const lgUp = useMediaQuery(theme => theme.breakpoints.up('lg'));
+  const lgDown = useMediaQuery(theme => theme.breakpoints.down('lg'));
+
   return (
     <AppBar
       className={
@@ -120,7 +123,7 @@ function HeaderMenu(props) {
       }
     >
       <div className={classes.appMenu}>
-        <Hidden lgUp>
+        {!lgUp && (
           <IconButton
             className={classes.menuButton}
             aria-label="Menu"
@@ -128,40 +131,42 @@ function HeaderMenu(props) {
             size="large">
             <MenuIcon />
           </IconButton>
-        </Hidden>
-        <Hidden mdDown>
-          <div className={classes.headerProperties}>
-            <div className={cx(classes.headerAction, classes.invert)}>
-              {fullScreen ? (
-                <Tooltip title="Exit Full Screen" placement="bottom">
-                  <IconButton className={classes.button} onClick={closeFullScreen} size="large">
-                    <i className="ion-ios-qr-scanner-outline" />
+        )}
+        {!mdDown && (
+          <Fragment>
+            <div className={classes.headerProperties}>
+              <div className={cx(classes.headerAction, classes.invert)}>
+                {fullScreen ? (
+                  <Tooltip title="Exit Full Screen" placement="bottom">
+                    <IconButton className={classes.button} onClick={closeFullScreen} size="large">
+                      <i className="ion-ios-qr-scanner-outline" />
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Full Screen" placement="bottom">
+                    <IconButton className={classes.button} onClick={openFullScreen} size="large">
+                      <i className="ion-ios-qr-scanner-outline" />
+                    </IconButton>
+                  </Tooltip>
+                )}
+                <Tooltip title="Turn Dark/Light" placement="bottom">
+                  <IconButton className={classes.button} onClick={() => turnMode(mode)} size="large">
+                    <i className="ion-ios-bulb-outline" />
                   </IconButton>
                 </Tooltip>
-              ) : (
-                <Tooltip title="Full Screen" placement="bottom">
-                  <IconButton className={classes.button} onClick={openFullScreen} size="large">
-                    <i className="ion-ios-qr-scanner-outline" />
+                <Tooltip title="Show Guide" placement="bottom">
+                  <IconButton className={classes.button} onClick={openGuide} size="large">
+                    <i className="ion-ios-help-circle-outline" />
                   </IconButton>
                 </Tooltip>
-              )}
-              <Tooltip title="Turn Dark/Light" placement="bottom">
-                <IconButton className={classes.button} onClick={() => turnMode(mode)} size="large">
-                  <i className="ion-ios-bulb-outline" />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Show Guide" placement="bottom">
-                <IconButton className={classes.button} onClick={openGuide} size="large">
-                  <i className="ion-ios-help-circle-outline" />
-                </IconButton>
-              </Tooltip>
+              </div>
             </div>
-          </div>
-          <NavLink to={logoLink} className={classes.brand}>
-            <img src={logo} alt={brand.name} />
-            {brand.name}
-          </NavLink>
-        </Hidden>
+            <NavLink to={logoLink} className={classes.brand}>
+              <img src={logo} alt={brand.name} />
+              {brand.name}
+            </NavLink>
+          </Fragment>
+        )}
         <div className={classes.searchHeaderMenu}>
           <div className={cx(classes.wrapper, classes.dark)}>
             <div className={classes.search}>
@@ -174,10 +179,8 @@ function HeaderMenu(props) {
           <UserMenu dark />
         </Toolbar>
       </div>
-      <Hidden lgDown>
-        { type === 'mega-menu' ? <MegaMenu dataMenu={dataMenu} /> : <DropListMenu dataMenu={dataMenu} />}
-      </Hidden>
-      <Hidden lgUp>
+      {!lgDown && type === 'mega-menu' ? <MegaMenu dataMenu={dataMenu} /> : <DropListMenu dataMenu={dataMenu} />}
+      {!lgUp && (
         <SwipeableDrawer
           onClose={toggleDrawerOpen}
           onOpen={toggleDrawerOpen}
@@ -200,7 +203,7 @@ function HeaderMenu(props) {
             />
           </div>
         </SwipeableDrawer>
-      </Hidden>
+      )}
     </AppBar>
   );
 }

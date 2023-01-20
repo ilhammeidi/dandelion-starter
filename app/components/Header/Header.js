@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Typography from '@mui/material/Typography';
-import Hidden from '@mui/material/Hidden';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import SearchIcon from '@mui/icons-material/Search';
@@ -105,6 +105,9 @@ function Header(props) {
     return classes.left;
   };
 
+  const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
+
   return (
     <AppBar
       className={
@@ -127,7 +130,7 @@ function Header(props) {
         >
           <MenuIcon />
         </Fab>
-        <Hidden mdDown>
+        {!mdDown && (
           <div className={classes.headerProperties}>
             <div className={cx(classes.headerAction, showTitle && classes.fadeOut)}>
               {fullScreen ? (
@@ -158,7 +161,7 @@ function Header(props) {
               {title}
             </Typography>
           </div>
-        </Hidden>
+        )}
         <div className={classes.searchWrapper}>
           <div className={cx(classes.wrapper, classes.light)}>
             <div className={classes.search}>
@@ -167,9 +170,9 @@ function Header(props) {
             <SearchUi history={history} />
           </div>
         </div>
-        <Hidden smDown>
+        {!smDown && (
           <span className={classes.separatorV} />
-        </Hidden>
+        )}
         <UserMenu />
       </Toolbar>
     </AppBar>

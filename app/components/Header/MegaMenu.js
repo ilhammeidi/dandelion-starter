@@ -79,9 +79,9 @@ function MegaMenu(props) {
             onClick={(event) => handleOpenMenu(event, item.key, item.keyParent)}
           >
             {item.name}
-            { !item.linkParent ? <ExpandMore className={classes.rightIcon} /> : <span className={classes.rightIcon}>&nbsp;&nbsp;</span> }
+            {!item.linkParent ? <ExpandMore className={classes.rightIcon} /> : <span className={classes.rightIcon}>&nbsp;&nbsp;</span>}
           </Button>
-          { !item.linkParent && (
+          {!item.linkParent && (
             <Popper
               open={openMenu.indexOf(item.key) > -1}
               anchorEl={anchorEl}

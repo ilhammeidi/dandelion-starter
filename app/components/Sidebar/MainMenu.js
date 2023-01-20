@@ -57,13 +57,13 @@ function MainMenu(props) {
               </ListItemIcon>
             )}
             <ListItemText classes={{ primary: classes.primary }} variant="inset" primary={item.name} />
-            { !item.linkParent && (
+            {!item.linkParent && (
               <span>
-                { open.indexOf(item.key) > -1 ? <ExpandLess /> : <ExpandMore /> }
+                {open.indexOf(item.key) > -1 ? <ExpandLess /> : <ExpandMore />}
               </span>
             )}
           </ListItem>
-          { !item.linkParent && (
+          {!item.linkParent && (
             <Collapse
               component="div"
               className={cx(

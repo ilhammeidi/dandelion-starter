@@ -59,7 +59,7 @@ function RightSidebarLayout(props) {
               <BreadCrumb separator=" / " theme={bgPosition === 'header' ? 'dark' : 'light'} location={history.location} />
             </div>
           )}
-          { !pageLoaded && (<img src="/images/spinner.gif" alt="spinner" className={classes.circularProgress} />) }
+          {!pageLoaded && (<img src="/images/spinner.gif" alt="spinner" className={classes.circularProgress} />)}
           <Fade
             in={pageLoaded}
             {...(pageLoaded ? { timeout: 700 } : {})}

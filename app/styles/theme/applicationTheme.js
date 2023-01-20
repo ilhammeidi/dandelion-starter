@@ -8,7 +8,11 @@ const applicationTheme = (color, mode, direction) => ({
     action: {
       hover: mode === 'dark' ? 'rgba(80,80,80, 0.9)' : 'rgba(80,80,80, 0.05)',
       hoverOpacity: 0.05
-    }
+    },
+    background: {
+      paper: mode === 'dark' ? '#424242' : '#FFFFFF',
+      default: mode === 'dark' ? '#303030' : '#FAFAFA',
+    },
   },
   typography: {
     useNextVariants: true,

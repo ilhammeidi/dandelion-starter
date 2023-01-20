@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import Hidden from '@mui/material/Hidden';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Drawer from '@mui/material/Drawer';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import dummy from 'dan-api/dummy/dummyContents';
@@ -55,9 +55,12 @@ function Sidebar(props) {
     dataMenu
   } = props;
 
+  const lgDown = useMediaQuery(theme => theme.breakpoints.down('lg'));
+  const lgUp = useMediaQuery(theme => theme.breakpoints.up('lg'));
+
   return (
     <Fragment>
-      <Hidden lgUp>
+      { !lgUp && (
         <SwipeableDrawer
           onClose={toggleDrawerOpen}
           onOpen={toggleDrawerOpen}
@@ -79,8 +82,8 @@ function Sidebar(props) {
             />
           </div>
         </SwipeableDrawer>
-      </Hidden>
-      <Hidden lgDown>
+      )}
+      {!lgDown && (
         <Drawer
           variant="permanent"
           onClose={toggleDrawerOpen}
@@ -104,7 +107,7 @@ function Sidebar(props) {
             changeStatus={handleChangeStatus}
           />
         </Drawer>
-      </Hidden>
+      )}
     </Fragment>
   );
 }

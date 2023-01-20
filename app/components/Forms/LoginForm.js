@@ -18,7 +18,7 @@ import People from '@mui/icons-material/People';
 import ArrowForward from '@mui/icons-material/ArrowForward';
 import Paper from '@mui/material/Paper';
 import Icon from '@mui/material/Icon';
-import Hidden from '@mui/material/Hidden';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
 import { TextFieldRedux, CheckboxRedux } from './ReduxFormMUI';
@@ -49,6 +49,9 @@ function LoginForm(props) {
     event.preventDefault();
   };
 
+  const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
+  const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
+
   const {
     handleSubmit,
     pristine,
@@ -57,14 +60,14 @@ function LoginForm(props) {
   } = props;
   return (
     <Fragment>
-      <Hidden mdUp>
+      {!mdUp && (
         <NavLink to="/" className={cx(classes.brand, classes.outer)}>
           <img src={logo} alt={brand.name} />
           {brand.name}
         </NavLink>
-      </Hidden>
+      )}
       <Paper className={cx(classes.paperWrap, deco && classes.petal)}>
-        <Hidden mdDown>
+        {!mdDown && (
           <div className={classes.topBar}>
             <NavLink to="/" className={classes.brand}>
               <img src={logo} alt={brand.name} />
@@ -75,7 +78,7 @@ function LoginForm(props) {
               Create new account
             </Button>
           </div>
-        </Hidden>
+        )}
         <Typography variant="h4" className={classes.title} gutterBottom>
           Sign In
         </Typography>
