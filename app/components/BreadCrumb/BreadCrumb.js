@@ -7,7 +7,6 @@ import useStyles from './breadCrumb-jss';
 const Breadcrumbs = (props) => {
   const { classes, cx } = useStyles();
   const {
-
     theme,
     separator,
     location

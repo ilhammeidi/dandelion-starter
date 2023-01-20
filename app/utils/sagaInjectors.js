@@ -25,7 +25,7 @@ const checkDescriptor = descriptor => {
 };
 
 export function injectSagaFactory(store, isValid) {
-  return function injectSaga(key, descriptor = {}, args) {
+  return function injectSaga(key, descriptor = {}, args) { // eslint-disable-line
     if (!isValid) checkStore(store);
 
     const newDescriptor = {

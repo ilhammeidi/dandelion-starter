@@ -85,7 +85,6 @@ function Header(props) {
   };
 
   const {
-
     toggleDrawerOpen,
     margin,
     position,

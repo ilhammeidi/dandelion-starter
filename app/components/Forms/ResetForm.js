@@ -25,7 +25,6 @@ const email = value => (
 function ResetForm(props) {
   const { classes, cx } = useStyles();
   const {
-
     handleSubmit,
     pristine,
     submitting,

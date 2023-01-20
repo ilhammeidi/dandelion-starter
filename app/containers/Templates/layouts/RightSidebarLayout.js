@@ -16,7 +16,6 @@ import useStyles from '../appStyles-jss';
 function RightSidebarLayout(props) {
   const { classes, cx } = useStyles();
   const {
-
     children,
     toggleDrawer,
     sidebarOpen,

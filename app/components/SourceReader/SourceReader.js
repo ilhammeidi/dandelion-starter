@@ -91,7 +91,6 @@ const useStyles = makeStyles()((theme) => ({
 function SourceReader(props) {
   const { classes, cx } = useStyles();
   const {
-
     componentName,
     mode
   } = props;

@@ -49,13 +49,11 @@ function Dashboard(props) {
   const handleOpenGuide = () => {
     setOpenGuide(true);
   };
-
   const handleCloseGuide = () => {
     setOpenGuide(false);
   };
 
   const {
-
     children,
     toggleDrawer,
     sidebarOpen,

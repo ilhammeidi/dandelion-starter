@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-import PropTypes from 'prop-types';
 import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';

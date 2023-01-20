@@ -48,7 +48,6 @@ function Sidebar(props) {
   };
 
   const {
-
     open,
     toggleDrawerOpen,
     loadTransition,

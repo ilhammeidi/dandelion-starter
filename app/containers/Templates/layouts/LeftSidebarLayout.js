@@ -16,7 +16,6 @@ import useStyles from '../appStyles-jss';
 function LeftSidebarLayout(props) {
   const { classes, cx } = useStyles();
   const {
-
     children,
     toggleDrawer,
     sidebarOpen,

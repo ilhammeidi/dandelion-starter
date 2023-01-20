@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-import PropTypes from 'prop-types';
-
 import { LoginForm } from 'dan-components';
 import useStyles from 'dan-components/Forms/user-jss';
 

@@ -8,7 +8,6 @@ import useStyles from './papperStyle-jss';
 function PapperBlock(props) {
   const { classes, cx } = useStyles();
   const {
-
     title,
     desc,
     children,

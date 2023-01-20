@@ -1,8 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-import PropTypes from 'prop-types';
-
 import { ResetForm } from 'dan-components';
 import useStyles from '../../../components/Forms/user-jss';
 

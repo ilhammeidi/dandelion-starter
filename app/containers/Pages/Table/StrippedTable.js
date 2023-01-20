@@ -1,8 +1,5 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-
 import Toolbar from '@mui/material/Toolbar';
-
 import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

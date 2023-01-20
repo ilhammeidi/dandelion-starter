@@ -50,7 +50,6 @@ function LoginForm(props) {
   };
 
   const {
-
     handleSubmit,
     pristine,
     submitting,

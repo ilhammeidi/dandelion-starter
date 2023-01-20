@@ -9,7 +9,6 @@ import MainMenuBig from './MainMenuBig';
 function SidebarBig(props) {
   const { classes } = useStyles();
   const {
-
     dataMenu,
     loadTransition,
     open,

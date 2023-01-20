@@ -29,7 +29,6 @@ function MainMenu(props) {
   };
 
   const {
-
     openSubMenu,
     open,
     dataMenu

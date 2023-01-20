@@ -50,7 +50,6 @@ function RegisterForm(props) {
   };
 
   const {
-
     handleSubmit,
     pristine,
     submitting,

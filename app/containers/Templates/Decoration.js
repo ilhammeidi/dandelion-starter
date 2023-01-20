@@ -9,7 +9,6 @@ import useStyles from './appStyles-jss';
 function Decoration(props) {
   const { classes, cx } = useStyles();
   const {
-
     mode,
     gradient,
     decoration,

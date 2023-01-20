@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-
 import { SourceReader, PapperBlock } from 'dan-components';
 import ReduxFormDemo from './ReduxFormDemo';
-
-const styles = ({
-  root: {
-    flexGrow: 1,
-  }
-});
 
 function ReduxForm() {
   const [valueForm, setValueForm] = useState(null);

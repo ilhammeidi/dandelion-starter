@@ -53,7 +53,6 @@ DashDivider.defaultProps = {
 export const ShadowDivider = props => {
   const { classes } = useStyles();
   const {
-
     thin,
     ...rest
   } = props;
@@ -75,7 +74,6 @@ ShadowDivider.defaultProps = {
 export const InsetDivider = props => {
   const { classes } = useStyles();
   const {
-
     thin,
     ...rest
   } = props;
@@ -98,7 +96,6 @@ InsetDivider.defaultProps = {
 export const FlairedEdgesDivider = props => {
   const { classes } = useStyles();
   const {
-
     thin,
     ...rest
   } = props;
@@ -119,7 +116,6 @@ FlairedEdgesDivider.defaultProps = {
 export const ContentDivider = props => {
   const { classes } = useStyles();
   const {
-
     thin,
     content,
     ...rest

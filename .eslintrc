@@ -1,7 +1,8 @@
 {
   "extends": [
     "airbnb-base",
-    "plugin:flowtype/recommended"
+    "plugin:flowtype/recommended",
+    "plugin:react/recommended"
   ],
   "env": {
     "browser": true,
@@ -10,7 +11,6 @@
   },
   "parser": "@babel/eslint-parser",
   "rules": {
-    "no-unused-vars": 0,
     "import/no-import-module-exports": 0,
     "no-nested-ternary": 0,
     "import/no-unresolved": 0,
@@ -42,12 +42,15 @@
   "plugins": [
     "react",
     "import",
-    "flowtype"
+    "flowtype",
   ],
   "settings": {
     "import/parser": "babel-eslint",
     "import/resolve": {
       "moduleDirectory": ["node_modules", "src"]
+    },
+    "react": {
+      "version": "detect"
     }
   },
   "globals": {

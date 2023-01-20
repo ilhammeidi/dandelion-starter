@@ -8,7 +8,6 @@ import useStyles from './appStyles-jss';
 function Outer(props) {
   const { classes, cx } = useStyles();
   const {
-
     children,
     gradient,
     decoration

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from 'tss-react/mui';
 import { createTheme } from '@mui/material/styles';
 import ThemePallete from 'dan-api/palette/themePalette';

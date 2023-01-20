@@ -78,7 +78,6 @@ function ReduxFormDemo(props) {
   const { classes } = useStyles();
   const trueBool = true;
   const {
-
     handleSubmit,
     pristine,
     reset,

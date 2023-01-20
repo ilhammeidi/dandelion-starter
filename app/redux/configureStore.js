@@ -14,7 +14,7 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
   key: 'dandelion',
   storage,
-  whitelist: []
+  whitelist: ['ui']
 };
 
 const persistedReducer = persistReducer(persistConfig, createReducer());

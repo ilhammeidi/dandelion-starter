@@ -98,7 +98,6 @@ function HeaderMenu(props) {
   };
 
   const {
-
     type,
     dataMenu,
     history,

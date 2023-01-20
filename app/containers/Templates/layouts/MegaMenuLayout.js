@@ -12,7 +12,6 @@ import useStyles from '../appStyles-jss';
 function DropMenuLayout(props) {
   const { classes, cx } = useStyles();
   const {
-
     children,
     pageLoaded,
     mode,

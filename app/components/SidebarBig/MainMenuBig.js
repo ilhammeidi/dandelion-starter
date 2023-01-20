@@ -24,7 +24,6 @@ function MainMenuBig(props) {
   const [menuLoaded, setMenuLoaded] = useState(true);
 
   const {
-
     open,
     closeDrawer,
     dataMenu,
