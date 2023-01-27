@@ -2,8 +2,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-// const OfflinePlugin = require('offline-plugin');
-// const { HashedModuleIdsPlugin } = require('webpack');
+// const WorkboxPlugin = require('workbox-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
@@ -85,31 +84,18 @@ module.exports = require('./webpack.base.babel')({
       },
       inject: true,
     }),
-
-    // Put it in the end to capture all the HtmlWebpackPlugin's
-    // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
-    //    new OfflinePlugin({
-    //      relativePaths: false,
-    //      publicPath: '/',
-    //      appShell: '/',
-    //
-    //      // No need to cache .htaccess. See http://mxs.is/googmp,
-    //      // this is applied before any match in `caches` section
-    //      excludes: ['.htaccess'],
-    //
-    //      caches: {
-    //        main: [':rest:'],
-    //
-    //        // All chunks marked as `additional`, loaded after main section
-    //        // and do not prevent SW to install. Change to `optional` if
-    //        // do not want them to be preloaded at all (cached only when first loaded)
-    //        additional: ['*.chunk.js'],
-    //      },
-    //
-    //      // Removes warning for about `additional` section usage
-    //      safeToUseOptionalCaches: true,
+    /**
+    Generate Service Worker for production
+    Uncomment this code bellow to generate Service Worker.
+    **/
+    //    new WorkboxPlugin.GenerateSW({
+    //      // these options encourage the ServiceWorkers to get in there fast
+    //      // and not allow any straggling "old" SWs to hang around
+    //      clientsClaim: true,
+    //      navigateFallback: '/index.html',
+    //      skipWaiting: true,
+    //      maximumFileSizeToCacheInBytes: 5242880
     //    }),
-
     new CompressionPlugin({
       algorithm: 'gzip',
       test: /\.js$|\.css$|\.html$/,

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import MobileStepper from '@material-ui/core/MobileStepper';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import Slide from '@material-ui/core/Slide';
+import MobileStepper from '@mui/material/MobileStepper';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import SwipeableViews from 'react18-swipeable-views';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import Slide from '@mui/material/Slide';
+import { useTheme } from '@mui/material/styles';
 import guideData from 'dan-api/dummy/guideData';
-import styles from './guide-jss';
+import useStyles from './guide-jss';
 
 const maxStepsSwipe = guideData.length;
 
@@ -20,6 +20,8 @@ const Transition = React.forwardRef(function Transition(props, ref) { // eslint-
 });
 
 function GuideSlider(props) {
+  const { classes } = useStyles();
+  const theme = useTheme();
   const [activeStepSwipe, setActiveStepSwipe] = useState(0);
 
   const handleNextSwipe = () => {
@@ -41,8 +43,6 @@ function GuideSlider(props) {
   };
 
   const {
-    classes,
-    theme,
     openGuide,
     closeGuide
   } = props;
@@ -109,8 +109,6 @@ function GuideSlider(props) {
 GuideSlider.propTypes = {
   openGuide: PropTypes.bool.isRequired,
   closeGuide: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(GuideSlider);
+export default GuideSlider;

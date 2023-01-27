@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Popper from '@material-ui/core/Popper';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import classNames from 'classnames';
+import Button from '@mui/material/Button';
+
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Popper from '@mui/material/Popper';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import styles from './header-jss';
+import Paper from '@mui/material/Paper';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import useStyles from './header-jss';
 
 const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
   return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
@@ -23,6 +23,7 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
 
 // eslint-disable-next-line
 function MainMenu(props) {
+  const { classes, cx } = useStyles();
   const [active, setActive] = useState([]);
   const [openMenu, setOpenMenu] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -55,7 +56,7 @@ function MainMenu(props) {
     setOpenMenu([]);
   };
 
-  const { classes, open, dataMenu } = props;
+  const { open, dataMenu } = props;
   const getMenus = (parent, menuArray) => menuArray.map((item, index) => {
     if (item.multilevel) {
       return false;
@@ -68,7 +69,7 @@ function MainMenu(props) {
             component={LinkBtn}
             to={item.linkParent ? item.linkParent : '#'}
             className={
-              classNames(
+              cx(
                 classes.headMenu,
                 open.indexOf(item.key) > -1 ? classes.opened : '',
                 active.indexOf(item.key) > -1 ? classes.selected : ''
@@ -77,9 +78,9 @@ function MainMenu(props) {
             onClick={(event) => handleOpenMenu(event, item.key, item.keyParent)}
           >
             {item.name}
-            { !item.linkParent ? <ExpandMore className={classes.rightIcon} /> : <span className={classes.rightIcon}>&nbsp;&nbsp;</span> }
+            {!item.linkParent ? <ExpandMore className={classes.rightIcon} /> : <span className={classes.rightIcon}>&nbsp;&nbsp;</span>}
           </Button>
-          { !item.linkParent && (
+          {!item.linkParent && (
             <Popper
               open={openMenu.indexOf(item.key) > -1}
               anchorEl={anchorEl}
@@ -136,7 +137,7 @@ function MainMenu(props) {
 }
 
 MainMenu.propTypes = {
-  classes: PropTypes.object.isRequired,
+
   open: PropTypes.array.isRequired,
   openSubMenu: PropTypes.func.isRequired,
   dataMenu: PropTypes.array.isRequired,
@@ -157,4 +158,4 @@ const MainMenuMapped = connect(
   mapDispatchToProps
 )(MainMenu);
 
-export default withStyles(styles)(MainMenuMapped);
+export default MainMenuMapped;

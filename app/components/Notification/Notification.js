@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import { makeStyles } from 'tss-react/mui';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
-const styles = theme => ({
+const useStyles = makeStyles()((theme) => ({
   close: {
     width: theme.spacing(4),
     height: theme.spacing(4),
     padding: 0,
   },
-});
+}));
 
 function Notification(props) {
+  const { classes } = useStyles();
   const handleClose = (event, reason) => {
     const { close } = props;
     if (reason === 'clickaway') {
@@ -22,7 +23,7 @@ function Notification(props) {
     close('crudTableDemo');
   };
 
-  const { classes, message } = props;
+  const { message } = props;
   return (
     <Snackbar
       anchorOrigin={{
@@ -43,7 +44,7 @@ function Notification(props) {
           color="inherit"
           className={classes.close}
           onClick={() => handleClose()}
-        >
+          size="large">
           <CloseIcon />
         </IconButton>,
       ]}
@@ -52,9 +53,9 @@ function Notification(props) {
 }
 
 Notification.propTypes = {
-  classes: PropTypes.object.isRequired,
+
   close: PropTypes.func.isRequired,
   message: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(Notification);
+export default Notification;

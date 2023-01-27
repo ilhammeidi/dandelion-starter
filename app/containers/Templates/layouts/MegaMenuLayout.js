@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react';
 import { PropTypes } from 'prop-types';
-import classNames from 'classnames';
-import Fade from '@material-ui/core/Fade';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+
+import Fade from '@mui/material/Fade';
+import Typography from '@mui/material/Typography';
+
 import { HeaderMenu, BreadCrumb } from 'dan-components';
 import dataMenu from 'dan-api/ui/menu';
 import Decoration from '../Decoration';
-import styles from '../appStyles-jss';
+import useStyles from '../appStyles-jss';
 
 function DropMenuLayout(props) {
+  const { classes, cx } = useStyles();
   const {
-    classes,
     children,
     pageLoaded,
     mode,
@@ -43,7 +43,7 @@ function DropMenuLayout(props) {
       />
       <main
         className={
-          classNames(
+          cx(
             classes.content,
             classes.highMargin
           )
@@ -57,14 +57,14 @@ function DropMenuLayout(props) {
           bgPosition={bgPosition}
           horizontalMenu
         />
-        <section className={classNames(classes.mainWrap, classes.topbarLayout)}>
+        <section className={cx(classes.mainWrap, classes.topbarLayout)}>
           {titleException.indexOf(history.location.pathname) < 0 && (
             <div className={classes.pageTitle}>
               <Typography component="h4" className={bgPosition === 'header' ? classes.darkTitle : classes.lightTitle} variant="h4">{place}</Typography>
               <BreadCrumb separator=" / " theme={bgPosition === 'header' ? 'dark' : 'light'} location={history.location} />
             </div>
           )}
-          { !pageLoaded && (<img src="/images/spinner.gif" alt="spinner" className={classes.circularProgress} />) }
+          {!pageLoaded && (<img src="/images/spinner.gif" alt="spinner" className={classes.circularProgress} />) }
           <Fade
             in={pageLoaded}
             {...(pageLoaded ? { timeout: 700 } : {})}
@@ -81,7 +81,7 @@ function DropMenuLayout(props) {
 }
 
 DropMenuLayout.propTypes = {
-  classes: PropTypes.object.isRequired,
+
   children: PropTypes.node.isRequired,
   history: PropTypes.object.isRequired,
   changeMode: PropTypes.func.isRequired,
@@ -98,4 +98,4 @@ DropMenuLayout.propTypes = {
   handleOpenGuide: PropTypes.func.isRequired
 };
 
-export default (withStyles(styles)(DropMenuLayout));
+export default DropMenuLayout;

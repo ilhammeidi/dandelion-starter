@@ -7,12 +7,13 @@
 
 // Import all the third party stuff
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { ConnectedRouter } from 'connected-react-router';
+import { ConnectedRouter } from 'connected-react18-router';
 import FontFaceObserver from 'fontfaceobserver';
 import history from 'utils/history';
+import 'react-18-image-lightbox/style.css';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
@@ -45,8 +46,9 @@ const initialState = {};
 const { store, persistor } = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
+const root = createRoot(MOUNT_NODE);
 const render = messages => {
-  ReactDOM.render(
+  root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <LanguageProvider messages={messages}>
@@ -55,8 +57,7 @@ const render = messages => {
           </ConnectedRouter>
         </LanguageProvider>
       </PersistGate>
-    </Provider>,
-    MOUNT_NODE,
+    </Provider>
   );
 };
 
@@ -65,7 +66,7 @@ if (module.hot) {
   // modules.hot.accept does not accept dynamic dependencies,
   // have to be constants at compile-time
   module.hot.accept(['./i18n', 'containers/App'], () => {
-    ReactDOM.unmountComponentAtNode(MOUNT_NODE);
+    root.unmount();
     render(translationMessages);
   });
 }
@@ -86,9 +87,18 @@ if (!window.Intl) {
 } else {
   render(translationMessages);
 }
-// Install ServiceWorker and AppCache in the end since
-// it's not most important operation and if main code fails,
-// we do not want it installed
-//  if (process.env.NODE_ENV === 'production') {
-//    require('offline-plugin/runtime').install(); // eslint-disable-line global-require
+
+/**
+Offline access for production mode.
+Uncomment this code bellow to register Service Worker.
+* */
+
+//  if ('serviceWorker' in navigator) {
+//    window.addEventListener('load', () => {
+//      navigator.serviceWorker.register('/service-worker.js').then(registration => {
+//        console.log('SW registered: ', registration);
+//      }).catch(registrationError => {
+//        console.log('SW registration failed: ', registrationError);
+//      });
+//    });
 //  }

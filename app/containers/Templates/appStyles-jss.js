@@ -1,4 +1,5 @@
-import { darken } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
+import { darken } from '@mui/material/styles';
 import bg from 'dan-images/petal_bg.svg';
 
 export const gradientBgLight = (theme) => `linear-gradient(-45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.main} 33%, ${theme.palette.secondary.main} 100%);`;
@@ -11,7 +12,7 @@ const appFrame = {
   zIndex: 1,
 };
 
-const styles = theme => ({
+const useStyles = makeStyles()((theme, _params, classes) => ({
   root: {
     width: '100%',
     marginTop: 0,
@@ -57,7 +58,7 @@ const styles = theme => ({
     padding: theme.spacing(2),
     minHeight: '100%',
     overflow: 'hidden',
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       paddingLeft: theme.spacing(1),
       paddingRight: theme.spacing(1),
     },
@@ -96,22 +97,22 @@ const styles = theme => ({
     top: 0,
     left: 0,
     position: 'absolute',
-    '&$headerBg': {
+    [`&.${classes.headerBg}`]: {
       height: 64
     },
-    '&$halfBg': {
+    [`&.${classes.halfBg}`]: {
       height: 400
     },
-    '&$fullBg': {
+    [`&.${classes.fullBg}`]: {
       height: '100%'
     },
   },
   gradientBg: {
-    backgroundImage: theme.palette.type === 'dark' ? gradientBgDark(theme) : gradientBgLight(theme),
+    backgroundImage: theme.palette.mode === 'dark' ? gradientBgDark(theme) : gradientBgLight(theme),
     backgroundAttachment: 'fixed'
   },
   solidBg: {
-    backgroundColor: theme.palette.type === 'dark' ? darken(theme.palette.primary.main, 0.4) : theme.palette.primary.main
+    backgroundColor: theme.palette.mode === 'dark' ? darken(theme.palette.primary.main, 0.4) : theme.palette.primary.main
   },
   decorationWave: {
     width: '100%',
@@ -121,7 +122,7 @@ const styles = theme => ({
     bottom: -32,
     transform: 'scale(1.1,0.8)',
     transformOrigin: 'bottom',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none'
     },
   },
@@ -140,10 +141,10 @@ const styles = theme => ({
     '& > div': {
       willChange: 'inherit !important' // hack for floating form issue when expaded
     },
-    '&$sidebarLayout': {
+    [`&.${classes.sidebarLayout}`]: {
       paddingTop: theme.spacing(8),
     },
-    '&$topbarLayout': {
+    [`&.${classes.topbarLayout}`]: {
       width: '100%',
       marginTop: theme.spacing(3),
     },
@@ -211,17 +212,18 @@ const styles = theme => ({
     '& h4': {
       fontWeight: 700,
       textTransform: 'capitalize',
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('lg')]: {
         marginBottom: theme.spacing(3)
       }
     },
   },
   darkTitle: {
-    color: theme.palette.type === 'dark' ? theme.palette.primary.main : theme.palette.primary.dark,
+    color: theme.palette.mode === 'dark' ? theme.palette.primary.main : theme.palette.primary.dark,
   },
   lightTitle: {
     color: theme.palette.common.white,
   }
-});
+}));
 
-export default styles;
+// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
+export default useStyles;

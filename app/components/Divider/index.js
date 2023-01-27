@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import styles from './divider-jss';
+
+import useStyles from './divider-jss';
 
 /* Gradient Divider */
-const Gradient = props => {
+export const GradientDivider = props => {
+  const { classes } = useStyles();
   const {
     thin,
-    classes,
+
     ...rest
   } = props;
   return (
@@ -15,23 +16,22 @@ const Gradient = props => {
   );
 };
 
-Gradient.propTypes = {
+GradientDivider.propTypes = {
   thin: PropTypes.number,
-  classes: PropTypes.object.isRequired,
+
 };
 
-Gradient.defaultProps = {
+GradientDivider.defaultProps = {
   thin: 1
 };
 
-export const GradientDivider = withStyles(styles)(Gradient);
-
 /* Dash Divider */
 
-const Dash = props => {
+export const DashDivider = props => {
+  const { classes } = useStyles();
   const {
     thin,
-    classes,
+
     ...rest
   } = props;
   return (
@@ -39,22 +39,20 @@ const Dash = props => {
   );
 };
 
-Dash.propTypes = {
-  classes: PropTypes.object.isRequired,
+DashDivider.propTypes = {
+
   thin: PropTypes.number,
 };
 
-Dash.defaultProps = {
+DashDivider.defaultProps = {
   thin: 1
 };
 
-export const DashDivider = withStyles(styles)(Dash);
-
 /* Shadow Divider */
 
-const Shadow = props => {
+export const ShadowDivider = props => {
+  const { classes } = useStyles();
   const {
-    classes,
     thin,
     ...rest
   } = props;
@@ -63,22 +61,19 @@ const Shadow = props => {
   );
 };
 
-Shadow.propTypes = {
-  classes: PropTypes.object.isRequired,
+ShadowDivider.propTypes = {
   thin: PropTypes.number,
 };
 
-Shadow.defaultProps = {
+ShadowDivider.defaultProps = {
   thin: 1
 };
 
-export const ShadowDivider = withStyles(styles)(Shadow);
-
 /* Shadow Inset */
 
-const Inset = props => {
+export const InsetDivider = props => {
+  const { classes } = useStyles();
   const {
-    classes,
     thin,
     ...rest
   } = props;
@@ -87,22 +82,20 @@ const Inset = props => {
   );
 };
 
-Inset.propTypes = {
-  classes: PropTypes.object.isRequired,
+InsetDivider.propTypes = {
+
   thin: PropTypes.number,
 };
 
-Inset.defaultProps = {
+InsetDivider.defaultProps = {
   thin: 1
 };
 
-export const InsetDivider = withStyles(styles)(Inset);
-
 /* Shadow FlairedEdges */
 
-export const FlairedEdges = props => {
+export const FlairedEdgesDivider = props => {
+  const { classes } = useStyles();
   const {
-    classes,
     thin,
     ...rest
   } = props;
@@ -111,20 +104,18 @@ export const FlairedEdges = props => {
   );
 };
 
-FlairedEdges.propTypes = {
-  classes: PropTypes.object.isRequired,
+FlairedEdgesDivider.propTypes = {
+
   thin: PropTypes.number,
 };
 
-FlairedEdges.defaultProps = {
+FlairedEdgesDivider.defaultProps = {
   thin: 1
 };
 
-export const FlairedEdgesDivider = withStyles(styles)(FlairedEdges);
-
-export const Content = props => {
+export const ContentDivider = props => {
+  const { classes } = useStyles();
   const {
-    classes,
     thin,
     content,
     ...rest
@@ -134,14 +125,12 @@ export const Content = props => {
   );
 };
 
-Content.propTypes = {
-  classes: PropTypes.object.isRequired,
+ContentDivider.propTypes = {
+
   thin: PropTypes.number,
   content: PropTypes.string.isRequired,
 };
 
-Content.defaultProps = {
+ContentDivider.defaultProps = {
   thin: 1
 };
-
-export const ContentDivider = withStyles(styles)(Content);

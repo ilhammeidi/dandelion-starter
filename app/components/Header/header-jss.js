@@ -1,9 +1,10 @@
-import { alpha, darken } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
+import { alpha, darken } from '@mui/material/styles';
 import { gradientBgLight, gradientBgDark } from 'containers/Templates/appStyles-jss';
 const drawerWidth = 240;
 const drawerBigWidth = 280;
 
-const styles = theme => ({
+const useStyles = makeStyles()((theme, _params, classes) => ({
   appBar: {
     background: 'rgba(0,0,0,0)',
     zIndex: theme.zIndex.drawer + 1,
@@ -11,54 +12,54 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    '& $menuButton': {
-      color: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.main,
+    [`& .${classes.menuButton}`]: {
+      color: theme.palette.mode === 'dark' ? theme.palette.primary.light : theme.palette.primary.main,
       backgroundColor: 'transparent',
       boxShadow: 'none',
       zIndex: 10,
     },
-    '&$left': {
-      '& $menuButton': {
+    [`&.${classes.left}`]: {
+      [`& .${classes.menuButton}`]: {
         marginLeft: 13,
       },
-      '& $headerTitle': {
+      [`& .${classes.headerTitle}`]: {
         left: theme.spacing(2),
       }
     },
-    '&$leftBig': {
-      '& $menuButton': {
+    [`&.${classes.leftBig}`]: {
+      [`& .${classes.menuButton}`]: {
         marginLeft: 30,
         marginRight: theme.spacing(2),
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('lg')]: {
           marginLeft: 13,
         },
       },
-      '& $headerTitle': {
+      [`& .${classes.headerTitle}`]: {
         left: 0,
       }
     },
-    '&$right': {
-      '& $menuButton': {
+    [`&.${classes.right}`]: {
+      [`& .${classes.menuButton}`]: {
         marginRight: 13,
       },
-      '& $headerTitle': {
+      [`& .${classes.headerTitle}`]: {
         right: theme.spacing(2),
       },
       '& > div': {
         flexDirection: 'row-reverse'
       },
-      '& $flex': {
+      [`& .${classes.flex}`]: {
         textAlign: 'left'
       }
     },
   },
   attachedbar: {
     position: 'relative',
-    '& $menuButton': {
-      margin: `0 ${theme.spacing(2)}px`
+    [`& .${classes.menuButton}`]: {
+      margin: `0 ${theme.spacing(2)}`
     },
-    '& $wrapper': {
-      [theme.breakpoints.down('lg')]: {
+    [`& .${classes.wrapper}`]: {
+      [theme.breakpoints.down('xl')]: {
         border: `1px solid ${theme.palette.divider}`
       },
     }
@@ -72,8 +73,8 @@ const styles = theme => ({
     flexDirection: 'row',
     background: theme.palette.background.paper,
     boxShadow: theme.shadows[3],
-    [theme.breakpoints.down('md')]: {
-      padding: `${theme.spacing(0.5)}px 0`,
+    [theme.breakpoints.down('lg')]: {
+      padding: `${theme.spacing(0.5)} 0`,
     },
     [theme.breakpoints.up('lg')]: {
       background: alpha(theme.palette.background.paper, 0.8),
@@ -96,8 +97,8 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    '&$left': {
-      '& $menuButton': {
+    [`&.${classes.left}`]: {
+      [`& .${classes.menuButton}`]: {
         [theme.breakpoints.up('lg')]: {
           marginLeft: -20
         }
@@ -107,8 +108,8 @@ const styles = theme => ({
         width: `calc(100% - ${drawerWidth}px)`,
       },
     },
-    '&$leftBig': {
-      '& $menuButton': {
+    [`&.${classes.leftBig}`]: {
+      [`& .${classes.menuButton}`]: {
         [theme.breakpoints.up('lg')]: {
           marginLeft: -20
         }
@@ -118,8 +119,8 @@ const styles = theme => ({
         width: `calc(100% - ${drawerBigWidth}px)`,
       },
     },
-    '&$right': {
-      '& $menuButton': {
+    [`&.${classes.right}`]: {
+      [`& .${classes.menuButton}`]: {
         [theme.breakpoints.up('lg')]: {
           marginRight: -20
         }
@@ -129,16 +130,16 @@ const styles = theme => ({
         width: `calc(100% - ${drawerWidth}px)`,
       },
     },
-    '& $menuButton': {
-      backgroundColor: theme.palette.type === 'dark' ? theme.palette.primary.main : theme.palette.primary.light,
+    [`& .${classes.menuButton}`]: {
+      backgroundColor: theme.palette.mode === 'dark' ? theme.palette.primary.main : theme.palette.primary.light,
       boxShadow: theme.glow.medium,
     },
-    '& $headerAction': {
+    [`& .${classes.headerAction}`]: {
       marginLeft: theme.spacing(1)
     },
-    '&$darker': {
-      '& $menuButton': {
-        color: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.main,
+    [`&.${classes.darker}`]: {
+      [`& .${classes.menuButton}`]: {
+        color: theme.palette.mode === 'dark' ? theme.palette.primary.light : theme.palette.primary.main,
       }
     }
   },
@@ -167,11 +168,11 @@ const styles = theme => ({
     '&:hover': {
       background: alpha(theme.palette.common.white, 0.25),
     },
-    '&$light': {
+    [`&.${classes.light}`]: {
       background: alpha(theme.palette.common.white, 0.2),
     },
-    '&$dark': {
-      background: theme.palette.type === 'dark' ? theme.palette.grey[700] : alpha(theme.palette.common.white, 0.8),
+    [`&.${classes.dark}`]: {
+      background: theme.palette.mode === 'dark' ? theme.palette.grey[700] : alpha(theme.palette.common.white, 0.8),
       boxShadow: theme.shade.light,
       '& input': {
         color: theme.palette.grey[700],
@@ -187,12 +188,12 @@ const styles = theme => ({
         color: theme.palette.grey[400],
       }
     },
-    '& $miniInput': {
+    [`& .${classes.miniInput}`]: {
       width: 70
     },
   },
   searchWrapper: {
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       flex: 1,
       textAlign: 'right'
     }
@@ -205,7 +206,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none'
     },
   },
@@ -218,13 +219,13 @@ const styles = theme => ({
   darker: {
     backgroundAttachment: 'fixed',
     boxShadow: theme.shadows[3],
-    '&$gradientBg': {
-      backgroundImage: theme.palette.type === 'dark' ? gradientBgDark(theme) : gradientBgLight(theme),
+    [`&.${classes.gradientBg}`]: {
+      backgroundImage: theme.palette.mode === 'dark' ? gradientBgDark(theme) : gradientBgLight(theme),
     },
-    '&$solidBg': {
-      backgroundColor: theme.palette.type === 'dark' ? darken(theme.palette.primary.main, 0.4) : theme.palette.primary.main
+    [`&.${classes.solidBg}`]: {
+      backgroundColor: theme.palette.mode === 'dark' ? darken(theme.palette.primary.main, 0.4) : theme.palette.primary.main
     },
-    '& $menuButton': {
+    [`& .${classes.menuButton}`]: {
       color: theme.palette.common.white
     }
   },
@@ -233,7 +234,7 @@ const styles = theme => ({
     left: 0,
     top: 0,
     [theme.breakpoints.up('lg')]: {
-      top: theme.spacing(1) * -8,
+      top: theme.spacing(-8)
     }
   },
   separatorV: {
@@ -272,12 +273,12 @@ const styles = theme => ({
       height: 28,
       fontSize: 28
     },
-    '&$dark': {
+    [`&.${classes.dark}`]: {
       '& i': {
         color: theme.palette.text.primary,
       }
     },
-    '&$light': {
+    [`&.${classes.light}`]: {
       '& i': {
         color: theme.palette.common.white,
       }
@@ -314,10 +315,11 @@ const styles = theme => ({
   },
   headMenu: {
     fontSize: 12,
-    padding: `${theme.spacing(0.5)}px ${theme.spacing(1)}px ${theme.spacing(0.5)}px ${theme.spacing(2)}px`,
+    padding: `${theme.spacing(0.5)} ${theme.spacing(1)} ${theme.spacing(0.5)} ${theme.spacing(2)}`,
     minHeight: 'auto',
-    margin: `0 ${theme.spacing(0.5)}px`,
-    lineHeight: '2em'
+    margin: `0 ${theme.spacing(0.5)}`,
+    lineHeight: '2em',
+    color: theme.palette.text.primary
   },
   opened: {
     color: theme.palette.primary.main,
@@ -339,7 +341,7 @@ const styles = theme => ({
     '& svg': {
       fill: theme.palette.primary.light,
     },
-    '& $rightIcon': {
+    [`& .${classes.rightIcon}`]: {
       opacity: 0.7
     }
   },
@@ -371,19 +373,19 @@ const styles = theme => ({
     '& span': {
       fontSize: 14,
     },
-    '&$active': {
+    [`&.${classes.active}`]: {
       borderLeft: `5px solid ${theme.palette.primary.main}`,
-      backgroundColor: theme.palette.type === 'dark' ? alpha(theme.palette.secondary.main, 0.24) : theme.palette.secondary.light,
+      backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.secondary.main, 0.24) : theme.palette.secondary.light,
       '& span': {
         color: theme.palette.primary.main,
       },
       '&:hover': {
-        backgroundColor: theme.palette.type === 'dark' ? alpha(theme.palette.secondary.main, 0.24) : theme.palette.secondary.light,
+        backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.secondary.main, 0.24) : theme.palette.secondary.light,
       }
     }
   },
   megaMenu: {
-    '& $title': {
+    [`& .${classes.title}`]: {
       paddingLeft: theme.spacing(2)
     }
   },
@@ -392,21 +394,21 @@ const styles = theme => ({
     width: 'auto',
     margin: theme.spacing(1),
     borderRadius: theme.rounded.big,
-    padding: `${theme.spacing(0.25)}px ${theme.spacing(1)}px`,
+    padding: `${theme.spacing(0.25)} ${theme.spacing(1)}`,
     '& span': {
       fontSize: 14,
     },
     '& div': {
       padding: 0
     },
-    '&$active': {
+    [`&.${classes.active}`]: {
       border: `1px solid ${theme.palette.primary.main}`,
-      backgroundColor: theme.palette.type === 'dark' ? alpha(theme.palette.secondary.main, 0.24) : theme.palette.secondary.light,
+      backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.secondary.main, 0.24) : theme.palette.secondary.light,
       '& span': {
         color: theme.palette.primary.main,
       },
       '&:hover': {
-        backgroundColor: theme.palette.type === 'dark' ? alpha(theme.palette.secondary.main, 0.24) : theme.palette.secondary.light,
+        backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.secondary.main, 0.24) : theme.palette.secondary.light,
       }
     }
   },
@@ -432,10 +434,10 @@ const styles = theme => ({
   fadeOut: {},
   invert: {},
   headerAction: {
-    margin: `0 ${theme.spacing(3)}px`,
+    margin: `0 ${theme.spacing(3)}`,
     transition: 'opacity 0.5s ease',
-    '& $button': {
-      margin: `0 ${theme.spacing(1)}px / 2`,
+    [`& .${classes.button}`]: {
+      margin: `0 ${theme.spacing(1)} / 2`,
       '& i': {
         color: alpha(theme.palette.common.white, 0.87),
         width: 28,
@@ -443,11 +445,11 @@ const styles = theme => ({
         fontSize: 28,
       }
     },
-    '&$fadeOut': {
+    [`&.${classes.fadeOut}`]: {
       opacity: 0,
     },
-    '&$invert': {
-      '& $button': {
+    [`&.${classes.invert}`]: {
+      [`& .${classes.button}`]: {
         '& i': {
           color: alpha(theme.palette.text.primary, 0.5),
         }
@@ -464,7 +466,7 @@ const styles = theme => ({
     top: 60,
     color: theme.palette.common.white,
     opacity: 0,
-    '&$show': {
+    [`&.${classes.show}`]: {
       top: theme.spacing(1),
       opacity: 0.87
     }
@@ -478,6 +480,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center'
   }
-});
+}));
 
-export default styles;
+// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
+export default useStyles;

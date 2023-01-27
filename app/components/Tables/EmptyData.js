@@ -1,11 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import TableIcon from '@material-ui/icons/Apps';
-import styles from 'dan-components/Tables/tableStyle-jss';
+import TableIcon from '@mui/icons-material/Apps';
+import useStyles from 'dan-components/Tables/tableStyle-jss';
 
-function EmptyData(props) {
-  const { classes } = props;
+function EmptyData() {
+  const { classes } = useStyles();
   return (
     <div className={classes.nodata}>
       <TableIcon />
@@ -14,8 +12,4 @@ function EmptyData(props) {
   );
 }
 
-EmptyData.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(EmptyData);
+export default EmptyData;

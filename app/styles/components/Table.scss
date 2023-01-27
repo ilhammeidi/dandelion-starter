@@ -74,6 +74,9 @@
       svg, button {
         visibility: hidden;
       }
+      &[disabled], [class*="disabled"] {
+        -webkit-text-fill-color: inherit
+      }
     }
   }
   th {

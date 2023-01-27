@@ -4,35 +4,35 @@ import Autosuggest from 'react-autosuggest';
 import { NavLink } from 'react-router-dom';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import MenuItem from '@material-ui/core/MenuItem';
-import { withStyles } from '@material-ui/core/styles';
+import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
+import MenuItem from '@mui/material/MenuItem';
 import suggestionsApi from 'dan-api/ui/menu';
-import styles from './search-jss';
+import useStyles from './search-jss';
 
 const menu = [];
 
 function renderInput(inputProps) {
-  const { classes, ref, ...other } = inputProps;
+  const { ref, ...rest } = inputProps;
 
   return (
     <TextField
-      className={classes.inputHeader}
+      variant="standard"
+      className="input-header"
       fullWidth
       InputProps={{
         inputRef: ref,
-        ...other,
-      }}
-    />
+        ...rest,
+      }} />
   );
 }
 
 function renderSuggestion(suggestion, { query, isHighlighted }) {
   const matches = match(suggestion.name, query);
   const parts = parse(suggestion.name, matches);
+
   return (
-    <MenuItem button selected={isHighlighted} component={NavLink} to={suggestion.link}>
+    <MenuItem selected={isHighlighted} component={NavLink} to={suggestion.link}>
       <div>
         {parts.map((part, index) => (
           part.highlight ? (
@@ -82,6 +82,7 @@ function getSuggestions(value) {
 function SearchUi(props) {
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const { classes } = useStyles();
 
   useEffect(() => {
     suggestionsApi.map(item => {
@@ -116,8 +117,6 @@ function SearchUi(props) {
     }
   };
 
-  const { classes } = props;
-
   return (
     <Autosuggest
       theme={{
@@ -136,7 +135,6 @@ function SearchUi(props) {
       renderSuggestion={renderSuggestion}
       className={classes.autocomplete}
       inputProps={{
-        classes,
         placeholder: 'Search UI',
         value,
         onChange: handleChange,
@@ -146,8 +144,7 @@ function SearchUi(props) {
 }
 
 SearchUi.propTypes = {
-  classes: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SearchUi);
+export default SearchUi;

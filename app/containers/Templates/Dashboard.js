@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
-import classNames from 'classnames';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+
 import { GuideSlider } from 'dan-components';
 import { toggleAction, openAction, playTransitionAction } from 'dan-redux/actions/uiActions';
 import LeftSidebarLayout from './layouts/LeftSidebarLayout';
@@ -11,9 +11,10 @@ import RightSidebarLayout from './layouts/RightSidebarLayout';
 import LeftSidebarBigLayout from './layouts/LeftSidebarBigLayout';
 import DropMenuLayout from './layouts/DropMenuLayout';
 import MegaMenuLayout from './layouts/MegaMenuLayout';
-import styles from './appStyles-jss';
+import useStyles from './appStyles-jss';
 
 function Dashboard(props) {
+  const { classes, cx } = useStyles();
   // Initial header style
   const [openGuide, setOpenGuide] = useState(false);
   const [appHeight, setAppHeight] = useState(0);
@@ -48,13 +49,11 @@ function Dashboard(props) {
   const handleOpenGuide = () => {
     setOpenGuide(true);
   };
-
   const handleCloseGuide = () => {
     setOpenGuide(false);
   };
 
   const {
-    classes,
     children,
     toggleDrawer,
     sidebarOpen,
@@ -75,7 +74,7 @@ function Dashboard(props) {
     <div
       style={{ minHeight: appHeight }}
       className={
-        classNames(
+        cx(
           classes.appFrameInner,
           layout === 'top-navigation' || layout === 'mega-menu' ? classes.topNav : classes.sideNav,
           mode === 'dark' ? 'dark-mode' : 'light-mode'
@@ -193,7 +192,7 @@ function Dashboard(props) {
 }
 
 Dashboard.propTypes = {
-  classes: PropTypes.object.isRequired,
+
   children: PropTypes.node.isRequired,
   history: PropTypes.object.isRequired,
   initialOpen: PropTypes.func.isRequired,
@@ -230,4 +229,4 @@ const DashboardMaped = connect(
   mapDispatchToProps
 )(Dashboard);
 
-export default (withStyles(styles)(DashboardMaped));
+export default DashboardMaped;

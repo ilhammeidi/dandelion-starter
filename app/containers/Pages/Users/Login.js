@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import { LoginForm } from 'dan-components';
-import styles from 'dan-components/Forms/user-jss';
+import useStyles from 'dan-components/Forms/user-jss';
 
-function Login(props) {
+function Login() {
   const [valueForm, setValueForm] = useState(null);
-
+  const { classes } = useStyles();
   const submitForm = values => {
     setTimeout(() => {
       setValueForm(values);
@@ -19,7 +17,7 @@ function Login(props) {
 
   const title = brand.name + ' - Login';
   const description = brand.desc;
-  const { classes } = props;
+
   return (
     <div className={classes.root}>
       <Helmet>
@@ -39,8 +37,4 @@ function Login(props) {
   );
 }
 
-Login.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Login);
+export default Login;

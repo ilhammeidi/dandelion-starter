@@ -310,6 +310,9 @@ button.rbc-input::-moz-focus-inner {
 .rbc-date-cell > a:visited {
   text-decoration: none;
 }
+.rbc-date-cell button {
+  background: none;
+}
 .rbc-row-bg {
   display: -ms-flexbox;
   display: -webkit-box;

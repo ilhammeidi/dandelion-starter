@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
+import { makeStyles } from 'tss-react/mui';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
+import rtlPlugin from 'stylis-plugin-rtl';
+import { prefixer } from 'stylis';
 import { connect } from 'react-redux';
-import Loading from '@material-ui/core/LinearProgress';
-import { create } from 'jss';
-import rtl from 'jss-rtl';
-import { StylesProvider, jssPreset } from '@material-ui/styles';
+import Loading from '@mui/material/LinearProgress';
 import { bindActionCreators } from 'redux';
-import { withStyles, createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { changeModeAction } from 'dan-redux/actions/uiActions';
-import applicationTheme from '../../styles/theme/applicationTheme';
+import appTheme from '../../styles/theme/applicationTheme';
 
-const styles = {
+const useStyles = makeStyles()(() => ({
   root: {
     width: '100%',
     minHeight: '100%',
@@ -35,18 +37,38 @@ const styles = {
   hide: {
     opacity: 0
   }
-};
+}));
 
-// Configure JSS
-const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
+const isBrowser = typeof document !== 'undefined';
+let insertionPoint;
+
+if (isBrowser) {
+  const emotionInsertionPoint = document.querySelector(
+    'meta[name="emotion-insertion-point"]',
+  );
+  insertionPoint = emotionInsertionPoint ?? undefined;
+}
+
+const cacheRTL = createCache({
+  key: 'mui-style-rtl',
+  stylisPlugins: [prefixer, rtlPlugin],
+  insertionPoint,
+  prepend: true,
+});
+
+const cacheLTR = createCache({
+  key: 'mui-style-ltr',
+  insertionPoint,
+  prepend: true,
+});
 
 export const ThemeContext = React.createContext(undefined);
 
 function ThemeWrapper(props) {
+  const { classes } = useStyles();
   const [progress, setProgress] = useState(0);
   const [theme, setTheme] = useState(
-    // eslint-disable-next-line
-    createTheme(applicationTheme(props.color, props.mode, props.direction))
+    appTheme(props.color, props.mode, props.direction)
   );
 
   useEffect(() => {
@@ -67,18 +89,16 @@ function ThemeWrapper(props) {
 
   const handleChangeMode = mode => { // eslint-disable-line
     const { color, changeMode } = props;
-    setTheme(
-      createTheme(
-        applicationTheme(color, mode)
-      )
-    );
+    setTheme(appTheme(color, mode));
     changeMode(mode);
   };
 
-  const { classes, children } = props;
+  const muiTheme = createTheme(theme);
+  const { children } = props;
+
   return (
-    <StylesProvider jss={jss}>
-      <MuiThemeProvider theme={theme}>
+    <CacheProvider value={theme.direction === 'rtl' ? cacheRTL : cacheLTR}>
+      <ThemeProvider theme={muiTheme}>
         <div className={classes.root}>
           <Loading
             variant="determinate"
@@ -94,13 +114,12 @@ function ThemeWrapper(props) {
             {children}
           </ThemeContext.Provider>
         </div>
-      </MuiThemeProvider>
-    </StylesProvider>
+      </ThemeProvider>
+    </CacheProvider>
   );
 }
 
 ThemeWrapper.propTypes = {
-  classes: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
   direction: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
@@ -123,4 +142,4 @@ const ThemeWrapperMapped = connect(
   dispatchToProps
 )(ThemeWrapper);
 
-export default withStyles(styles)(ThemeWrapperMapped);
+export default ThemeWrapperMapped;

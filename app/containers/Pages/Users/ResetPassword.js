@@ -1,14 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import { ResetForm } from 'dan-components';
-import styles from '../../../components/Forms/user-jss';
+import useStyles from '../../../components/Forms/user-jss';
 
-function ResetPassword(props) {
+function ResetPassword() {
   const [valueForm, setValueForm] = useState(null);
-
+  const { classes } = useStyles();
   const submitForm = useCallback((values) => {
     setValueForm(values);
     setTimeout(() => {
@@ -18,7 +16,7 @@ function ResetPassword(props) {
 
   const title = brand.name + ' - Reset Password';
   const description = brand.desc;
-  const { classes } = props;
+
   return (
     <div className={classes.root}>
       <Helmet>
@@ -38,8 +36,4 @@ function ResetPassword(props) {
   );
 }
 
-ResetPassword.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(ResetPassword);
+export default ResetPassword;

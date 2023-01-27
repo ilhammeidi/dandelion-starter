@@ -22,7 +22,11 @@ const ReactBoilerplate = {
        */
       exclude: [
         '@date-io/moment',
-        '@material-ui/pickers',
+        '@emotion/react',
+        '@emotion/server',
+        '@emotion/styled',
+        '@mui/material',
+        '@mui/x-date-pickers',
         '@react-dnd',
         'autosuggest-highlight',
         'chalk',

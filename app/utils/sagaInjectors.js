@@ -2,7 +2,6 @@ import invariant from 'invariant';
 import {
   isEmpty, isFunction, isString, conformsTo
 } from 'lodash';
-
 import checkStore from './checkStore';
 import { DAEMON, ONCE_TILL_UNMOUNT, RESTART_ON_REMOUNT } from './constants';
 
@@ -25,7 +24,7 @@ const checkDescriptor = descriptor => {
 };
 
 export function injectSagaFactory(store, isValid) {
-  return function injectSaga(key, descriptor = {}, args) {
+  return function injectSaga(key, descriptor = {}, args) { // eslint-disable-line
     if (!isValid) checkStore(store);
 
     const newDescriptor = {

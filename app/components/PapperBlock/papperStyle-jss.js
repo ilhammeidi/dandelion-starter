@@ -1,5 +1,7 @@
-import { lighten } from '@material-ui/core/styles';
-const styles = theme => ({
+import { makeStyles } from 'tss-react/mui';
+import { lighten } from '@mui/material/styles';
+
+const useStyles = makeStyles()((theme, _params, classes) => ({
   root: {
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(3),
@@ -12,7 +14,7 @@ const styles = theme => ({
       paddingLeft: theme.spacing(3),
       paddingRight: theme.spacing(3),
     },
-    '&$noMargin': {
+    [`&.${classes.noMargin}`]: {
       margin: 0
     },
   },
@@ -20,7 +22,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     marginBottom: theme.spacing(5),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginBottom: theme.spacing(3),
     }
   },
@@ -32,8 +34,8 @@ const styles = theme => ({
     textTransform: 'capitalize',
     fontSize: 24,
     fontWeight: 400,
-    color: theme.palette.type === 'dark' ? theme.palette.primary.main : theme.palette.primary.dark,
-    [theme.breakpoints.down('xs')]: {
+    color: theme.palette.mode === 'dark' ? theme.palette.primary.main : theme.palette.primary.dark,
+    [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
       fontWeight: 600,
       marginBottom: theme.spacing(1)
@@ -42,7 +44,7 @@ const styles = theme => ({
   description: {
     maxWidth: 960,
     paddingTop: theme.spacing(0.5),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       textAlign: 'center'
     }
   },
@@ -62,14 +64,14 @@ const styles = theme => ({
   },
   noMargin: {},
   colorMode: {
-    backgroundColor: theme.palette.type === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main,
-    '& $title': {
+    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main,
+    [`& .${classes.title}`]: {
       color: theme.palette.grey[100],
       '&:after': {
         borderBottom: `5px solid ${theme.palette.primary.light}`
       }
     },
-    '& $description': {
+    [`& .${classes.description}`]: {
       color: theme.palette.grey[100],
     }
   },
@@ -79,24 +81,25 @@ const styles = theme => ({
   },
   iconTitle: {
     borderRadius: theme.rounded.small,
-    border: theme.palette.type === 'dark' ? 'none' : `1px solid ${lighten(theme.palette.primary.dark, 0.9)}`,
+    border: theme.palette.mode === 'dark' ? 'none' : `1px solid ${lighten(theme.palette.primary.dark, 0.9)}`,
     boxShadow: `0 2px 15px -5px ${theme.palette.primary.main}`,
-    background: theme.palette.type === 'dark' ? theme.palette.primary.main : lighten(theme.palette.primary.light, 0.5),
+    background: theme.palette.mode === 'dark' ? theme.palette.primary.main : lighten(theme.palette.primary.light, 0.5),
     width: 48,
     height: 48,
     textAlign: 'center',
     lineHeight: '44px',
     verticalAlign: 'middle',
     marginRight: theme.spacing(3),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none'
     },
     '& i': {
       fontSize: 28,
       verticalAlign: 'baseline',
-      color: theme.palette.type === 'dark' ? theme.palette.common.white : theme.palette.primary.main
+      color: theme.palette.mode === 'dark' ? theme.palette.common.white : theme.palette.primary.main
     }
   }
-});
+}));
 
-export default styles;
+// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
+export default useStyles;

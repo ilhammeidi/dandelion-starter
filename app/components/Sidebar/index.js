@@ -1,15 +1,15 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import Hidden from '@material-ui/core/Hidden';
-import Drawer from '@material-ui/core/Drawer';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Drawer from '@mui/material/Drawer';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import dummy from 'dan-api/dummy/dummyContents';
-import styles from './sidebar-jss';
+import useStyles from './sidebar-jss';
 import SidebarContent from './SidebarContent';
 
 function Sidebar(props) {
+  const { classes, cx } = useStyles();
   const [status, setStatus] = useState(dummy.user.status);
   const [anchorEl, setAnchorEl] = useState(null);
   const [turnDarker, setTurnDarker] = useState(false);
@@ -48,7 +48,6 @@ function Sidebar(props) {
   };
 
   const {
-    classes,
     open,
     toggleDrawerOpen,
     loadTransition,
@@ -56,9 +55,12 @@ function Sidebar(props) {
     dataMenu
   } = props;
 
+  const lgDown = useMediaQuery(theme => theme.breakpoints.down('lg'));
+  const lgUp = useMediaQuery(theme => theme.breakpoints.up('lg'));
+
   return (
     <Fragment>
-      <Hidden lgUp>
+      { !lgUp && (
         <SwipeableDrawer
           onClose={toggleDrawerOpen}
           onOpen={toggleDrawerOpen}
@@ -80,14 +82,14 @@ function Sidebar(props) {
             />
           </div>
         </SwipeableDrawer>
-      </Hidden>
-      <Hidden mdDown>
+      )}
+      {!lgDown && (
         <Drawer
           variant="permanent"
           onClose={toggleDrawerOpen}
           className={open ? classes.drawer : ''}
           classes={{
-            paper: classNames(classes.drawer, classes.drawerPaper, !open ? classes.drawerPaperClose : ''),
+            paper: cx(classes.drawer, classes.drawerPaper, !open ? classes.drawerPaperClose : ''),
           }}
           open={open}
           anchor={leftSidebar ? 'left' : 'right'}
@@ -105,13 +107,13 @@ function Sidebar(props) {
             changeStatus={handleChangeStatus}
           />
         </Drawer>
-      </Hidden>
+      )}
     </Fragment>
   );
 }
 
 Sidebar.propTypes = {
-  classes: PropTypes.object.isRequired,
+
   toggleDrawerOpen: PropTypes.func.isRequired,
   loadTransition: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
@@ -123,4 +125,4 @@ Sidebar.defaultProps = {
   leftSidebar: true
 };
 
-export default withStyles(styles)(Sidebar);
+export default Sidebar;
