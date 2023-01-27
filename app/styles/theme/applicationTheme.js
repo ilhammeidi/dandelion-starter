@@ -181,7 +181,7 @@ const applicationTheme = (color, mode, direction) => ({
     MuiAutocomplete: {
       styleOverrides: {
         inputRoot: {
-          padding: '24px 8px',
+          padding: '24px 8px 0',
           top: -3,
           '& $endAdornment': {
             paddingTop: 0
@@ -194,43 +194,32 @@ const applicationTheme = (color, mode, direction) => ({
     },
     MuiInputLabel: {
       styleOverrides: {
-        formControl: {
+        standard: {
           top: 10,
           left: 10,
           transform: 'translate(0, 22px) scale(1)',
-        },
-        animated: {
+          '&.MuiInputLabel-shrink': {
+            transform: 'translate(0, 13px) scale(0.7)',
+            zIndex: 1,
+          },
           '& + div': {
             paddingBottom: 4,
             '& input, > .MuiInputAdornment-positionStart, > select': {
               padding: '24px 8px 0',
-            }
-          }
-        },
-        shrink: {
-          transform: 'translate(0, 13px) scale(0.7)',
-          zIndex: 1,
-        },
-        filled: {
-          transform: 'translate(2px, 6px) scale(1)',
-          '&$shrink': {
-            transform: 'translate(0px, -6px) scale(0.75)',
-          },
-        },
-        outlined: {
-          transform: 'translate(2px, 6px) scale(1)',
-          '&$shrink': {
-            transform: 'translate(4px, -16px) scale(0.75)',
-          },
-        },
-        root: {
-          '& + div': {
+            },
             '& .MuiSelect-select': {
               paddingBottom: 0,
               paddingTop: '24px'
-            }
-          }
-        }
+            },
+          },
+        },
+        outlined: {
+          transform: 'translate(14px, 10px) scale(1)',
+          '&.MuiInputLabel-shrink': {
+            transform: 'translate(14px, -9px) scale(0.75)',
+            zIndex: 1,
+          },
+        },
       }
     },
     MuiFormLabel: {
@@ -280,6 +269,7 @@ const applicationTheme = (color, mode, direction) => ({
         root: {
           alignItems: 'flex-end',
           height: 'auto !important',
+          width: 32,
           '& button': {
             width: 32,
             height: 32,
@@ -289,6 +279,13 @@ const applicationTheme = (color, mode, direction) => ({
             minWidth: 24,
             lineHeight: '16px'
           },
+          '& svg': {
+            position: 'relative',
+            top: 4
+          },
+          '& .MuiAvatar-root': {
+            marginRight: 12
+          }
         },
         positionStart: {
           marginLeft: 0,
@@ -340,24 +337,6 @@ const applicationTheme = (color, mode, direction) => ({
         },
         colorPrimary: {
           backgroundColor: mode === 'dark' ? '#616161' : '#ededed',
-        },
-      }
-    },
-    MuiTablePagination: {
-      styleOverrides: {
-        input: {
-          marginRight: 32,
-          marginLeft: 8,
-        },
-        selectRoot: {
-          marginLeft: 0,
-          marginRight: 0,
-        },
-        select: {
-          paddingRight: 24,
-        },
-        selectIcon: {
-          top: 4,
         },
       }
     },
@@ -532,10 +511,51 @@ const applicationTheme = (color, mode, direction) => ({
         }
       }
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        input: {
+          padding: '8px 0 8px 8px'
+        },
+        root: {
+          paddingRight: 0
+        }
+      }
+    },
     MuiInputBase: {
       styleOverrides: {
         input: {
           flex: 1
+        },
+        root: {
+          MuiTablePagination: {
+            input: {
+              marginRight: 32,
+              marginLeft: 8,
+            },
+            selectRoot: {
+              marginLeft: 0,
+              marginRight: 0,
+            },
+            select: {
+              paddingRight: 24,
+            },
+            selectIcon: {
+              top: 4,
+            },
+            '& p': {
+              marginBottom: 0
+            }
+          },
+        }
+      }
+    },
+    MuiTablePagination: {
+      styleOverrides: {
+        displayedRows: {
+          marginBottom: 0
+        },
+        selectLabel: {
+          marginBottom: 0
         }
       }
     },
@@ -554,7 +574,8 @@ const applicationTheme = (color, mode, direction) => ({
       styleOverrides: {
         toolbar: {
           padding: 0,
-          '& > p:nth-of-type(2)': {
+          '& > p': {
+            marginBottom: 0,
             '@media (max-width: 400px)': {
               display: 'none'
             }

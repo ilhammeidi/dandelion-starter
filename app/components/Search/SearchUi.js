@@ -32,7 +32,7 @@ function renderSuggestion(suggestion, { query, isHighlighted }) {
   const parts = parse(suggestion.name, matches);
 
   return (
-    <MenuItem button selected={isHighlighted} component={NavLink} to={suggestion.link}>
+    <MenuItem selected={isHighlighted} component={NavLink} to={suggestion.link}>
       <div>
         {parts.map((part, index) => (
           part.highlight ? (

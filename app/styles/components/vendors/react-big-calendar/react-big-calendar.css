@@ -142,25 +142,25 @@ button.rbc-input::-moz-focus-inner {
   display: inline-block;
   white-space: nowrap;
 }
-.rbc-btn-group > button:first-of-type:not(:last-child) {
+.rbc-btn-group > button:first-child:not(:last-child) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.rbc-btn-group > button:last-child:not(:first-of-type) {
+.rbc-btn-group > button:last-child:not(:first-child) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-.rbc-rtl .rbc-btn-group > button:first-of-type:not(:last-child) {
+.rbc-rtl .rbc-btn-group > button:first-child:not(:last-child) {
   border-radius: 20px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-.rbc-rtl .rbc-btn-group > button:last-child:not(:first-of-type) {
+.rbc-rtl .rbc-btn-group > button:last-child:not(:first-child) {
   border-radius: 20px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.rbc-btn-group > button:not(:first-of-type):not(:last-child) {
+.rbc-btn-group > button:not(:first-child):not(:last-child) {
   border-radius: 0;
 }
 .rbc-btn-group button + button {
@@ -310,6 +310,9 @@ button.rbc-input::-moz-focus-inner {
 .rbc-date-cell > a:visited {
   text-decoration: none;
 }
+.rbc-date-cell button {
+  background: none;
+}
 .rbc-row-bg {
   display: -ms-flexbox;
   display: -webkit-box;
@@ -323,7 +326,7 @@ button.rbc-input::-moz-focus-inner {
           flex: 1 0 0;
   overflow: hidden;
 }
-.rbc-row-bg > .rbc-day-bg:first-of-type {
+.rbc-row-bg > .rbc-day-bg:first-child {
   border-left-width: 1px;
   border-left-style: solid;
 }
@@ -576,7 +579,7 @@ button.rbc-input::-moz-focus-inner {
   border-right-width: 0;
   border-left: 1px solid #DDD;
 }
-.rbc-time-header > .rbc-row:first-of-type {
+.rbc-time-header > .rbc-row:first-child {
   border-bottom: 1px solid #DDD;
 }
 .rbc-time-header > .rbc-row.rbc-row-resource {

@@ -13,6 +13,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { ConnectedRouter } from 'connected-react18-router';
 import FontFaceObserver from 'fontfaceobserver';
 import history from 'utils/history';
+import 'react-18-image-lightbox/style.css';
 import 'sanitize.css/sanitize.css';
 
 // Import root app

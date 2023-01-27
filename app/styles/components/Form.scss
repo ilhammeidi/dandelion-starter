@@ -3,7 +3,6 @@ $sm: "(max-width: 600px)";
 
 .bodyForm {
   position: relative;
-  background: $white;
   padding: 16px;
   @media #{$sm} {
     padding: 15px 10px;
@@ -12,7 +11,8 @@ $sm: "(max-width: 600px)";
   overflow: auto;
 }
 .buttonArea {
-  background: material-color('grey', '100');
+  background: rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   bottom: 0;
   left: 0;
