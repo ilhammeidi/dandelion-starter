@@ -20,8 +20,8 @@ const useStyles = makeStyles()(() => ({
     zIndex: 1,
   },
   loading: {
-    zIndex: 10,
-    position: 'fixed',
+    zIndex: '10 !important',
+    position: 'fixed !important',
     top: 0,
     left: 0,
     width: '100%',
@@ -29,10 +29,10 @@ const useStyles = makeStyles()(() => ({
     transition: 'opacity .5s ease'
   },
   loadingWrap: {
-    background: 'none'
+    background: 'none !important'
   },
   bar: {
-    background: 'rgba(255, 255, 255, 0.7)'
+    background: 'rgba(255, 255, 255, 0.7) !important'
   },
   hide: {
     opacity: 0
@@ -53,13 +53,11 @@ const cacheRTL = createCache({
   key: 'mui-style-rtl',
   stylisPlugins: [prefixer, rtlPlugin],
   insertionPoint,
-  prepend: true,
 });
 
 const cacheLTR = createCache({
   key: 'mui-style-ltr',
   insertionPoint,
-  prepend: true,
 });
 
 export const ThemeContext = React.createContext(undefined);
