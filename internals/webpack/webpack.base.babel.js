@@ -4,10 +4,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const ESLintPlugin = require('eslint-webpack-plugin');
-
-const HappyPack = require('happypack');
-const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
+// const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = options => ({
   mode: options.mode,
@@ -25,8 +22,10 @@ module.exports = options => ({
         test: /\.jsx?$/, // Transform all .js and .jsx files required somewhere with Babel
         exclude: /node_modules/,
         use: {
-          loader: 'happypack/loader?id=js',
-          options: options.babelQuery,
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
         },
       },
       {
@@ -164,29 +163,24 @@ module.exports = options => ({
       },
     ],
   },
-  ignoreWarnings: [/Failed to parse source map/, /failed to load source map/],
+  ignoreWarnings: [/Failed to parse source map/, /failed to load source map/, /Can't resolve '..\/..\/locale'/],
   plugins: options.plugins.concat([
     /*
       Disabled eslint by default.
       You can enable it to maintain and keep clean your code.
       NOTE: By enable eslint running app process at beginning will slower
     */
-    new ESLintPlugin({
-      extensions: 'js',
-      exclude: 'node_modules',
-      failOnWarning: true,
-      failOnError: true,
-      emitError: true,
-      emitWarning: true,
-    }),
+    //    new ESLintPlugin({
+    //      extensions: 'js',
+    //      exclude: 'node_modules',
+    //      failOnWarning: true,
+    //      failOnError: true,
+    //      emitError: true,
+    //      emitWarning: true,
+    //    }),
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; Terser will automatically
     // drop any unreachable code.
-    new HappyPack({
-      id: 'js',
-      threadPool: happyThreadPool,
-      loaders: ['babel-loader?cacheDirectory=true']
-    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
