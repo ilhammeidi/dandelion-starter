@@ -120,7 +120,6 @@ function MainMenu(props) {
 }
 
 MainMenu.propTypes = {
-
   open: PropTypes.array.isRequired,
   openSubMenu: PropTypes.func.isRequired,
   toggleDrawerOpen: PropTypes.func.isRequired,

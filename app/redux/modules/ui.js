@@ -87,9 +87,10 @@ const uiReducer = (state = initialState, action = {}) => produce(state, draft =>
       // Expand / Collapse parent menu
       const menuList = state.subMenuOpen;
       if (menuList.indexOf(action.key) > -1) {
-        draft.subMenuOpen = [];
+        const index = draft.subMenuOpen.findIndex((obj) => obj === action.key);
+        draft.subMenuOpen.splice(index, 1);
       } else {
-        draft.subMenuOpen = [action.key, action.keyParent];
+        draft.subMenuOpen.push(action.key);
       }
       break;
     }
