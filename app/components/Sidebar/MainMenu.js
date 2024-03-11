@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import List from '@mui/material/List';
+import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -34,7 +34,7 @@ function MainMenu(props) {
     dataMenu
   } = props;
 
-  const getMenus = menuArray => menuArray.map((item, index) => {
+  const getMenus = (menuArray, paddingLevel) => menuArray.map((item, index) => {
     if (item.child || item.linkParent) {
       return (
         <div key={index.toString()}>
@@ -42,6 +42,7 @@ function MainMenu(props) {
             button
             component={LinkBtn}
             to={item.linkParent ? item.linkParent : '#'}
+            sx={{ marginLeft: !item.icon ? paddingLevel : 0 }}
             className={
               cx(
                 classes.head,
@@ -74,8 +75,8 @@ function MainMenu(props) {
               timeout="auto"
               unmountOnExit
             >
-              <List className={classes.dense} component="nav" dense>
-                { getMenus(item.child, 'key') }
+              <List className={classes.dense} component="nav">
+                { getMenus(item.child, item.level) }
               </List>
             </Collapse>
           )}
@@ -99,16 +100,26 @@ function MainMenu(props) {
         key={index.toString()}
         button
         exact
+        sx={{ pl: paddingLevel }}
         className={classes.nested}
         activeClassName={classes.active}
         component={LinkBtn}
         to={item.link}
         onClick={() => handleClick()}
       >
-        <ListItemText classes={{ primary: classes.primary }} inset primary={item.name} />
-        {item.badge && (
-          <Chip color="primary" label={item.badge} className={classes.badge} />
-        )}
+        <Box
+          sx={{
+            flex: 1,
+            pl: paddingLevel,
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}
+        >
+          <ListItemText classes={{ primary: classes.primary }} inset primary={item.name} />
+          {item.badge && (
+            <Chip color="primary" label={item.badge} className={classes.badge} />
+          )}
+        </Box>
       </ListItem>
     );
   });
@@ -120,7 +131,6 @@ function MainMenu(props) {
 }
 
 MainMenu.propTypes = {
-
   open: PropTypes.array.isRequired,
   openSubMenu: PropTypes.func.isRequired,
   toggleDrawerOpen: PropTypes.func.isRequired,
