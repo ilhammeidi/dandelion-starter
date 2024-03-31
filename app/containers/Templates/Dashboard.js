@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
-
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
 import { GuideSlider } from 'dan-components';
-import { toggleAction, openAction, playTransitionAction } from 'dan-redux/actions/uiActions';
+import { toggleAction, openAction, playTransitionAction } from 'dan-redux/modules/ui';
 import LeftSidebarLayout from './layouts/LeftSidebarLayout';
 import RightSidebarLayout from './layouts/RightSidebarLayout';
 import LeftSidebarBigLayout from './layouts/LeftSidebarBigLayout';
@@ -19,23 +16,32 @@ function Dashboard(props) {
   const [openGuide, setOpenGuide] = useState(false);
   const [appHeight, setAppHeight] = useState(0);
 
+  const dispatch = useDispatch();
+  const sidebarOpen = useSelector((state) => state.ui.sidebarOpen);
+  const pageLoaded = useSelector((state) => state.ui.pageLoaded);
+  const mode = useSelector((state) => state.ui.type);
+  const gradient = useSelector((state) => state.ui.gradient);
+  const deco = useSelector((state) => state.ui.decoration);
+  const layout = useSelector((state) => state.ui.layout);
+  const bgPosition = useSelector((state) => state.ui.bgPosition);
+
   useEffect(() => {
-    const { history, loadTransition } = props;
+    const { history } = props;
 
     // Adjust min height
     setAppHeight(window.innerHeight + 112);
 
     // Set expanded sidebar menu
     const currentPath = history.location.pathname;
-    props.initialOpen(currentPath);
+    dispatch(openAction({ initialLocation: currentPath }));
     // Play page transition
-    loadTransition(true);
+    dispatch(playTransitionAction(true));
 
     // Execute all arguments when page changes
     const unlisten = history.listen(() => {
       window.scrollTo(0, 0);
       setTimeout(() => {
-        loadTransition(true);
+        dispatch(playTransitionAction(true));
       }, 500);
     });
 
@@ -53,20 +59,7 @@ function Dashboard(props) {
     setOpenGuide(false);
   };
 
-  const {
-    children,
-    toggleDrawer,
-    sidebarOpen,
-    loadTransition,
-    pageLoaded,
-    mode,
-    history,
-    gradient,
-    deco,
-    bgPosition,
-    layout,
-    changeMode
-  } = props;
+  const { changeMode, children, history } = props;
   const titleException = ['/app', '/app/crm-dashboard', '/app/crypto-dashboard'];
   const parts = history.location.pathname.split('/');
   const place = parts[parts.length - 1].replace('-', ' ');
@@ -86,8 +79,8 @@ function Dashboard(props) {
         layout === 'left-sidebar' && (
           <LeftSidebarLayout
             history={history}
-            toggleDrawer={toggleDrawer}
-            loadTransition={loadTransition}
+            toggleDrawer={() => dispatch(toggleAction())}
+            loadTransition={() => dispatch(playTransitionAction())}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
@@ -107,8 +100,8 @@ function Dashboard(props) {
         layout === 'big-sidebar' && (
           <LeftSidebarBigLayout
             history={history}
-            toggleDrawer={toggleDrawer}
-            loadTransition={loadTransition}
+            toggleDrawer={dispatch(toggleAction)}
+            loadTransition={dispatch(playTransitionAction)}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
@@ -128,8 +121,8 @@ function Dashboard(props) {
         layout === 'right-sidebar' && (
           <RightSidebarLayout
             history={history}
-            toggleDrawer={toggleDrawer}
-            loadTransition={loadTransition}
+            toggleDrawer={dispatch(toggleAction)}
+            loadTransition={dispatch(playTransitionAction)}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
@@ -149,8 +142,8 @@ function Dashboard(props) {
         layout === 'top-navigation' && (
           <DropMenuLayout
             history={history}
-            toggleDrawer={toggleDrawer}
-            loadTransition={loadTransition}
+            toggleDrawer={dispatch(toggleAction)}
+            loadTransition={dispatch(playTransitionAction)}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
@@ -170,8 +163,8 @@ function Dashboard(props) {
         layout === 'mega-menu' && (
           <MegaMenuLayout
             history={history}
-            toggleDrawer={toggleDrawer}
-            loadTransition={loadTransition}
+            toggleDrawer={dispatch(toggleAction)}
+            loadTransition={dispatch(playTransitionAction)}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
@@ -192,41 +185,9 @@ function Dashboard(props) {
 }
 
 Dashboard.propTypes = {
-
   children: PropTypes.node.isRequired,
   history: PropTypes.object.isRequired,
-  initialOpen: PropTypes.func.isRequired,
-  toggleDrawer: PropTypes.func.isRequired,
-  loadTransition: PropTypes.func.isRequired,
   changeMode: PropTypes.func.isRequired,
-  sidebarOpen: PropTypes.bool.isRequired,
-  pageLoaded: PropTypes.bool.isRequired,
-  mode: PropTypes.string.isRequired,
-  gradient: PropTypes.bool.isRequired,
-  deco: PropTypes.bool.isRequired,
-  bgPosition: PropTypes.string.isRequired,
-  layout: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => ({
-  sidebarOpen: state.ui.sidebarOpen,
-  pageLoaded: state.ui.pageLoaded,
-  mode: state.ui.type,
-  gradient: state.ui.gradient,
-  deco: state.ui.decoration,
-  layout: state.ui.layout,
-  bgPosition: state.ui.bgPosition,
-});
-
-const mapDispatchToProps = dispatch => ({
-  toggleDrawer: () => dispatch(toggleAction),
-  initialOpen: bindActionCreators(openAction, dispatch),
-  loadTransition: bindActionCreators(playTransitionAction, dispatch),
-});
-
-const DashboardMaped = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard);
-
-export default DashboardMaped;
+export default Dashboard;

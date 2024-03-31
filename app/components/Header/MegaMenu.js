@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
-
 import Fade from '@mui/material/Fade';
 import Popper from '@mui/material/Popper';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Paper from '@mui/material/Paper';
@@ -16,6 +13,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
+import { openAction as openSubMenu } from 'dan-redux/modules/ui';
 import useStyles from './header-jss';
 
 const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
@@ -29,16 +27,17 @@ function MegaMenu(props) {
   const [openMenu, setOpenMenu] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const open = useSelector((state) => state.ui.subMenuOpen);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    const { open } = props;
     setTimeout(() => {
       setActive(open);
     }, 50);
   }, []);
 
   const handleOpenMenu = (event, key, keyParent) => {
-    const { openSubMenu } = props;
-    openSubMenu(key, keyParent);
+    dispatch(openSubMenu({ key, keyParent }));
     setAnchorEl(event.currentTarget);
     setTimeout(() => {
       setOpenMenu([key]);
@@ -57,7 +56,7 @@ function MegaMenu(props) {
     setOpenMenu([]);
   };
 
-  const { open, dataMenu } = props;
+  const { dataMenu } = props;
   const getMenus = (parent, menuArray) => menuArray.map((item, index) => {
     if (item.multilevel) {
       return false;
@@ -153,25 +152,7 @@ function MegaMenu(props) {
 }
 
 MegaMenu.propTypes = {
-
-  open: PropTypes.array.isRequired,
-  openSubMenu: PropTypes.func.isRequired,
   dataMenu: PropTypes.array.isRequired,
 };
 
-const openAction = (key, keyParent) => ({ type: 'OPEN_SUBMENU', key, keyParent });
-
-const mapStateToProps = state => ({
-  open: state.ui.subMenuOpen
-});
-
-const mapDispatchToProps = dispatch => ({
-  openSubMenu: bindActionCreators(openAction, dispatch)
-});
-
-const MegaMenuMapped = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MegaMenu);
-
-export default MegaMenuMapped;
+export default MegaMenu;

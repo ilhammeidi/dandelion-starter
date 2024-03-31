@@ -12,7 +12,6 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Button from '@mui/material/Button';
 import {

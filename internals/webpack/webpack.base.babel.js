@@ -203,6 +203,7 @@ module.exports = options => ({
     extensions: ['.js', '.jsx', '.react.js'],
     mainFields: ['browser', 'jsnext:main', 'main'],
     fallback: {
+      'process/browser': require.resolve('process/browser'),
       fs: false,
       domain: false,
       path: false,

@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
-
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Popper from '@mui/material/Popper';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
@@ -137,25 +133,9 @@ function MainMenu(props) {
 }
 
 MainMenu.propTypes = {
-
   open: PropTypes.array.isRequired,
   openSubMenu: PropTypes.func.isRequired,
   dataMenu: PropTypes.array.isRequired,
 };
 
-const openAction = (key, keyParent) => ({ type: 'OPEN_SUBMENU', key, keyParent });
-
-const mapStateToProps = state => ({
-  open: state.ui.subMenuOpen
-});
-
-const mapDispatchToProps = dispatch => ({
-  openSubMenu: bindActionCreators(openAction, dispatch)
-});
-
-const MainMenuMapped = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainMenu);
-
-export default MainMenuMapped;
+export default MainMenu;

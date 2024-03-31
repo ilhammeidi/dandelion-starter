@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-import { ResetForm } from 'dan-components';
+// import { ResetForm } from 'dan-components';
 import useStyles from '../../../components/Forms/user-jss';
 
 function ResetPassword() {
@@ -29,7 +29,7 @@ function ResetPassword() {
       </Helmet>
       <div className={classes.container}>
         <div className={classes.userFormWrap}>
-          <ResetForm onSubmit={(values) => submitForm(values)} />
+          {/* <ResetForm onSubmit={(values) => submitForm(values)} /> */}
         </div>
       </div>
     </div>

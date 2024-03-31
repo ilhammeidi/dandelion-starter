@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-import { LoginForm } from 'dan-components';
+// import { LoginForm } from 'dan-components';
 import useStyles from 'dan-components/Forms/user-jss';
 
 function Login() {
@@ -30,7 +30,7 @@ function Login() {
       </Helmet>
       <div className={classes.container}>
         <div className={classes.userFormWrap}>
-          <LoginForm onSubmit={(values) => submitForm(values)} />
+          {/* <LoginForm onSubmit={(values) => submitForm(values)} /> */}
         </div>
       </div>
     </div>

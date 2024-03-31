@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-import { RegisterForm } from 'dan-components';
+// import { RegisterForm } from 'dan-components';
 import useStyles from 'dan-components/Forms/user-jss';
 
 function Register() {
@@ -30,7 +30,7 @@ function Register() {
       </Helmet>
       <div className={classes.container}>
         <div className={classes.userFormWrap}>
-          <RegisterForm onSubmit={(values) => submitForm(values)} />
+          {/* <RegisterForm onSubmit={(values) => submitForm(values)} /> */}
         </div>
       </div>
     </div>

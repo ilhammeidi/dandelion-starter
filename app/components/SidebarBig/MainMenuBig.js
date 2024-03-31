@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ButtonBase from '@mui/material/ButtonBase';
-import { openMenuAction, closeMenuAction } from 'dan-redux/actions/uiActions';
+import { openAction, openMenuAction, closeMenuAction } from 'dan-redux/modules/ui';
 import MenuProfile from './MenuProfile';
 import useStyles from './sidebarBig-jss';
 
@@ -23,31 +21,29 @@ function MainMenuBig(props) {
   const [selectedMenu, setSelectedMenu] = useState([]);
   const [menuLoaded, setMenuLoaded] = useState(true);
 
-  const {
-    open,
-    closeDrawer,
-    dataMenu,
-    drawerPaper,
-    openSubMenu
-  } = props;
+  const dispatch = useDispatch();
+  const open = useSelector((state) => state.ui.subMenuOpen);
+
+  const { dataMenu, drawerPaper } = props;
 
   const handleLoadMenu = (menu, key) => {
-    const { openDrawer, mobile } = props;
+    const { mobile } = props;
     setSelectedMenu(menu);
     setMenuLoaded(false); // unload transition menu
-    openSubMenu(key);
+    dispatch(openAction({ key }));
+
     setTimeout(() => {
       setMenuLoaded(true); // load transtion menu
     }, 100);
     // Unecessary in mobile, because toggle menu is handled already
     if (!mobile) {
-      openDrawer();
+      dispatch(openMenuAction());
     }
   };
 
   const handleLoadSingleMenu = () => {
     setSelectedMenu([]);
-    closeDrawer();
+    dispatch(closeMenuAction());
   };
 
   const handleLoadPage = () => {
@@ -186,12 +182,7 @@ function MainMenuBig(props) {
 }
 
 MainMenuBig.propTypes = {
-
-  open: PropTypes.array.isRequired,
   dataMenu: PropTypes.array.isRequired,
-  openDrawer: PropTypes.func.isRequired,
-  openSubMenu: PropTypes.func.isRequired,
-  closeDrawer: PropTypes.func.isRequired,
   loadTransition: PropTypes.func.isRequired,
   drawerPaper: PropTypes.bool.isRequired,
   mobile: PropTypes.bool,
@@ -203,21 +194,4 @@ MainMenuBig.defaultProps = {
   mobile: false
 };
 
-const openAction = key => ({ type: 'OPEN_SUBMENU', key });
-
-const mapStateToProps = state => ({
-  open: state.ui.subMenuOpen
-});
-
-const mapDispatchToProps = dispatch => ({
-  openDrawer: () => dispatch(openMenuAction),
-  closeDrawer: () => dispatch(closeMenuAction),
-  openSubMenu: bindActionCreators(openAction, dispatch)
-});
-
-const MainMenuBigMapped = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MainMenuBig);
-
-export default MainMenuBigMapped;
+export default MainMenuBig;

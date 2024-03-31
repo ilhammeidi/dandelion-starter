@@ -2,14 +2,16 @@
  * Create the store with dynamic reducers
  */
 
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'connected-react18-router';
-import createSagaMiddleware from 'redux-saga';
-import { persistStore, persistReducer } from 'redux-persist';
+import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit'
+import {
+  persistStore, persistReducer,
+  FLUSH, REHYDRATE, PAUSE,
+  PERSIST, PURGE, REGISTER,
+} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import createReducer from './reducers';
+import rootReducer from './reducers';
 
-const sagaMiddleware = createSagaMiddleware();
+const listenerMiddleware = createListenerMiddleware();
 
 const persistConfig = {
   key: 'dandelion',
@@ -17,44 +19,77 @@ const persistConfig = {
   whitelist: ['ui']
 };
 
-const persistedReducer = persistReducer(persistConfig, createReducer());
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export default function configureStore(initialState = {}, history) { // eslint-disable-line
-  // Create the store with two middlewares
-  // 1. sagaMiddleware: Makes redux-sagas work
-  // 2. routerMiddleware: Syncs the location/URL path to the state
-  const middlewares = [sagaMiddleware, routerMiddleware(history)];
+//  export default function configStore() {
+//    const store = configureStore({
+//      // Automatically calls `combineReducers`
+//      reducer: {
+//        persistedReducer,
+//      },
+//      middleware: (getDefaultMiddleware) =>
+//        getDefaultMiddleware({
+//          serializableCheck: {
+//            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//          },
+//        })
+//    });
+//
+//    const persistor = persistStore(store);
+//
+//    return { store, persistor };
+//  }
 
-  const enhancers = [applyMiddleware(...middlewares)];
-  const composeEnhancers = process.env.NODE_ENV !== 'production'
-    && typeof window === 'object'
-    && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      // Prevent recomputing reducers for `replaceReducer`
-      shouldHotReload: false,
-    })
-    : compose;
-  /* eslint-enable */
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
 
-  const store = createStore(
-    persistedReducer,
-    initialState,
-    composeEnhancers(...enhancers),
-  );
+export const persistor = persistStore(store)
 
-  const persistor = persistStore(store);
-  // Extensions
-  store.runSaga = sagaMiddleware.run;
-  store.injectedReducers = {}; // Reducer registry
-  store.injectedSagas = {}; // Saga registry
+export default store;
 
-  // Make reducers hot reloadable, see http://mxs.is/googmo
-  /* istanbul ignore next */
-  if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      store.replaceReducer(createReducer(store.injectedReducers));
-    });
-  }
-
-  return { store, persistor };
-}
+//  export default function configureStore(initialState = {}) { // eslint-disable-line
+//    // Create the store with two middlewares
+//    // 1. sagaMiddleware: Makes redux-sagas work
+//    // 2. routerMiddleware: Syncs the location/URL path to the state
+//    const middlewares = [sagaMiddleware];
+//
+//    const enhancers = [applyMiddleware(...middlewares)];
+//    const composeEnhancers = process.env.NODE_ENV !== 'production'
+//      && typeof window === 'object'
+//      && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+//      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+//        // Prevent recomputing reducers for `replaceReducer`
+//        shouldHotReload: false,
+//      })
+//      : compose;
+//    /* eslint-enable */
+//
+//    const store = createStore(
+//      persistedReducer,
+//      initialState,
+//      composeEnhancers(...enhancers),
+//    );
+//
+//    const persistor = persistStore(store);
+//    // Extensions
+//    store.runSaga = sagaMiddleware.run;
+//    store.injectedReducers = {}; // Reducer registry
+//    store.injectedSagas = {}; // Saga registry
+//
+//    // Make reducers hot reloadable, see http://mxs.is/googmo
+//    /* istanbul ignore next */
+//    if (module.hot) {
+//      module.hot.accept('./reducers', () => {
+//        store.replaceReducer(createReducer(store.injectedReducers));
+//      });
+//    }
+//
+//    return { store, persistor };
+//  }

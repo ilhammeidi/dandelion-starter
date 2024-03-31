@@ -125,7 +125,6 @@ function SidebarContent(props) {
 }
 
 SidebarContent.propTypes = {
-
   drawerPaper: PropTypes.bool.isRequired,
   turnDarker: PropTypes.bool,
   toggleDrawerOpen: PropTypes.func,

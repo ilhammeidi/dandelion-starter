@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
 import { SourceReader, PapperBlock } from 'dan-components';
-import ReduxFormDemo from './ReduxFormDemo';
+// import ReduxFormDemo from './ReduxFormDemo';
 
 function ReduxForm() {
   const [valueForm, setValueForm] = useState(null);
@@ -29,7 +29,7 @@ function ReduxForm() {
       </Helmet>
       <PapperBlock title="Redux Form" icon="ion-ios-list-box-outline" desc="This is a simple demonstration of how to connect all the standard material-ui form elements to redux-form.">
         <div>
-          <ReduxFormDemo onSubmit={(values) => showResult(values)} />
+          {/* <ReduxFormDemo onSubmit={(values) => showResult(values)} /> */}
           <p>Submited Result: </p>
           <code>
             {valueForm && valueForm.toString()}

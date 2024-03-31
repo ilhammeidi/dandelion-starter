@@ -31,6 +31,7 @@ function LeftSidebarLayout(props) {
     titleException,
     handleOpenGuide
   } = props;
+
   return (
     <Fragment>
       <Header
@@ -83,14 +84,13 @@ function LeftSidebarLayout(props) {
 }
 
 LeftSidebarLayout.propTypes = {
-
   children: PropTypes.node.isRequired,
   history: PropTypes.object.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
   loadTransition: PropTypes.func.isRequired,
   changeMode: PropTypes.func.isRequired,
   sidebarOpen: PropTypes.bool.isRequired,
-  pageLoaded: PropTypes.bool.isRequired,
+  pageLoaded: PropTypes.bool,
   mode: PropTypes.string.isRequired,
   gradient: PropTypes.bool.isRequired,
   deco: PropTypes.bool.isRequired,
@@ -98,6 +98,10 @@ LeftSidebarLayout.propTypes = {
   place: PropTypes.string.isRequired,
   titleException: PropTypes.array.isRequired,
   handleOpenGuide: PropTypes.func.isRequired
+};
+
+LeftSidebarLayout.defaultProps = {
+  pageLoaded: false,
 };
 
 export default LeftSidebarLayout;

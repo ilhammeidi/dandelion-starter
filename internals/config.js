@@ -28,6 +28,7 @@ const ReactBoilerplate = {
         '@mui/material',
         '@mui/x-date-pickers',
         '@react-dnd',
+        '@reduxjs/toolkit',
         'autosuggest-highlight',
         'chalk',
         'compression',
