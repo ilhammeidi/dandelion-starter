@@ -100,8 +100,8 @@ function Dashboard(props) {
         layout === 'big-sidebar' && (
           <LeftSidebarBigLayout
             history={history}
-            toggleDrawer={dispatch(toggleAction)}
-            loadTransition={dispatch(playTransitionAction)}
+            toggleDrawer={() => dispatch(toggleAction())}
+            loadTransition={() => dispatch(playTransitionAction())}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
@@ -121,8 +121,8 @@ function Dashboard(props) {
         layout === 'right-sidebar' && (
           <RightSidebarLayout
             history={history}
-            toggleDrawer={dispatch(toggleAction)}
-            loadTransition={dispatch(playTransitionAction)}
+            toggleDrawer={() => dispatch(toggleAction())}
+            loadTransition={() => dispatch(playTransitionAction())}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
@@ -142,8 +142,8 @@ function Dashboard(props) {
         layout === 'top-navigation' && (
           <DropMenuLayout
             history={history}
-            toggleDrawer={dispatch(toggleAction)}
-            loadTransition={dispatch(playTransitionAction)}
+            toggleDrawer={() => dispatch(toggleAction())}
+            loadTransition={() => dispatch(playTransitionAction())}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
@@ -163,8 +163,8 @@ function Dashboard(props) {
         layout === 'mega-menu' && (
           <MegaMenuLayout
             history={history}
-            toggleDrawer={dispatch(toggleAction)}
-            loadTransition={dispatch(playTransitionAction)}
+            toggleDrawer={() => dispatch(toggleAction())}
+            loadTransition={() => dispatch(playTransitionAction())}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}

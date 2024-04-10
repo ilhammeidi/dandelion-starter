@@ -82,7 +82,6 @@ function LeftSidebarBigLayout(props) {
 }
 
 LeftSidebarBigLayout.propTypes = {
-
   children: PropTypes.node.isRequired,
   history: PropTypes.object.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
@@ -97,6 +96,10 @@ LeftSidebarBigLayout.propTypes = {
   place: PropTypes.string.isRequired,
   titleException: PropTypes.array.isRequired,
   handleOpenGuide: PropTypes.func.isRequired,
+};
+
+LeftSidebarBigLayout.defaultProps = {
+  pageLoaded: false,
 };
 
 export default LeftSidebarBigLayout;
