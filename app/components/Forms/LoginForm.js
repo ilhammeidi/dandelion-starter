@@ -1,8 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
 import Button from '@mui/material/Button';
-import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
@@ -18,26 +16,49 @@ import ArrowForward from '@mui/icons-material/ArrowForward';
 import Paper from '@mui/material/Paper';
 import Icon from '@mui/material/Icon';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
 import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
-import { TextFieldRedux, CheckboxRedux } from './ReduxFormMUI';
+import { useSelector } from 'react-redux';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import useStyles from './user-jss';
 import { ContentDivider } from '../Divider';
-
-// validation functions
-const required = value => (value === null ? 'Required' : undefined);
-const email = value => (
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email'
-    : undefined
-);
 
 const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
   return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
 });
 
+const validationSchema = yup.object({
+  email: yup
+    .string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: yup
+    .string('Enter your password')
+    .required('Password is required'),
+});
+
 function LoginForm(props) {
   const { classes, cx } = useStyles();
+
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const deco = useSelector((state) => state.ui.decoration);
+
+  const formik = useFormik({
+    initialValues: {
+      email: 'john.doe@mail.com',
+      password: '12345678',
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      await sleep(500);
+      console.log('You submitted:' + JSON.stringify(values, null, 2));
+      window.location.href = '/app';
+    },
+  });
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => {
@@ -51,12 +72,6 @@ function LoginForm(props) {
   const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
   const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
 
-  const {
-    handleSubmit,
-    pristine,
-    submitting,
-    deco,
-  } = props;
   return (
     <Fragment>
       {!mdUp && (
@@ -102,27 +117,37 @@ function LoginForm(props) {
           <ContentDivider content="Or sign in with email" />
         </section>
         <section className={classes.formWrap}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <div>
               <FormControl variant="standard" className={classes.formControl}>
-                <Field
+                <TextField
+                  id="email"
                   name="email"
-                  component={TextFieldRedux}
                   placeholder="Your Email"
                   label="Your Email"
-                  required
-                  validate={[required, email]}
+                  variant="standard"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
                   className={classes.field}
                 />
               </FormControl>
             </div>
             <div>
               <FormControl variant="standard" className={classes.formControl}>
-                <Field
+                <TextField
+                  id="password"
                   name="password"
-                  component={TextFieldRedux}
-                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Your Password"
                   label="Your Password"
+                  type={showPassword ? 'text' : 'password'}
+                  variant="standard"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={formik.touched.password && Boolean(formik.errors.password)}
+                  helperText={formik.touched.password && formik.errors.password}
+                  className={classes.field}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -136,20 +161,17 @@ function LoginForm(props) {
                       </InputAdornment>
                     )
                   }}
-                  required
-                  validate={required}
-                  className={classes.field}
                 />
               </FormControl>
             </div>
             <div className={classes.optArea}>
-              <FormControlLabel className={classes.label} control={<Field name="checkbox" component={CheckboxRedux} />} label="Remember" />
+              <FormControlLabel className={classes.label} control={<Checkbox name="checkbox" />} label="Remember" />
               <Button size="small" component={LinkBtn} to="/reset-password" className={classes.buttonLink}>Forgot Password</Button>
             </div>
             <div className={classes.btnArea}>
-              <Button variant="contained" color="primary" size="large" type="submit">
+              <Button variant="contained" color="primary" size="large" type="submit" disabled={formik.isSubmitting}>
                 Continue
-                <ArrowForward className={cx(classes.rightIcon, classes.iconSmall)} disabled={submitting || pristine} />
+                <ArrowForward className={cx(classes.rightIcon, classes.iconSmall)} />
               </Button>
             </div>
           </form>
@@ -159,25 +181,4 @@ function LoginForm(props) {
   );
 }
 
-LoginForm.propTypes = {
-
-  handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  deco: PropTypes.bool.isRequired,
-};
-
-const LoginFormReduxed = reduxForm({
-  form: 'loginForm',
-  enableReinitialize: true,
-})(LoginForm);
-
-const FormInit = connect(
-  state => ({
-    force: state,
-    initialValues: state.login.usersLogin,
-    deco: state.ui.decoration
-  }),
-)(LoginFormReduxed);
-
-export default FormInit;
+export default LoginForm;

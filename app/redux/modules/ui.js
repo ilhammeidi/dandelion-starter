@@ -73,7 +73,7 @@ const uiSlice = createSlice({
 
       // Expand / Collapse parent menu
       const menuList = state.subMenuOpen;
-      if (menuList.indexOf(action.key) > -1) {
+      if (menuList.indexOf(key) > -1) {
         const index = state.subMenuOpen.findIndex((obj) => obj === key);
         state.subMenuOpen.splice(index, 1);
       } else {

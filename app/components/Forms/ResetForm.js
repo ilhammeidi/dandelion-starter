@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import ArrowForward from '@mui/icons-material/ArrowForward';
@@ -11,25 +8,36 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
-import { TextFieldRedux } from './ReduxFormMUI';
+import TextField from '@mui/material/TextField';
+import { useFormik } from 'formik';
+import { useSelector } from 'react-redux';
+import * as yup from 'yup';
 import useStyles from './user-jss';
 
 // validation functions
-const required = value => (value === null ? 'Required' : undefined);
-const email = value => (
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email'
-    : undefined
-);
+const validationSchema = yup.object({
+  email: yup
+    .string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+});
 
 function ResetForm(props) {
   const { classes, cx } = useStyles();
-  const {
-    handleSubmit,
-    pristine,
-    submitting,
-    deco,
-  } = props;
+  const deco = useSelector((state) => state.ui.decoration);
+
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const formik = useFormik({
+    initialValues: {
+      email: ''
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      await sleep(500);
+      console.log(JSON.stringify(values, null, 2));
+    },
+  })
+
   return (
     <Paper className={cx(classes.paperWrap, deco && classes.petal)}>
       <div className={classes.topBar}>
@@ -45,24 +53,26 @@ function ResetForm(props) {
         Send reset password link to Your email
       </Typography>
       <section className={classes.formWrap}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <div>
             <FormControl variant="standard" className={classes.formControl}>
-              <Field
+              <TextField
                 name="email"
-                component={TextFieldRedux}
+                variant="standard"
                 placeholder="Your Email"
                 label="Your Email"
                 required
-                validate={[required, email]}
-                className={classes.field}
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
               />
             </FormControl>
           </div>
           <div className={classes.btnArea}>
-            <Button variant="contained" color="primary" type="submit">
+            <Button variant="contained" color="primary" type="submit" disabled={formik.isSubmitting || !formik.isValid}>
               Send Reset Link
-              <ArrowForward className={cx(classes.rightIcon, classes.iconSmall)} disabled={submitting || pristine} />
+              <ArrowForward className={cx(classes.rightIcon, classes.iconSmall)} />
             </Button>
           </div>
         </form>
@@ -71,23 +81,4 @@ function ResetForm(props) {
   );
 }
 
-ResetForm.propTypes = {
-
-  handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  deco: PropTypes.bool.isRequired,
-};
-
-const ResetFormReduxed = reduxForm({
-  form: 'resetFrm',
-  enableReinitialize: true,
-})(ResetForm);
-
-const RegisterFormMapped = connect(
-  state => ({
-    deco: state.ui.decoration
-  }),
-)(ResetFormReduxed);
-
-export default RegisterFormMapped;
+export default ResetForm;

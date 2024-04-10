@@ -90,12 +90,12 @@ const useStyles = makeStyles()((theme) => ({
 function SourceReader(props) {
   const { classes, cx } = useStyles();
   const { componentName } = props;
+  const mode = useSelector((state) => state.ui.type);
+
   const [raws, setRaws] = useState([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [style, setStyle] = useState(mode);
-
-  const mode = useSelector((state) => state.ui.type);
 
   const sourceOpen = () => {
     setLoading(true);

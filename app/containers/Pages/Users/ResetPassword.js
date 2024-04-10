@@ -1,18 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-// import { ResetForm } from 'dan-components';
+import { ResetForm } from 'dan-components';
 import useStyles from '../../../components/Forms/user-jss';
 
 function ResetPassword() {
-  const [valueForm, setValueForm] = useState(null);
   const { classes } = useStyles();
-  const submitForm = useCallback((values) => {
-    setValueForm(values);
-    setTimeout(() => {
-      console.log(`You submitted:\n\n${valueForm}`); // eslint-disable-line
-    }, 500); // simulate server latency
-  }, [valueForm]);
 
   const title = brand.name + ' - Reset Password';
   const description = brand.desc;
@@ -29,7 +22,7 @@ function ResetPassword() {
       </Helmet>
       <div className={classes.container}>
         <div className={classes.userFormWrap}>
-          {/* <ResetForm onSubmit={(values) => submitForm(values)} /> */}
+          <ResetForm />
         </div>
       </div>
     </div>

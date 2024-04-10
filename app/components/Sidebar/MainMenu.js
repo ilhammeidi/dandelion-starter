@@ -47,7 +47,7 @@ function MainMenu(props) {
                 open.indexOf(item.key) > -1 ? classes.opened : '',
               )
             }
-            onClick={() => dispatch(openSubMenu({ key: item.key, keyParent: item.keyParent }))}
+            onClick={() => dispatch(openAction({ key: item.key, keyParent: item.keyParent }))}
           >
             {item.icon && (
               <ListItemIcon className={classes.icon}>

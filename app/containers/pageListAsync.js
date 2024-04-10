@@ -12,10 +12,10 @@ export const DashboardPage = loadable(() =>
   import('./Pages/Dashboard'), {
     fallback: <Loading />,
   });
-//  export const Form = loadable(() =>
-//    import('./Pages/Forms/ReduxForm'), {
-//      fallback: <Loading />,
-//    });
+export const Form = loadable(() =>
+  import('./Pages/Forms/FormikForm'), {
+    fallback: <Loading />,
+  });
 export const Table = loadable(() =>
   import('./Pages/Table/BasicTable'), {
     fallback: <Loading />,

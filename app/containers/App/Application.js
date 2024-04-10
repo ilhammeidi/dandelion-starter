@@ -7,7 +7,7 @@ import {
   Parent,
   DashboardPage,
   BlankPage,
-  // Form,
+  Form,
   Table,
   Error,
   NotFound
@@ -22,7 +22,7 @@ function Application(props) {
         <Route exact path="/app" component={BlankPage} />
         <Route exact path="/app/blank-page" component={BlankPage} />
         <Route path="/app/pages/dashboard" component={DashboardPage} />
-        {/* <Route path="/app/pages/form" component={Form} /> */}
+        <Route path="/app/pages/form" component={Form} />
         <Route path="/app/pages/table" component={Table} />
         <Route path="/app/pages/not-found" component={NotFound} />
         <Route path="/app/pages/error" component={Error} />
