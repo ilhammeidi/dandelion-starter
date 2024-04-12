@@ -9,7 +9,7 @@ const initialState = {
   gradient: true, // true or false
   decoration: true, // true or false
   bgPosition: 'half', // half, header, full
-  layout: 'big-sidebar', // big-sidebar, left-sidebar, top-navigation, mega-menu
+  layout: 'left-sidebar', // big-sidebar, left-sidebar, top-navigation, mega-menu
   /* End settings */
   palette: [
     { name: 'Mint', value: 'blueCyanTheme' },

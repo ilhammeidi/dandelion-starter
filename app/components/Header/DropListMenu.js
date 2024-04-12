@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
+import { useSelector, useDispatch } from 'react-redux';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Popper from '@mui/material/Popper';
@@ -11,6 +12,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
+import { openAction, openMenuAction } from 'dan-redux/modules/ui';
 import useStyles from './header-jss';
 
 const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
@@ -19,21 +21,24 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
 
 // eslint-disable-next-line
 function MainMenu(props) {
+  const { dataMenu } = props;
+
+  const dispatch = useDispatch();
+  const open = useSelector((state) => state.ui.subMenuOpen);
+
   const { classes, cx } = useStyles();
   const [active, setActive] = useState([]);
   const [openMenu, setOpenMenu] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
-    const { open } = props;
     setTimeout(() => {
       setActive(open);
     }, 50);
   }, []);
 
   const handleOpenMenu = (event, key, keyParent) => {
-    const { openSubMenu } = props;
-    openSubMenu(key, keyParent);
+    dispatch(openAction({ key, keyParent }));
     setAnchorEl(event.currentTarget);
     setTimeout(() => {
       setOpenMenu([key]);
@@ -52,7 +57,6 @@ function MainMenu(props) {
     setOpenMenu([]);
   };
 
-  const { open, dataMenu } = props;
   const getMenus = (parent, menuArray) => menuArray.map((item, index) => {
     if (item.multilevel) {
       return false;
@@ -133,8 +137,6 @@ function MainMenu(props) {
 }
 
 MainMenu.propTypes = {
-  open: PropTypes.array.isRequired,
-  openSubMenu: PropTypes.func.isRequired,
   dataMenu: PropTypes.array.isRequired,
 };
 

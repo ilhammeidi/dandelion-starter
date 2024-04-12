@@ -366,7 +366,8 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
   dropDownMenu: {
     minWidth: 300,
     marginTop: theme.spacing(1.5),
-    position: 'relative'
+    position: 'relative',
+    padding: theme.spacing(2, 3)
   },
   active: {},
   menuItem: {
