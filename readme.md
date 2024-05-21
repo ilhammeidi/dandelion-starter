@@ -1,6 +1,6 @@
 ### Dandelion Starter - React Website Template
 ----------
-**Dandelion Starter** Dandelion Pro is admin dashboard template based on **React Boilerplate**. It provides you clean modern design and high performance react app with various color theme. This template has been built to makes the development process easy and fast for you, which is supported by material-ui v3.x, jss (css in js), immutable js, webpack, npm modern workflow and flexible layout with flexbox.
+**Dandelion Starter** Dandelion Pro is admin dashboard template based on **React Redux Material UI**. It provides you clean modern design and high performance react app with various color theme. This template has been built to makes the development process easy and fast for you, which is supported by MUI v5.x, tss, redux, webpack, npm modern workflow and flexible layout with flexbox.
 
 # Template Feature
 
