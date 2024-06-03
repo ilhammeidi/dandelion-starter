@@ -11,6 +11,7 @@
   },
   "parser": "@babel/eslint-parser",
   "rules": {
+    "no-param-reassign": 0,
     "import/no-import-module-exports": 0,
     "no-nested-ternary": 0,
     "import/no-unresolved": 0,
@@ -19,6 +20,7 @@
     "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
     "indent": [2, 2, {"SwitchCase": 1}],
     "no-console": 0,
+    "linebreak-style": 0,
     "no-alert": 0,
     "id-length": 0,
     "no-script-url": 0,

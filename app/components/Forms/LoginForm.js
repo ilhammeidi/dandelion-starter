@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import { NavLink } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
@@ -14,22 +14,18 @@ import Brightness5 from '@mui/icons-material/Brightness5';
 import People from '@mui/icons-material/People';
 import ArrowForward from '@mui/icons-material/ArrowForward';
 import Paper from '@mui/material/Paper';
-import Icon from '@mui/material/Icon';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
-import brand from 'dan-api/dummy/brand';
-import logo from 'dan-images/logo.svg';
-import { useSelector } from 'react-redux';
+import Icon from '@mui/material/Icon';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import brand from 'dan-api/dummy/brand';
+import logo from 'dan-images/logo.svg';
 import useStyles from './user-jss';
 import { ContentDivider } from '../Divider';
 
-const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
-  return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
-});
-
+// validation functions
 const validationSchema = yup.object({
   email: yup
     .string('Enter your email')
@@ -40,10 +36,15 @@ const validationSchema = yup.object({
     .required('Password is required'),
 });
 
-function LoginForm(props) {
-  const { classes, cx } = useStyles();
+const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
+  return <NavLink to={props.to} {...props} />; // eslint-disable-line
+});
 
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+function LoginForm() {
+  const { classes, cx } = useStyles();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const sleep = (ms) => new Promise((r) => { setTimeout(r, ms); });
   const deco = useSelector((state) => state.ui.decoration);
 
   const formik = useFormik({
@@ -51,15 +52,13 @@ function LoginForm(props) {
       email: 'john.doe@mail.com',
       password: '12345678',
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: async (values) => {
       await sleep(500);
       console.log('You submitted:' + JSON.stringify(values, null, 2));
       window.location.href = '/app';
     },
   });
-
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(show => !show);
@@ -123,7 +122,6 @@ function LoginForm(props) {
                 <TextField
                   id="email"
                   name="email"
-                  placeholder="Your Email"
                   label="Your Email"
                   variant="standard"
                   value={formik.values.email}
@@ -139,7 +137,6 @@ function LoginForm(props) {
                 <TextField
                   id="password"
                   name="password"
-                  placeholder="Your Password"
                   label="Your Password"
                   type={showPassword ? 'text' : 'password'}
                   variant="standard"

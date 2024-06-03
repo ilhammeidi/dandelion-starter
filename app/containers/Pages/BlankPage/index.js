@@ -6,6 +6,7 @@ import { PapperBlock } from 'dan-components';
 function BlankPage() {
   const title = brand.name + ' - Blank Page';
   const description = brand.desc;
+
   return (
     <div>
       <Helmet>

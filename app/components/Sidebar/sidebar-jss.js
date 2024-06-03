@@ -31,19 +31,10 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     [`& .${classes.primary}, & .${classes.icon}`]: {
       color: theme.palette.primary.main,
     },
-    '&:before': {
-      content: '""',
-      position: 'absolute',
-      width: 5,
-      height: theme.spacing(6),
-      top: 0,
-      left: 0,
-      background: alpha(theme.palette.primary.main, 0.5)
-    }
   },
   drawerPaperClose: {
     width: theme.spacing(8),
-    position: 'absolute',
+    position: 'fixed',
     overflowX: 'hidden',
     background: theme.palette.background.paper,
     transition: theme.transitions.create('width', {
@@ -57,6 +48,9 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
       width: 40,
       height: 40,
     },
+    [`& .${classes.primary}`]: {
+      opacity: 0
+    },
     '& nav': {
       display: 'none'
     },
@@ -65,7 +59,10 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
       boxShadow: theme.shadows[6],
       '& nav': {
         display: 'block'
-      }
+      },
+      [`& .${classes.primary}`]: {
+        opacity: 1
+      },
     },
     [`& .${classes.brand}`]: {
       display: 'none'
@@ -135,19 +132,24 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
     margin: `${theme.spacing(0.5)} 0`,
-    [theme.breakpoints.down('xl')]: {
-      paddingLeft: theme.spacing(3)
-    }
-  },
-  child: {
-    '& a': {
-      paddingLeft: theme.spacing(6),
-    }
+    paddingLeft: 0,
+    '&[class*="active"]:not(.rootPath)': {
+      backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) + ' !important' : alpha(theme.palette.primary.main, 0.3) + ' !important',
+      [`& .${classes.primary}`]: {
+        color: theme.palette.mode === 'dark' ? theme.palette.common.white : theme.palette.primary.dark,
+      },
+      [`& .${classes.icon}`]: {
+        color: theme.palette.primary.dark,
+      },
+      '&:hover, &:focus': {
+        backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) : alpha(theme.palette.primary.main, 0.3),
+      }
+    },
   },
   title: {
     fontSize: 10,
     textTransform: 'uppercase',
-    paddingLeft: theme.spacing(10),
+    paddingLeft: theme.spacing(7),
     marginTop: theme.spacing(3),
     display: 'block',
     color: theme.palette.secondary.main,
@@ -155,24 +157,11 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     fontWeight: 'bold'
   },
   dense: {
-    marginLeft: -15,
     [`& > .${classes.title}:first-of-type`]: {
       margin: '0'
     },
     [`& .${classes.head}`]: {
-      paddingLeft: theme.spacing(10)
-    }
-  },
-  active: {
-    backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) + ' !important' : alpha(theme.palette.primary.main, 0.3) + ' !important',
-    [`& .${classes.primary}`]: {
-      color: theme.palette.mode === 'dark' ? theme.palette.common.white : theme.palette.primary.dark,
-    },
-    [`& .${classes.icon}`]: {
-      color: theme.palette.primary.dark,
-    },
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) : alpha(theme.palette.primary.main, 0.3),
+      paddingLeft: theme.spacing(7)
     }
   },
   nolist: {
@@ -182,13 +171,24 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     whiteSpace: 'nowrap'
   },
   icon: {
-    minWidth: theme.spacing(5),
+    minWidth: theme.spacing(4),
     fontSize: 24
   },
-  iconed: {},
+  iconed: {
+    [`&.${classes.opened}`]: {
+      '&:before': {
+        content: '""',
+        position: 'absolute',
+        width: 5,
+        height: theme.spacing(6),
+        top: 0,
+        left: 0,
+        background: theme.palette.primary.main
+      }
+    }
+  },
   head: {
-    padding: `${theme.spacing(1)} 0`,
-    margin: `${theme.spacing(1)} 0`,
+    padding: '6px 0',
     borderRadius: `0 ${theme.spacing(3)} ${theme.spacing(3)} 0`,
     paddingLeft: theme.spacing(3),
     [`&.${classes.iconed}`]: {
@@ -201,7 +201,7 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
   },
   headCapital: {
     padding: `${theme.spacing(1)} 0 ${theme.spacing(1)} ${theme.spacing(9)}`,
-    left: theme.spacing(1) * -2,
+    left: theme.spacing(-2),
     position: 'relative',
     textTransform: 'uppercase',
     borderRadius: `0 ${theme.spacing(3)} ${theme.spacing(3)} 0`,
@@ -311,9 +311,6 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
   offline: {
     backgroundColor: grey[500]
   },
-  rounded: {},
-  landingNav: {},
-  withProfile: {},
   menuContainer: {
     overflow: 'auto',
     height: 'calc(100% - 64px)',
@@ -338,11 +335,6 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
       '& a': {
         borderRadius: `0 ${theme.spacing(3)} ${theme.spacing(3)} 0`,
       },
-      [`& .${classes.opened}`]: {
-        '&:before': {
-          background: theme.palette.primary.main
-        }
-      }
     },
     '&::-webkit-scrollbar': {
       width: 8,

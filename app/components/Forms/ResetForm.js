@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
@@ -22,21 +21,22 @@ const validationSchema = yup.object({
     .required('Email is required'),
 });
 
-function ResetForm(props) {
+function ResetForm() {
   const { classes, cx } = useStyles();
+
   const deco = useSelector((state) => state.ui.decoration);
 
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const sleep = (ms) => new Promise((r) => { setTimeout(r, ms); });
   const formik = useFormik({
     initialValues: {
       email: ''
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: async (values) => {
       await sleep(500);
       console.log(JSON.stringify(values, null, 2));
     },
-  })
+  });
 
   return (
     <Paper className={cx(classes.paperWrap, deco && classes.petal)}>
@@ -61,7 +61,6 @@ function ResetForm(props) {
                 variant="standard"
                 placeholder="Your Email"
                 label="Your Email"
-                required
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 error={formik.touched.email && Boolean(formik.errors.email)}

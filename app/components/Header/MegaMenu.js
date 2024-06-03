@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useLocation, NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Fade from '@mui/material/Fade';
 import Popper from '@mui/material/Popper';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { NavLink } from 'react-router-dom';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -13,31 +13,24 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
-import { openAction as openSubMenu } from 'dan-redux/modules/ui';
 import useStyles from './header-jss';
 
 const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
-  return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
+  return <NavLink to={props.to} {...props} />; // eslint-disable-line
 });
 
 // eslint-disable-next-line
 function MegaMenu(props) {
+  const open = useSelector((state) => state.ui.subMenuOpen);
+  const location = useLocation();
+
   const { classes, cx } = useStyles();
   const [active, setActive] = useState([]);
   const [openMenu, setOpenMenu] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [initActive, setInitActive] = useState(true);
 
-  const open = useSelector((state) => state.ui.subMenuOpen);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    setTimeout(() => {
-      setActive(open);
-    }, 50);
-  }, []);
-
-  const handleOpenMenu = (event, key, keyParent) => {
-    dispatch(openSubMenu({ key, keyParent }));
+  const handleOpenMenu = (event, key) => {
     setAnchorEl(event.currentTarget);
     setTimeout(() => {
       setOpenMenu([key]);
@@ -52,7 +45,10 @@ function MegaMenu(props) {
   };
 
   const handleActiveParent = key => {
-    setActive([key]);
+    setTimeout(() => {
+      setInitActive(false);
+      setActive([key]);
+    }, 500);
     setOpenMenu([]);
   };
 
@@ -71,11 +67,12 @@ function MegaMenu(props) {
             className={
               cx(
                 classes.headMenu,
-                open.indexOf(item.key) > -1 ? classes.opened : '',
-                active.indexOf(item.key) > -1 ? classes.selected : ''
+                openMenu.indexOf(item.key) > -1 ? classes.opened : '',
+                active.indexOf(item.key) > -1 ? classes.selected : '',
+                initActive && open.indexOf(item.key) > -1 ? classes.selected : ''
               )
             }
-            onClick={(event) => handleOpenMenu(event, item.key, item.keyParent)}
+            onClick={(event) => handleOpenMenu(event, item.key)}
           >
             {item.name}
             {!item.linkParent ? <ExpandMore className={classes.rightIcon} /> : <span className={classes.rightIcon}>&nbsp;&nbsp;</span>}
@@ -131,9 +128,7 @@ function MegaMenu(props) {
       <ListItem
         key={index.toString()}
         button
-        exact
-        className={classes.megaItem}
-        activeClassName={classes.active}
+        className={cx(classes.megaItem, (item.link === '/app' && location.pathname !== '/app') ? 'rootPath' : '')}
         component={LinkBtn}
         to={item.link || item.linkParent}
         onClick={() => handleActiveParent(parent)}

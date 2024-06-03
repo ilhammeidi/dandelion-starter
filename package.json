@@ -188,7 +188,7 @@
     "react-popper": "^2.3.0",
     "react-redux": "^9.0.0",
     "react-router": "^5.3.3",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^6.23.1",
     "react-scroll-parallax": "^3.3.2",
     "react-slick": "^0.29.0",
     "react-syntax-highlighter": "^15.4.4",

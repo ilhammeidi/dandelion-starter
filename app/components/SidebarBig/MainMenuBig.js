@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
@@ -12,14 +12,11 @@ import { openAction, openMenuAction, closeMenuAction } from 'dan-redux/modules/u
 import MenuProfile from './MenuProfile';
 import useStyles from './sidebarBig-jss';
 
-const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
-  return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
-});
-
 function MainMenuBig(props) {
   const { classes, cx } = useStyles();
   const [selectedMenu, setSelectedMenu] = useState([]);
   const [menuLoaded, setMenuLoaded] = useState(true);
+  const location = useLocation();
 
   const dispatch = useDispatch();
   const open = useSelector((state) => state.ui.subMenuOpen);
@@ -78,7 +75,7 @@ function MainMenuBig(props) {
           className={
             cx(
               classes.menuHead,
-              activeMenu(item.key, item.child) ? classes.active : ''
+              activeMenu(item.key, item.child) ? 'active' : ''
             )
           }
           onClick={() => handleLoadMenu(item.child, item.key)}
@@ -94,9 +91,8 @@ function MainMenuBig(props) {
       <ButtonBase
         key={index.toString()}
         focusRipple
-        className={classes.menuHead}
-        component={LinkBtn}
-        activeClassName={classes.active}
+        component={NavLink}
+        className={cx(classes.menuHead, (item.link === '/app' && location.pathname !== '/app') ? 'rootPath' : '')}
         to={item.linkParent}
         onClick={() => handleLoadSingleMenu(item.key)}
       >
@@ -124,10 +120,8 @@ function MainMenuBig(props) {
       <ListItem
         key={index.toString()}
         button
-        exact
-        className={classes.item}
-        activeClassName={classes.active}
-        component={LinkBtn}
+        className={cx(classes.item, (item.link === '/app' && location.pathname !== '/app') ? 'rootPath' : '')}
+        component={NavLink}
         to={item.link}
         onClick={() => handleLoadPage()}
       >

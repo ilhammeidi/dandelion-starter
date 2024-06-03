@@ -1,19 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
 import { SourceReader, PapperBlock } from 'dan-components';
 import FormikFormDemo from './FormikFormDemo';
 
 function ReduxForm() {
-  const [valueForm, setValueForm] = useState(null);
-
-  const showResult = values => {
-    setTimeout(() => {
-      setValueForm(JSON.stringify(values));
-      console.log(`You submitted:\n\n${valueForm}`); // eslint-disable-line
-    }, 500); // simulate server latency
-  };
-
   const title = brand.name + ' - Form';
   const description = brand.desc;
   const docSrc = 'containers/Pages/Forms/';

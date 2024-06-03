@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react';
 import { PropTypes } from 'prop-types';
-
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
-
 import {
   Header,
   SidebarBig,
@@ -31,6 +29,7 @@ function LeftSidebarBigLayout(props) {
     titleException,
     handleOpenGuide,
   } = props;
+
   return (
     <Fragment>
       <Header

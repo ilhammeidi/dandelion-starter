@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
@@ -14,15 +13,16 @@ import Brightness5 from '@mui/icons-material/Brightness5';
 import People from '@mui/icons-material/People';
 import Icon from '@mui/material/Icon';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import brand from 'dan-api/dummy/brand';
+import logo from 'dan-images/logo.svg';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import brand from 'dan-api/dummy/brand';
-import logo from 'dan-images/logo.svg';
 import useStyles from './user-jss';
 
+// validation functions
 const validationSchema = yup.object({
   name: yup
     .string('Enter your name')
@@ -43,13 +43,12 @@ const validationSchema = yup.object({
 });
 
 const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
-  return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
+  return <NavLink to={props.to} {...props} />; // eslint-disable-line
 });
 
-function RegisterForm(props) {
+function RegisterForm() {
   const { classes, cx } = useStyles();
-
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const sleep = (ms) => new Promise((r) => { setTimeout(r, ms); });
   const deco = useSelector((state) => state.ui.decoration);
 
   const formik = useFormik({
@@ -60,7 +59,7 @@ function RegisterForm(props) {
       passwordConfirmation: '',
       termsAndConditions: false
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: async (values) => {
       await sleep(500);
       console.log('You submitted:' + JSON.stringify(values, null, 2));
@@ -123,7 +122,6 @@ function RegisterForm(props) {
                   <TextField
                     id="name"
                     name="name"
-                    placeholder="Username"
                     label="Username"
                     variant="standard"
                     value={formik.values.name}
@@ -139,7 +137,6 @@ function RegisterForm(props) {
                   <TextField
                     id="email"
                     name="email"
-                    placeholder="Your Email"
                     label="Your Email"
                     variant="standard"
                     value={formik.values.email}
@@ -156,7 +153,6 @@ function RegisterForm(props) {
                     id="password"
                     name="password"
                     type="password"
-                    placeholder="Your Email"
                     label="Your Password"
                     variant="standard"
                     value={formik.values.password}
@@ -173,7 +169,6 @@ function RegisterForm(props) {
                     id="passwordConfirmation"
                     name="passwordConfirmation"
                     type="password"
-                    placeholder="Re-type Password"
                     label="Re-type Password"
                     variant="standard"
                     value={formik.values.passwordConfirmation}

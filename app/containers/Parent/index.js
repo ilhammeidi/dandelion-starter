@@ -1,20 +1,17 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
-import { Helmet } from 'react-helmet';
 import { makeStyles } from 'tss-react/mui';
+import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
-import Typography from '@mui/material/Typography';
-
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import { Link, useLocation } from 'react-router-dom';
 import MenuContent from 'dan-api/ui/menu';
 import { PapperBlock } from 'dan-components';
 
 const useStyles = makeStyles()(() => ({
   link: {
     display: 'block',
-    textTransform: 'capitalize',
-    marginLeft: 24
+    textTransform: 'capitalize'
   },
   title: {
     margin: '20px 16px 5px',
@@ -23,13 +20,15 @@ const useStyles = makeStyles()(() => ({
   }
 }));
 
-function Parent(props) {
-  const { classes } = useStyles();
+function Parent() {
   const title = brand.name;
   const description = brand.desc;
-  const { history } = props;
+
+  const location = useLocation();
+  const { classes } = useStyles();
+
   // Get Path Location
-  let parts = history.location.pathname.split('/');
+  let parts = location.pathname.split('/');
   const place = parts[parts.length - 1];
   parts = parts.slice(1, parts.length - 1);
   const menuItems = MenuContent
@@ -73,10 +72,5 @@ function Parent(props) {
     </div>
   );
 }
-
-Parent.propTypes = {
-
-  history: PropTypes.object.isRequired,
-};
 
 export default Parent;

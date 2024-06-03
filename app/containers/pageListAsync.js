@@ -24,10 +24,6 @@ export const Login = loadable(() =>
   import('./Pages/Users/Login'), {
     fallback: <Loading />,
   });
-export const LoginDedicated = loadable(() =>
-  import('./Pages/Standalone/LoginDedicated'), {
-    fallback: <Loading />,
-  });
 export const Register = loadable(() =>
   import('./Pages/Users/Register'), {
     fallback: <Loading />,

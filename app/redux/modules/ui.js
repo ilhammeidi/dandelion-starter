@@ -1,15 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 import menuContent from 'dan-api/ui/menu';
 
 const initialState = {
   /* Settings for Themes and layout */
   theme: 'blueCyanTheme',
   direction: 'ltr',
-  type: 'dark', // light or dark
+  type: 'light', // light or dark
   gradient: true, // true or false
   decoration: true, // true or false
   bgPosition: 'half', // half, header, full
-  layout: 'left-sidebar', // big-sidebar, left-sidebar, top-navigation, mega-menu
+  layout: 'big-sidebar', // big-sidebar, left-sidebar, top-navigation, mega-menu
   /* End settings */
   palette: [
     { name: 'Mint', value: 'blueCyanTheme' },
@@ -101,7 +101,7 @@ const uiSlice = createSlice({
       state.bgPosition = action.payload;
     },
     changeDirectionAction: (state, action) => {
-      state.direction = action.payload
+      state.direction = action.payload;
     },
     playTransitionAction: (state, action) => {
       state.pageLoaded = action.payload;

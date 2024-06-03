@@ -10,7 +10,6 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormLabel from '@mui/material/FormLabel';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
@@ -43,7 +42,7 @@ const useStyles = makeStyles()((theme) => ({
 function FormikForm() {
   const { classes } = useStyles();
 
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const sleep = (ms) => new Promise((r) => { setTimeout(r, ms); });
   const defaultData = {
     name: '',
     email: '',
@@ -54,7 +53,7 @@ function FormikForm() {
     check: false,
     group: [],
     textarea: ''
-  }
+  };
   const [sampleData, setSampleData] = useState(defaultData);
 
   const initData = () => {
@@ -74,7 +73,7 @@ function FormikForm() {
   const formik = useFormik({
     initialValues: sampleData,
     enableReinitialize: true,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: async (values) => {
       await sleep(500);
       alert(JSON.stringify(values, null, 2));
@@ -85,8 +84,7 @@ function FormikForm() {
     formik.resetForm({
       values: defaultData
     });
-  }
-
+  };
 
   return (
     <Grid container spacing={3} alignItems="flex-start" direction="row" justifyContent="center">

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import useStyles from 'containers/Templates/appStyles-jss';
 import { ErrorWrap } from 'dan-components';
 
-function NotFoundDedicated(props) {
+function NotFoundDedicated() {
   const { classes, cx } = useStyles();
   const gradient = useSelector((state) => state.ui.gradient);
 

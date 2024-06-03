@@ -3,8 +3,8 @@ import { PropTypes } from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { GuideSlider } from 'dan-components';
 import { toggleAction, openAction, playTransitionAction } from 'dan-redux/modules/ui';
+import { useLocation } from 'react-router-dom';
 import LeftSidebarLayout from './layouts/LeftSidebarLayout';
-import RightSidebarLayout from './layouts/RightSidebarLayout';
 import LeftSidebarBigLayout from './layouts/LeftSidebarBigLayout';
 import DropMenuLayout from './layouts/DropMenuLayout';
 import MegaMenuLayout from './layouts/MegaMenuLayout';
@@ -25,32 +25,23 @@ function Dashboard(props) {
   const layout = useSelector((state) => state.ui.layout);
   const bgPosition = useSelector((state) => state.ui.bgPosition);
 
-  useEffect(() => {
-    const { history } = props;
+  const location = useLocation();
+  const history = { location };
 
+  useEffect(() => {
     // Adjust min height
     setAppHeight(window.innerHeight + 112);
 
     // Set expanded sidebar menu
-    const currentPath = history.location.pathname;
+    const currentPath = location.pathname;
     dispatch(openAction({ initialLocation: currentPath }));
-    // Play page transition
-    dispatch(playTransitionAction(true));
 
     // Execute all arguments when page changes
-    const unlisten = history.listen(() => {
+    setTimeout(() => {
       window.scrollTo(0, 0);
-      setTimeout(() => {
-        dispatch(playTransitionAction(true));
-      }, 500);
-    });
-
-    return () => {
-      if (unlisten != null) {
-        unlisten();
-      }
-    };
-  }, []);
+      dispatch(playTransitionAction(true));
+    }, 500);
+  }, [location]);
 
   const handleOpenGuide = () => {
     setOpenGuide(true);
@@ -59,9 +50,9 @@ function Dashboard(props) {
     setOpenGuide(false);
   };
 
-  const { changeMode, children, history } = props;
-  const titleException = ['/app', '/app/crm-dashboard', '/app/crypto-dashboard'];
-  const parts = history.location.pathname.split('/');
+  const { changeMode, children } = props;
+  const titleException = ['/app'];
+  const parts = location.pathname.split('/');
   const place = parts[parts.length - 1].replace('-', ' ');
   return (
     <div
@@ -80,7 +71,7 @@ function Dashboard(props) {
           <LeftSidebarLayout
             history={history}
             toggleDrawer={() => dispatch(toggleAction())}
-            loadTransition={() => dispatch(playTransitionAction())}
+            loadTransition={(payload) => dispatch(playTransitionAction(payload))}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
@@ -101,7 +92,7 @@ function Dashboard(props) {
           <LeftSidebarBigLayout
             history={history}
             toggleDrawer={() => dispatch(toggleAction())}
-            loadTransition={() => dispatch(playTransitionAction())}
+            loadTransition={(payload) => dispatch(playTransitionAction(payload))}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
@@ -117,33 +108,12 @@ function Dashboard(props) {
           </LeftSidebarBigLayout>
         )
       }
-      { /* Right Sidebar Layout */
-        layout === 'right-sidebar' && (
-          <RightSidebarLayout
-            history={history}
-            toggleDrawer={() => dispatch(toggleAction())}
-            loadTransition={() => dispatch(playTransitionAction())}
-            changeMode={changeMode}
-            sidebarOpen={sidebarOpen}
-            pageLoaded={pageLoaded}
-            mode={mode}
-            gradient={gradient}
-            deco={deco}
-            bgPosition={bgPosition}
-            place={place}
-            titleException={titleException}
-            handleOpenGuide={handleOpenGuide}
-          >
-            { children }
-          </RightSidebarLayout>
-        )
-      }
       { /* Top Bar with Dropdown Menu */
         layout === 'top-navigation' && (
           <DropMenuLayout
             history={history}
             toggleDrawer={() => dispatch(toggleAction())}
-            loadTransition={() => dispatch(playTransitionAction())}
+            loadTransition={(payload) => dispatch(playTransitionAction(payload))}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
@@ -164,7 +134,7 @@ function Dashboard(props) {
           <MegaMenuLayout
             history={history}
             toggleDrawer={() => dispatch(toggleAction())}
-            loadTransition={() => dispatch(playTransitionAction())}
+            loadTransition={(payload) => dispatch(playTransitionAction(payload))}
             changeMode={changeMode}
             sidebarOpen={sidebarOpen}
             pageLoaded={pageLoaded}
