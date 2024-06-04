@@ -1,53 +1,46 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
-import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { NavLink, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ButtonBase from '@mui/material/ButtonBase';
-import { openMenuAction, closeMenuAction } from 'dan-redux/actions/uiActions';
+import { openAction, openMenuAction, closeMenuAction } from 'dan-redux/modules/ui';
 import MenuProfile from './MenuProfile';
 import useStyles from './sidebarBig-jss';
-
-const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
-  return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
-});
 
 function MainMenuBig(props) {
   const { classes, cx } = useStyles();
   const [selectedMenu, setSelectedMenu] = useState([]);
   const [menuLoaded, setMenuLoaded] = useState(true);
+  const location = useLocation();
 
-  const {
-    open,
-    closeDrawer,
-    dataMenu,
-    drawerPaper,
-    openSubMenu
-  } = props;
+  const dispatch = useDispatch();
+  const open = useSelector((state) => state.ui.subMenuOpen);
+
+  const { dataMenu, drawerPaper } = props;
 
   const handleLoadMenu = (menu, key) => {
-    const { openDrawer, mobile } = props;
+    const { mobile } = props;
     setSelectedMenu(menu);
     setMenuLoaded(false); // unload transition menu
-    openSubMenu(key);
+    dispatch(openAction({ key }));
+
     setTimeout(() => {
       setMenuLoaded(true); // load transtion menu
     }, 100);
     // Unecessary in mobile, because toggle menu is handled already
     if (!mobile) {
-      openDrawer();
+      dispatch(openMenuAction());
     }
   };
 
   const handleLoadSingleMenu = () => {
     setSelectedMenu([]);
-    closeDrawer();
+    dispatch(closeMenuAction());
   };
 
   const handleLoadPage = () => {
@@ -82,7 +75,7 @@ function MainMenuBig(props) {
           className={
             cx(
               classes.menuHead,
-              activeMenu(item.key, item.child) ? classes.active : ''
+              activeMenu(item.key, item.child) ? 'active' : ''
             )
           }
           onClick={() => handleLoadMenu(item.child, item.key)}
@@ -98,9 +91,8 @@ function MainMenuBig(props) {
       <ButtonBase
         key={index.toString()}
         focusRipple
-        className={classes.menuHead}
-        component={LinkBtn}
-        activeClassName={classes.active}
+        component={NavLink}
+        className={cx(classes.menuHead, (item.link === '/app' && location.pathname !== '/app') ? 'rootPath' : '')}
         to={item.linkParent}
         onClick={() => handleLoadSingleMenu(item.key)}
       >
@@ -128,10 +120,8 @@ function MainMenuBig(props) {
       <ListItem
         key={index.toString()}
         button
-        exact
-        className={classes.item}
-        activeClassName={classes.active}
-        component={LinkBtn}
+        className={cx(classes.item, (item.link === '/app' && location.pathname !== '/app') ? 'rootPath' : '')}
+        component={NavLink}
         to={item.link}
         onClick={() => handleLoadPage()}
       >
@@ -186,12 +176,7 @@ function MainMenuBig(props) {
 }
 
 MainMenuBig.propTypes = {
-
-  open: PropTypes.array.isRequired,
   dataMenu: PropTypes.array.isRequired,
-  openDrawer: PropTypes.func.isRequired,
-  openSubMenu: PropTypes.func.isRequired,
-  closeDrawer: PropTypes.func.isRequired,
   loadTransition: PropTypes.func.isRequired,
   drawerPaper: PropTypes.bool.isRequired,
   mobile: PropTypes.bool,
@@ -203,21 +188,4 @@ MainMenuBig.defaultProps = {
   mobile: false
 };
 
-const openAction = key => ({ type: 'OPEN_SUBMENU', key });
-
-const mapStateToProps = state => ({
-  open: state.ui.subMenuOpen
-});
-
-const mapDispatchToProps = dispatch => ({
-  openDrawer: () => dispatch(openMenuAction),
-  closeDrawer: () => dispatch(closeMenuAction),
-  openSubMenu: bindActionCreators(openAction, dispatch)
-});
-
-const MainMenuBigMapped = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MainMenuBig);
-
-export default MainMenuBigMapped;
+export default MainMenuBig;

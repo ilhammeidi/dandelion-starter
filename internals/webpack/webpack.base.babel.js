@@ -4,7 +4,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
-// const ESLintPlugin = require('eslint-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = options => ({
   mode: options.mode,
@@ -170,14 +170,14 @@ module.exports = options => ({
       You can enable it to maintain and keep clean your code.
       NOTE: By enable eslint running app process at beginning will slower
     */
-    //    new ESLintPlugin({
-    //      extensions: 'js',
-    //      exclude: 'node_modules',
-    //      failOnWarning: true,
-    //      failOnError: true,
-    //      emitError: true,
-    //      emitWarning: true,
-    //    }),
+    new ESLintPlugin({
+      extensions: 'js',
+      exclude: 'node_modules',
+      failOnWarning: true,
+      failOnError: true,
+      emitError: true,
+      emitWarning: true,
+    }),
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; Terser will automatically
     // drop any unreachable code.
@@ -203,6 +203,7 @@ module.exports = options => ({
     extensions: ['.js', '.jsx', '.react.js'],
     mainFields: ['browser', 'jsnext:main', 'main'],
     fallback: {
+      'process/browser': require.resolve('process/browser'),
       fs: false,
       domain: false,
       path: false,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles()((theme) => ({
   errorWrap: {
@@ -48,35 +48,26 @@ const useStyles = makeStyles()((theme) => ({
 
 const ErrorWrap = (props) => {
   const { classes } = useStyles();
+  const { title, desc } = props;
+
   return (
-    <Route
-      render={({ staticContext }) => {
-        if (staticContext) {
-          staticContext.status = 404; // eslint-disable-line
-        }
-        const { title, desc } = props;
-        return (
-          <div className={classes.errorWrap}>
-            <Typography className={classes.title} variant="h1">{title}</Typography>
-            <Typography variant="h5">{desc}</Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              component={Link}
-              to="/app/"
-            >
-              Go To Dashboard
-            </Button>
-          </div>
-        );
-      }}
-    />
+    <div className={classes.errorWrap}>
+      <Typography className={classes.title} variant="h1">{title}</Typography>
+      <Typography variant="h5">{desc}</Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        component={Link}
+        to="/app/"
+      >
+        Go To Dashboard
+      </Button>
+    </div>
   );
 };
 
 ErrorWrap.propTypes = {
-
   desc: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };

@@ -366,14 +366,14 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
   dropDownMenu: {
     minWidth: 300,
     marginTop: theme.spacing(1.5),
-    position: 'relative'
+    position: 'relative',
+    padding: theme.spacing(2, 3)
   },
-  active: {},
   menuItem: {
     '& span': {
       fontSize: 14,
     },
-    [`&.${classes.active}`]: {
+    '&[class*="active"]:not(.rootPath)': {
       borderLeft: `5px solid ${theme.palette.primary.main}`,
       backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.secondary.main, 0.24) : theme.palette.secondary.light,
       '& span': {
@@ -401,7 +401,7 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     '& div': {
       padding: 0
     },
-    [`&.${classes.active}`]: {
+    '&[class*="active"]:not(.rootPath)': {
       border: `1px solid ${theme.palette.primary.main}`,
       backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.secondary.main, 0.24) : theme.palette.secondary.light,
       '& span': {

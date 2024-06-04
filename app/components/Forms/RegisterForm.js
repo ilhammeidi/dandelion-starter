@@ -1,9 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
-
-import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -19,30 +15,58 @@ import Icon from '@mui/material/Icon';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
-import { TextFieldRedux, CheckboxRedux } from './ReduxFormMUI';
+import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
+import { useSelector } from 'react-redux';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import useStyles from './user-jss';
 
 // validation functions
-const required = value => (value === null ? 'Required' : undefined);
-const email = value => (
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email'
-    : undefined
-);
-
-const passwordsMatch = (value, allValues) => {
-  if (value !== allValues.password) {
-    return 'Passwords dont match';
-  }
-  return undefined;
-};
-
-const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
-  return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
+const validationSchema = yup.object({
+  name: yup
+    .string('Enter your name')
+    .required('Name is required'),
+  email: yup
+    .string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: yup
+    .string('Enter your password')
+    .required('Password is required'),
+  passwordConfirmation: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+  termsAndConditions: yup
+    .bool()
+    .oneOf([true])
 });
 
-function RegisterForm(props) {
+const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
+  return <NavLink to={props.to} {...props} />; // eslint-disable-line
+});
+
+function RegisterForm() {
   const { classes, cx } = useStyles();
+  const sleep = (ms) => new Promise((r) => { setTimeout(r, ms); });
+  const deco = useSelector((state) => state.ui.decoration);
+
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+      termsAndConditions: false
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      await sleep(500);
+      console.log('You submitted:' + JSON.stringify(values, null, 2));
+      window.location.href = '/app';
+    },
+  });
+
   const [tab, setTab] = useState(0);
 
   const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
@@ -52,12 +76,6 @@ function RegisterForm(props) {
     setTab(value);
   };
 
-  const {
-    handleSubmit,
-    pristine,
-    submitting,
-    deco
-  } = props;
   return (
     <Fragment>
       {!mdUp && (
@@ -98,54 +116,65 @@ function RegisterForm(props) {
         </Tabs>
         {tab === 0 && (
           <section className={classes.formWrap}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={formik.handleSubmit}>
               <div>
                 <FormControl variant="standard" className={classes.formControl}>
-                  <Field
+                  <TextField
+                    id="name"
                     name="name"
-                    component={TextFieldRedux}
-                    placeholder="Username"
                     label="Username"
-                    required
+                    variant="standard"
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    error={formik.touched.name && Boolean(formik.errors.name)}
+                    helperText={formik.touched.name && formik.errors.name}
                     className={classes.field}
                   />
                 </FormControl>
               </div>
               <div>
                 <FormControl variant="standard" className={classes.formControl}>
-                  <Field
+                  <TextField
+                    id="email"
                     name="email"
-                    component={TextFieldRedux}
-                    placeholder="Your Email"
                     label="Your Email"
-                    required
-                    validate={[required, email]}
+                    variant="standard"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
                     className={classes.field}
                   />
                 </FormControl>
               </div>
               <div>
                 <FormControl variant="standard" className={classes.formControl}>
-                  <Field
+                  <TextField
+                    id="password"
                     name="password"
-                    component={TextFieldRedux}
                     type="password"
                     label="Your Password"
-                    required
-                    validate={[required, passwordsMatch]}
+                    variant="standard"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    error={formik.touched.password && Boolean(formik.errors.password)}
+                    helperText={formik.touched.password && formik.errors.password}
                     className={classes.field}
                   />
                 </FormControl>
               </div>
               <div>
                 <FormControl variant="standard" className={classes.formControl}>
-                  <Field
-                    name="passwordConfirm"
-                    component={TextFieldRedux}
+                  <TextField
+                    id="passwordConfirmation"
+                    name="passwordConfirmation"
                     type="password"
                     label="Re-type Password"
-                    required
-                    validate={[required, passwordsMatch]}
+                    variant="standard"
+                    value={formik.values.passwordConfirmation}
+                    onChange={formik.handleChange}
+                    error={formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation)}
+                    helperText={formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
                     className={classes.field}
                   />
                 </FormControl>
@@ -153,16 +182,24 @@ function RegisterForm(props) {
               <div>
                 <FormControlLabel
                   control={(
-                    <Field name="checkbox" component={CheckboxRedux} required className={classes.agree} />
+                    <Checkbox
+                      id="termsAndConditions"
+                      name="termsAndConditions"
+                      checked={formik.values.check}
+                      value={formik.values.check}
+                      onChange={formik.handleChange}
+                      className={classes.agree}
+                      required
+                    />
                   )}
                   label="Agree with"
                 />
                 <a href="#" className={classes.link}>Terms &amp; Condition</a>
               </div>
               <div className={classes.btnArea}>
-                <Button variant="contained" color="primary" type="submit">
+                <Button variant="contained" color="primary" type="submit" disabled={formik.isSubmitting}>
                   Continue
-                  <ArrowForward className={cx(classes.rightIcon, classes.iconSmall)} disabled={submitting || pristine} />
+                  <ArrowForward className={cx(classes.rightIcon, classes.iconSmall)} />
                 </Button>
               </div>
             </form>
@@ -189,23 +226,4 @@ function RegisterForm(props) {
   );
 }
 
-RegisterForm.propTypes = {
-
-  handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  deco: PropTypes.bool.isRequired,
-};
-
-const RegisterFormReduxed = reduxForm({
-  form: 'registerForm',
-  enableReinitialize: true,
-})(RegisterForm);
-
-const RegisterFormMapped = connect(
-  state => ({
-    deco: state.ui.decoration
-  }),
-)(RegisterFormReduxed);
-
-export default RegisterFormMapped;
+export default RegisterForm;

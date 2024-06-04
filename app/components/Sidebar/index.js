@@ -112,7 +112,6 @@ function Sidebar(props) {
 }
 
 Sidebar.propTypes = {
-
   toggleDrawerOpen: PropTypes.func.isRequired,
   loadTransition: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,

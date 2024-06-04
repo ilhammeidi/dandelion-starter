@@ -19,7 +19,7 @@ function SidebarBig(props) {
 
   return (
     <Fragment>
-      { !lgUp && (
+      {!lgUp && (
         <SwipeableDrawer
           onClose={toggleDrawerOpen}
           onOpen={toggleDrawerOpen}
@@ -51,7 +51,6 @@ function SidebarBig(props) {
 }
 
 SidebarBig.propTypes = {
-
   dataMenu: PropTypes.array.isRequired,
   loadTransition: PropTypes.func.isRequired,
   toggleDrawerOpen: PropTypes.func.isRequired,

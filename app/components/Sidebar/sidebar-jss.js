@@ -34,6 +34,7 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
   },
   drawerPaperClose: {
     width: theme.spacing(8),
+    position: 'fixed',
     overflowX: 'hidden',
     background: theme.palette.background.paper,
     transition: theme.transitions.create('width', {
@@ -47,6 +48,9 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
       width: 40,
       height: 40,
     },
+    [`& .${classes.primary}`]: {
+      opacity: 0
+    },
     '& nav': {
       display: 'none'
     },
@@ -55,7 +59,10 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
       boxShadow: theme.shadows[6],
       '& nav': {
         display: 'block'
-      }
+      },
+      [`& .${classes.primary}`]: {
+        opacity: 1
+      },
     },
     [`& .${classes.brand}`]: {
       display: 'none'
@@ -125,7 +132,19 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
     margin: `${theme.spacing(0.5)} 0`,
-    paddingLeft: 0
+    paddingLeft: 0,
+    '&[class*="active"]:not(.rootPath)': {
+      backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) + ' !important' : alpha(theme.palette.primary.main, 0.3) + ' !important',
+      [`& .${classes.primary}`]: {
+        color: theme.palette.mode === 'dark' ? theme.palette.common.white : theme.palette.primary.dark,
+      },
+      [`& .${classes.icon}`]: {
+        color: theme.palette.primary.dark,
+      },
+      '&:hover, &:focus': {
+        backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) : alpha(theme.palette.primary.main, 0.3),
+      }
+    },
   },
   title: {
     fontSize: 10,
@@ -143,18 +162,6 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     },
     [`& .${classes.head}`]: {
       paddingLeft: theme.spacing(7)
-    }
-  },
-  active: {
-    backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) + ' !important' : alpha(theme.palette.primary.main, 0.3) + ' !important',
-    [`& .${classes.primary}`]: {
-      color: theme.palette.mode === 'dark' ? theme.palette.common.white : theme.palette.primary.dark,
-    },
-    [`& .${classes.icon}`]: {
-      color: theme.palette.primary.dark,
-    },
-    '&:hover, &:focus': {
-      backgroundColor: theme.palette.mode === 'dark' ? alpha(theme.palette.primary.main, 0.24) : alpha(theme.palette.primary.main, 0.3),
     }
   },
   nolist: {
@@ -194,7 +201,7 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
   },
   headCapital: {
     padding: `${theme.spacing(1)} 0 ${theme.spacing(1)} ${theme.spacing(9)}`,
-    left: theme.spacing(1) * -2,
+    left: theme.spacing(-2),
     position: 'relative',
     textTransform: 'uppercase',
     borderRadius: `0 ${theme.spacing(3)} ${theme.spacing(3)} 0`,
@@ -304,9 +311,6 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
   offline: {
     backgroundColor: grey[500]
   },
-  rounded: {},
-  landingNav: {},
-  withProfile: {},
   menuContainer: {
     overflow: 'auto',
     height: 'calc(100% - 64px)',

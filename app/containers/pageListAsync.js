@@ -13,7 +13,7 @@ export const DashboardPage = loadable(() =>
     fallback: <Loading />,
   });
 export const Form = loadable(() =>
-  import('./Pages/Forms/ReduxForm'), {
+  import('./Pages/Forms/FormikForm'), {
     fallback: <Loading />,
   });
 export const Table = loadable(() =>
@@ -22,10 +22,6 @@ export const Table = loadable(() =>
   });
 export const Login = loadable(() =>
   import('./Pages/Users/Login'), {
-    fallback: <Loading />,
-  });
-export const LoginDedicated = loadable(() =>
-  import('./Pages/Standalone/LoginDedicated'), {
     fallback: <Loading />,
   });
 export const Register = loadable(() =>

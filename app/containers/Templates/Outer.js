@@ -1,41 +1,21 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
-
-import { connect } from 'react-redux';
-
+import { useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
 import useStyles from './appStyles-jss';
 
-function Outer(props) {
+function Outer() {
   const { classes, cx } = useStyles();
-  const {
-    children,
-    gradient,
-    decoration
-  } = props;
+  const gradient = useSelector((state) => state.ui.gradient);
+  const decoration = useSelector((state) => state.ui.decoration);
+
   return (
     <div className={cx(classes.appFrameOuter, gradient ? classes.gradientBg : classes.solidBg)}>
       <main className={classes.outerContent} id="mainContent">
         { decoration && <div className={classes.petal} /> }
-        {children}
+        <Outlet />
       </main>
     </div>
   );
 }
 
-Outer.propTypes = {
-
-  gradient: PropTypes.bool.isRequired,
-  decoration: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired,
-};
-
-const mapStateToProps = state => ({
-  gradient: state.ui.gradient,
-  decoration: state.ui.decoration,
-});
-
-const OuterMaped = connect(
-  mapStateToProps,
-)(Outer);
-
-export default OuterMaped;
+export default Outer;
