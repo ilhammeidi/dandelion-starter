@@ -1,6 +1,6 @@
 {
-  "name": "dandelion_starter",
-  "version": "2.5.4",
+  "name": "dandelion_pro",
+  "version": "2.6.1",
   "description": "React website tempate with focus on perfomance and design",
   "private": true,
   "engines": {
@@ -147,7 +147,7 @@
     "formik": "^2.4.5",
     "history": "4.9.0",
     "hoist-non-react-statics": "3.3.0",
-    "html-webpack-plugin": "^5.5.0",
+    "html-webpack-plugin": "^5.6.3",
     "immer": "^9.0.6",
     "immutable": "3.8.2",
     "intl": "1.2.5",
@@ -220,9 +220,9 @@
     "@babel/plugin-transform-react-constant-elements": "7.2.0",
     "@babel/plugin-transform-react-inline-elements": "7.2.0",
     "@babel/preset-env": "^7.4.3",
-    "@babel/preset-react": "7.0.0",
+    "@babel/preset-react": "7.25.9",
     "@babel/register": "7.4.0",
-    "add-asset-html-webpack-plugin": "5.0.1",
+    "add-asset-html-webpack-plugin": "6.0.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-loader": "9.1.2",
     "babel-plugin-dynamic-import-node": "2.2.0",
@@ -273,7 +273,6 @@
     "webpack-cli": "4.7.2",
     "webpack-dev-middleware": "5.0.0",
     "webpack-hot-middleware": "^2.25.3",
-    "webpack-pwa-manifest": "^4.3.0",
     "whatwg-fetch": "3.0.0"
   }
 }

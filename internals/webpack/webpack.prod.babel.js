@@ -1,7 +1,6 @@
 // Important modules this config uses
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest');
 // const WorkboxPlugin = require('workbox-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -87,7 +86,7 @@ module.exports = require('./webpack.base.babel')({
     /**
     Generate Service Worker for production
     Uncomment this code bellow to generate Service Worker.
-    **/
+    * */
     //    new WorkboxPlugin.GenerateSW({
     //      // these options encourage the ServiceWorkers to get in there fast
     //      // and not allow any straggling "old" SWs to hang around
@@ -101,27 +100,6 @@ module.exports = require('./webpack.base.babel')({
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0.8,
-    }),
-
-    new WebpackPwaManifest({
-      name: 'React Boilerplate',
-      short_name: 'React BP',
-      description: 'My React Boilerplate-based project!',
-      background_color: '#fafafa',
-      theme_color: '#b1624d',
-      inject: true,
-      ios: true,
-      icons: [
-        {
-          src: path.resolve('public/images/logo.png'),
-          sizes: [72, 96, 128, 144, 192, 384, 512],
-        },
-        {
-          src: path.resolve('public/images/logo.png'),
-          sizes: [120, 152, 167, 180],
-          ios: true,
-        },
-      ],
     }),
   ],
 

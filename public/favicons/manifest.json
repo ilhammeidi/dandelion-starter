@@ -1,5 +1,4 @@
 {
-  "name": "App",
   "icons": [
     {
       "src": "/favicons/android-icon-36x36.png",
@@ -37,5 +36,13 @@
       "type": "image/png",
       "density": "4.0"
     }
-  ]
+  ],
+  "name": "Dandelion Pro",
+  "short_name": "Dandelion",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "My React Boilerplate-based project!",
+  "background_color": "#fafafa",
+  "theme_color": "#2196F3"
 }
