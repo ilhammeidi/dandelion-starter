@@ -23,6 +23,11 @@ const outputPath = join(process.cwd(), dllConfig.path);
 
 module.exports = require('./webpack.base.babel')({
   mode: 'development',
+  resolve: {
+    alias: {
+      process: 'process/browser'
+    }
+  },
   context: process.cwd(),
   entry: dllConfig.dlls ? dllConfig.dlls : dllPlugin.entry(pkg),
   optimization: {
